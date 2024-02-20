@@ -4,6 +4,7 @@ import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 interface Props {}
 
@@ -14,6 +15,9 @@ const initialState = {
 };
 
 const PasswordChangePage: FunctionComponent<Props> = ({}) => {
+  const searchParams = useSearchParams();
+  const resetConfirmationCode = searchParams.get("reset-confirmation");
+
   const [formState, setFormState] = useState(initialState);
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -32,12 +36,14 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
     <div>
       <Form onSubmit={onSubmitHandler}>
         <div>Смена пароля</div>
-        <Input
-          name="currentPassword"
-          type="text"
-          placeholder="Старый пароль"
-          onChange={onChangeHandler}
-        />
+        {!!resetConfirmationCode && (
+          <Input
+            name="currentPassword"
+            type="text"
+            placeholder="Старый пароль"
+            onChange={onChangeHandler}
+          />
+        )}
         <Input
           name="newPassword"
           type="password"
@@ -50,7 +56,7 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
           placeholder="Подтвердите пароль"
           onChange={onChangeHandler}
         />
-        <Button>Продолжить</Button>
+        <Button>Сменить пароль</Button>
       </Form>
     </div>
   );
