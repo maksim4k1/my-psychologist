@@ -5,6 +5,7 @@ import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 interface Props {}
 
@@ -57,6 +58,10 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
           onChange={onChangeHandler}
         />
         <Button>Сменить пароль</Button>
+        <p>
+          <Link href="/login">Вход</Link>{" "}
+          <Link href="/register">Регистрация</Link>
+        </p>
       </Form>
     </div>
   );

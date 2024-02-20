@@ -4,6 +4,7 @@ import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import Link from "next/link";
 
 interface Props {}
 
@@ -46,6 +47,12 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
           onChange={onChangeHandler}
         />
         <Button type="submit">Войти</Button>
+        <p>
+          Забыли пароль? <Link href="/password-reset">Восстановить</Link>
+        </p>
+        <p>
+          Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
+        </p>
       </Form>
     </div>
   );
