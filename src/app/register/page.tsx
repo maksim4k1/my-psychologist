@@ -25,7 +25,6 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    setFormState(initialState);
     console.log(formState);
   };
 

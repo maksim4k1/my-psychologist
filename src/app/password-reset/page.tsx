@@ -16,7 +16,6 @@ const PasswordResetPage: FunctionComponent<Props> = ({}) => {
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    setEmail("");
     console.log(email);
   };
 
