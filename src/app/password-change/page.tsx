@@ -37,7 +37,7 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
     <div>
       <Form onSubmit={onSubmitHandler}>
         <div>Смена пароля</div>
-        {!!resetConfirmationCode && (
+        {!resetConfirmationCode && (
           <Input
             name="currentPassword"
             type="text"
