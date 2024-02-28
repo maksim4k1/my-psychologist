@@ -7,6 +7,7 @@ import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import PageTitle from "@/components/UI/Titles/PageTitle";
+import Container from "@/components/UI/Container";
 
 interface Props {}
 
@@ -35,7 +36,7 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
   };
 
   return (
-    <div>
+    <Container>
       <PageTitle>
         {resetConfirmationCode ? "Восстановить пароль" : "Изменить пароль"}
       </PageTitle>
@@ -69,7 +70,7 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
           <Link href="/register">Регистрация</Link>
         </p> */}
       </Form>
-    </div>
+    </Container>
   );
 };
 

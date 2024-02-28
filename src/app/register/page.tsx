@@ -6,6 +6,7 @@ import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import Link from "next/link";
 import PageTitle from "@/components/UI/Titles/PageTitle";
+import Container from "@/components/UI/Container";
 
 interface Props {}
 
@@ -32,7 +33,7 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
   };
 
   return (
-    <div>
+    <Container>
       <PageTitle>Регистрация</PageTitle>
       <Form
         title="Регистрация"
@@ -75,7 +76,7 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
           Уже есть аккаунт? <Link href="/login">Войти</Link>
         </p> */}
       </Form>
-    </div>
+    </Container>
   );
 };
 

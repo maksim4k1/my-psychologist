@@ -6,6 +6,7 @@ import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import Link from "next/link";
 import PageTitle from "@/components/UI/Titles/PageTitle";
+import Container from "@/components/UI/Container";
 
 interface Props {}
 
@@ -30,7 +31,7 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
   };
 
   return (
-    <div>
+    <Container>
       <PageTitle>Войти</PageTitle>
       <Form onSubmit={onSubmitHandler}>
         <Input
@@ -55,7 +56,7 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
           Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
         </p> */}
       </Form>
-    </div>
+    </Container>
   );
 };
 
