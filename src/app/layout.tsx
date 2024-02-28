@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Sans } from "next/font/google";
 import "../styles/reset.scss";
 import "../styles/global.scss";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const font = IBM_Plex_Sans({
+  weight: ["400", "500"],
+  subsets: ["latin", "cyrillic"],
+});
 
 export const metadata: Metadata = {
   title: "Обсудим?",
@@ -18,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={inter.className}>{children}</body>
+      <body className={font.className}>{children}</body>
     </html>
   );
 }
