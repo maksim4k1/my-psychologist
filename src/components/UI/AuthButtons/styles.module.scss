@@ -1,0 +1,19 @@
+@import "@/styles/variables.scss";
+
+.authContainer{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.labelText{
+  color: $text-placeholder;
+  font-size: 14px;
+}
+
+.iconButtons{
+  display: flex;
+  gap: 16px;
+}
