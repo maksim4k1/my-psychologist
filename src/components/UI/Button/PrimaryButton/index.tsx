@@ -9,7 +9,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Component: FunctionComponent<Props> = ({
+const PrimaryButton: FunctionComponent<Props> = ({
   children,
   className = "",
   ...props
@@ -24,4 +24,4 @@ const Component: FunctionComponent<Props> = ({
   );
 };
 
-export default Component;
+export default PrimaryButton;

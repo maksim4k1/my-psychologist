@@ -1,0 +1,17 @@
+@import "@/styles/variables.scss";
+
+.button{
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  color: $white;
+  background-color: $primary;
+  border-radius: 10px;
+  line-height: 20px;
+
+  &:disabled{
+    background-color: $primary-inactive;
+  }
+}
