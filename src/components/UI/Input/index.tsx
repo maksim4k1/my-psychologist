@@ -15,13 +15,13 @@ const Input: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <label className={styles.label}>
+    <div className={styles.label}>
       <span className={styles.labelText}>{labelText}</span>
       <input
         className={`${styles.input} ${className}`}
         {...props}
       />
-    </label>
+    </div>
   );
 };
 
