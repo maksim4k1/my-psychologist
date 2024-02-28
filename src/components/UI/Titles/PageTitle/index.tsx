@@ -9,7 +9,7 @@ interface Props {
 
 const PageTitle: FunctionComponent<Props> = ({
   children,
-  className,
+  className = "",
   ...props
 }) => {
   return (
