@@ -1,11 +1,38 @@
+@import "@/styles/variables.scss";
+
 .label{
-  
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .labelText{
-
+  font-size: 15px;
+  color: $text-secondary;
+  line-height: 20px;
+  letter-spacing: 0.2px;
 }
 
 .input{
-  border: 1px solid black;
+  width: 100%;
+  padding: 12px 11px;
+  background-color: $bg-primary;
+  border-radius: 10px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+
+  &::placeholder{
+    color: $text-placeholder;
+  }
+
+  &:focus{
+    caret-color: $primary;
+
+    &::placeholder{
+      font-size: 0;
+      color: transparent;
+    }
+  }
 }
