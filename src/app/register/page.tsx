@@ -5,10 +5,12 @@ import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import Link from "next/link";
+import PageTitle from "@/components/UI/Titles/PageTitle";
 
 interface Props {}
 
 const initialState = {
+  name: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -31,33 +33,47 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
 
   return (
     <div>
-      <Form onSubmit={onSubmitHandler}>
-        <div>Регистрация</div>
+      <PageTitle>Регистрация</PageTitle>
+      <Form
+        title="Регистрация"
+        onSubmit={onSubmitHandler}
+      >
         <Input
+          labelText="Ваше имя"
+          name="name"
+          type="text"
+          placeholder="Введите имя"
+          value={formState.name}
+          onChange={onChangeHandler}
+        />
+        <Input
+          labelText="Электронная почта"
           name="email"
           type="email"
-          placeholder="Введите email"
+          placeholder="Введите адрес почты"
           value={formState.email}
           onChange={onChangeHandler}
         />
         <Input
+          labelText="Пароль"
           name="password"
           type="password"
-          placeholder="Введите пароль"
+          placeholder="Создайте пароль"
           value={formState.password}
           onChange={onChangeHandler}
         />
         <Input
+          labelText="Пароль повторно"
           name="confirmPassword"
           type="password"
-          placeholder="Подтвердите пароль"
+          placeholder="Повторите пароль"
           value={formState.confirmPassword}
           onChange={onChangeHandler}
         />
         <Button type="submit">Зарегистрироваться</Button>
-        <p>
+        {/* <p>
           Уже есть аккаунт? <Link href="/login">Войти</Link>
-        </p>
+        </p> */}
       </Form>
     </div>
   );

@@ -5,6 +5,7 @@ import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import Link from "next/link";
+import PageTitle from "@/components/UI/Titles/PageTitle";
 
 interface Props {}
 
@@ -30,16 +31,18 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
 
   return (
     <div>
+      <PageTitle>Войти</PageTitle>
       <Form onSubmit={onSubmitHandler}>
-        <div>Вход в аккаунт</div>
         <Input
+          labelText="Электронная почта"
           name="email"
           type="email"
-          placeholder="Введите email"
+          placeholder="Введите адрес электронной почты"
           value={formState.email}
           onChange={onChangeHandler}
         />
         <Input
+          labelText="Пароль"
           name="password"
           type="password"
           placeholder="Введите пароль"
@@ -47,12 +50,10 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
           onChange={onChangeHandler}
         />
         <Button type="submit">Войти</Button>
-        <p>
-          Забыли пароль? <Link href="/password-reset">Восстановить</Link>
-        </p>
-        <p>
+        <Link href="/password-reset">Восстановить пароль</Link>
+        {/* <p>
           Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
-        </p>
+        </p> */}
       </Form>
     </div>
   );

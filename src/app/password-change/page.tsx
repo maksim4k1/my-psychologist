@@ -6,6 +6,7 @@ import Button from "@/components/UI/Button";
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import PageTitle from "@/components/UI/Titles/PageTitle";
 
 interface Props {}
 
@@ -35,33 +36,38 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
 
   return (
     <div>
+      <PageTitle>
+        {resetConfirmationCode ? "Восстановить пароль" : "Изменить пароль"}
+      </PageTitle>
       <Form onSubmit={onSubmitHandler}>
-        <div>Смена пароля</div>
         {!resetConfirmationCode && (
           <Input
+            labelText="Старый пароль"
             name="currentPassword"
             type="text"
-            placeholder="Старый пароль"
+            placeholder="Введите старый пароль"
             onChange={onChangeHandler}
           />
         )}
         <Input
+          labelText="Новый пароль"
           name="newPassword"
           type="password"
-          placeholder="Новый пароль"
+          placeholder="Введите пароль"
           onChange={onChangeHandler}
         />
         <Input
+          labelText="Новый пароль повторно"
           name="confirmPassword"
           type="password"
-          placeholder="Подтвердите пароль"
+          placeholder="Повторите пароль"
           onChange={onChangeHandler}
         />
-        <Button>Сменить пароль</Button>
-        <p>
+        <Button>Сохранить пароль</Button>
+        {/* <p>
           <Link href="/login">Вход</Link>{" "}
           <Link href="/register">Регистрация</Link>
-        </p>
+        </p> */}
       </Form>
     </div>
   );
