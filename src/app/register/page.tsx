@@ -1,12 +1,13 @@
 "use client";
 
+import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import styles from "./styles.module.scss";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
-import Link from "next/link";
+import Button from "@/components/UI/Button/PrimaryButton";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import Container from "@/components/UI/Container";
+import Container from "@/components/UI/Containers/FormContainer";
+import AuthButtons from "@/components/UI/AuthButtons";
 
 interface Props {}
 
@@ -71,7 +72,9 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
           value={formState.confirmPassword}
           onChange={onChangeHandler}
         />
-        <Button type="submit">Зарегистрироваться</Button>
+        <AuthButtons className={styles.authButtons}>
+          <Button type="submit">Зарегистрироваться</Button>
+        </AuthButtons>
         {/* <p>
           Уже есть аккаунт? <Link href="/login">Войти</Link>
         </p> */}

@@ -1,13 +1,13 @@
 "use client";
 
+import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import styles from "./styles.module.scss";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import Button from "@/components/UI/Button/PrimaryButton";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import Container from "@/components/UI/Container";
+import Container from "@/components/UI/Containers/FormContainer";
 
 interface Props {}
 
@@ -38,7 +38,7 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
   return (
     <Container>
       <PageTitle>
-        {resetConfirmationCode ? "Восстановить пароль" : "Изменить пароль"}
+        {resetConfirmationCode ? "Восстановить пароль" : "Сменить пароль"}
       </PageTitle>
       <Form onSubmit={onSubmitHandler}>
         {!resetConfirmationCode && (
@@ -64,7 +64,12 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
           placeholder="Повторите пароль"
           onChange={onChangeHandler}
         />
-        <Button>Сохранить пароль</Button>
+        <Button
+          type="submit"
+          className={styles.button}
+        >
+          Сохранить пароль
+        </Button>
         {/* <p>
           <Link href="/login">Вход</Link>{" "}
           <Link href="/register">Регистрация</Link>

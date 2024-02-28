@@ -1,12 +1,14 @@
 "use client";
 
+import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import styles from "./styles.module.scss";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
-import Link from "next/link";
+import Button from "@/components/UI/Button/PrimaryButton";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import Container from "@/components/UI/Container";
+import Container from "@/components/UI/Containers/FormContainer";
+import AuthButtons from "@/components/UI/AuthButtons";
+import PrimaryLink from "@/components/UI/Links/PrimaryLink";
 
 interface Props {}
 
@@ -50,8 +52,15 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
           value={formState.password}
           onChange={onChangeHandler}
         />
-        <Button type="submit">Войти</Button>
-        <Link href="/password-reset">Восстановить пароль</Link>
+        <AuthButtons className={styles.authButtons}>
+          <Button type="submit">Войти</Button>
+        </AuthButtons>
+        <PrimaryLink
+          className={styles.link}
+          href="/password-reset"
+        >
+          Восстановить пароль
+        </PrimaryLink>
         {/* <p>
           Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
         </p> */}
