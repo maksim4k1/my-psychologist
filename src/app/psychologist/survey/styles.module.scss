@@ -1,0 +1,44 @@
+.title{
+  margin-bottom: 40px;
+  text-align: start;
+}
+
+.form{
+  width: 100%;
+  display: flex;
+  gap: 120px;
+}
+
+.leftInputs{
+  width: 360px;
+  display: flex;
+  flex-flow: column;
+  gap: 20px
+}
+
+.button{
+  margin-top: 20px;
+}
+
+.rightInputs{
+  width: 250px;
+  display: flex;
+  flex-flow: column;
+  gap: 48px;
+}
+
+.subtitle{
+  margin-bottom: 20px;
+}
+
+.radios{
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+}
+
+.checkboxes{
+  display: flex;
+  flex-flow: wrap;
+  gap: 8px;
+}
