@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "../styles/reset.scss";
 import "../styles/global.scss";
 import Header from "@/components/UI/Header";
+import styles from "./styles.module.scss";
 
 const font = Roboto({
   weight: ["400", "500"],
@@ -24,7 +25,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className={font.className}>
         <Header />
-        {children}
+        <main className={styles.main}>{children}</main>
       </body>
     </html>
   );
