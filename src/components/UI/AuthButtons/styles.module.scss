@@ -5,11 +5,11 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
 }
 
 .labelText{
-  color: $text-placeholder;
+  color: $text-outline;
   font-size: 14px;
 }
 

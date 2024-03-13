@@ -1,17 +1,22 @@
 @import "@/styles/variables.scss";
 
 .button{
-  width: 100%;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  width: 168px;
+  height: 40px;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: $white;
   background-color: $primary;
-  border-radius: 10px;
-  line-height: 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
 
   &:disabled{
     background-color: $primary-inactive;
+  }
+
+  &.large{
+    width: 257px;
   }
 }

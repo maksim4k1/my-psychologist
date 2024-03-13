@@ -5,22 +5,26 @@ import styles from "./styles.module.scss";
 
 interface Props {
   labelText: string;
+  supportText?: string;
   className?: string;
   [key: string]: any;
 }
 
 const Input: FunctionComponent<Props> = ({
-  labelText,
+  errorText,
+  labelText = "",
   className = "",
   ...props
 }) => {
   return (
     <div className={styles.label}>
-      <span className={styles.labelText}>{labelText}</span>
       <input
-        className={`${styles.input} ${className}`}
+        className={`${styles.input} ${
+          errorText ? styles.error : ""
+        } ${className}`}
         {...props}
       />
+      {!!errorText && <div className={styles.errorText}>{errorText}</div>}
     </div>
   );
 };

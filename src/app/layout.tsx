@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "../styles/reset.scss";
 import "../styles/global.scss";
+import Header from "@/components/UI/Header";
 
-const font = IBM_Plex_Sans({
+const font = Roboto({
   weight: ["400", "500"],
   subsets: ["latin", "cyrillic"],
 });
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
