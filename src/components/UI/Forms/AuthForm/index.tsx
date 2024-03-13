@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
 import Meditation from "@/assets/svg/Meditation";
+import Form from "../Form";
 import PageTitle from "../../Titles/PageTitle";
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Form: FunctionComponent<Props> = ({
+const AuthForm: FunctionComponent<Props> = ({
   children,
   title,
   className = "",
@@ -18,13 +19,13 @@ const Form: FunctionComponent<Props> = ({
 }) => {
   return (
     <div className={styles.container}>
-      <form
+      <Form
         className={`${styles.form} ${className}`}
         {...props}
       >
         {!!title && <PageTitle className={styles.title}>{title}</PageTitle>}
         {children}
-      </form>
+      </Form>
       <div className={styles.svgContainer}>
         <Meditation />
       </div>
@@ -32,4 +33,4 @@ const Form: FunctionComponent<Props> = ({
   );
 };
 
-export default Form;
+export default AuthForm;
