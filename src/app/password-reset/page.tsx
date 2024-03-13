@@ -2,12 +2,11 @@
 
 import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
 import styles from "./styles.module.scss";
-import Form from "@/components/UI/Form";
+import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button/PrimaryButton";
 import { useRouter } from "next/navigation";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import Container from "@/components/UI/Containers/FormContainer";
+import Container from "@/components/UI/Container";
 
 interface Props {}
 
@@ -27,7 +26,6 @@ const PasswordResetPage: FunctionComponent<Props> = ({}) => {
 
   return (
     <Container>
-      <PageTitle>Восстановить пароль</PageTitle>
       <Form
         title="Восстановить пароль"
         onSubmit={onSubmitHandler}
@@ -49,10 +47,6 @@ const PasswordResetPage: FunctionComponent<Props> = ({}) => {
         >
           Сбросить пароль
         </Button>
-        {/* <p>
-          <Link href="/login">Вход</Link>{" "}
-          <Link href="/register">Регистрация</Link>
-        </p> */}
       </Form>
     </Container>
   );

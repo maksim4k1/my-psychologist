@@ -1,3 +1,13 @@
 .authButtons{
-  margin-top: 30px;
+  margin-top: 20px;
+}
+.registrationCompletedContainer{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 40px;
+}
+.svgContainer{
+  width: 430px;
+  height: 430px;
 }
