@@ -4,7 +4,6 @@ import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 
 interface Props {
-  labelText: string;
   supportText?: string;
   className?: string;
   [key: string]: any;
@@ -12,7 +11,6 @@ interface Props {
 
 const Input: FunctionComponent<Props> = ({
   errorText,
-  labelText = "",
   className = "",
   ...props
 }) => {

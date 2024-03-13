@@ -9,6 +9,7 @@ import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Completed from "@/assets/svg/Completed";
+import { useRouter } from "next/navigation";
 
 interface Props {}
 
@@ -22,6 +23,7 @@ const initialState = {
 const RegisterPage: FunctionComponent<Props> = ({}) => {
   const [formState, setFormState] = useState(initialState);
   const [registrationIsCompleted, setRegistrationIsCompleted] = useState(false);
+  const router = useRouter();
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormState((currentFormState) => ({
@@ -33,6 +35,7 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     console.log(formState);
+    setRegistrationIsCompleted(true);
   };
 
   return (
@@ -43,7 +46,12 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
           <div className={styles.svgContainer}>
             <Completed />
           </div>
-          <Button isLarge={true}>Заполнить анкету психолога</Button>
+          <Button
+            isLarge={true}
+            onClick={() => router.push("/psychologist/survey")}
+          >
+            Заполнить анкету психолога
+          </Button>
         </div>
       ) : (
         <Form
@@ -51,7 +59,6 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
           title="Регистрация"
         >
           <Input
-            labelText="Ваше имя"
             name="name"
             type="text"
             placeholder="Введите имя"
@@ -59,7 +66,6 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
             onChange={onChangeHandler}
           />
           <Input
-            labelText="Электронная почта"
             name="email"
             type="email"
             placeholder="Введите адрес почты"
@@ -67,7 +73,6 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
             onChange={onChangeHandler}
           />
           <Input
-            labelText="Пароль"
             name="password"
             type="password"
             placeholder="Создайте пароль"
@@ -75,7 +80,6 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
             onChange={onChangeHandler}
           />
           <Input
-            labelText="Пароль повторно"
             name="confirmPassword"
             type="password"
             placeholder="Повторите пароль"
@@ -83,12 +87,7 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
             onChange={onChangeHandler}
           />
           <AuthButtons className={styles.authButtons}>
-            <Button
-              type="submit"
-              onClick={() => setRegistrationIsCompleted(true)}
-            >
-              Зарегистрироваться
-            </Button>
+            <Button type="submit">Зарегистрироваться</Button>
           </AuthButtons>
         </Form>
       )}

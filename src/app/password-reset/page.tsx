@@ -31,7 +31,6 @@ const PasswordResetPage: FunctionComponent<Props> = ({}) => {
         onSubmit={onSubmitHandler}
       >
         <Input
-          labelText="Электронная почта"
           name="email"
           type="email"
           placeholder="Введите адрес электронной почты"

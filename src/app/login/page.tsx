@@ -37,7 +37,6 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
         title="Вход"
       >
         <Input
-          labelText="Электронная почта"
           name="email"
           type="email"
           placeholder="Введите адрес почты"
@@ -45,7 +44,6 @@ const LoginPage: FunctionComponent<Props> = ({}) => {
           onChange={onChangeHandler}
         />
         <Input
-          labelText="Пароль"
           name="password"
           type="password"
           placeholder="Введите пароль"

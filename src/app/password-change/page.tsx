@@ -42,7 +42,6 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
       >
         {!resetConfirmationCode && (
           <Input
-            labelText="Старый пароль"
             name="currentPassword"
             type="text"
             placeholder="Введите старый пароль"
@@ -50,14 +49,12 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
           />
         )}
         <Input
-          labelText="Новый пароль"
           name="newPassword"
           type="password"
           placeholder="Введите пароль"
           onChange={onChangeHandler}
         />
         <Input
-          labelText="Новый пароль повторно"
           name="confirmPassword"
           type="password"
           placeholder="Повторите пароль"
