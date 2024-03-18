@@ -11,13 +11,10 @@
 
 .leftInputs{
   width: 360px;
-  display: flex;
-  flex-flow: column;
-  gap: 20px
 }
 
 .button{
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .rightInputs{
@@ -29,6 +26,12 @@
 
 .subtitle{
   margin-bottom: 20px;
+}
+
+.inputs{
+  display: flex;
+  flex-flow: column;
+  gap: 20px
 }
 
 .radios{

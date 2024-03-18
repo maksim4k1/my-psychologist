@@ -1,14 +1,13 @@
 "use client";
 
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button/PrimaryButton";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/UI/Container";
-
-interface Props {}
+import { onChangeInputHandler } from "@/utils/handlers";
 
 const initialState = {
   currentPassword: "",
@@ -16,18 +15,13 @@ const initialState = {
   confirmPassword: "",
 };
 
-const PasswordChangePage: FunctionComponent<Props> = ({}) => {
+function PasswordChangePage() {
   const searchParams = useSearchParams();
   const resetConfirmationCode = searchParams.get("reset-confirmation");
 
   const [formState, setFormState] = useState(initialState);
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    setFormState((currentFormState) => ({
-      ...currentFormState,
-      [event.target.name]: event.target.value,
-    }));
-  };
+  const onChangeHandler = onChangeInputHandler(setFormState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -69,6 +63,6 @@ const PasswordChangePage: FunctionComponent<Props> = ({}) => {
       </Form>
     </Container>
   );
-};
+}
 
 export default PasswordChangePage;

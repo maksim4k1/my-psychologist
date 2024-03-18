@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
@@ -10,8 +10,7 @@ import AuthButtons from "@/components/UI/AuthButtons";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Completed from "@/assets/svg/Completed";
 import { useRouter } from "next/navigation";
-
-interface Props {}
+import { onChangeInputHandler } from "@/utils/handlers";
 
 const initialState = {
   name: "",
@@ -20,17 +19,12 @@ const initialState = {
   confirmPassword: "",
 };
 
-const RegisterPage: FunctionComponent<Props> = ({}) => {
+function RegisterPage() {
   const [formState, setFormState] = useState(initialState);
   const [registrationIsCompleted, setRegistrationIsCompleted] = useState(false);
   const router = useRouter();
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    setFormState((currentFormState) => ({
-      ...currentFormState,
-      [event.target.name]: event.target.value,
-    }));
-  };
+  const onChangeHandler = onChangeInputHandler(setFormState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -93,6 +87,6 @@ const RegisterPage: FunctionComponent<Props> = ({}) => {
       )}
     </Container>
   );
-};
+}
 
 export default RegisterPage;

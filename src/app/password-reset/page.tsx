@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, FunctionComponent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
@@ -8,9 +8,7 @@ import Button from "@/components/UI/Button/PrimaryButton";
 import { useRouter } from "next/navigation";
 import Container from "@/components/UI/Container";
 
-interface Props {}
-
-const PasswordResetPage: FunctionComponent<Props> = ({}) => {
+function PasswordResetPage() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -49,6 +47,6 @@ const PasswordResetPage: FunctionComponent<Props> = ({}) => {
       </Form>
     </Container>
   );
-};
+}
 
 export default PasswordResetPage;
