@@ -1,0 +1,45 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.navigation {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 34px;
+  justify-content: flex-end;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  @include titleLarge;
+}
+
+.card {
+  width: 100%;
+  height: 80px;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: $surface;
+  border: 1px solid $outline-variant;
+  border-radius: 12px;
+}
+
+.info {
+  max-width: calc(100% - 40px - 16px);
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.username {
+  @include titleSmall;
+}
+
+.content {
+  max-width: 100%;
+  @include bodyMedium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
