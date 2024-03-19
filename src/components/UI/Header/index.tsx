@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 import LogoIcon from "@/assets/svg/icons/Logo";
 import Container from "../Container";
+import ProfileImage from "../Images/ProfileImage";
 
 const Header: FunctionComponent = ({}) => {
   return (
@@ -44,10 +45,10 @@ const Header: FunctionComponent = ({}) => {
           href="/login"
           className={styles.profileContainer}
         >
-          <img
-            className={styles.profileImage}
+          <ProfileImage
             src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
             alt="profile"
+            size={54}
           />
         </Link>
       </Container>
