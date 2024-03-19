@@ -1,0 +1,98 @@
+@mixin displayLarge{
+  font-size: 57px;
+  font-weight: 400;
+  line-height: 64px;
+  letter-spacing: -0.25px;
+}
+
+@mixin displayMedium{
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 52px;
+}
+
+@mixin displaySmall{
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 44px;
+}
+
+@mixin headlineLarge{
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+@mixin headlineMedium{
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+@mixin headlineSmall{
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+@mixin titleLarge{
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+@mixin titleMedium{
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+@mixin titleSmall{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+
+@mixin labelLarge{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+
+@mixin labelMedium{
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+@mixin labelSmall{
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+@mixin bodyLarge{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+@mixin bodyMedium{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+@mixin bodySmall{
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}

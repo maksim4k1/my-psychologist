@@ -1,4 +1,5 @@
 @import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
 
 .authContainer{
   width: 100%;
@@ -10,7 +11,7 @@
 
 .labelText{
   color: $text-outline;
-  font-size: 14px;
+  @include bodyMedium;
 }
 
 .iconButtons{

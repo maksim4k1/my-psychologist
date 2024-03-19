@@ -23,7 +23,7 @@ const initialState = {
   gender: "man",
 };
 
-function PsychologistSurvey() {
+function PsychologistSurveyPage() {
   const [formData, setFormData] = useState(initialState);
 
   const onChangeHandler = onChangeInputHandler(setFormData);
@@ -169,4 +169,4 @@ function PsychologistSurvey() {
   );
 }
 
-export default PsychologistSurvey;
+export default PsychologistSurveyPage;

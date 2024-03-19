@@ -1,4 +1,5 @@
 @import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
 
 .radio{
   width: 24px;
@@ -26,7 +27,7 @@
 .labelText{
   display: inline-block;
   padding-left: 34px;
-  line-height: 24px;
+  @include labelLarge;
 
   &::before{
     content: "";
