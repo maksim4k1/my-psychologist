@@ -1,0 +1,81 @@
+@import "@/styles/variables";
+@import "@/styles/textStyles";
+
+.title {
+  margin-bottom: 40px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.clientCard {
+  max-width: 265px;
+  width: 25%;
+  display: flex;
+  flex-flow: column;
+  padding: 12px 16px 16px;
+  background-color: $surface;
+  border: 1px solid $outline-variant;
+  border-radius: 12px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clientInfo {
+  width: 100%;
+  margin-left: 16px;
+  margin-right: 12px;
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.username {
+  @include titleMedium;
+}
+
+.status {
+  @include bodyMedium;
+  color: $on-primary-fixed-variant;
+
+  &.isOnline {
+    color: $inverse-primary;
+  }
+}
+
+.moreButton {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.problems {
+  margin-top: 28px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.problem {
+  padding: 6px 8px;
+  @include labelLarge;
+  background-color: $secondary-container;
+  border-radius: 8px;
+}
+
+.buttons {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
