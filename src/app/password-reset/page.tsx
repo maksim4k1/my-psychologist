@@ -36,6 +36,7 @@ function PasswordResetPage() {
         />
         <Button
           className={styles.button}
+          isMedium={true}
           onClick={() =>
             router.push(
               "/password-change?reset-confirmation=very_long_hash_code_*o*",

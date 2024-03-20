@@ -45,7 +45,12 @@ function LoginPage() {
           onChange={onChangeHandler}
         />
         <AuthButtons className={styles.authButtons}>
-          <Button type="submit">Войти</Button>
+          <Button
+            type="submit"
+            isMedium={true}
+          >
+            Войти
+          </Button>
         </AuthButtons>
       </Form>
     </Container>

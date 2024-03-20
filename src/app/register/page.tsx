@@ -81,7 +81,12 @@ function RegisterPage() {
             onChange={onChangeHandler}
           />
           <AuthButtons className={styles.authButtons}>
-            <Button type="submit">Зарегистрироваться</Button>
+            <Button
+              type="submit"
+              isMedium={true}
+            >
+              Зарегистрироваться
+            </Button>
           </AuthButtons>
         </Form>
       )}

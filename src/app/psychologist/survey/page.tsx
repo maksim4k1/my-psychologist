@@ -91,6 +91,7 @@ function PsychologistSurveyPage() {
           <Button
             type="submit"
             className={styles.button}
+            isMedium={true}
           >
             Сохранить
           </Button>
