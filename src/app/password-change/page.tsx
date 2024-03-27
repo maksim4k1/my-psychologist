@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button/PrimaryButton";
+import Button from "@/components/UI/Buttons/PrimaryButton";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/UI/Container";
 import { onChangeInputHandler } from "@/utils/handlers";
@@ -26,6 +26,7 @@ function PasswordChangePage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     console.log(formState);
+    setFormState(initialState);
   };
 
   return (
@@ -40,6 +41,7 @@ function PasswordChangePage() {
             type="text"
             placeholder="Введите старый пароль"
             onChange={onChangeHandler}
+            required
           />
         )}
         <Input
@@ -47,11 +49,13 @@ function PasswordChangePage() {
           type="password"
           placeholder="Введите пароль"
           onChange={onChangeHandler}
+          required
         />
         <Input
           name="confirmPassword"
           type="password"
           placeholder="Повторите пароль"
+          required
           onChange={onChangeHandler}
         />
         <Button

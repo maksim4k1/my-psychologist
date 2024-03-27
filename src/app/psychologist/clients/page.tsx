@@ -4,8 +4,8 @@ import styles from "./styles.module.scss";
 import ProfileImage from "@/components/UI/Images/ProfileImage";
 import MoreVerticalIcon from "@/assets/svg/icons/MoreVerticalIcon";
 import { FunctionComponent } from "react";
-import PrimaryButton from "@/components/UI/Button/PrimaryButton";
-import SecondaryButton from "@/components/UI/Button/SecondaryButton";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
+import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 
 interface Props {
   profileImage: string;

@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button/PrimaryButton";
+import Button from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import PageTitle from "@/components/UI/Titles/PageTitle";
@@ -29,6 +29,7 @@ function RegisterPage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     console.log(formState);
+    setFormState(initialState);
     setRegistrationIsCompleted(true);
   };
 
@@ -58,6 +59,7 @@ function RegisterPage() {
             placeholder="Введите имя"
             value={formState.name}
             onChange={onChangeHandler}
+            required
           />
           <Input
             name="email"
@@ -65,6 +67,7 @@ function RegisterPage() {
             placeholder="Введите адрес почты"
             value={formState.email}
             onChange={onChangeHandler}
+            required
           />
           <Input
             name="password"
@@ -72,6 +75,7 @@ function RegisterPage() {
             placeholder="Создайте пароль"
             value={formState.password}
             onChange={onChangeHandler}
+            required
           />
           <Input
             name="confirmPassword"
@@ -79,6 +83,7 @@ function RegisterPage() {
             placeholder="Повторите пароль"
             value={formState.confirmPassword}
             onChange={onChangeHandler}
+            required
           />
           <AuthButtons className={styles.authButtons}>
             <Button

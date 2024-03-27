@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button/PrimaryButton";
+import Button from "@/components/UI/Buttons/PrimaryButton";
 import { useRouter } from "next/navigation";
 import Container from "@/components/UI/Container";
 
@@ -20,6 +20,8 @@ function PasswordResetPage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     console.log(email);
+
+    router.push("/password-change?reset-confirmation=very_long_hash_code_*o*");
   };
 
   return (
@@ -33,15 +35,12 @@ function PasswordResetPage() {
           type="email"
           placeholder="Введите адрес электронной почты"
           onChange={onChangeHandler}
+          required
         />
         <Button
           className={styles.button}
           isMedium={true}
-          onClick={() =>
-            router.push(
-              "/password-change?reset-confirmation=very_long_hash_code_*o*",
-            )
-          }
+          type="submit"
         >
           Сбросить пароль
         </Button>

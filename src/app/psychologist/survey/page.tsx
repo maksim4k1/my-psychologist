@@ -9,7 +9,7 @@ import Checkbox from "@/components/UI/Checkbox";
 import Form from "@/components/UI/Forms/Form";
 import FormSubtitle from "@/components/UI/Titles/FormSubtitle";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button/PrimaryButton";
+import Button from "@/components/UI/Buttons/PrimaryButton";
 import { onChangeInputHandler } from "@/utils/handlers";
 
 const initialState = {

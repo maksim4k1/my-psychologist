@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button/PrimaryButton";
+import Button from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
@@ -22,6 +22,7 @@ function LoginPage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     console.log(formState);
+    setFormState(initialState);
   };
 
   return (
@@ -36,6 +37,7 @@ function LoginPage() {
           placeholder="Введите адрес почты"
           value={formState.email}
           onChange={onChangeHandler}
+          required
         />
         <Input
           name="password"
@@ -43,6 +45,7 @@ function LoginPage() {
           placeholder="Введите пароль"
           value={formState.password}
           onChange={onChangeHandler}
+          required
         />
         <AuthButtons className={styles.authButtons}>
           <Button

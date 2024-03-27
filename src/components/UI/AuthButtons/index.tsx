@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
-import IconButton from "../Button/IconButton";
+import IconButton from "../Buttons/IconButton";
 import YandexIcon from "@/assets/svg/icons/YandexIcon";
 import VkIcon from "@/assets/svg/icons/VkIcon";
 
