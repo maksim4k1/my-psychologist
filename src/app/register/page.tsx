@@ -9,7 +9,6 @@ import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Completed from "@/assets/svg/Completed";
-import { useRouter } from "next/navigation";
 import { onChangeInputHandler } from "@/utils/handlers";
 
 const initialState = {
@@ -22,7 +21,6 @@ const initialState = {
 function RegisterPage() {
   const [formState, setFormState] = useState(initialState);
   const [registrationIsCompleted, setRegistrationIsCompleted] = useState(false);
-  const router = useRouter();
 
   const onChangeHandler = onChangeInputHandler(setFormState);
 
@@ -43,7 +41,7 @@ function RegisterPage() {
           </div>
           <Button
             isLarge={true}
-            onClick={() => router.push("/psychologist/survey")}
+            href="./psychologist/survey"
           >
             Заполнить анкету психолога
           </Button>
