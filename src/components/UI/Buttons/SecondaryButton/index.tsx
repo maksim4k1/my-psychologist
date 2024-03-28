@@ -2,10 +2,10 @@
 
 import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
+import PrimaryButton from "../PrimaryButton";
 
 interface Props {
   children: ReactNode;
-  isLarge?: boolean;
   className?: string;
   [key: string]: any;
 }
@@ -16,12 +16,12 @@ const SecondaryButton: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <button
+    <PrimaryButton
       className={`${styles.button} ${className}`}
       {...props}
     >
       {children}
-    </button>
+    </PrimaryButton>
   );
 };
 

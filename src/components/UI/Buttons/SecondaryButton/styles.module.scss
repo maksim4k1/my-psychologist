@@ -1,15 +1,7 @@
 @import "@/styles/variables.scss";
-@import "@/styles/textStyles.scss";
 
 .button {
-  padding: 0 24px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: $primary;
-  @include labelLarge;
   background-color: transparent;
   border: 1px solid $light-outline;
-  border-radius: 20px;
 }
