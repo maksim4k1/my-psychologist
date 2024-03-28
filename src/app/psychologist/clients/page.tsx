@@ -6,34 +6,35 @@ import MoreVerticalIcon from "@/assets/svg/icons/MoreVerticalIcon";
 import { FunctionComponent } from "react";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
+import Symptom from "@/components/UI/Symptom";
 
 interface Props {
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problems: string[];
+  client: {
+    userId: number;
+    profileImage: string;
+    username: string;
+    isOnline: boolean;
+    problems: string[];
+  };
 }
 
-const ClientCard: FunctionComponent<Props> = ({
-  profileImage,
-  username,
-  isOnline,
-  problems,
-}) => {
+const ClientCard: FunctionComponent<Props> = ({ client }) => {
   return (
     <div className={styles.clientCard}>
       <div className={styles.cardHeader}>
         <ProfileImage
-          src={profileImage}
+          src={client.profileImage}
           alt="profile"
           size={40}
         />
         <div className={styles.clientInfo}>
-          <div className={styles.username}>{username}</div>
+          <div className={styles.username}>{client.username}</div>
           <div
-            className={`${styles.status} ${isOnline ? styles.isOnline : ""}`}
+            className={`${styles.status} ${
+              client.isOnline ? styles.isOnline : ""
+            }`}
           >
-            {isOnline ? "Онлайн" : "Был(а) недавно"}
+            {client.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
         <button className={styles.moreButton}>
@@ -41,20 +42,20 @@ const ClientCard: FunctionComponent<Props> = ({
         </button>
       </div>
       <div className={styles.problems}>
-        {problems.map((problem, index) => {
+        {client.problems.map((problem, index) => {
           return (
-            <div
+            <Symptom
               key={index}
-              className={styles.problem}
-            >
-              {problem}
-            </div>
+              problem={problem}
+            />
           );
         })}
       </div>
       <div className={styles.buttons}>
         <SecondaryButton>Чат</SecondaryButton>
-        <PrimaryButton>Профиль</PrimaryButton>
+        <PrimaryButton href={`./clients/${client.userId}`}>
+          Профиль
+        </PrimaryButton>
       </div>
     </div>
   );
@@ -66,28 +67,44 @@ function PsychologistClientsPage() {
       <PageTitle className={styles.title}>Мои клиенты</PageTitle>
       <div className={styles.list}>
         <ClientCard
-          profileImage="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-          username="Александр"
-          isOnline={false}
-          problems={["Депрессия", "Зависимости", "Выгорание"]}
+          client={{
+            userId: 1,
+            profileImage:
+              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            username: "Александр",
+            isOnline: false,
+            problems: ["Депрессия", "Зависимости", "Выгорание"],
+          }}
         />
         <ClientCard
-          profileImage="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-          username="Алиса"
-          isOnline={true}
-          problems={["ПТСР", "Тревога", "РПП", "Депрессия"]}
+          client={{
+            userId: 2,
+            profileImage:
+              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            username: "Алиса",
+            isOnline: true,
+            problems: ["ПТСР", "Тревога", "РПП", "Депрессия"],
+          }}
         />
         <ClientCard
-          profileImage="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-          username="Виктор"
-          isOnline={true}
-          problems={["Выгорание"]}
+          client={{
+            userId: 3,
+            profileImage:
+              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            username: "Виктор",
+            isOnline: true,
+            problems: ["Выгорание"],
+          }}
         />
         <ClientCard
-          profileImage="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-          username="Ангелина"
-          isOnline={false}
-          problems={["Панические атаки", "СДВГ", "Социофобия"]}
+          client={{
+            userId: 4,
+            profileImage:
+              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            username: "Ангелина",
+            isOnline: false,
+            problems: ["Панические атаки", "СДВГ", "Социофобия"],
+          }}
         />
       </div>
     </Container>

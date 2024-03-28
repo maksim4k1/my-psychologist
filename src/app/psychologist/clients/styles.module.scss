@@ -66,13 +66,6 @@
   gap: 8px;
 }
 
-.problem {
-  padding: 6px 8px;
-  @include labelLarge;
-  background-color: $secondary-container;
-  border-radius: 8px;
-}
-
 .buttons {
   margin-top: auto;
   display: flex;
