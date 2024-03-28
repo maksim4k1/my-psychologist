@@ -7,19 +7,19 @@ interface Props {
   [key: string]: any;
 }
 
-const FormSubtitle: FunctionComponent<Props> = ({
+const Subtitle: FunctionComponent<Props> = ({
   children,
   className = "",
   ...props
 }) => {
   return (
-    <h5
+    <h3
       className={`${styles.title} ${className}`}
       {...props}
     >
       {children}
-    </h5>
+    </h3>
   );
 };
 
-export default FormSubtitle;
+export default Subtitle;

@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 import Container from "@/components/UI/Container";
 import Checkbox from "@/components/UI/Checkbox";
 import Form from "@/components/UI/Forms/Form";
-import FormSubtitle from "@/components/UI/Titles/FormSubtitle";
+import Subtitle from "@/components/UI/Titles/Subtitle";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Buttons/PrimaryButton";
 import { onChangeInputHandler } from "@/utils/handlers";
@@ -41,9 +41,7 @@ function PsychologistSurveyPage() {
         onSubmit={onSubmitHandler}
       >
         <div className={styles.leftInputs}>
-          <FormSubtitle className={styles.subtitle}>
-            Общая информация
-          </FormSubtitle>
+          <Subtitle className={styles.subtitle}>Общая информация</Subtitle>
           <div className={styles.inputs}>
             <Input
               name="fullName"
@@ -98,7 +96,7 @@ function PsychologistSurveyPage() {
         </div>
         <div className={styles.rightInputs}>
           <div>
-            <FormSubtitle className={styles.subtitle}>Пол</FormSubtitle>
+            <Subtitle className={styles.subtitle}>Пол</Subtitle>
             <div className={styles.radios}>
               <Radio
                 name="gender"
@@ -122,9 +120,7 @@ function PsychologistSurveyPage() {
             </div>
           </div>
           <div>
-            <FormSubtitle className={styles.subtitle}>
-              Специализация
-            </FormSubtitle>
+            <Subtitle className={styles.subtitle}>Специализация</Subtitle>
             <div className={styles.checkboxes}>
               <Checkbox
                 name="specialization"
