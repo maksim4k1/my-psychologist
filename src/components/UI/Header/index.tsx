@@ -15,7 +15,7 @@ const Header: FunctionComponent = ({}) => {
         >
           <LogoIcon />
         </Link>
-        <nav className={styles.nav}>
+        {/* <nav className={styles.nav}>
           <Link
             className={styles.navLink}
             href="/"
@@ -40,7 +40,7 @@ const Header: FunctionComponent = ({}) => {
           >
             Психолог
           </Link>
-        </nav>
+        </nav> */}
         <Link
           href="/login"
           className={styles.profileContainer}
