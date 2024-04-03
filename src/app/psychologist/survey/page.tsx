@@ -30,7 +30,6 @@ function PsychologistSurveyPage() {
 
   function onSubmitHandler(event: SubmitEvent) {
     event.preventDefault();
-    console.log(formData);
   }
 
   return (
