@@ -19,9 +19,8 @@ function PasswordResetPage() {
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(email);
 
-    router.push("/password-change?reset-confirmation=very_long_hash_code_*o*");
+    router.push("/password/change?reset-confirmation=reset-password-code");
   };
 
   return (

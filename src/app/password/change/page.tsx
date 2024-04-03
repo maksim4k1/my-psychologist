@@ -25,7 +25,7 @@ function PasswordChangePage() {
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(formState);
+
     setFormState(initialState);
   };
 
