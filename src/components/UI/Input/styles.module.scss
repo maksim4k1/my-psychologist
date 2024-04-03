@@ -1,46 +1,48 @@
 @import "@/styles/variables.scss";
 @import "@/styles/textStyles.scss";
 
-.label{
+.label {
   position: relative;
   width: 100%;
 }
 
-.input{
+.input {
   width: 100%;
   padding: 16px;
   background-color: transparent;
   @include bodyLarge;
   border-bottom: 1px solid $text-placeholder;
+  transition: border-color 0.2s;
 
-  &::placeholder{
+  &::placeholder {
     color: $text-placeholder;
   }
 
-  &:focus{
+  &:focus {
     caret-color: $text-primary;
+    border-bottom-color: $text-primary;
 
-    &::placeholder{
+    &::placeholder {
       font-size: 0;
       color: transparent;
     }
   }
 
-  &.error{
+  &.error {
     color: $error;
     border-bottom-color: $error;
 
-    &::placeholder{
+    &::placeholder {
       color: $error;
     }
 
-    &:focus{
+    &:focus {
       caret-color: $error;
     }
   }
 }
 
-.errorText{
+.errorText {
   position: absolute;
   bottom: -20px;
   padding: 0 16px;
