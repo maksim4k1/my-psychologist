@@ -35,6 +35,7 @@ function PasswordResetPage() {
           type="email"
           placeholder="Введите адрес электронной почты"
           onChange={onChangeHandler}
+          value={email}
           required
         />
         <Button
