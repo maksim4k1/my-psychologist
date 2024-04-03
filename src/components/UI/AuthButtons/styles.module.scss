@@ -1,7 +1,7 @@
 @import "@/styles/variables.scss";
 @import "@/styles/textStyles.scss";
 
-.authContainer{
+.authContainer {
   width: 100%;
   display: flex;
   flex-flow: column;
@@ -9,12 +9,26 @@
   gap: 20px;
 }
 
-.labelText{
+.labelText {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
   color: $outline-variant;
   @include bodyMedium;
+
+  &::before,
+  &::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    display: block;
+    background-color: $outline-variant;
+  }
 }
 
-.iconButtons{
+.iconButtons {
   display: flex;
   gap: 16px;
 }

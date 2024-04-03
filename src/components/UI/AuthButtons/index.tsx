@@ -21,7 +21,7 @@ const AuthButtons: FunctionComponent<Props> = ({
       {...props}
     >
       {children}
-      <span className={styles.labelText}>или войти с помощью</span>
+      <span className={styles.labelText}>или</span>
       <div className={styles.iconButtons}>
         <IconButton type="button">
           <YandexIcon />
