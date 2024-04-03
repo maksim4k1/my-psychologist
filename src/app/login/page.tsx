@@ -8,6 +8,8 @@ import Button from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
+import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
+import Link from "next/link";
 
 const initialState = {
   email: "",
@@ -47,6 +49,12 @@ function LoginPage() {
           onChange={onChangeHandler}
           required
         />
+        <Link
+          href="/password-reset"
+          className={styles.resetPasswordLink}
+        >
+          Забыли пароль?
+        </Link>
         <AuthButtons className={styles.authButtons}>
           <Button
             type="submit"
@@ -54,6 +62,12 @@ function LoginPage() {
           >
             Войти
           </Button>
+          <SecondaryButton
+            href="/register"
+            isMedium={true}
+          >
+            Зарегистрироваться
+          </SecondaryButton>
         </AuthButtons>
       </Form>
     </Container>

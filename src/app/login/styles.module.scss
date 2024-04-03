@@ -1,7 +1,21 @@
-.authButtons{
-  margin-top: 30px;
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.authButtons {
+  margin-top: 0;
 }
 
-.link{
-  margin-top: 20px;
+.resetPasswordLink {
+  margin-top: -12px;
+  margin-bottom: -4px;
+  margin-left: auto;
+  color: $outline-variant;
+  text-decoration: underline;
+  @include labelMedium;
+  transition: text-decoration-color 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+  }
 }

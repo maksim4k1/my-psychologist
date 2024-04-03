@@ -10,6 +10,7 @@ import AuthButtons from "@/components/UI/AuthButtons";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Completed from "@/assets/svg/Completed";
 import { onChangeInputHandler } from "@/utils/handlers";
+import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 
 const initialState = {
   name: "",
@@ -90,6 +91,12 @@ function RegisterPage() {
             >
               Зарегистрироваться
             </Button>
+            <SecondaryButton
+              href="/login"
+              isMedium={true}
+            >
+              Войти
+            </SecondaryButton>
           </AuthButtons>
         </Form>
       )}
