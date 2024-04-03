@@ -18,7 +18,8 @@ const ProfileImage: FunctionComponent<Props> = ({
 }) => {
   return (
     <img
-      style={{ width: size + "px", height: size + "px" }}
+      width={size}
+      height={size}
       className={`${styles.image} ${className}`}
       src={src}
       alt={alt}
