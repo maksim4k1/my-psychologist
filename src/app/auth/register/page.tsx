@@ -9,30 +9,42 @@ import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const initialState = {
+  name: "",
   email: "",
   password: "",
+  confirmPassword: "",
 };
 
-function LoginPage() {
+function RegisterPage() {
   const [formState, setFormState] = useState(initialState);
+  const router = useRouter();
 
   const onChangeHandler = onChangeInputHandler(setFormState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(formState);
+
     setFormState(initialState);
+    router.push("/auth/register/success");
   };
 
   return (
     <Container>
       <Form
         onSubmit={onSubmitHandler}
-        title="Вход"
+        title="Регистрация"
       >
+        <Input
+          name="name"
+          type="text"
+          placeholder="Введите имя"
+          value={formState.name}
+          onChange={onChangeHandler}
+          required
+        />
         <Input
           name="email"
           type="email"
@@ -44,29 +56,31 @@ function LoginPage() {
         <Input
           name="password"
           type="password"
-          placeholder="Введите пароль"
+          placeholder="Создайте пароль"
           value={formState.password}
           onChange={onChangeHandler}
           required
         />
-        <Link
-          href="/password-reset"
-          className={styles.resetPasswordLink}
-        >
-          Забыли пароль?
-        </Link>
+        <Input
+          name="confirmPassword"
+          type="password"
+          placeholder="Повторите пароль"
+          value={formState.confirmPassword}
+          onChange={onChangeHandler}
+          required
+        />
         <AuthButtons className={styles.authButtons}>
           <Button
             type="submit"
             isMedium={true}
           >
-            Войти
+            Зарегистрироваться
           </Button>
           <SecondaryButton
-            href="/register"
+            href="/auth/login"
             isMedium={true}
           >
-            Зарегистрироваться
+            Войти
           </SecondaryButton>
         </AuthButtons>
       </Form>
@@ -74,4 +88,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
