@@ -42,7 +42,7 @@ const Header: FunctionComponent = ({}) => {
           </Link>
         </nav> */}
         <Link
-          href="/login"
+          href="/psychologist"
           className={styles.profileContainer}
         >
           <ProfileImage
