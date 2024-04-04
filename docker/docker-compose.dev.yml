@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  nextjs-dev:
+    container_name: nextjs-dev
+    build:
+      dockerfile: ./docker/dockerfile/Dockerfile
+      context: ../
+    restart: on-failure
+    volumes:
+      - ../:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+
+  nginx-dev:
+    container_name: nginx-dev
+    image: nginx:latest
+    restart: on-failure
+    volumes:
+      - ../:/app
+      - /app/node_modules
+      - /app/docker/nginx/default.conf:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - nextjs-dev
