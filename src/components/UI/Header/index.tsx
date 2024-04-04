@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import LogoIcon from "@/assets/svg/icons/Logo";
+import LogoIcon from "@/assets/svg/Icons/Logo";
 import Container from "../Container";
 import ProfileImage from "../Images/ProfileImage";
 

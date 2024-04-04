@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/scss";
 import styles from "./styles.module.scss";
-import NextIcon from "@/assets/svg/icons/NextIcon";
+import NextIcon from "@/assets/svg/Icons/NextIcon";
 
 interface Props {
   children: ReactNode[];

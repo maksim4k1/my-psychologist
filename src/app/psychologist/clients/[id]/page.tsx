@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 import { FunctionComponent } from "react";
 import ProfileImage from "@/components/UI/Images/ProfileImage";
 import Symptom from "@/components/UI/Symptom";
-import MoreVerticalIcon from "@/assets/svg/icons/MoreVerticalIcon";
+import MoreVerticalIcon from "@/assets/svg/Icons/MoreVerticalIcon";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import Link from "next/link";

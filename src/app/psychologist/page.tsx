@@ -1,5 +1,5 @@
-import GroupIcon from "@/assets/svg/icons/GroupIcon";
-import MessageIcon from "@/assets/svg/icons/MessageIcon";
+import GroupIcon from "@/assets/svg/Icons/GroupIcon";
+import MessageIcon from "@/assets/svg/Icons/MessageIcon";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import IconTextLink from "@/components/UI/Links/IconTextLink";

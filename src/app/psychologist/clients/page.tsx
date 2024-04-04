@@ -2,7 +2,7 @@ import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";
 import ProfileImage from "@/components/UI/Images/ProfileImage";
-import MoreVerticalIcon from "@/assets/svg/icons/MoreVerticalIcon";
+import MoreVerticalIcon from "@/assets/svg/Icons/MoreVerticalIcon";
 import { FunctionComponent } from "react";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
