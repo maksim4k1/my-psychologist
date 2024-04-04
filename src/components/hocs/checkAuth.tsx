@@ -10,7 +10,7 @@ function checkAuth(
   isNeedAuth: boolean = false,
   accessFor: string[] = [ACCESS.public],
 ): FunctionComponent {
-  return () => {
+  return function CheckAuthComponent() {
     const isAuth: boolean = true;
     const currentRole: string = !isAuth
       ? ACCESS.unauthorized
