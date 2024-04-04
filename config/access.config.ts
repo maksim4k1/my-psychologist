@@ -1,4 +1,4 @@
-export const Roles = {
+export const ACCESS = {
   public: "public",
   unauthorized: "unauthorized",
   authorized: "authorized",
