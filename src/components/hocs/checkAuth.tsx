@@ -16,28 +16,29 @@ function checkAuth(
       ? ACCESS.unauthorized
       : ACCESS.psychologist;
 
-    if (isNeedAuth && !isAuth) {
-      return <NeedAuthErrorPage />;
-    } else if (
-      !isNeedAuth &&
-      isAuth &&
-      accessFor.includes(ACCESS.unauthorized) &&
-      accessFor.length === 1
-    ) {
-      return <OnlyForUnauthorizedErrorPage />;
-    }
+    // if (isNeedAuth && !isAuth) {
+    //   return <NeedAuthErrorPage />;
+    // } else if (
+    //   !isNeedAuth &&
+    //   isAuth &&
+    //   accessFor.includes(ACCESS.unauthorized) &&
+    //   accessFor.length === 1
+    // ) {
+    //   return <OnlyForUnauthorizedErrorPage />;
+    // }
 
-    if (
-      accessFor.includes(ACCESS.public) ||
-      accessFor.includes(currentRole) ||
-      (isAuth && accessFor.includes(ACCESS.client))
-    ) {
-      return <Component />;
-    } else if (isAuth && accessFor.includes(ACCESS.psychologist)) {
-      return <OnlyForPsychologistErrorPage />;
-    } else {
-      return <AccessDeniedErrorPage />;
-    }
+    // if (
+    //   accessFor.includes(ACCESS.public) ||
+    //   accessFor.includes(currentRole) ||
+    //   (isAuth && accessFor.includes(ACCESS.client))
+    // ) {
+    //   return <Component />;
+    // } else if (isAuth && accessFor.includes(ACCESS.psychologist)) {
+    //   return <OnlyForPsychologistErrorPage />;
+    // } else {
+    //   return <AccessDeniedErrorPage />;
+    // }
+    return <Component />;
   };
 }
 
