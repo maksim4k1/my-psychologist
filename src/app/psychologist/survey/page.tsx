@@ -11,6 +11,8 @@ import Subtitle from "@/components/UI/Titles/Subtitle";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Buttons/PrimaryButton";
 import { onChangeInputHandler } from "@/utils/handlers";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../../config/access.config";
 
 const initialState = {
   fullName: "",
@@ -165,4 +167,4 @@ function PsychologistSurveyPage() {
   );
 }
 
-export default PsychologistSurveyPage;
+export default checkAuth(PsychologistSurveyPage, true, [ACCESS.client]);

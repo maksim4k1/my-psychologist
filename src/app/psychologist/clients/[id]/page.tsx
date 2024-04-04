@@ -8,6 +8,8 @@ import MoreVerticalIcon from "@/assets/svg/icons/MoreVerticalIcon";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import Link from "next/link";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../../../config/access.config";
 
 interface ClientCardProps {
   client: {
@@ -128,4 +130,4 @@ function PsychologistClientPage() {
   );
 }
 
-export default PsychologistClientPage;
+export default checkAuth(PsychologistClientPage, true, [ACCESS.psychologist]);

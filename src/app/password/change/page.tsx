@@ -8,6 +8,8 @@ import Button from "@/components/UI/Buttons/PrimaryButton";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/UI/Container";
 import { onChangeInputHandler } from "@/utils/handlers";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../../config/access.config";
 
 const initialState = {
   currentPassword: "",
@@ -69,4 +71,7 @@ function PasswordChangePage() {
   );
 }
 
-export default PasswordChangePage;
+export default checkAuth(PasswordChangePage, false, [
+  ACCESS.unauthorized,
+  ACCESS.client,
+]);

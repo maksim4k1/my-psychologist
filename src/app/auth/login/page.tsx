@@ -10,6 +10,8 @@ import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import Link from "next/link";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../../config/access.config";
 
 const initialState = {
   email: "",
@@ -74,4 +76,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default checkAuth(LoginPage, false, [ACCESS.unauthorized]);

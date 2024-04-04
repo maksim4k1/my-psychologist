@@ -10,6 +10,8 @@ import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import { useRouter } from "next/navigation";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../../config/access.config";
 
 const initialState = {
   name: "",
@@ -88,4 +90,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default checkAuth(RegisterPage, false, [ACCESS.unauthorized]);

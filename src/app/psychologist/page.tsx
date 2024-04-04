@@ -4,9 +4,11 @@ import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import IconTextLink from "@/components/UI/Links/IconTextLink";
 import styles from "./styles.module.scss";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import ProfileImage from "@/components/UI/Images/ProfileImage";
 import PrimarySwiper from "@/components/UI/PrimarySwiper";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../config/access.config";
 
 interface Props {
   username: string;
@@ -72,4 +74,4 @@ async function PsychologistPage() {
   );
 }
 
-export default PsychologistPage;
+export default checkAuth(PsychologistPage, true, [ACCESS.psychologist]);

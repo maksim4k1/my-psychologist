@@ -7,6 +7,8 @@ import { FunctionComponent } from "react";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import Symptom from "@/components/UI/Symptom";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../../config/access.config";
 
 interface Props {
   client: {
@@ -111,4 +113,4 @@ function PsychologistClientsPage() {
   );
 }
 
-export default PsychologistClientsPage;
+export default checkAuth(PsychologistClientsPage, true, [ACCESS.psychologist]);

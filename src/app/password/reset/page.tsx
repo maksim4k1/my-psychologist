@@ -7,6 +7,8 @@ import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Buttons/PrimaryButton";
 import { useRouter } from "next/navigation";
 import Container from "@/components/UI/Container";
+import checkAuth from "@/components/hocs/checkAuth";
+import { ACCESS } from "../../../../config/access.config";
 
 function PasswordResetPage() {
   const router = useRouter();
@@ -49,4 +51,4 @@ function PasswordResetPage() {
   );
 }
 
-export default PasswordResetPage;
+export default checkAuth(PasswordResetPage, false, [ACCESS.unauthorized]);
