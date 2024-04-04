@@ -1,0 +1,51 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.label {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 16px;
+  background-color: transparent;
+  @include bodyLarge;
+  border-bottom: 1px solid $text-placeholder;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: $text-placeholder;
+  }
+
+  &:focus {
+    caret-color: $text-primary;
+    border-bottom-color: $text-primary;
+
+    &::placeholder {
+      font-size: 0;
+      color: transparent;
+    }
+  }
+
+  &.error {
+    color: $error;
+    border-bottom-color: $error;
+
+    &::placeholder {
+      color: $error;
+    }
+
+    &:focus {
+      caret-color: $error;
+    }
+  }
+}
+
+.errorText {
+  position: absolute;
+  bottom: -20px;
+  padding: 0 16px;
+  color: $error;
+  @include bodySmall;
+}

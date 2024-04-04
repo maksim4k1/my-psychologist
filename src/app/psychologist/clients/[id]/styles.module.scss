@@ -1,0 +1,103 @@
+@import "@/styles/variables";
+@import "@/styles/textStyles";
+@import "@/styles/mixins";
+
+.main {
+  display: flex;
+  gap: 120px;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.card {
+  max-width: 360px;
+  padding: 16px;
+  @include card;
+}
+
+.cardHeader {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profileInfo {
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.username {
+  @include titleMedium;
+}
+
+.status {
+  @include bodyMedium;
+  color: $on-primary-fixed-variant;
+
+  &.isOnline {
+    color: $inverse-primary;
+  }
+}
+
+.moreButton {
+  position: relative;
+  right: -12px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileImage {
+  display: flex;
+  margin: 0 auto 16px;
+}
+
+.info {
+  margin-bottom: 8px;
+  color: $on-surface-variant;
+  @include bodyMedium;
+}
+
+.problems {
+  margin-top: 16px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cardButton {
+  margin-left: auto;
+}
+
+.tests {
+  margin: 20px 0;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+
+.testCard {
+  width: 360px;
+  padding: 16px;
+  display: flex;
+  flex-flow: column;
+  gap: 6px;
+  @include card;
+}
+
+.testTitle {
+  color: $on-surface-variant;
+  @include titleSmall;
+}
+
+.testLink {
+  color: $primary;
+  @include labelSmall;
+}

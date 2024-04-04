@@ -1,0 +1,11 @@
+@import "@/styles/variables.scss";
+
+.button{
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-primary;
+  border-radius: 12px;
+}

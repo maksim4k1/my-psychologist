@@ -1,0 +1,6 @@
+@import "@/styles/textStyles.scss";
+
+.title{
+  width: 100%;
+  @include titleLarge;
+}

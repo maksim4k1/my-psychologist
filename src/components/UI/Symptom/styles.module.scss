@@ -1,0 +1,10 @@
+@import "@/styles/variables";
+@import "@/styles/textStyles";
+
+.problem {
+  display: inline-block;
+  padding: 6px 8px;
+  @include labelLarge;
+  background-color: $secondary-container;
+  border-radius: 8px;
+}

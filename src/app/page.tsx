@@ -1,7 +1,8 @@
+import Container from "@/components/UI/Container";
 import { FunctionComponent } from "react";
 
 const Home: FunctionComponent = () => {
-  return <main>Initial</main>;
+  return <Container>Main page</Container>;
 };
 
 export default Home;

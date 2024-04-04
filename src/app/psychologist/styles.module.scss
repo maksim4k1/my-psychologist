@@ -1,0 +1,44 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+@import "@/styles/mixins";
+
+.navigation {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 34px;
+  justify-content: flex-end;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  @include titleLarge;
+}
+
+.card {
+  width: 100%;
+  height: 80px;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  @include card;
+}
+
+.info {
+  max-width: calc(100% - 40px - 16px);
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.username {
+  @include titleSmall;
+}
+
+.content {
+  max-width: 100%;
+  @include bodyMedium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
