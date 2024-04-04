@@ -1,12 +1,12 @@
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Container from "@/components/UI/Container";
 
-function Error403Page() {
+function NotFoundPage() {
   return (
     <Container>
-      <PageTitle>403 - отказано в доступе</PageTitle>
+      <PageTitle>404 - страница не найдена</PageTitle>
     </Container>
   );
 }
 
-export default Error403Page;
+export default NotFoundPage;
