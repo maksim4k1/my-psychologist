@@ -4,7 +4,7 @@ services:
   nextjs-dev:
     container_name: nextjs-dev
     build:
-      dockerfile: ./docker/dockerfile/Dockerfile
+      dockerfile: ./docker/dockerfile/Dockerfile.dev
       context: ../
     restart: on-failure
     volumes:
@@ -20,7 +20,7 @@ services:
     volumes:
       - ../:/app
       - /app/node_modules
-      - /app/docker/nginx/default.conf:/etc/nginx/conf.d
+      - ./nginx/default.dev.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "80:80"
     depends_on:
