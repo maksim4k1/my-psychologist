@@ -2,26 +2,30 @@
 
 import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
-import PrimaryButton from "../PrimaryButton";
+import Button from "../Button";
 
 interface Props {
   children: ReactNode;
   className?: string;
+  isMedium?: boolean;
   [key: string]: any;
 }
 
 const SecondaryButton: FunctionComponent<Props> = ({
   children,
   className = "",
+  isMedium = false,
   ...props
 }) => {
   return (
-    <PrimaryButton
-      className={`${styles.button} ${className}`}
+    <Button
+      className={`${styles.button} ${className} ${
+        isMedium ? styles.medium : ""
+      }`}
       {...props}
     >
       {children}
-    </PrimaryButton>
+    </Button>
   );
 };
 

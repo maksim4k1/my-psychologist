@@ -4,9 +4,6 @@
 .button {
   height: 40px;
   padding: 0 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: $white;
   @include labelLarge;
   background-color: $primary;
@@ -14,9 +11,5 @@
 
   &.medium {
     width: 168px;
-  }
-
-  &.large {
-    width: 257px;
   }
 }

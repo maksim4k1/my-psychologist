@@ -1,5 +1,6 @@
 import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
+import Button from "../Button";
 
 interface Props {
   children: ReactNode;
@@ -13,12 +14,12 @@ const IconButton: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <button
+    <Button
       className={`${styles.button} ${className}`}
       {...props}
     >
       {children}
-    </button>
+    </Button>
   );
 };
 
