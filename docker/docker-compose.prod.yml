@@ -9,8 +9,10 @@ services:
     restart: on-failure
     volumes:
       - /app/node_modules
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
+    networks:
+      - my-psychologist
 
   nginx-prod:
     container_name: nginx-prod
@@ -21,5 +23,13 @@ services:
       - ./nginx/default.prod.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "80:80"
+    expose:
+      - "80"
+    networks:
+      - my-psychologist
     depends_on:
       - nextjs-prod
+
+networks:
+  my-psychologist:
+    driver: bridge
