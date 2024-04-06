@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Buttons/PrimaryButton";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import { useRouter } from "next/navigation";
 import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
@@ -39,13 +39,13 @@ function PasswordResetPage() {
           value={email}
           required
         />
-        <Button
+        <PrimaryButton
           className={styles.button}
           isMedium={true}
           type="submit"
         >
           Сбросить пароль
-        </Button>
+        </PrimaryButton>
       </Form>
     </Container>
   );

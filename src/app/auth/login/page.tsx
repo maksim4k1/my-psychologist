@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Buttons/PrimaryButton";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
@@ -58,12 +58,12 @@ function LoginPage() {
           Забыли пароль?
         </Link>
         <AuthButtons className={styles.authButtons}>
-          <Button
+          <PrimaryButton
             type="submit"
             isMedium={true}
           >
             Войти
-          </Button>
+          </PrimaryButton>
           <SecondaryButton
             href="/auth/register"
             isMedium={true}

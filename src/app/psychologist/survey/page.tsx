@@ -9,7 +9,7 @@ import Checkbox from "@/components/UI/Checkbox";
 import Form from "@/components/UI/Forms/Form";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Buttons/PrimaryButton";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import { onChangeInputHandler } from "@/utils/handlers";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
@@ -87,13 +87,13 @@ function PsychologistSurveyPage() {
               onChange={onChangeHandler}
             />
           </div>
-          <Button
+          <PrimaryButton
             type="submit"
             className={styles.button}
             isMedium={true}
           >
             Сохранить
-          </Button>
+          </PrimaryButton>
         </div>
         <div className={styles.rightInputs}>
           <div>
