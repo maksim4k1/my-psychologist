@@ -1,3 +1,5 @@
+"use client";
+
 import GroupIcon from "@/assets/svg/Icons/GroupIcon";
 import MessageIcon from "@/assets/svg/Icons/MessageIcon";
 import Container from "@/components/UI/Container";

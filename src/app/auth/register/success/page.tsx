@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Completed from "@/assets/svg/Completed";
@@ -14,10 +16,7 @@ function RegistrationSuccessPage() {
         <div className={styles.svgContainer}>
           <Completed />
         </div>
-        <PrimaryButton
-          isLarge={true}
-          href="/psychologist/survey"
-        >
+        <PrimaryButton href="/psychologist/survey">
           Заполнить анкету психолога
         </PrimaryButton>
       </div>
