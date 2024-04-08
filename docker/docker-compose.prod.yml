@@ -12,7 +12,7 @@ services:
     expose:
       - "3000"
     networks:
-      - my-psychologist
+      - demo
 
   nginx-prod:
     container_name: nginx-prod
@@ -21,15 +21,13 @@ services:
     volumes:
       - /app/node_modules
       - ./nginx/default.prod.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "80:80"
     expose:
       - "80"
     networks:
-      - my-psychologist
+      - demo
     depends_on:
       - nextjs-prod
 
 networks:
-  my-psychologist:
+  demo:
     driver: bridge
