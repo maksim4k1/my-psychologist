@@ -2,13 +2,13 @@
 
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import { useState } from "react";
-import Radio from "@/components/UI/Radio";
+import Radio from "@/components/UI/Inputs/Radio";
 import styles from "./styles.module.scss";
 import Container from "@/components/UI/Container";
-import Checkbox from "@/components/UI/Checkbox";
+import Checkbox from "@/components/UI/Inputs/Checkbox";
 import Form from "@/components/UI/Forms/Form";
 import Subtitle from "@/components/UI/Titles/Subtitle";
-import Input from "@/components/UI/Input";
+import Input from "@/components/UI/Inputs/Input";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import { onChangeInputHandler } from "@/utils/handlers";
 import checkAuth from "@/components/hocs/checkAuth";

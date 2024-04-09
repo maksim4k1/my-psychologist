@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
-import Input from "@/components/UI/Input";
+import Input from "@/components/UI/Inputs/Input";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
