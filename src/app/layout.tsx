@@ -4,6 +4,7 @@ import "../styles/reset.scss";
 import "../styles/global.scss";
 import Header from "@/components/UI/Header";
 import styles from "./styles.module.scss";
+import StoreProvider from "@/redux/StoreProvider";
 
 const font = Roboto({
   weight: ["400", "500"],
@@ -24,8 +25,10 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={font.className}>
-        <Header />
-        <main className={styles.main}>{children}</main>
+        <StoreProvider>
+          <Header />
+          <main className={styles.main}>{children}</main>
+        </StoreProvider>
       </body>
     </html>
   );
