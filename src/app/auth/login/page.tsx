@@ -12,8 +12,9 @@ import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
+import { LoginPayload } from "@/redux/features/auth/types";
 
-const initialState = {
+const initialState: LoginPayload = {
   email: "",
   password: "",
 };
