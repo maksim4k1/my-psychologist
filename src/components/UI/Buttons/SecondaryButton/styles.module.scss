@@ -2,15 +2,7 @@
 @import "@/styles/textStyles.scss";
 
 .button {
-  height: 40px;
-  padding: 0 24px;
   color: $primary;
-  @include labelLarge;
   background-color: transparent;
   border: 1px solid $light-outline;
-  border-radius: 20px;
-
-  &.medium {
-    width: 168px;
-  }
 }
