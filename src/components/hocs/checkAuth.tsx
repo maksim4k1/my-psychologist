@@ -1,44 +1,62 @@
-import { ACCESS } from "../../../config/access.config";
-import { FunctionComponent } from "react";
-import NeedAuthErrorPage from "../errors/NeedAuth";
-import OnlyForPsychologistErrorPage from "../errors/OnlyForPsychologist";
+"use client";
+
+import { ACCESS, AccessRole } from "../../../config/access.config";
+import { FunctionComponent, useEffect } from "react";
 import AccessDeniedErrorPage from "../errors/AccessDenied";
-import OnlyForUnauthorizedErrorPage from "../errors/OnlyForUnautorized";
+import { useAppSelector } from "@/hooks/reduxHooks";
+import { selectAuth } from "@/redux/features/auth/selectors";
+import { usePathname, useRouter } from "next/navigation";
 
 function checkAuth(
   Component: FunctionComponent,
   isNeedAuth: boolean = false,
-  accessFor: string[] = [ACCESS.public],
+  accessFor: AccessRole[] = [ACCESS.public],
 ): FunctionComponent {
   return function CheckAuthComponent() {
-    const isAuth: boolean = true;
-    const currentRole: string = !isAuth
-      ? ACCESS.unauthorized
-      : ACCESS.psychologist;
+    const { isAuth, role } = useAppSelector(selectAuth);
+    const router = useRouter();
+    const pathname = usePathname();
 
-    // if (isNeedAuth && !isAuth) {
-    //   return <NeedAuthErrorPage />;
-    // } else if (
-    //   !isNeedAuth &&
-    //   isAuth &&
-    //   accessFor.includes(ACCESS.unauthorized) &&
-    //   accessFor.length === 1
-    // ) {
-    //   return <OnlyForUnauthorizedErrorPage />;
-    // }
+    const isOnlyForUnauthorized =
+      !isNeedAuth &&
+      isAuth &&
+      accessFor.includes(ACCESS.unauthorized) &&
+      accessFor.length === 1;
 
-    // if (
-    //   accessFor.includes(ACCESS.public) ||
-    //   accessFor.includes(currentRole) ||
-    //   (isAuth && accessFor.includes(ACCESS.client))
-    // ) {
-    //   return <Component />;
-    // } else if (isAuth && accessFor.includes(ACCESS.psychologist)) {
-    //   return <OnlyForPsychologistErrorPage />;
-    // } else {
-    //   return <AccessDeniedErrorPage />;
-    // }
-    return <Component />;
+    const isOnlyForAuthorized = isNeedAuth && !isAuth;
+
+    const isOnlyForPsychologist =
+      isAuth &&
+      accessFor.includes(ACCESS.psychologist) &&
+      accessFor.length === 1 &&
+      role !== ACCESS.psychologist;
+
+    useEffect(() => {
+      if (isOnlyForUnauthorized && pathname === "/auth/register")
+        router.push("/auth/register/success");
+      else if (isOnlyForUnauthorized) router.push("/");
+      else if (isOnlyForAuthorized) router.push(`/auth/login`);
+      else if (isOnlyForPsychologist) router.push(`/psychologist/survey`);
+    }, [
+      isOnlyForUnauthorized,
+      isOnlyForAuthorized,
+      isOnlyForPsychologist,
+      router,
+      pathname,
+    ]);
+
+    if (isOnlyForUnauthorized || isOnlyForAuthorized || isOnlyForPsychologist)
+      return <div>Loading...</div>;
+
+    if (
+      accessFor.includes(ACCESS.public) ||
+      accessFor.includes(role) ||
+      (isAuth && accessFor.includes(ACCESS.client))
+    ) {
+      return <Component />;
+    }
+
+    return <AccessDeniedErrorPage />;
   };
 }
 
