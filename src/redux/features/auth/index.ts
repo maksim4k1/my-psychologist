@@ -1,39 +1,56 @@
+import {
+  createDefaultState,
+  createLoadingState,
+  createSuccessState,
+  createFailureState,
+} from "../../../utils/stateCreators";
 import { Actions } from "./../../store";
 import { ACCESS } from "./../../../../config/access.config";
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
-import { AuthState, LoginPayload, RegisterPayload } from "./types";
+import { AuthState } from "./types";
 
 const initialState: AuthState = {
   isAuth: false,
   role: ACCESS.unauthorized,
+  loginState: createDefaultState(),
+  registerState: createDefaultState(),
 };
 
 const authSlice: Slice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, { payload }: PayloadAction<LoginPayload>) => {
-      console.log("login");
-      console.log(payload);
-
+    loginLoading: (state) => {
+      console.log("login loading");
+      state.loginState = createLoadingState();
+    },
+    loginSuccess: (state) => {
+      console.log("login success");
       state.isAuth = true;
       state.role = ACCESS.psychologist;
+      state.loginState = createSuccessState();
     },
-    register: (state, { payload }: PayloadAction<RegisterPayload>) => {
-      console.log("register");
-      console.log(payload);
-
+    loginError: (state, { payload }: PayloadAction<string>) => {
+      console.log("login error");
+      state.loginState = createFailureState(payload);
+    },
+    registerLoading: (state) => {
+      console.log("register loading");
+      state.registerState = createLoadingState();
+    },
+    registerSuccess: (state) => {
+      console.log("register success");
       state.isAuth = true;
       state.role = ACCESS.client;
+      state.registerState = createSuccessState();
     },
-    logout: () => {
-      console.log("logout");
-
-      return initialState;
+    registerError: (state, { payload }: PayloadAction<string>) => {
+      console.log("register error");
+      state.registerState = createFailureState(payload);
     },
   },
 });
 
-export const { login, register, logout }: Actions = authSlice.actions;
+export const authActions: Actions = authSlice.actions;
 
 export default authSlice.reducer;
