@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";

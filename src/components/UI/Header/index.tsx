@@ -1,11 +1,18 @@
+"use client";
+
 import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import LogoIcon from "@/assets/svg/Icons/Logo";
 import Container from "../Container";
 import ProfileImage from "../Images/ProfileImage";
+import PrimaryButton from "../Buttons/PrimaryButton";
+import { useAppSelector } from "@/hooks/reduxHooks";
+import { selectAuthIsAuth } from "@/redux/features/auth/selectors";
 
 const Header: FunctionComponent = ({}) => {
+  const isAuth: boolean = useAppSelector(selectAuthIsAuth);
+
   return (
     <header className={styles.header}>
       <Container className={styles.container}>
@@ -41,16 +48,20 @@ const Header: FunctionComponent = ({}) => {
             Психолог
           </Link>
         </nav> */}
-        <Link
-          href="/psychologist"
-          className={styles.profileContainer}
-        >
-          <ProfileImage
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-            alt="profile"
-            size={54}
-          />
-        </Link>
+        {isAuth ? (
+          <Link
+            href="/psychologist"
+            className={styles.profileContainer}
+          >
+            <ProfileImage
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              alt="profile"
+              size={54}
+            />
+          </Link>
+        ) : (
+          <PrimaryButton href="/auth/login">Войти</PrimaryButton>
+        )}
       </Container>
     </header>
   );

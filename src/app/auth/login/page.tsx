@@ -3,8 +3,8 @@
 import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
-import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Buttons/PrimaryButton";
+import Input from "@/components/UI/Inputs/Input";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
@@ -12,21 +12,27 @@ import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
+import { LoginPayload } from "@/redux/features/auth/types";
+import { login } from "@/api/auth";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { selectAuthLoginState } from "@/redux/features/auth/selectors";
 
-const initialState = {
+const initialState: LoginPayload = {
   email: "",
   password: "",
 };
 
 function LoginPage() {
   const [formState, setFormState] = useState(initialState);
+  const dispatch = useAppDispatch();
+  const loginStatus = useAppSelector(selectAuthLoginState);
 
   const onChangeHandler = onChangeInputHandler(setFormState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    setFormState(initialState);
+    dispatch(login(formState));
   };
 
   return (
@@ -42,6 +48,7 @@ function LoginPage() {
           value={formState.email}
           onChange={onChangeHandler}
           required
+          disabled={loginStatus.isLoading}
         />
         <Input
           name="password"
@@ -50,6 +57,7 @@ function LoginPage() {
           value={formState.password}
           onChange={onChangeHandler}
           required
+          disabled={loginStatus.isLoading}
         />
         <Link
           href="/password/reset"
@@ -57,13 +65,15 @@ function LoginPage() {
         >
           Забыли пароль?
         </Link>
+        {loginStatus.isFailure && <div>{loginStatus.error}</div>}
         <AuthButtons className={styles.authButtons}>
-          <Button
+          <PrimaryButton
             type="submit"
             isMedium={true}
+            disabled={loginStatus.isLoading}
           >
             Войти
-          </Button>
+          </PrimaryButton>
           <SecondaryButton
             href="/auth/register"
             isMedium={true}

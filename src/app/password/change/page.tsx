@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
-import Input from "@/components/UI/Input";
+import Input from "@/components/UI/Inputs/Input";
 import Button from "@/components/UI/Buttons/PrimaryButton";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/UI/Container";

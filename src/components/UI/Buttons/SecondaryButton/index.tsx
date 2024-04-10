@@ -2,7 +2,7 @@
 
 import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
-import PrimaryButton from "../PrimaryButton";
+import AppButton from "../AppButton";
 
 interface Props {
   children: ReactNode;
@@ -16,12 +16,12 @@ const SecondaryButton: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <PrimaryButton
+    <AppButton
       className={`${styles.button} ${className}`}
       {...props}
     >
       {children}
-    </PrimaryButton>
+    </AppButton>
   );
 };
 

@@ -2,27 +2,37 @@
 
 import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
-import AppButton from "../AppButton";
+import Link from "next/link";
 
 interface Props {
   children: ReactNode;
   className?: string;
+  href?: string | null;
   [key: string]: any;
 }
 
-const PrimaryButton: FunctionComponent<Props> = ({
+const Button: FunctionComponent<Props> = ({
   children,
   className = "",
+  href = null,
   ...props
 }) => {
-  return (
-    <AppButton
+  return href === null ? (
+    <button
       className={`${styles.button} ${className}`}
       {...props}
     >
       {children}
-    </AppButton>
+    </button>
+  ) : (
+    <Link
+      href={href}
+      className={`${styles.button} ${className}`}
+      {...props}
+    >
+      {children}
+    </Link>
   );
 };
 
-export default PrimaryButton;
+export default Button;
