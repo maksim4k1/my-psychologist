@@ -7,9 +7,11 @@ import LogoIcon from "@/assets/svg/Icons/Logo";
 import Container from "../Container";
 import ProfileImage from "../Images/ProfileImage";
 import PrimaryButton from "../Buttons/PrimaryButton";
+import { useAppSelector } from "@/hooks/reduxHooks";
+import { selectAuthIsAuth } from "@/redux/features/auth/selectors";
 
 const Header: FunctionComponent = ({}) => {
-  const isAuth = true;
+  const isAuth: boolean = useAppSelector(selectAuthIsAuth);
 
   return (
     <header className={styles.header}>
