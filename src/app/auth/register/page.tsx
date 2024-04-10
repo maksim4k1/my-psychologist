@@ -9,10 +9,12 @@ import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
 import { onChangeInputHandler } from "@/utils/handlers";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
-import { useRouter } from "next/navigation";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
 import { RegisterPayload } from "@/redux/features/auth/types";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { register } from "@/api/auth";
+import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
 
 const initialState: RegisterPayload = {
   name: "",
@@ -23,15 +25,15 @@ const initialState: RegisterPayload = {
 
 function RegisterPage() {
   const [formState, setFormState] = useState(initialState);
-  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const registerStatus = useAppSelector(selectAuthRegisterState);
 
   const onChangeHandler = onChangeInputHandler(setFormState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    setFormState(initialState);
-    router.push("/auth/register/success");
+    dispatch(register(formState));
   };
 
   return (
@@ -47,6 +49,7 @@ function RegisterPage() {
           value={formState.name}
           onChange={onChangeHandler}
           required
+          disabled={registerStatus.isLoading}
         />
         <Input
           name="email"
@@ -55,6 +58,7 @@ function RegisterPage() {
           value={formState.email}
           onChange={onChangeHandler}
           required
+          disabled={registerStatus.isLoading}
         />
         <Input
           name="password"
@@ -63,6 +67,7 @@ function RegisterPage() {
           value={formState.password}
           onChange={onChangeHandler}
           required
+          disabled={registerStatus.isLoading}
         />
         <Input
           name="confirmPassword"
@@ -71,11 +76,14 @@ function RegisterPage() {
           value={formState.confirmPassword}
           onChange={onChangeHandler}
           required
+          disabled={registerStatus.isLoading}
         />
+        {registerStatus.isFailure && <div>{registerStatus.error}</div>}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"
             isMedium={true}
+            disabled={registerStatus.isLoading}
           >
             Зарегистрироваться
           </PrimaryButton>
