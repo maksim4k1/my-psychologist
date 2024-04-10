@@ -4,7 +4,7 @@ import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 
 interface Props {
-  supportText?: string;
+  errorText?: string;
   className?: string;
   [key: string]: any;
 }
