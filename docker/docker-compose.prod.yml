@@ -30,4 +30,5 @@ services:
 
 networks:
   demo:
+    external: true
     driver: bridge
