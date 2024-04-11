@@ -1,13 +1,12 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
-import { onChangeInputHandler } from "@/utils/handlers";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
@@ -16,23 +15,24 @@ import { LoginPayload } from "@/redux/features/auth/types";
 import { login } from "@/api/auth";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { selectAuthLoginState } from "@/redux/features/auth/selectors";
-
-const initialState: LoginPayload = {
-  email: "",
-  password: "",
-};
+import { useInput } from "@/hooks/inputHooks";
 
 function LoginPage() {
-  const [formState, setFormState] = useState(initialState);
+  const [email, emailOnChange] = useInput("");
+  const [password, passwordOnChange] = useInput("");
+
   const dispatch = useAppDispatch();
   const loginStatus = useAppSelector(selectAuthLoginState);
-
-  const onChangeHandler = onChangeInputHandler(setFormState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    dispatch(login(formState));
+    const formData: LoginPayload = {
+      email,
+      password,
+    };
+
+    dispatch(login(formData));
   };
 
   return (
@@ -45,8 +45,8 @@ function LoginPage() {
           name="email"
           type="email"
           placeholder="Введите адрес почты"
-          value={formState.email}
-          onChange={onChangeHandler}
+          value={email}
+          onChange={emailOnChange}
           required
           disabled={loginStatus.isLoading}
         />
@@ -54,8 +54,8 @@ function LoginPage() {
           name="password"
           type="password"
           placeholder="Введите пароль"
-          value={formState.password}
-          onChange={onChangeHandler}
+          value={password}
+          onChange={passwordOnChange}
           required
           disabled={loginStatus.isLoading}
         />

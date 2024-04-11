@@ -1,7 +1,6 @@
 "use client";
 
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import { useState } from "react";
 import Radio from "@/components/UI/Inputs/Radio";
 import styles from "./styles.module.scss";
 import Container from "@/components/UI/Container";
@@ -10,28 +9,33 @@ import Form from "@/components/UI/Forms/Form";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import Input from "@/components/UI/Inputs/Input";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
-import { onChangeInputHandler } from "@/utils/handlers";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
-
-const initialState = {
-  fullName: "",
-  birthday: "",
-  education: "",
-  about: "",
-  city: "",
-  workFormat: "",
-  specialization: [],
-  gender: "man",
-};
+import { useCheckbox, useInput } from "@/hooks/inputHooks";
 
 function PsychologistSurveyPage() {
-  const [formData, setFormData] = useState(initialState);
-
-  const onChangeHandler = onChangeInputHandler(setFormData);
+  const [fullName, fullNameOnChange] = useInput("");
+  const [birthday, birthdayOnChange] = useInput("");
+  const [education, educationOnChange] = useInput("");
+  const [about, aboutOnChange] = useInput("");
+  const [city, cityOnChange] = useInput("");
+  const [workFormat, workFormatOnChange] = useInput("");
+  const [gender, genderOnChange] = useInput("man");
+  const [specialization, specializationOnChange] = useCheckbox([]);
 
   function onSubmitHandler(event: SubmitEvent) {
     event.preventDefault();
+
+    const formData = {
+      fullName,
+      birthday,
+      education,
+      about,
+      city,
+      workFormat,
+      specialization,
+      gender,
+    };
   }
 
   return (
@@ -48,43 +52,43 @@ function PsychologistSurveyPage() {
               name="fullName"
               type="text"
               placeholder="ФИО"
-              value={formData.fullName}
-              onChange={onChangeHandler}
+              value={fullName}
+              onChange={fullNameOnChange}
             />
             <Input
               name="birthday"
               type="text"
               placeholder="Дата рождения  (ДД.ММ.ГГГГ)"
-              value={formData.birthday}
-              onChange={onChangeHandler}
+              value={birthday}
+              onChange={birthdayOnChange}
             />
             <Input
               name="education"
               type="text"
               placeholder="Образование"
-              value={formData.education}
-              onChange={onChangeHandler}
+              value={education}
+              onChange={educationOnChange}
             />
             <Input
               name="about"
               type="text"
               placeholder="О себе"
-              value={formData.about}
-              onChange={onChangeHandler}
+              value={about}
+              onChange={aboutOnChange}
             />
             <Input
               name="city"
               type="text"
               placeholder="Город"
-              value={formData.city}
-              onChange={onChangeHandler}
+              value={city}
+              onChange={cityOnChange}
             />
             <Input
               name="workFormat"
               type="text"
               placeholder="Формат работы (очно, дистанционно и тд.)"
-              value={formData.workFormat}
-              onChange={onChangeHandler}
+              value={workFormat}
+              onChange={workFormatOnChange}
             />
           </div>
           <PrimaryButton
@@ -104,19 +108,19 @@ function PsychologistSurveyPage() {
                 value="man"
                 defaultChecked
                 labelText="Мужской"
-                onChange={onChangeHandler}
+                onChange={genderOnChange}
               />
               <Radio
                 name="gender"
                 value="woman"
                 labelText="Женский"
-                onChange={onChangeHandler}
+                onChange={genderOnChange}
               />
               <Radio
                 name="gender"
                 value="other"
                 labelText="Другой"
-                onChange={onChangeHandler}
+                onChange={genderOnChange}
               />
             </div>
           </div>
@@ -127,37 +131,37 @@ function PsychologistSurveyPage() {
                 name="specialization"
                 value="Депрессия"
                 labelText="Депрессия"
-                onChange={onChangeHandler}
+                onChange={specializationOnChange}
               />
               <Checkbox
                 name="specialization"
                 value="Тревога"
                 labelText="Тревога"
-                onChange={onChangeHandler}
+                onChange={specializationOnChange}
               />
               <Checkbox
                 name="specialization"
                 value="ПТСР"
                 labelText="ПТСР"
-                onChange={onChangeHandler}
+                onChange={specializationOnChange}
               />
               <Checkbox
                 name="specialization"
                 value="Растройство пищевого поведения"
                 labelText="Растройство пищевого поведения"
-                onChange={onChangeHandler}
+                onChange={specializationOnChange}
               />
               <Checkbox
                 name="specialization"
                 value="Зависимости"
                 labelText="Зависимости"
-                onChange={onChangeHandler}
+                onChange={specializationOnChange}
               />
               <Checkbox
                 name="specialization"
                 value="Другое"
                 labelText="Другое"
-                onChange={onChangeHandler}
+                onChange={specializationOnChange}
               />
             </div>
           </div>

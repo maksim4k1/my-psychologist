@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
@@ -9,15 +9,12 @@ import { useRouter } from "next/navigation";
 import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
+import { useInput } from "@/hooks/inputHooks";
 
 function PasswordResetPage() {
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-    setEmail(event.target.value);
-  };
+  const [email, emailOnChange] = useInput("");
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -35,7 +32,7 @@ function PasswordResetPage() {
           name="email"
           type="email"
           placeholder="Введите адрес электронной почты"
-          onChange={onChangeHandler}
+          onChange={emailOnChange}
           value={email}
           required
         />

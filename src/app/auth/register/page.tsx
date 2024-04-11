@@ -1,13 +1,12 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
-import { onChangeInputHandler } from "@/utils/handlers";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
@@ -15,25 +14,28 @@ import { RegisterPayload } from "@/redux/features/auth/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { register } from "@/api/auth";
 import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
-
-const initialState: RegisterPayload = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+import { useInput } from "@/hooks/inputHooks";
 
 function RegisterPage() {
-  const [formState, setFormState] = useState(initialState);
+  const [name, nameOnChange] = useInput("");
+  const [email, emailOnChange] = useInput("");
+  const [password, passwordOnChange] = useInput("");
+  const [confirmPassword, confirmPasswordOnChange] = useInput("");
+
   const dispatch = useAppDispatch();
   const registerStatus = useAppSelector(selectAuthRegisterState);
-
-  const onChangeHandler = onChangeInputHandler(setFormState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    dispatch(register(formState));
+    const formData: RegisterPayload = {
+      name,
+      email,
+      password,
+      confirmPassword,
+    };
+
+    dispatch(register(formData));
   };
 
   return (
@@ -46,8 +48,8 @@ function RegisterPage() {
           name="name"
           type="text"
           placeholder="Введите имя"
-          value={formState.name}
-          onChange={onChangeHandler}
+          value={name}
+          onChange={nameOnChange}
           required
           disabled={registerStatus.isLoading}
         />
@@ -55,8 +57,8 @@ function RegisterPage() {
           name="email"
           type="email"
           placeholder="Введите адрес почты"
-          value={formState.email}
-          onChange={onChangeHandler}
+          value={email}
+          onChange={emailOnChange}
           required
           disabled={registerStatus.isLoading}
         />
@@ -64,8 +66,8 @@ function RegisterPage() {
           name="password"
           type="password"
           placeholder="Создайте пароль"
-          value={formState.password}
-          onChange={onChangeHandler}
+          value={password}
+          onChange={passwordOnChange}
           required
           disabled={registerStatus.isLoading}
         />
@@ -73,8 +75,8 @@ function RegisterPage() {
           name="confirmPassword"
           type="password"
           placeholder="Повторите пароль"
-          value={formState.confirmPassword}
-          onChange={onChangeHandler}
+          value={confirmPassword}
+          onChange={confirmPasswordOnChange}
           required
           disabled={registerStatus.isLoading}
         />

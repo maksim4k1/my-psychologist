@@ -1,34 +1,32 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
 import Button from "@/components/UI/Buttons/PrimaryButton";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/UI/Container";
-import { onChangeInputHandler } from "@/utils/handlers";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
-
-const initialState = {
-  currentPassword: "",
-  newPassword: "",
-  confirmPassword: "",
-};
+import { useInput } from "@/hooks/inputHooks";
 
 function PasswordChangePage() {
   const searchParams = useSearchParams();
   const resetConfirmationCode = searchParams.get("reset-confirmation");
 
-  const [formState, setFormState] = useState(initialState);
-
-  const onChangeHandler = onChangeInputHandler(setFormState);
+  const [currentPassword, currentPasswordOnChange] = useInput("");
+  const [newPassword, newPasswordOnChange] = useInput("");
+  const [confirmPassword, confirmPasswordOnChange] = useInput("");
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    setFormState(initialState);
+    const formData = {
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    };
   };
 
   return (
@@ -42,7 +40,8 @@ function PasswordChangePage() {
             name="currentPassword"
             type="text"
             placeholder="Введите старый пароль"
-            onChange={onChangeHandler}
+            value={currentPassword}
+            onChange={currentPasswordOnChange}
             required
           />
         )}
@@ -50,15 +49,17 @@ function PasswordChangePage() {
           name="newPassword"
           type="password"
           placeholder="Введите пароль"
-          onChange={onChangeHandler}
+          value={newPassword}
+          onChange={newPasswordOnChange}
           required
         />
         <Input
           name="confirmPassword"
           type="password"
           placeholder="Повторите пароль"
+          value={confirmPassword}
+          onChange={confirmPasswordOnChange}
           required
-          onChange={onChangeHandler}
         />
         <Button
           type="submit"
