@@ -15,17 +15,21 @@ function PasswordChangePage() {
   const searchParams = useSearchParams();
   const resetConfirmationCode = searchParams.get("reset-confirmation");
 
-  const [currentPassword, currentPasswordOnChange] = useInput("");
-  const [newPassword, newPasswordOnChange] = useInput("");
-  const [confirmPassword, confirmPasswordOnChange] = useInput("");
+  const currentPassword = useInput("", { isEmpty: true });
+  const newPassword = useInput("", { isEmpty: true });
+  const confirmPassword = useInput("", {
+    isEmpty: true,
+    isConfirmPassword: true,
+    confirmPassword: newPassword.value,
+  });
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     const formData = {
-      currentPassword,
-      newPassword,
-      confirmPassword,
+      currentPassword: currentPassword.value,
+      newPassword: newPassword.value,
+      confirmPassword: confirmPassword.value,
     };
   };
 
@@ -40,8 +44,10 @@ function PasswordChangePage() {
             name="currentPassword"
             type="text"
             placeholder="Введите старый пароль"
-            value={currentPassword}
-            onChange={currentPasswordOnChange}
+            value={currentPassword.value}
+            onChange={currentPassword.onChange}
+            onBlur={currentPassword.onBlur}
+            errorText={currentPassword.error}
             required
           />
         )}
@@ -49,21 +55,30 @@ function PasswordChangePage() {
           name="newPassword"
           type="password"
           placeholder="Введите пароль"
-          value={newPassword}
-          onChange={newPasswordOnChange}
+          value={newPassword.value}
+          onChange={newPassword.onChange}
+          onBlur={newPassword.onBlur}
+          errorText={newPassword.error}
           required
         />
         <Input
           name="confirmPassword"
           type="password"
           placeholder="Повторите пароль"
-          value={confirmPassword}
-          onChange={confirmPasswordOnChange}
+          value={confirmPassword.value}
+          onChange={confirmPassword.onChange}
+          onBlur={confirmPassword.onBlur}
+          errorText={confirmPassword.error}
           required
         />
         <Button
           type="submit"
           className={styles.button}
+          disabled={
+            !newPassword.isValid ||
+            !currentPassword.isValid ||
+            !confirmPassword.isValid
+          }
         >
           Сохранить пароль
         </Button>

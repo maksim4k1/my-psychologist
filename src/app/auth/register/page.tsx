@@ -17,10 +17,14 @@ import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
 
 function RegisterPage() {
-  const [name, nameOnChange] = useInput("");
-  const [email, emailOnChange] = useInput("");
-  const [password, passwordOnChange] = useInput("");
-  const [confirmPassword, confirmPasswordOnChange] = useInput("");
+  const name = useInput("", { isEmpty: true });
+  const email = useInput("", { isEmpty: true, isEmail: true });
+  const password = useInput("", { isEmpty: true });
+  const confirmPassword = useInput("", {
+    isEmpty: true,
+    isConfirmPassword: true,
+    confirmPassword: password.value,
+  });
 
   const dispatch = useAppDispatch();
   const registerStatus = useAppSelector(selectAuthRegisterState);
@@ -29,10 +33,10 @@ function RegisterPage() {
     event.preventDefault();
 
     const formData: RegisterPayload = {
-      name,
-      email,
-      password,
-      confirmPassword,
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      confirmPassword: confirmPassword.value,
     };
 
     dispatch(register(formData));
@@ -48,8 +52,10 @@ function RegisterPage() {
           name="name"
           type="text"
           placeholder="Введите имя"
-          value={name}
-          onChange={nameOnChange}
+          value={name.value}
+          onChange={name.onChange}
+          onBlur={name.onBlur}
+          errorText={name.error}
           required
           disabled={registerStatus.isLoading}
         />
@@ -57,8 +63,10 @@ function RegisterPage() {
           name="email"
           type="email"
           placeholder="Введите адрес почты"
-          value={email}
-          onChange={emailOnChange}
+          value={email.value}
+          onChange={email.onChange}
+          onBlur={email.onBlur}
+          errorText={email.error}
           required
           disabled={registerStatus.isLoading}
         />
@@ -66,8 +74,10 @@ function RegisterPage() {
           name="password"
           type="password"
           placeholder="Создайте пароль"
-          value={password}
-          onChange={passwordOnChange}
+          value={password.value}
+          onChange={password.onChange}
+          onBlur={password.onBlur}
+          errorText={password.error}
           required
           disabled={registerStatus.isLoading}
         />
@@ -75,8 +85,10 @@ function RegisterPage() {
           name="confirmPassword"
           type="password"
           placeholder="Повторите пароль"
-          value={confirmPassword}
-          onChange={confirmPasswordOnChange}
+          value={confirmPassword.value}
+          onChange={confirmPassword.onChange}
+          onBlur={confirmPassword.onBlur}
+          errorText={confirmPassword.error}
           required
           disabled={registerStatus.isLoading}
         />
@@ -85,7 +97,13 @@ function RegisterPage() {
           <PrimaryButton
             type="submit"
             isMedium={true}
-            disabled={registerStatus.isLoading}
+            disabled={
+              registerStatus.isLoading ||
+              !name.isValid ||
+              !email.isValid ||
+              !password.isValid ||
+              !confirmPassword.isValid
+            }
           >
             Зарегистрироваться
           </PrimaryButton>

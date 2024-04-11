@@ -18,8 +18,8 @@ import { selectAuthLoginState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
 
 function LoginPage() {
-  const [email, emailOnChange] = useInput("");
-  const [password, passwordOnChange] = useInput("");
+  const email = useInput("", { isEmpty: true, isEmail: true });
+  const password = useInput("", { isEmpty: true });
 
   const dispatch = useAppDispatch();
   const loginStatus = useAppSelector(selectAuthLoginState);
@@ -28,8 +28,8 @@ function LoginPage() {
     event.preventDefault();
 
     const formData: LoginPayload = {
-      email,
-      password,
+      email: email.value,
+      password: password.value,
     };
 
     dispatch(login(formData));
@@ -45,8 +45,10 @@ function LoginPage() {
           name="email"
           type="email"
           placeholder="Введите адрес почты"
-          value={email}
-          onChange={emailOnChange}
+          value={email.value}
+          onChange={email.onChange}
+          onBlur={email.onBlur}
+          errorText={email.error}
           required
           disabled={loginStatus.isLoading}
         />
@@ -54,8 +56,10 @@ function LoginPage() {
           name="password"
           type="password"
           placeholder="Введите пароль"
-          value={password}
-          onChange={passwordOnChange}
+          value={password.value}
+          onChange={password.onChange}
+          onBlur={password.onBlur}
+          errorText={password.error}
           required
           disabled={loginStatus.isLoading}
         />
@@ -70,7 +74,9 @@ function LoginPage() {
           <PrimaryButton
             type="submit"
             isMedium={true}
-            disabled={loginStatus.isLoading}
+            disabled={
+              loginStatus.isLoading || !email.isValid || !password.isValid
+            }
           >
             Войти
           </PrimaryButton>

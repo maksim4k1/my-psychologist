@@ -14,7 +14,7 @@ import { useInput } from "@/hooks/inputHooks";
 function PasswordResetPage() {
   const router = useRouter();
 
-  const [email, emailOnChange] = useInput("");
+  const email = useInput("", { isEmpty: true, isEmail: true });
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -32,14 +32,17 @@ function PasswordResetPage() {
           name="email"
           type="email"
           placeholder="Введите адрес электронной почты"
-          onChange={emailOnChange}
-          value={email}
+          value={email.value}
+          onChange={email.onChange}
+          onBlur={email.onBlur}
+          errorText={email.error}
           required
         />
         <PrimaryButton
           className={styles.button}
           isMedium={true}
           type="submit"
+          disabled={!email.isValid}
         >
           Сбросить пароль
         </PrimaryButton>

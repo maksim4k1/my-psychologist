@@ -14,27 +14,27 @@ import { ACCESS } from "../../../../config/access.config";
 import { useCheckbox, useInput } from "@/hooks/inputHooks";
 
 function PsychologistSurveyPage() {
-  const [fullName, fullNameOnChange] = useInput("");
-  const [birthday, birthdayOnChange] = useInput("");
-  const [education, educationOnChange] = useInput("");
-  const [about, aboutOnChange] = useInput("");
-  const [city, cityOnChange] = useInput("");
-  const [workFormat, workFormatOnChange] = useInput("");
-  const [gender, genderOnChange] = useInput("man");
-  const [specialization, specializationOnChange] = useCheckbox([]);
+  const fullName = useInput("");
+  const birthday = useInput("");
+  const education = useInput("");
+  const about = useInput("");
+  const city = useInput("");
+  const workFormat = useInput("");
+  const gender = useInput("man");
+  const specialization = useCheckbox([]);
 
   function onSubmitHandler(event: SubmitEvent) {
     event.preventDefault();
 
     const formData = {
-      fullName,
-      birthday,
-      education,
-      about,
-      city,
-      workFormat,
-      specialization,
-      gender,
+      fullName: fullName.value,
+      birthday: birthday.value,
+      education: education.value,
+      about: about.value,
+      city: city.value,
+      workFormat: workFormat.value,
+      specialization: specialization.value,
+      gender: gender.value,
     };
   }
 
@@ -52,43 +52,43 @@ function PsychologistSurveyPage() {
               name="fullName"
               type="text"
               placeholder="ФИО"
-              value={fullName}
-              onChange={fullNameOnChange}
+              value={fullName.value}
+              onChange={fullName.onChange}
             />
             <Input
               name="birthday"
               type="text"
               placeholder="Дата рождения  (ДД.ММ.ГГГГ)"
-              value={birthday}
-              onChange={birthdayOnChange}
+              value={birthday.value}
+              onChange={birthday.onChange}
             />
             <Input
               name="education"
               type="text"
               placeholder="Образование"
-              value={education}
-              onChange={educationOnChange}
+              value={education.value}
+              onChange={education.onChange}
             />
             <Input
               name="about"
               type="text"
               placeholder="О себе"
-              value={about}
-              onChange={aboutOnChange}
+              value={about.value}
+              onChange={about.onChange}
             />
             <Input
               name="city"
               type="text"
               placeholder="Город"
-              value={city}
-              onChange={cityOnChange}
+              value={city.value}
+              onChange={city.onChange}
             />
             <Input
               name="workFormat"
               type="text"
               placeholder="Формат работы (очно, дистанционно и тд.)"
-              value={workFormat}
-              onChange={workFormatOnChange}
+              value={workFormat.value}
+              onChange={workFormat.onChange}
             />
           </div>
           <PrimaryButton
@@ -108,19 +108,19 @@ function PsychologistSurveyPage() {
                 value="man"
                 defaultChecked
                 labelText="Мужской"
-                onChange={genderOnChange}
+                onChange={gender.onChange}
               />
               <Radio
                 name="gender"
                 value="woman"
                 labelText="Женский"
-                onChange={genderOnChange}
+                onChange={gender.onChange}
               />
               <Radio
                 name="gender"
                 value="other"
                 labelText="Другой"
-                onChange={genderOnChange}
+                onChange={gender.onChange}
               />
             </div>
           </div>
@@ -131,37 +131,37 @@ function PsychologistSurveyPage() {
                 name="specialization"
                 value="Депрессия"
                 labelText="Депрессия"
-                onChange={specializationOnChange}
+                onChange={specialization.onChange}
               />
               <Checkbox
                 name="specialization"
                 value="Тревога"
                 labelText="Тревога"
-                onChange={specializationOnChange}
+                onChange={specialization.onChange}
               />
               <Checkbox
                 name="specialization"
                 value="ПТСР"
                 labelText="ПТСР"
-                onChange={specializationOnChange}
+                onChange={specialization.onChange}
               />
               <Checkbox
                 name="specialization"
                 value="Растройство пищевого поведения"
                 labelText="Растройство пищевого поведения"
-                onChange={specializationOnChange}
+                onChange={specialization.onChange}
               />
               <Checkbox
                 name="specialization"
                 value="Зависимости"
                 labelText="Зависимости"
-                onChange={specializationOnChange}
+                onChange={specialization.onChange}
               />
               <Checkbox
                 name="specialization"
                 value="Другое"
                 labelText="Другое"
-                onChange={specializationOnChange}
+                onChange={specialization.onChange}
               />
             </div>
           </div>
