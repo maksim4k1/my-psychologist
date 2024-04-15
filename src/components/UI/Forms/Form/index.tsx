@@ -15,6 +15,7 @@ const Form: FunctionComponent<Props> = ({
 }) => {
   return (
     <form
+      noValidate
       className={className}
       {...props}
     >
