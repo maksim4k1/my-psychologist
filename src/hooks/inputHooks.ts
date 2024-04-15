@@ -1,50 +1,116 @@
-import { useInputValidation, ValidationSetup } from "./validationHooks";
+import {
+  useInputValidation,
+  InputValidationSetup,
+  useCheckboxValidation,
+  CheckboxValidationSetup,
+} from "./validationHooks";
 import { ChangeEvent, FocusEvent, useState } from "react";
 
-interface InputHookReturnValue {
-  value: string;
+interface ValidationData {
   isValid: boolean;
   error: string;
+  checkValidation: () => boolean;
+}
+
+export interface InputHookReturnValue extends ValidationData {
+  value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: FocusEvent<HTMLInputElement>) => void;
 }
 
-interface CheckboxHookReturnValue {
+export interface MaskedInputHookReturnValue extends ValidationData {
+  value: string;
+  onAccept: (value: any, mask: any) => void;
+  onBlur: (event: FocusEvent<HTMLInputElement>) => void;
+}
+
+export interface CheckboxHookReturnValue extends ValidationData {
   value: string[];
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
+function checkInputValidation(
+  value: string | string[],
+  validations: InputValidationSetup | CheckboxValidationSetup,
+  isValid: boolean,
+  setIsDirty: (value: boolean) => void,
+) {
+  if (!validations.isEmpty && value.length === 0) {
+    setIsDirty(false);
+  } else {
+    setIsDirty(true);
+  }
+
+  return isValid;
+}
+
 export const useInput = (
   initialValue: string = "",
-  validations: ValidationSetup = {},
+  validations: InputValidationSetup = {},
 ): InputHookReturnValue => {
   const [value, setValue] = useState(initialValue);
-  const [isWasFocused, setIsWasFocused] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
   const { isValid, error } = useInputValidation(value, validations);
 
-  function onChange(event: ChangeEvent<HTMLInputElement>) {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-  }
+  };
 
-  function onBlur(event: FocusEvent<HTMLInputElement>) {
-    setIsWasFocused(true);
-  }
+  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+    setIsDirty(!(!validations.isEmpty && value === ""));
+  };
+
+  const checkValidation = () =>
+    checkInputValidation(value, validations, isValid, setIsDirty);
 
   return {
     value,
-    isValid,
-    error: isWasFocused ? error : "",
+    isValid: isDirty ? isValid : true,
+    error: isDirty ? error : "",
     onChange,
     onBlur,
+    checkValidation,
+  };
+};
+
+export const useMaskedInput = (
+  initialValue: string = "",
+  validations: InputValidationSetup = {},
+): MaskedInputHookReturnValue => {
+  const [value, setValue] = useState(initialValue);
+  const [isDirty, setIsDirty] = useState(false);
+  const { isValid, error } = useInputValidation(value, validations);
+
+  const onAccept = (value: any, mask: any) => {
+    setValue(value);
+  };
+
+  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+    setIsDirty(!(!validations.isEmpty && value === ""));
+  };
+
+  const checkValidation = () =>
+    checkInputValidation(value, validations, isValid, setIsDirty);
+
+  return {
+    value,
+    isValid: isDirty ? isValid : true,
+    error: isDirty ? error : "",
+    onAccept,
+    onBlur,
+    checkValidation,
   };
 };
 
 export const useCheckbox = (
   initialValue: string[] = [],
+  validations: CheckboxValidationSetup = {},
 ): CheckboxHookReturnValue => {
   const [value, setValues] = useState(initialValue);
+  const [isDirty, setIsDirty] = useState(false);
+  const { isValid, error } = useCheckboxValidation(value, validations);
 
-  function onChange(event: ChangeEvent<HTMLInputElement>) {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue: string = event.target.value;
     const set: Set<string> = new Set(value);
 
@@ -55,7 +121,16 @@ export const useCheckbox = (
     }
 
     setValues(Array.from(set.values()));
-  }
+  };
 
-  return { value, onChange };
+  const checkValidation = () =>
+    checkInputValidation(value, validations, isValid, setIsDirty);
+
+  return {
+    value,
+    isValid: isDirty ? isValid : true,
+    error: isDirty ? error : "",
+    onChange,
+    checkValidation,
+  };
 };
