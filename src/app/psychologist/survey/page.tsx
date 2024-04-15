@@ -11,11 +11,13 @@ import Input from "@/components/UI/Inputs/Input";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
-import { useCheckbox, useInput } from "@/hooks/inputHooks";
+import { useCheckbox, useInput, useMaskedInput } from "@/hooks/inputHooks";
+import MaskedInput from "@/components/UI/Inputs/MaskedInput";
+import { checkFormDataValidation } from "@/utils/formUtils";
 
 function PsychologistSurveyPage() {
   const fullName = useInput("");
-  const birthday = useInput("");
+  const birthday = useMaskedInput("", { isDate: true });
   const education = useInput("");
   const about = useInput("");
   const city = useInput("");
@@ -26,16 +28,19 @@ function PsychologistSurveyPage() {
   function onSubmitHandler(event: SubmitEvent) {
     event.preventDefault();
 
-    const formData = {
-      fullName: fullName.value,
-      birthday: birthday.value,
-      education: education.value,
-      about: about.value,
-      city: city.value,
-      workFormat: workFormat.value,
-      specialization: specialization.value,
-      gender: gender.value,
-    };
+    if (checkFormDataValidation(birthday)) {
+      const formData = {
+        fullName: fullName.value,
+        birthday: birthday.value,
+        education: education.value,
+        about: about.value,
+        city: city.value,
+        workFormat: workFormat.value,
+        specialization: specialization.value,
+        gender: gender.value,
+      };
+      console.log(formData);
+    }
   }
 
   return (
@@ -55,12 +60,16 @@ function PsychologistSurveyPage() {
               value={fullName.value}
               onChange={fullName.onChange}
             />
-            <Input
+            <MaskedInput
               name="birthday"
               type="text"
               placeholder="Дата рождения  (ДД.ММ.ГГГГ)"
               value={birthday.value}
-              onChange={birthday.onChange}
+              mask={Date}
+              max={new Date()}
+              onBlur={birthday.onBlur}
+              onAccept={birthday.onAccept}
+              errorText={birthday.error}
             />
             <Input
               name="education"

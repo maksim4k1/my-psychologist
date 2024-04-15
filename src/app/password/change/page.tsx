@@ -10,6 +10,7 @@ import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
 import { useInput } from "@/hooks/inputHooks";
+import { checkFormDataValidation } from "@/utils/formUtils";
 
 function PasswordChangePage() {
   const searchParams = useSearchParams();
@@ -26,11 +27,21 @@ function PasswordChangePage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const formData = {
-      currentPassword: currentPassword.value,
-      newPassword: newPassword.value,
-      confirmPassword: confirmPassword.value,
-    };
+    if (
+      checkFormDataValidation(
+        resetConfirmationCode ? null : currentPassword,
+        newPassword,
+        confirmPassword,
+      )
+    ) {
+      const formData = {
+        currentPassword: currentPassword.value,
+        newPassword: newPassword.value,
+        confirmPassword: confirmPassword.value,
+      };
+
+      console.log(formData);
+    }
   };
 
   return (
@@ -74,11 +85,6 @@ function PasswordChangePage() {
         <Button
           type="submit"
           className={styles.button}
-          disabled={
-            !newPassword.isValid ||
-            !currentPassword.isValid ||
-            !confirmPassword.isValid
-          }
         >
           Сохранить пароль
         </Button>

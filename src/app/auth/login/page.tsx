@@ -16,6 +16,7 @@ import { login } from "@/api/auth";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { selectAuthLoginState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
+import { checkFormDataValidation } from "@/utils/formUtils";
 
 function LoginPage() {
   const email = useInput("", { isEmpty: true, isEmail: true });
@@ -27,12 +28,14 @@ function LoginPage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const formData: LoginPayload = {
-      email: email.value,
-      password: password.value,
-    };
+    if (checkFormDataValidation(email, password)) {
+      const formData: LoginPayload = {
+        email: email.value,
+        password: password.value,
+      };
 
-    dispatch(login(formData));
+      dispatch(login(formData));
+    }
   };
 
   return (
@@ -49,8 +52,8 @@ function LoginPage() {
           onChange={email.onChange}
           onBlur={email.onBlur}
           errorText={email.error}
-          required
           disabled={loginStatus.isLoading}
+          required
         />
         <Input
           name="password"
@@ -60,8 +63,8 @@ function LoginPage() {
           onChange={password.onChange}
           onBlur={password.onBlur}
           errorText={password.error}
-          required
           disabled={loginStatus.isLoading}
+          required
         />
         <Link
           href="/password/reset"
@@ -74,9 +77,7 @@ function LoginPage() {
           <PrimaryButton
             type="submit"
             isMedium={true}
-            disabled={
-              loginStatus.isLoading || !email.isValid || !password.isValid
-            }
+            disabled={loginStatus.isLoading}
           >
             Войти
           </PrimaryButton>

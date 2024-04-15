@@ -10,6 +10,7 @@ import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
 import { useInput } from "@/hooks/inputHooks";
+import { checkFormDataValidation } from "@/utils/formUtils";
 
 function PasswordResetPage() {
   const router = useRouter();
@@ -19,7 +20,9 @@ function PasswordResetPage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    router.push("/password/change?reset-confirmation=reset-password-code");
+    if (checkFormDataValidation(email)) {
+      router.push("/password/change?reset-confirmation=reset-password-code");
+    }
   };
 
   return (
@@ -42,7 +45,6 @@ function PasswordResetPage() {
           className={styles.button}
           isMedium={true}
           type="submit"
-          disabled={!email.isValid}
         >
           Сбросить пароль
         </PrimaryButton>

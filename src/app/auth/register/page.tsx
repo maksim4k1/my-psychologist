@@ -15,9 +15,10 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { register } from "@/api/auth";
 import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
+import { checkFormDataValidation } from "@/utils/formUtils";
 
 function RegisterPage() {
-  const name = useInput("", { isEmpty: true });
+  const name = useInput("");
   const email = useInput("", { isEmpty: true, isEmail: true });
   const password = useInput("", { isEmpty: true });
   const confirmPassword = useInput("", {
@@ -32,14 +33,16 @@ function RegisterPage() {
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const formData: RegisterPayload = {
-      name: name.value,
-      email: email.value,
-      password: password.value,
-      confirmPassword: confirmPassword.value,
-    };
+    if (checkFormDataValidation(email, password, confirmPassword)) {
+      const formData: RegisterPayload = {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+        confirmPassword: confirmPassword.value,
+      };
 
-    dispatch(register(formData));
+      dispatch(register(formData));
+    }
   };
 
   return (
@@ -97,13 +100,7 @@ function RegisterPage() {
           <PrimaryButton
             type="submit"
             isMedium={true}
-            disabled={
-              registerStatus.isLoading ||
-              !name.isValid ||
-              !email.isValid ||
-              !password.isValid ||
-              !confirmPassword.isValid
-            }
+            disabled={registerStatus.isLoading}
           >
             Зарегистрироваться
           </PrimaryButton>
