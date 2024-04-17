@@ -36,10 +36,10 @@
 
 .status {
   @include bodyMedium;
-  color: $on-primary-fixed-variant;
+  color: $color-on-primary-fixed-variant;
 
   &.isOnline {
-    color: $inverse-primary;
+    color: $color-inverse-primary;
   }
 }
 
@@ -60,7 +60,7 @@
 
 .info {
   margin-bottom: 8px;
-  color: $on-surface-variant;
+  color: $color-on-surface-variant;
   @include bodyMedium;
 }
 
@@ -93,11 +93,11 @@
 }
 
 .testTitle {
-  color: $on-surface-variant;
+  color: $color-on-surface-variant;
   @include titleSmall;
 }
 
 .testLink {
-  color: $primary;
+  color: $color-primary;
   @include labelSmall;
 }

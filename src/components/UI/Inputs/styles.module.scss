@@ -1,5 +1,5 @@
 @import "@/styles/variables.scss";
-@import "@/styles/textStyles.scss";
+@import "../../../styles/textStyles.scss";
 
 .label {
   position: relative;
@@ -11,16 +11,16 @@
   padding: 16px;
   background-color: transparent;
   @include bodyLarge;
-  border-bottom: 1px solid $text-placeholder;
+  border: 1px solid $color-outline-variant;
   transition: border-color 0.2s;
 
   &::placeholder {
-    color: $text-placeholder;
+    color: $color-surface-container-highest;
   }
 
   &:focus {
-    caret-color: $text-primary;
-    border-bottom-color: $text-primary;
+    caret-color: $color-on-surface;
+    border-bottom-color: $color-on-surface;
 
     &::placeholder {
       font-size: 0;
@@ -29,15 +29,15 @@
   }
 
   &.error {
-    color: $error;
-    border-bottom-color: $error;
+    color: $color-error;
+    border-bottom-color: $color-error;
 
     &::placeholder {
-      color: $error;
+      color: $color-error;
     }
 
     &:focus {
-      caret-color: $error;
+      caret-color: $color-error;
     }
   }
 }
@@ -46,6 +46,6 @@
   position: absolute;
   bottom: -20px;
   padding: 0 16px;
-  color: $error;
+  color: $color-error;
   @include bodySmall;
 }

@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 5px;
-  color: $outline-variant;
+  color: $color-outline-variant;
   @include bodyMedium;
 
   &::before,
@@ -24,7 +24,7 @@
     width: 100%;
     height: 1px;
     display: block;
-    background-color: $outline-variant;
+    background-color: $color-outline-variant;
   }
 }
 

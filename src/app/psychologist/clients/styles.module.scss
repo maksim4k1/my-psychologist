@@ -42,10 +42,10 @@
 
 .status {
   @include bodyMedium;
-  color: $on-primary-fixed-variant;
+  color: $color-on-primary-fixed-variant;
 
   &.isOnline {
-    color: $inverse-primary;
+    color: $color-inverse-primary;
   }
 }
 
