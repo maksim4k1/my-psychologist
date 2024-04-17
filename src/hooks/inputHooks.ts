@@ -3,6 +3,8 @@ import {
   InputValidationSetup,
   useCheckboxValidation,
   CheckboxValidationSetup,
+  FileInputValidationSetup,
+  useFileInputValidation,
 } from "./validationHooks";
 import { ChangeEvent, FocusEvent, useState } from "react";
 
@@ -29,8 +31,13 @@ export interface CheckboxHookReturnValue extends ValidationData {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface FileInputHookReturnValue extends ValidationData {
+  value: FileList | undefined;
+  onChoose: (input: HTMLInputElement) => void;
+}
+
 function checkInputValidation(
-  value: string | string[],
+  value: string | string[] | FileList,
   validations: InputValidationSetup | CheckboxValidationSetup,
   isValid: boolean,
   setIsDirty: (value: boolean) => void,
@@ -65,7 +72,7 @@ export const useInput = (
 
   return {
     value,
-    isValid: isDirty ? isValid : true,
+    isValid: !isDirty && isValid,
     error: isDirty ? error : "",
     onChange,
     onBlur,
@@ -94,7 +101,7 @@ export const useMaskedInput = (
 
   return {
     value,
-    isValid: isDirty ? isValid : true,
+    isValid: !isDirty && isValid,
     error: isDirty ? error : "",
     onAccept,
     onBlur,
@@ -128,9 +135,42 @@ export const useCheckbox = (
 
   return {
     value,
-    isValid: isDirty ? isValid : true,
+    isValid: !isDirty && isValid,
     error: isDirty ? error : "",
     onChange,
+    checkValidation,
+  };
+};
+
+export const useFileInput = (
+  initialValue: FileList | undefined = undefined,
+  validations: FileInputValidationSetup = {},
+): FileInputHookReturnValue => {
+  const [value, setValue] = useState<FileList | undefined>(initialValue);
+  const [isDirty, setIsDirty] = useState(false);
+  const { isValid, error } = useFileInputValidation(value, validations);
+
+  const onChoose = (input: HTMLInputElement) => {
+    if (input.files) {
+      setValue(input.files);
+      setIsDirty(true);
+    }
+  };
+
+  const checkValidation = () => {
+    if (value !== undefined) {
+      return checkInputValidation(value, validations, isValid, setIsDirty);
+    } else {
+      setIsDirty(true);
+      return !validations.isEmpty;
+    }
+  };
+
+  return {
+    value,
+    isValid: !isDirty && isValid,
+    error: isDirty ? error : "",
+    onChoose,
     checkValidation,
   };
 };
