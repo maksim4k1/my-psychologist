@@ -4,41 +4,64 @@
 .label {
   position: relative;
   width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.labelText {
+  @include titleMedium;
+
+  &.required::after {
+    content: " *";
+    color: $color-error;
+  }
+}
+
+.exampleText {
+  display: block;
+  color: $color-secondary;
+  @include bodySmall;
 }
 
 .input {
   width: 100%;
-  padding: 16px;
+  height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
   background-color: transparent;
   @include bodyLarge;
-  border: 1px solid $color-outline-variant;
-  transition: border-color 0.2s;
+  border: 1px solid $color-outline;
+  border-radius: 4px;
+  transition: border-color 0.2s, opacity 0.2s;
 
   &::placeholder {
-    color: $color-surface-container-highest;
+    color: $color-on-surface-variant;
+  }
+
+  &:hover {
+    border-color: $color-on-surface;
   }
 
   &:focus {
     caret-color: $color-on-surface;
-    border-bottom-color: $color-on-surface;
+    border-color: $color-primary;
+    border-width: 2px;
+  }
+
+  &:disabled {
+    border-color: $color-on-surface;
+    opacity: 0.12;
 
     &::placeholder {
-      font-size: 0;
-      color: transparent;
+      color: $color-on-surface;
     }
   }
 
   &.error {
-    color: $color-error;
-    border-bottom-color: $color-error;
-
-    &::placeholder {
-      color: $color-error;
-    }
-
-    &:focus {
-      caret-color: $color-error;
-    }
+    border-color: $color-error;
+    border-width: 2px;
   }
 }
 
