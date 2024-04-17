@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 export interface InputValidationSetup {
   isEmpty?: boolean;
@@ -14,6 +14,15 @@ export interface CheckboxValidationSetup {
   isEmpty?: boolean;
   minCount?: number;
   maxCount?: number;
+}
+
+export interface FileInputValidationSetup {
+  isEmpty?: boolean;
+  minCount?: number;
+  maxCount?: number;
+  minSize?: number; // mbyte
+  maxSize?: number; // mbyte
+  formats?: string[];
 }
 
 export interface ValidationResult {
@@ -144,4 +153,98 @@ export const useCheckboxValidation = (
   }, [value]);
 
   return { error, isValid };
+};
+
+export const useFileInputValidation = (
+  value: FileList | undefined,
+  validations: FileInputValidationSetup,
+): ValidationResult => {
+  const [isValid, setIsValid] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    setIsValid(true);
+    setError("");
+
+    validationCycle: for (let validation in validations) {
+      switch (validation) {
+        case "isEmpty": {
+          const { isEmpty } = validations;
+          if (isEmpty && (!value || value?.length === 0)) {
+            setIsValid(false);
+            setError("Необходимо выбрать файл");
+            break validationCycle;
+          }
+          break;
+        }
+        case "minCount": {
+          const { minCount } = validations;
+          if (minCount && value && value?.length < minCount) {
+            setIsValid(false);
+            setError(`Выберите не менее ${minCount} файлов`);
+            break validationCycle;
+          }
+          break;
+        }
+        case "maxCount": {
+          const { maxCount } = validations;
+          if (maxCount && value && value?.length > maxCount) {
+            setIsValid(false);
+            setError(`Выберите не более ${maxCount} файлов`);
+            break validationCycle;
+          }
+          break;
+        }
+        case "minSize": {
+          const { minSize } = validations;
+
+          if (value && minSize) {
+            for (let i = 0; i < value.length; i++) {
+              let file = value[i];
+              if (file.size / (1024 * 1024) < minSize) {
+                setIsValid(false);
+                setError(`Минимальный размер файла: ${minSize} Мб`);
+                break validationCycle;
+              }
+            }
+          }
+          break;
+        }
+        case "maxSize": {
+          const { maxSize } = validations;
+          if (value && maxSize) {
+            for (let i = 0; i < value.length; i++) {
+              let file = value[i];
+              if (file.size / (1024 * 1024) > maxSize) {
+                setIsValid(false);
+                setError(`Максимальный размер файла: ${maxSize} Мб`);
+                break validationCycle;
+              }
+            }
+          }
+          break;
+        }
+        case "formats": {
+          const { formats } = validations;
+          if (value && formats) {
+            for (let i = 0; i < value.length; i++) {
+              let file = value[i];
+              const fileFormat = file.name.split(".").at(-1);
+              if (!fileFormat || !formats.includes(fileFormat)) {
+                setIsValid(false);
+                setError(`Недопустимый формат файла: ${fileFormat}`);
+                break validationCycle;
+              }
+            }
+          }
+          break;
+        }
+      }
+    }
+  }, [value]);
+
+  return {
+    isValid,
+    error,
+  };
 };
