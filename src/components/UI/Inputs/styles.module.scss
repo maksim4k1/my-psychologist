@@ -24,19 +24,24 @@
   @include bodySmall;
 }
 
+.textInput {
+  height: 56px;
+}
+
 .input {
   width: 100%;
-  height: 56px;
-  padding: 0 16px;
+  padding: 16px;
   display: flex;
   align-items: center;
   background-color: transparent;
   @include bodyLarge;
   border: 1px solid $color-outline;
   border-radius: 4px;
-  transition: border-color 0.2s, opacity 0.2s;
+  transition: opacity 0.2s;
+  caret-color: $color-on-surface;
 
   &::placeholder {
+    @include bodyLarge;
     color: $color-on-surface-variant;
   }
 
@@ -45,9 +50,9 @@
   }
 
   &:focus {
-    caret-color: $color-on-surface;
-    border-color: $color-primary;
-    border-width: 2px;
+    border-color: transparent;
+    outline: 2px solid $color-primary;
+    outline-offset: -2px;
   }
 
   &:disabled {
@@ -60,8 +65,9 @@
   }
 
   &.error {
-    border-color: $color-error;
-    border-width: 2px;
+    border-color: transparent;
+    outline: 2px solid $color-error;
+    outline-offset: -2px;
   }
 }
 

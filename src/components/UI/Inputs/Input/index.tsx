@@ -37,7 +37,7 @@ const Input: FunctionComponent<Props> = ({
         </div>
       )}
       <input
-        className={`${styles.input} ${
+        className={`${styles.input} ${styles.textInput} ${
           errorText ? styles.error : ""
         } ${className}`}
         {...props}

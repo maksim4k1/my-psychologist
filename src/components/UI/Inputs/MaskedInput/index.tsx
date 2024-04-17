@@ -18,7 +18,7 @@ const MaskedInput: FunctionComponent<Props> = ({
   return (
     <div className={styles.label}>
       <IMaskInput
-        className={`${styles.input} ${
+        className={`${styles.input} ${styles.textInput} ${
           errorText ? styles.error : ""
         } ${className}`}
         {...props}
