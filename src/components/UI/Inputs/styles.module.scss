@@ -37,7 +37,7 @@
   @include bodyLarge;
   border: 1px solid $color-outline;
   border-radius: 4px;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, border-color 0.2s;
   caret-color: $color-on-surface;
 
   &::placeholder {
@@ -50,7 +50,7 @@
   }
 
   &:focus {
-    border-color: transparent;
+    border-color: $color-primary;
     outline: 2px solid $color-primary;
     outline-offset: -2px;
   }
@@ -65,7 +65,7 @@
   }
 
   &.error {
-    border-color: transparent;
+    border-color: $color-error;
     outline: 2px solid $color-error;
     outline-offset: -2px;
   }
