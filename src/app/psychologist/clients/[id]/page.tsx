@@ -79,7 +79,7 @@ const TestCard: FunctionComponent<TestProps> = ({ test }) => {
       <div className={styles.testTitle}>{test.title}</div>
       <Link
         className={styles.testLink}
-        href={`/test/${test.id}`}
+        href={`/psychologist/clients/result`}
       >
         Посмотреть результаты
       </Link>

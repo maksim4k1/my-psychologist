@@ -1,8 +1,5 @@
-build:
-	docker build -t my-psychologist .
+dev:
+	docker-compose -f ./docker/docker-compose.dev.yml -p my-psychologist-dev up --build
 
-run:
-	docker run -d -p 80:3000 --rm --name my-psychologist-container my-psychologist
-
-stop:
-	docker stop my-psychologist-container
+prod:
+	docker-compose -f ./docker/docker-compose.prod.yml up -d --build

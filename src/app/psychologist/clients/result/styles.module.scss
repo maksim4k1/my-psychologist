@@ -1,0 +1,29 @@
+@import "@/styles/textStyles";
+
+.resultTestContainer {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.resultTextContainer {
+  max-width: 744px;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.resultTitle {
+  @include labelLarge;
+}
+
+.resultText {
+  @include bodyMedium;
+}
