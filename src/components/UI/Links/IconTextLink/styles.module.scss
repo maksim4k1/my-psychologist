@@ -17,9 +17,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $white;
+  color: $color-on-error;
   @include labelSmall;
-  background-color: $error;
+  background-color: $color-error;
   border-radius: 8px;
 
   &.bigCount {
@@ -27,6 +27,6 @@
   }
 }
 .content {
-  color: $text-secondary;
+  color: $color-secondary;
   @include labelMedium;
 }

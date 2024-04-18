@@ -6,10 +6,10 @@
 }
 
 .resetPasswordLink {
-  margin-top: -12px;
+  margin-top: -24px;
   margin-bottom: -4px;
   margin-left: auto;
-  color: $outline-variant;
+  color: $color-outline-variant;
   text-decoration: underline;
   @include labelMedium;
   transition: text-decoration-color 0.2s;

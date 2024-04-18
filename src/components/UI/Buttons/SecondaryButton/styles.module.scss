@@ -2,7 +2,27 @@
 @import "@/styles/textStyles.scss";
 
 .button {
-  color: $primary;
+  color: $color-primary;
   background-color: transparent;
-  border: 1px solid $light-outline;
+  border: 1px solid $color-outline;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &:hover {
+    background-color: rgba($color: $color-primary, $alpha: 0.12);
+  }
+
+  &:focus {
+    border-color: $color-primary;
+    background-color: rgba($color: $color-primary, $alpha: 0.12);
+  }
+
+  &:active {
+    background-color: rgba($color: $color-primary, $alpha: 0.12);
+  }
+
+  &:disabled {
+    border-color: rgba($color: $color-on-surface, $alpha: 0.12);
+    color: rgba($color: $color-on-surface, $alpha: 0.38);
+    pointer-events: none;
+  }
 }

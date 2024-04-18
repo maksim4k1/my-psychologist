@@ -1,34 +1,47 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
 import Button from "@/components/UI/Buttons/PrimaryButton";
 import { useSearchParams } from "next/navigation";
 import Container from "@/components/UI/Container";
-import { onChangeInputHandler } from "@/utils/handlers";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
-
-const initialState = {
-  currentPassword: "",
-  newPassword: "",
-  confirmPassword: "",
-};
+import { useInput } from "@/hooks/inputHooks";
+import { checkFormDataValidation } from "@/utils/formUtils";
 
 function PasswordChangePage() {
   const searchParams = useSearchParams();
   const resetConfirmationCode = searchParams.get("reset-confirmation");
 
-  const [formState, setFormState] = useState(initialState);
-
-  const onChangeHandler = onChangeInputHandler(setFormState);
+  const currentPassword = useInput("", { isEmpty: true });
+  const newPassword = useInput("", { isEmpty: true });
+  const confirmPassword = useInput("", {
+    isEmpty: true,
+    isConfirmPassword: true,
+    confirmPassword: newPassword.value,
+  });
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    setFormState(initialState);
+    if (
+      checkFormDataValidation(
+        resetConfirmationCode ? null : currentPassword,
+        newPassword,
+        confirmPassword,
+      )
+    ) {
+      const formData = {
+        currentPassword: currentPassword.value,
+        newPassword: newPassword.value,
+        confirmPassword: confirmPassword.value,
+      };
+
+      console.log(formData);
+    }
   };
 
   return (
@@ -42,7 +55,10 @@ function PasswordChangePage() {
             name="currentPassword"
             type="text"
             placeholder="Введите старый пароль"
-            onChange={onChangeHandler}
+            value={currentPassword.value}
+            onChange={currentPassword.onChange}
+            onBlur={currentPassword.onBlur}
+            errorText={currentPassword.error}
             required
           />
         )}
@@ -50,15 +66,21 @@ function PasswordChangePage() {
           name="newPassword"
           type="password"
           placeholder="Введите пароль"
-          onChange={onChangeHandler}
+          value={newPassword.value}
+          onChange={newPassword.onChange}
+          onBlur={newPassword.onBlur}
+          errorText={newPassword.error}
           required
         />
         <Input
           name="confirmPassword"
           type="password"
           placeholder="Повторите пароль"
+          value={confirmPassword.value}
+          onChange={confirmPassword.onChange}
+          onBlur={confirmPassword.onBlur}
+          errorText={confirmPassword.error}
           required
-          onChange={onChangeHandler}
         />
         <Button
           type="submit"

@@ -1,47 +1,17 @@
-.title{
+.title {
   margin-bottom: 40px;
   text-align: start;
 }
 
-.form{
+.form {
+  max-width: 552px;
   width: 100%;
-  display: flex;
-  gap: 120px;
-}
-
-.leftInputs{
-  width: 360px;
-}
-
-.button{
-  margin-top: 40px;
-}
-
-.rightInputs{
-  width: 250px;
+  margin: 0 auto;
   display: flex;
   flex-flow: column;
-  gap: 48px;
+  gap: 32px;
 }
 
-.subtitle{
-  margin-bottom: 20px;
-}
-
-.inputs{
-  display: flex;
-  flex-flow: column;
-  gap: 20px
-}
-
-.radios{
-  display: flex;
-  flex-flow: column;
-  gap: 16px;
-}
-
-.checkboxes{
-  display: flex;
-  flex-flow: wrap;
-  gap: 8px;
+.button {
+  margin-top: 8px;
 }
