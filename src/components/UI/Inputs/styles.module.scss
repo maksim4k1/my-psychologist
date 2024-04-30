@@ -10,6 +10,7 @@
 }
 
 .labelText {
+  white-space: pre-wrap;
   @include titleMedium;
 
   &.required::after {
@@ -21,6 +22,7 @@
 .exampleText {
   display: block;
   color: $color-secondary;
+  white-space: pre-wrap;
   @include bodySmall;
 }
 
