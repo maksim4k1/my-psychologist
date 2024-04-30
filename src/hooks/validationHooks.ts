@@ -6,6 +6,7 @@ export interface InputValidationSetup {
   maxLength?: number;
   isEmail?: boolean;
   isDate?: boolean;
+  isPhoneNumber?: boolean;
   isConfirmPassword?: boolean;
   confirmPassword?: string;
 }
@@ -88,6 +89,20 @@ export const useInputValidation = (
           if (!(value === "" && !isEmpty) && isDate && !reg.test(value)) {
             setIsValid(false);
             setError("Введите корректную дату");
+            break validationCycle;
+          }
+          break;
+        }
+        case "isPhoneNumber": {
+          const { isPhoneNumber, isEmpty } = validations;
+          const reg = /^\+[0-9]\([0-9]{3}\)[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/;
+          if (
+            !(value === "" && !isEmpty) &&
+            isPhoneNumber &&
+            !reg.test(value)
+          ) {
+            setIsValid(false);
+            setError("Введите корректный номер телефона");
             break validationCycle;
           }
           break;
