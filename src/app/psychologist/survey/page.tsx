@@ -24,6 +24,7 @@ function PsychologistSurveyPage() {
   const onlineExperience = useInput("", { isEmpty: true });
   const currentClients = useInput("", { isEmpty: true });
   const personalTherapy = useInput("", { isEmpty: true });
+  const supervisions = useInput("", { isEmpty: true });
   const socialNetworkLink = useInput("", { isEmpty: true });
   const photos = useFileInput(undefined, { isEmpty: true });
   const phoneNumber = useMaskedInput("", {
@@ -194,6 +195,17 @@ function PsychologistSurveyPage() {
           value={personalTherapy.value}
           onChange={personalTherapy.onChange}
           onBlur={personalTherapy.onBlur}
+          required
+        />
+        <Input
+          name="supervisions"
+          type="text"
+          placeholder="Введите ответ"
+          labelText="Проходите ли вы регулярные супервизии?"
+          errorText={supervisions.error}
+          value={supervisions.value}
+          onChange={supervisions.onChange}
+          onBlur={supervisions.onBlur}
           required
         />
         <Input
