@@ -72,7 +72,9 @@ function LoginPage() {
         >
           Забыли пароль?
         </Link>
-        {loginStatus.isFailure && <div>{loginStatus.error}</div>}
+        {loginStatus.isFailure && !!loginStatus.error && (
+          <div>{loginStatus.error}</div>
+        )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"
