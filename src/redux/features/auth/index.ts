@@ -54,6 +54,7 @@ const authSlice: Slice = createSlice({
       state.isAuth = true;
       state.role = getRole(payload.role);
       state.registerState = createSuccessState();
+      saveToken(payload.token);
     },
     registerError: (state, { payload }: PayloadAction<string>) => {
       console.log("register error");
