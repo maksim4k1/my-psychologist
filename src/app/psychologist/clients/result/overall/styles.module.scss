@@ -36,3 +36,10 @@
 .descriptionText {
   @include bodyMedium;
 }
+
+.radarChart {
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 800px;
+  min-height: 400px;
+}

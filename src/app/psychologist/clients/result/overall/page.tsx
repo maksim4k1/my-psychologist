@@ -5,11 +5,34 @@ import PageTitle from "@/components/UI/Titles/PageTitle";
 import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../../config/access.config";
+import RadarChart from "@/components/UI/Charts/RadarChart";
 
 function PsychologistClientsOverallResultPage() {
+  const data = [
+    {
+      subject: "Эмоциональное истощение",
+      A: 15,
+      fullMark: 54,
+    },
+    {
+      subject: "Редукция проф. достижений",
+      A: 35,
+      fullMark: 40,
+    },
+    {
+      subject: "Деперсонализация",
+      A: 25,
+      fullMark: 30,
+    },
+  ];
+
   return (
     <Container>
       <PageTitle className={styles.title}>История тестов</PageTitle>
+      <RadarChart
+        data={data}
+        className={styles.radarChart}
+      />
       <div className={styles.descriptionTestContainer}>
         <div className={styles.descriptionTextContainer}>
           <h3 className={styles.descriptionTitle}>
