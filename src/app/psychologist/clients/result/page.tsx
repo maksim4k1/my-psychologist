@@ -6,7 +6,7 @@ import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../config/access.config";
 import Subtitle from "@/components/UI/Titles/Subtitle";
-import ProgressBar from "@/components/UI/ProgressBar";
+import ProgressBar from "@/components/UI/Charts/ProgressBar";
 
 function PsychologistClientsResultPage() {
   return (
