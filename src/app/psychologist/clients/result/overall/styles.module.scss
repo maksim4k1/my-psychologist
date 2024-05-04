@@ -1,0 +1,38 @@
+@import "@/styles/textStyles";
+@import "@/styles/variables";
+
+.title {
+  margin-bottom: 60px;
+}
+
+.descriptionTestContainer {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.descriptionTextContainer {
+  max-width: 744px;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  margin-bottom: 30px;
+}
+
+.descriptionTitle {
+  @include labelLarge;
+}
+
+.descriptionText {
+  @include bodyMedium;
+}
