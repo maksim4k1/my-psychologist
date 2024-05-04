@@ -1,0 +1,41 @@
+@import "@/styles/textStyles";
+@import "@/styles/variables";
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.radarChart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartGrid {
+  stroke: $color-primary-fixed-dim;
+  stroke-width: 4px;
+}
+
+.chartAxis {
+  stroke: transparent;
+}
+
+.chartAxisText {
+  font-size: 0px;
+}
+
+.chartText {
+  fill: $color-primary;
+  @include titleMedium;
+}
+
+.radarField {
+  stroke: $color-primary;
+  stroke-width: 5px;
+  fill: $color-primary;
+}
+
+.points {
+  fill: $color-primary;
+}
