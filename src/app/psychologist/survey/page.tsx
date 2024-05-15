@@ -12,6 +12,7 @@ import { useFileInput, useInput, useMaskedInput } from "@/hooks/inputHooks";
 import MaskedInput from "@/components/UI/Inputs/MaskedInput";
 import { checkFormDataValidation } from "@/utils/formUtils";
 import FileInput from "@/components/UI/Inputs/FileInput";
+import Textarea from "@/components/UI/Inputs/Textarea";
 
 function PsychologistSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
@@ -110,7 +111,7 @@ function PsychologistSurveyPage() {
           onAccept={birthday.onAccept}
           errorText={birthday.error}
         />
-        <Input
+        <Textarea
           name="education"
           type="text"
           placeholder="Введите ответ"
@@ -242,7 +243,7 @@ function PsychologistSurveyPage() {
           onBlur={phoneNumber.onBlur}
           required
         />
-        <Input
+        <Textarea
           name="about"
           type="text"
           placeholder="Введите ответ"
@@ -253,7 +254,7 @@ function PsychologistSurveyPage() {
           onBlur={about.onBlur}
           required
         />
-        <Input
+        <Textarea
           name="unacceptableThings"
           type="text"
           placeholder="Введите ответ"
