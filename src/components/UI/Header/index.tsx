@@ -8,12 +8,16 @@ import Container from "../Container";
 import ProfileImage from "../Images/ProfileImage";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { selectAuthIsAuth } from "@/redux/features/auth/selectors";
+import {
+  selectAuthIsAuth,
+  selectAuthLoginState,
+} from "@/redux/features/auth/selectors";
 import { getToken } from "@/storage/token";
 import { loginByToken } from "@/api/auth";
 
 const Header: FunctionComponent = ({}) => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
+  const { isLoading } = useAppSelector(selectAuthLoginState);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -69,6 +73,8 @@ const Header: FunctionComponent = ({}) => {
               size={54}
             />
           </Link>
+        ) : isLoading ? (
+          <PrimaryButton disabled={isLoading}>Загрузка...</PrimaryButton>
         ) : (
           <PrimaryButton href="/auth/login">Войти</PrimaryButton>
         )}
