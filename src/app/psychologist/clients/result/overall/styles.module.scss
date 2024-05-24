@@ -1,6 +1,10 @@
 @import "@/styles/textStyles";
 @import "@/styles/variables";
 
+.title {
+  margin-bottom: 60px;
+}
+
 .descriptionTestContainer {
   display: flex;
   flex-flow: column;
@@ -33,28 +37,9 @@
   @include bodyMedium;
 }
 
-.results {
-  max-width: 715px;
-  margin-bottom: 60px;
-  display: flex;
-  flex-flow: column;
-  gap: 30px;
-}
-
-.result {
+.radarChart {
+  margin-bottom: 40px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 440px;
-  column-gap: 50px;
-}
-
-.resultTitle {
-  text-align: end;
-  color: $color-primary;
-  @include titleMedium;
-}
-
-.scale {
-  width: 100%;
-  max-width: 440px;
+  max-width: 800px;
+  min-height: 400px;
 }

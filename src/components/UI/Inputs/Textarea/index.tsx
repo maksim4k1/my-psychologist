@@ -1,28 +1,35 @@
 "use client";
 
-import { FunctionComponent } from "react";
+import { ChangeEvent, FunctionComponent, useEffect, useRef } from "react";
 import styles from "../styles.module.scss";
-import { IMaskInput } from "react-imask";
 
 interface Props {
   labelText?: string;
   exampleText?: string;
   errorText?: string;
   className?: string;
-  type?: string;
-  mask?: any;
+  value?: string;
+  onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   [key: string]: any;
 }
 
-const MaskedInput: FunctionComponent<Props> = ({
+const Textarea: FunctionComponent<Props> = ({
   labelText,
   exampleText,
   errorText,
   className = "",
-  type = "string",
-  mask = "",
+  value = "",
+  onChange,
   ...props
 }) => {
+  const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    event.target.style.height = "56px";
+    event.target.style.height = `${event.target.scrollHeight}px`;
+    if (onChange) {
+      onChange(event);
+    }
+  };
+
   return (
     <div className={styles.label}>
       {(!!labelText || !!exampleText) && (
@@ -41,17 +48,17 @@ const MaskedInput: FunctionComponent<Props> = ({
           )}
         </div>
       )}
-      <IMaskInput
-        className={`${styles.input} ${styles.textInput} ${
+      <textarea
+        className={`${styles.input} ${styles.textarea} ${styles.textInput} ${
           errorText ? styles.error : ""
         } ${className}`}
-        type={type}
-        mask={type === "tel" ? "+0(000)000-00-00" : mask}
         {...props}
+        defaultValue={value}
+        onChange={onChangeHandler}
       />
       {!!errorText && <div className={styles.errorText}>{errorText}</div>}
     </div>
   );
 };
 
-export default MaskedInput;
+export default Textarea;

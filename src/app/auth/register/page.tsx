@@ -12,7 +12,7 @@ import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
 import { RegisterPayload } from "@/redux/features/auth/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { register } from "@/api/auth";
+import AuthServise from "@/api/auth";
 import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
@@ -41,7 +41,7 @@ function RegisterPage() {
         confirmPassword: confirmPassword.value,
       };
 
-      dispatch(register(formData));
+      dispatch(AuthServise.register(formData));
     }
   };
 

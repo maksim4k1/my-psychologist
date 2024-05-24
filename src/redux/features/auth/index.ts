@@ -8,6 +8,16 @@ import { Actions } from "./../../store";
 import { ACCESS } from "./../../../../config/access.config";
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { AuthState } from "./types";
+import { getRole } from "@/utils/apiUtils";
+import { saveToken } from "@/storage/token";
+
+interface UserData {
+  token: string;
+  user_id: string;
+  role: number;
+  email: string;
+  username: string;
+}
 
 const initialState: AuthState = {
   isAuth: false,
@@ -24,11 +34,12 @@ const authSlice: Slice = createSlice({
       console.log("login loading");
       state.loginState = createLoadingState();
     },
-    loginSuccess: (state) => {
-      console.log("login success");
+    loginSuccess: (state, { payload }: PayloadAction<UserData>) => {
+      console.log(payload);
       state.isAuth = true;
-      state.role = ACCESS.psychologist;
+      state.role = getRole(payload.role);
       state.loginState = createSuccessState();
+      saveToken(payload.token);
     },
     loginError: (state, { payload }: PayloadAction<string>) => {
       console.log("login error");
@@ -38,11 +49,12 @@ const authSlice: Slice = createSlice({
       console.log("register loading");
       state.registerState = createLoadingState();
     },
-    registerSuccess: (state) => {
-      console.log("register success");
+    registerSuccess: (state, { payload }: PayloadAction<UserData>) => {
+      console.log(payload);
       state.isAuth = true;
-      state.role = ACCESS.client;
+      state.role = getRole(payload.role);
       state.registerState = createSuccessState();
+      saveToken(payload.token);
     },
     registerError: (state, { payload }: PayloadAction<string>) => {
       console.log("register error");

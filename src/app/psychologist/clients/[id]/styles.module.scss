@@ -101,3 +101,8 @@
   color: $color-primary;
   @include labelSmall;
 }
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}

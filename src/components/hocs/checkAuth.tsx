@@ -4,7 +4,10 @@ import { ACCESS, AccessRole } from "../../../config/access.config";
 import { FunctionComponent, useEffect } from "react";
 import AccessDeniedErrorPage from "../errors/AccessDenied";
 import { useAppSelector } from "@/hooks/reduxHooks";
-import { selectAuth } from "@/redux/features/auth/selectors";
+import {
+  selectAuth,
+  selectAuthLoginState,
+} from "@/redux/features/auth/selectors";
 import { usePathname, useRouter } from "next/navigation";
 
 function checkAuth(
@@ -14,6 +17,7 @@ function checkAuth(
 ): FunctionComponent {
   return function CheckAuthComponent() {
     const { isAuth, role } = useAppSelector(selectAuth);
+    const { isLoading } = useAppSelector(selectAuthLoginState);
     const router = useRouter();
     const pathname = usePathname();
 
@@ -32,17 +36,20 @@ function checkAuth(
       role !== ACCESS.psychologist;
 
     useEffect(() => {
-      if (isOnlyForUnauthorized && pathname === "/auth/register")
-        router.push("/auth/register/success");
-      else if (isOnlyForUnauthorized) router.push("/");
-      else if (isOnlyForAuthorized) router.push(`/auth/login`);
-      else if (isOnlyForPsychologist) router.push(`/psychologist/survey`);
+      if (!isLoading) {
+        if (isOnlyForUnauthorized && pathname === "/auth/register")
+          router.push("/auth/register/success");
+        else if (isOnlyForUnauthorized) router.push("/");
+        else if (isOnlyForAuthorized) router.push(`/auth/login`);
+        else if (isOnlyForPsychologist) router.push(`/psychologist/survey`);
+      }
     }, [
       isOnlyForUnauthorized,
       isOnlyForAuthorized,
       isOnlyForPsychologist,
       router,
       pathname,
+      isLoading,
     ]);
 
     if (isOnlyForUnauthorized || isOnlyForAuthorized || isOnlyForPsychologist)

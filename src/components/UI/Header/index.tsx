@@ -1,17 +1,31 @@
 "use client";
 
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import LogoIcon from "@/assets/svg/Icons/Logo";
 import Container from "../Container";
 import ProfileImage from "../Images/ProfileImage";
 import PrimaryButton from "../Buttons/PrimaryButton";
-import { useAppSelector } from "@/hooks/reduxHooks";
-import { selectAuthIsAuth } from "@/redux/features/auth/selectors";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import {
+  selectAuthIsAuth,
+  selectAuthLoginState,
+} from "@/redux/features/auth/selectors";
+import { getToken } from "@/storage/token";
+import AuthServise from "@/api/auth";
 
 const Header: FunctionComponent = ({}) => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
+  const { isLoading } = useAppSelector(selectAuthLoginState);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!isAuth) {
+      const token: string | null = getToken();
+      if (token) dispatch(AuthServise.loginByToken(token));
+    }
+  }, [isAuth]);
 
   return (
     <header className={styles.header}>
@@ -59,6 +73,8 @@ const Header: FunctionComponent = ({}) => {
               size={54}
             />
           </Link>
+        ) : isLoading ? (
+          <PrimaryButton disabled={isLoading}>Загрузка...</PrimaryButton>
         ) : (
           <PrimaryButton href="/auth/login">Войти</PrimaryButton>
         )}

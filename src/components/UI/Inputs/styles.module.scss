@@ -10,6 +10,7 @@
 }
 
 .labelText {
+  white-space: pre-wrap;
   @include titleMedium;
 
   &.required::after {
@@ -21,6 +22,7 @@
 .exampleText {
   display: block;
   color: $color-secondary;
+  white-space: pre-wrap;
   @include bodySmall;
 }
 
@@ -28,16 +30,23 @@
   height: 56px;
 }
 
+.textarea {
+  resize: none;
+  max-height: 176px;
+}
+
 .input {
-  width: 100%;
+  min-height: 56px;
+  min-width: 100%;
+  max-width: 100%;
   padding: 16px;
   display: flex;
   align-items: center;
   background-color: transparent;
   @include bodyLarge;
-  border: 1px solid $color-outline;
+  outline: 1px solid $color-outline;
   border-radius: 4px;
-  transition: opacity 0.2s, border-color 0.2s;
+  transition: opacity 0.2s, outline-color 0.2s;
   caret-color: $color-on-surface;
 
   &::placeholder {
@@ -46,7 +55,7 @@
   }
 
   &:hover {
-    border-color: $color-on-surface;
+    outline-color: $color-on-surface;
   }
 
   &:focus {

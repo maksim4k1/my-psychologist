@@ -13,12 +13,12 @@ const Subtitle: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <h3
+    <h2
       className={`${styles.title} ${className}`}
       {...props}
     >
       {children}
-    </h3>
+    </h2>
   );
 };
 

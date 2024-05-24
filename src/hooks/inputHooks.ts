@@ -16,8 +16,10 @@ interface ValidationData {
 
 export interface InputHookReturnValue extends ValidationData {
   value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: FocusEvent<HTMLInputElement>) => void;
+  onChange: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  onBlur: (event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export interface MaskedInputHookReturnValue extends ValidationData {
@@ -59,11 +61,15 @@ export const useInput = (
   const [isDirty, setIsDirty] = useState(false);
   const { isValid, error } = useInputValidation(value, validations);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setValue(event.target.value);
   };
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+  const onBlur = (
+    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setIsDirty(!(!validations.isEmpty && value === ""));
   };
 

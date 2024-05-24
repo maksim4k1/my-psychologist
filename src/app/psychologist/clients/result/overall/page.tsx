@@ -4,50 +4,35 @@ import styles from "./styles.module.scss";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "../../../../../config/access.config";
-import Subtitle from "@/components/UI/Titles/Subtitle";
-import ProgressBar from "@/components/UI/Charts/ProgressBar";
+import { ACCESS } from "../../../../../../config/access.config";
+import RadarChart from "@/components/UI/Charts/RadarChart";
 
-function PsychologistClientsResultPage() {
+function PsychologistClientsOverallResultPage() {
+  const data = [
+    {
+      subject: "Эмоциональное истощение",
+      A: 15,
+      fullMark: 54,
+    },
+    {
+      subject: "Редукция проф. достижений",
+      A: 35,
+      fullMark: 40,
+    },
+    {
+      subject: "Деперсонализация",
+      A: 25,
+      fullMark: 30,
+    },
+  ];
+
   return (
     <Container>
-      <PageTitle className={styles.title}>Результаты теста</PageTitle>
-      <Subtitle className={styles.subtitle}>
-        Профессиональное выгорание
-      </Subtitle>
-      <div className={styles.results}>
-        <div className={styles.result}>
-          <h4 className={styles.resultTitle}>Эмоциональное истощение</h4>
-          <ProgressBar
-            className={styles.scale}
-            value={15}
-            maxGood={15}
-            maxAverage={24}
-            maxBad={54}
-          />
-        </div>
-        <div className={styles.result}>
-          <h4 className={styles.resultTitle}>Деперсонализация</h4>
-          <ProgressBar
-            className={styles.scale}
-            value={25}
-            maxGood={5}
-            maxAverage={10}
-            maxBad={30}
-          />
-        </div>
-        <div className={styles.result}>
-          <h4 className={styles.resultTitle}>Редукция проф. достижений</h4>
-          <ProgressBar
-            className={styles.scale}
-            value={35}
-            maxBad={30}
-            maxAverage={36}
-            maxGood={40}
-            isReversed={true}
-          />
-        </div>
-      </div>
+      <PageTitle className={styles.title}>История тестов</PageTitle>
+      <RadarChart
+        data={data}
+        className={styles.radarChart}
+      />
       <div className={styles.descriptionTestContainer}>
         <div className={styles.descriptionTextContainer}>
           <h3 className={styles.descriptionTitle}>
@@ -96,6 +81,6 @@ function PsychologistClientsResultPage() {
   );
 }
 
-export default checkAuth(PsychologistClientsResultPage, true, [
+export default checkAuth(PsychologistClientsOverallResultPage, true, [
   ACCESS.psychologist,
 ]);

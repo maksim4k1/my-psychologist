@@ -12,6 +12,7 @@ import Subtitle from "@/components/UI/Titles/Subtitle";
 import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../config/access.config";
+import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 
 interface ClientCardProps {
   client: {
@@ -125,7 +126,14 @@ function PsychologistClientPage() {
               }}
             />
           </div>
-          <PrimaryButton>Посмотреть все тесты</PrimaryButton>
+          <div className={styles.buttons}>
+            <PrimaryButton href="./result/overall">
+              Общий результат
+            </PrimaryButton>
+            <SecondaryButton href="./exercises">
+              Назначить задание
+            </SecondaryButton>
+          </div>
         </div>
       </div>
     </Container>
