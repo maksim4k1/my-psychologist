@@ -12,7 +12,7 @@ import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
 import { LoginPayload } from "@/redux/features/auth/types";
-import { login } from "@/api/auth";
+import AuthServise from "@/api/auth";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { selectAuthLoginState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
@@ -34,7 +34,7 @@ function LoginPage() {
         password: password.value,
       };
 
-      dispatch(login(formData));
+      dispatch(AuthServise.login(formData));
     }
   };
 

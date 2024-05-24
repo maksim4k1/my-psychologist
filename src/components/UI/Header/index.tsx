@@ -13,7 +13,7 @@ import {
   selectAuthLoginState,
 } from "@/redux/features/auth/selectors";
 import { getToken } from "@/storage/token";
-import { loginByToken } from "@/api/auth";
+import AuthServise from "@/api/auth";
 
 const Header: FunctionComponent = ({}) => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
@@ -23,7 +23,7 @@ const Header: FunctionComponent = ({}) => {
   useEffect(() => {
     if (!isAuth) {
       const token: string | null = getToken();
-      if (token) dispatch(loginByToken(token));
+      if (token) dispatch(AuthServise.loginByToken(token));
     }
   }, [isAuth]);
 
