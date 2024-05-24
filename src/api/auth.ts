@@ -1,7 +1,7 @@
 import { LoginPayload, RegisterPayload } from "@/redux/features/auth/types";
 import { AppDispatch } from "./../redux/store";
 import { authActions } from "@/redux/features/auth/";
-import { API } from "../../config/api.config";
+import { customAxios } from "../../config/api.config";
 import { deleteToken, saveToken } from "@/storage/token";
 
 export default class AuthServise {
@@ -9,16 +9,9 @@ export default class AuthServise {
     (formData: LoginPayload) => async (dispatch: AppDispatch) => {
       dispatch(authActions.loginLoading());
       try {
-        const response = await fetch(`${API}/users/auth`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+        const response = await customAxios.post("/users/auth", formData);
 
-        const data = await response.json();
+        const data = response.data;
 
         if (typeof data === "string") {
           dispatch(authActions.loginError(data));
@@ -40,21 +33,14 @@ export default class AuthServise {
       dispatch(authActions.registerLoading());
 
       try {
-        const response = await fetch(`${API}/users/reg`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            username: formData.name,
-            password: formData.password,
-            confirm_password: formData.confirmPassword,
-          }),
+        const response = await customAxios.post("/users/reg", {
+          email: formData.email,
+          username: formData.name,
+          password: formData.password,
+          confirm_password: formData.confirmPassword,
         });
 
-        const data = await response.json();
+        const data = response.data;
 
         if (typeof data === "string") {
           dispatch(authActions.registerError(data));
@@ -74,18 +60,9 @@ export default class AuthServise {
     (token: string) => async (dispatch: AppDispatch) => {
       dispatch(authActions.loginLoading());
       try {
-        const response = await fetch(`${API}/users/auth_token`, {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            token: token,
-          }),
-        });
+        const response = await customAxios.post("/users/auth_token", { token });
 
-        const data = await response.json();
+        const data = response.data;
 
         if (typeof data === "string") {
           deleteToken();
