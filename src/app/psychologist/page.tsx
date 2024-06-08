@@ -9,14 +9,12 @@ import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../config/access.config";
 import ApplicationCard from "@/components/UI/Cards/ApplicationCard";
 import ClientCard from "@/components/UI/Cards/ClientCard";
-
-interface Application {
-  userId: number;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problem: string;
-}
+import { ApplicationData } from "@/redux/features/psychologist/types";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useEffect } from "react";
+import PsychologistServise from "@/api/psychologist";
+import { psychologistActions } from "@/redux/features/psychologist";
+import { selectApplications } from "@/redux/features/psychologist/selectors";
 
 interface Client {
   userId: number;
@@ -26,39 +24,14 @@ interface Client {
   problems: string[];
 }
 
-async function PsychologistPage() {
-  const applications: Application[] = [
-    {
-      userId: 1,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Евгений",
-      isOnline: true,
-      problem:
-        "Здравствуйте! За эту неделю я выгорел уже 20 раз и больше не намерен это терпеть",
-    },
-    {
-      userId: 2,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Евгений",
-      isOnline: true,
-      problem: "Я думаю, что за мной следит утка, что мне делать?",
-    },
-    {
-      userId: 3,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Александра",
-      isOnline: true,
-      problem: "Привет, я не люблю общаться с людьми, только со своей собакой",
-    },
-    {
-      userId: 4,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Ангелина",
-      isOnline: true,
-      problem:
-        "Здравствуйте! Я страдаю от паниеских атак почти три года и хотела бы сделать с этим что нибудь, вы можете мне помочь? ",
-    },
-  ];
+function PsychologistPage() {
+  const dispatch = useAppDispatch();
+  const applications: ApplicationData[] = useAppSelector(selectApplications);
+
+  useEffect(() => {
+    dispatch(PsychologistServise.getApplications());
+  }, []);
+
   const clients: Client[] = [
     {
       userId: 1,
