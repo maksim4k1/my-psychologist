@@ -19,3 +19,11 @@ export interface RegisterPayload {
   password: string;
   confirmPassword: string;
 }
+
+export interface UserData {
+  token: string;
+  user_id: string;
+  role: number;
+  email: string;
+  username: string;
+}

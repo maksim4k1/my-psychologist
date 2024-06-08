@@ -5,7 +5,6 @@ import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import IconTextLink from "@/components/UI/Links/IconTextLink";
 import styles from "./styles.module.scss";
-import { ReactNode } from "react";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../config/access.config";
 import ApplicationCard from "@/components/UI/Cards/ApplicationCard";
