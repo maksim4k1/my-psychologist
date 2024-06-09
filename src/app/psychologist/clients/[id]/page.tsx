@@ -3,7 +3,7 @@
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import ProfileImage from "@/components/UI/Images/ProfileImage";
 import Symptom from "@/components/UI/Symptom";
 import MoreVerticalIcon from "@/assets/svg/Icons/MoreVerticalIcon";
@@ -13,16 +13,17 @@ import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../config/access.config";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
+import { ClientProfileData } from "@/redux/features/clients/types";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useParams } from "next/navigation";
+import {
+  selectClient,
+  selectClientState,
+} from "@/redux/features/clients/selectors";
+import ClientsService from "@/api/clients";
 
 interface ClientCardProps {
-  client: {
-    profileImage: string;
-    username: string;
-    isOnline: boolean;
-    age: number;
-    diagnose: string;
-    problems: string[];
-  };
+  client: ClientProfileData;
 }
 
 const ClientCard: FunctionComponent<ClientCardProps> = ({ client }) => {
@@ -50,8 +51,7 @@ const ClientCard: FunctionComponent<ClientCardProps> = ({ client }) => {
         alt={client.username}
       />
       <div className={styles.info}>Возраст: {client.age} лет</div>
-      <div className={styles.info}>Диагноз: {client.diagnose}</div>
-      <div className={styles.info}>Отмечено клиентом:</div>
+      {!!client.problems.length && <div className={styles.info}>Запрос:</div>}
       <div className={styles.problems}>
         {client.problems.map((problem, index) => {
           return (
@@ -89,21 +89,22 @@ const TestCard: FunctionComponent<TestProps> = ({ test }) => {
 };
 
 function PsychologistClientPage() {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const client = useAppSelector(selectClient);
+  const clientState = useAppSelector(selectClientState);
+
+  useEffect(() => {
+    dispatch(ClientsService.getClient(id));
+  }, []);
+
   return (
     <Container>
       <PageTitle className={styles.title}>Профиль клиента</PageTitle>
       <div className={styles.main}>
-        <ClientCard
-          client={{
-            profileImage:
-              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-            username: "Ангелина",
-            isOnline: false,
-            age: 26,
-            diagnose: "депрессия",
-            problems: ["Панические атаки", "СДВГ", "Социофобия", "РПП"],
-          }}
-        />
+        {clientState.isLoading
+          ? "Loading..."
+          : client && <ClientCard client={client} />}
         <div>
           <Subtitle>Пройденные тесты</Subtitle>
           <div className={styles.tests}>
