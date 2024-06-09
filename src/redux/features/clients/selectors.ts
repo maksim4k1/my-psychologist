@@ -1,5 +1,5 @@
 import { RootState } from "@/redux/store";
-import { ClientData, ClientsState } from "./types";
+import { ClientData, ClientProfileData, ClientsState } from "./types";
 import { StatusState } from "@/utils/stateCreators";
 
 const selectClientsModule = (state: RootState): ClientsState => {
@@ -12,4 +12,12 @@ export const selectClients = (state: RootState): ClientData[] => {
 
 export const selectClientsState = (state: RootState): StatusState => {
   return selectClientsModule(state).getClientsState;
+};
+
+export const selectClientState = (state: RootState): StatusState => {
+  return selectClientsModule(state).getClientState;
+};
+
+export const selectClient = (state: RootState): ClientProfileData | null => {
+  return selectClientsModule(state).client;
 };
