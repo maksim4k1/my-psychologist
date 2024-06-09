@@ -1,10 +1,12 @@
 import authReducer from "./features/auth/index";
 import applicationsReducer from "./features/applications/index";
+import clientsReducer from "./features/clients/index";
 import { combineReducers, configureStore, Store } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   authReducer,
   applicationsReducer,
+  clientsReducer,
 });
 
 const store: Store = configureStore({

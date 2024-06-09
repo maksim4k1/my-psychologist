@@ -1,0 +1,43 @@
+import { ClientData } from "./../redux/features/clients/types";
+import { customAxios } from "./../../config/api.config";
+import { clientsActions } from "@/redux/features/clients";
+import { AppDispatch } from "@/redux/store";
+
+interface ClientResponse {
+  client_id: string;
+  username: string;
+  is_active: boolean;
+  request: string[];
+}
+
+export default class ClientsServise {
+  static getClients: Function = () => async (dispatch: AppDispatch) => {
+    dispatch(clientsActions.getClientsLoading());
+
+    try {
+      const response = await customAxios.get("/psychologist/get_list_client");
+
+      const data = response.data;
+
+      if (typeof data === "string") {
+        dispatch(clientsActions.getClientsError(data));
+      } else {
+        const formattedData: ClientData[] = data.map((el: ClientResponse) => ({
+          userId: el.client_id,
+          profileImage:
+            "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+          username: el.username,
+          isOnline: el.is_active,
+          problems: el.request,
+        }));
+        dispatch(clientsActions.getClientsSuccess(formattedData));
+      }
+    } catch (err) {
+      dispatch(
+        clientsActions.getClientsError(
+          err instanceof Error ? err.message : String(err),
+        ),
+      );
+    }
+  };
+}
