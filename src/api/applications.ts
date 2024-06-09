@@ -1,7 +1,7 @@
-import { psychologistActions } from "@/redux/features/psychologist";
+import { applicationsActions } from "@/redux/features/applications";
 import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../../config/api.config";
-import { ApplicationData } from "@/redux/features/psychologist/types";
+import { ApplicationData } from "@/redux/features/applications/types";
 
 interface ApplicationResponse {
   client_id: string;
@@ -12,9 +12,9 @@ interface ApplicationResponse {
   username: string;
 }
 
-export default class PsychologistServise {
+export default class ApplicationsServise {
   static getApplications: Function = () => async (dispatch: AppDispatch) => {
-    dispatch(psychologistActions.getApplicationsLoading());
+    dispatch(applicationsActions.getApplicationsLoading());
 
     try {
       const response = await customAxios.get(
@@ -24,7 +24,7 @@ export default class PsychologistServise {
       const data = response.data;
 
       if (typeof data === "string") {
-        dispatch(psychologistActions.getApplicationsError(data));
+        dispatch(applicationsActions.getApplicationsError(data));
       } else {
         const formattedData: ApplicationData[] = data.map(
           (el: ApplicationResponse) => ({
@@ -37,14 +37,16 @@ export default class PsychologistServise {
           }),
         );
 
-        dispatch(psychologistActions.getApplicationsSuccess(formattedData));
+        dispatch(applicationsActions.getApplicationsSuccess(formattedData));
       }
     } catch (err) {
       dispatch(
-        psychologistActions.getApplicationsError(
+        applicationsActions.getApplicationsError(
           err instanceof Error ? err.message : String(err),
         ),
       );
     }
   };
+
+  static getClients: Function = () => async (dispatch: AppDispatch) => {};
 }

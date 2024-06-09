@@ -1,10 +1,10 @@
 import authReducer from "./features/auth/index";
-import psychologistReducer from "./features/psychologist/index";
+import applicationsReducer from "./features/applications/index";
 import { combineReducers, configureStore, Store } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   authReducer,
-  psychologistReducer,
+  applicationsReducer,
 });
 
 const store: Store = configureStore({

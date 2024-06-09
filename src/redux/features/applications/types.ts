@@ -8,7 +8,7 @@ export interface ApplicationData {
   problem: string;
 }
 
-export interface PsychologistState {
+export interface ApplicationsState {
   applications: ApplicationData[];
   getApplicationsState: StatusState;
 }

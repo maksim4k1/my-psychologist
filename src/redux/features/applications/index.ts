@@ -6,15 +6,15 @@ import {
   createSuccessState,
 } from "@/utils/stateCreators";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
-import { ApplicationData, PsychologistState } from "./types";
+import { ApplicationData, ApplicationsState } from "./types";
 
-const initialState: PsychologistState = {
+const initialState: ApplicationsState = {
   applications: [],
   getApplicationsState: createDefaultState(),
 };
 
-const psychologistSlice: Slice = createSlice({
-  name: "psychologist",
+const applicationsSlice: Slice = createSlice({
+  name: "applications",
   initialState,
   reducers: {
     getApplicationsLoading: (state) => {
@@ -34,6 +34,6 @@ const psychologistSlice: Slice = createSlice({
   },
 });
 
-export const psychologistActions: Actions = psychologistSlice.actions;
+export const applicationsActions: Actions = applicationsSlice.actions;
 
-export default psychologistSlice.reducer;
+export default applicationsSlice.reducer;

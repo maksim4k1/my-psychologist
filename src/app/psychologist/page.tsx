@@ -9,12 +9,15 @@ import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../config/access.config";
 import ApplicationCard from "@/components/UI/Cards/ApplicationCard";
 import ClientCard from "@/components/UI/Cards/ClientCard";
-import { ApplicationData } from "@/redux/features/psychologist/types";
+import { ApplicationData } from "@/redux/features/applications/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useEffect } from "react";
-import PsychologistServise from "@/api/psychologist";
-import { psychologistActions } from "@/redux/features/psychologist";
-import { selectApplications } from "@/redux/features/psychologist/selectors";
+import ApplicationsServise from "@/api/applications";
+import {
+  selectApplications,
+  selectApplicationsState,
+} from "@/redux/features/applications/selectors";
+import { StatusState } from "@/utils/stateCreators";
 
 interface Client {
   userId: number;
@@ -27,9 +30,10 @@ interface Client {
 function PsychologistPage() {
   const dispatch = useAppDispatch();
   const applications: ApplicationData[] = useAppSelector(selectApplications);
+  const { isLoading }: StatusState = useAppSelector(selectApplicationsState);
 
   useEffect(() => {
-    dispatch(PsychologistServise.getApplications());
+    dispatch(ApplicationsServise.getApplications());
   }, []);
 
   const clients: Client[] = [
@@ -77,16 +81,20 @@ function PsychologistPage() {
 
       <div>
         <h2 className={styles.subtitle}>Заявки</h2>
-        <div className={styles.list}>
-          {applications.map((application) => {
-            return (
-              <ApplicationCard
-                key={application.userId}
-                client={application}
-              />
-            );
-          })}
-        </div>
+        {isLoading ? (
+          "Loading..."
+        ) : (
+          <div className={styles.list}>
+            {applications.map((application) => {
+              return (
+                <ApplicationCard
+                  key={application.userId}
+                  client={application}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
       <div>
         <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
