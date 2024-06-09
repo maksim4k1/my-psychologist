@@ -10,7 +10,7 @@ interface ClientResponse {
   request: string[];
 }
 
-export default class ClientsServise {
+export default class ClientsService {
   static getClients: Function = () => async (dispatch: AppDispatch) => {
     dispatch(clientsActions.getClientsLoading());
 

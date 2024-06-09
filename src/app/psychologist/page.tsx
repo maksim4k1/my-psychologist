@@ -12,60 +12,32 @@ import ClientCard from "@/components/UI/Cards/ClientCard";
 import { ApplicationData } from "@/redux/features/applications/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useEffect } from "react";
-import ApplicationsServise from "@/api/applications";
+import ApplicationsService from "@/api/applications";
 import {
   selectApplications,
   selectApplicationsState,
 } from "@/redux/features/applications/selectors";
 import { StatusState } from "@/utils/stateCreators";
-
-interface Client {
-  userId: number;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problems: string[];
-}
+import ClientsService from "@/api/clients";
+import { ClientData } from "@/redux/features/clients/types";
+import {
+  selectClients,
+  selectClientsState,
+} from "@/redux/features/clients/selectors";
 
 function PsychologistPage() {
   const dispatch = useAppDispatch();
   const applications: ApplicationData[] = useAppSelector(selectApplications);
-  const { isLoading }: StatusState = useAppSelector(selectApplicationsState);
+  const applicationsState: StatusState = useAppSelector(
+    selectApplicationsState,
+  );
+  const clients: ClientData[] = useAppSelector(selectClients);
+  const clientsState: StatusState = useAppSelector(selectClientsState);
 
   useEffect(() => {
-    dispatch(ApplicationsServise.getApplications());
+    dispatch(ApplicationsService.getApplications());
+    dispatch(ClientsService.getClients());
   }, []);
-
-  const clients: Client[] = [
-    {
-      userId: 1,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Александр",
-      isOnline: false,
-      problems: ["Депрессия", "Зависимости", "Выгорание"],
-    },
-    {
-      userId: 2,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Алиса",
-      isOnline: true,
-      problems: ["ПТСР", "Тревога", "РПП", "Депрессия"],
-    },
-    {
-      userId: 3,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Виктор",
-      isOnline: true,
-      problems: ["Выгорание"],
-    },
-    {
-      userId: 4,
-      profileImage: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      username: "Ангелина",
-      isOnline: false,
-      problems: ["Панические атаки", "СДВГ", "Социофобия"],
-    },
-  ];
 
   return (
     <Container>
@@ -81,7 +53,7 @@ function PsychologistPage() {
 
       <div>
         <h2 className={styles.subtitle}>Заявки</h2>
-        {isLoading ? (
+        {applicationsState.isLoading ? (
           "Loading..."
         ) : (
           <div className={styles.list}>
@@ -100,16 +72,20 @@ function PsychologistPage() {
         <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
           Мои клиенты
         </h2>
-        <div className={styles.list}>
-          {clients.map((client) => {
-            return (
-              <ClientCard
-                key={client.userId}
-                client={client}
-              />
-            );
-          })}
-        </div>
+        {clientsState.isLoading ? (
+          "Loading..."
+        ) : (
+          <div className={styles.list}>
+            {clients.map((client) => {
+              return (
+                <ClientCard
+                  key={client.userId}
+                  client={client}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </Container>
   );
