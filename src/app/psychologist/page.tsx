@@ -37,7 +37,7 @@ function PsychologistPage() {
   useEffect(() => {
     dispatch(ApplicationsService.getApplications());
     dispatch(ClientsService.getClients());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>

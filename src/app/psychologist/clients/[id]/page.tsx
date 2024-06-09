@@ -96,7 +96,7 @@ function PsychologistClientPage() {
 
   useEffect(() => {
     dispatch(ClientsService.getClient(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <Container>

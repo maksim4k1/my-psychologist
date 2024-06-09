@@ -118,7 +118,7 @@ export const useInputValidation = (
         }
       }
     }
-  }, [value, validations.confirmPassword]);
+  }, [value, validations]);
 
   return { error, isValid };
 };
@@ -165,7 +165,7 @@ export const useCheckboxValidation = (
         }
       }
     }
-  }, [value]);
+  }, [value, validations]);
 
   return { error, isValid };
 };
@@ -256,7 +256,7 @@ export const useFileInputValidation = (
         }
       }
     }
-  }, [value]);
+  }, [value, validations]);
 
   return {
     isValid,

@@ -1,21 +1,24 @@
-import { RefObject, useEffect } from "react";
+import { RefObject, useCallback, useEffect } from "react";
 
 export const useClickOutside = (
   ref: RefObject<any>,
   callback: Function,
   ignoreRef?: RefObject<any>,
 ) => {
-  const onClickHandler = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      if (
-        !ignoreRef ||
-        (event.target !== ignoreRef.current &&
-          !ignoreRef.current.contains(event.target))
-      ) {
-        callback();
+  const onClickHandler = useCallback(
+    (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        if (
+          !ignoreRef ||
+          (event.target !== ignoreRef.current &&
+            !ignoreRef.current.contains(event.target))
+        ) {
+          callback();
+        }
       }
-    }
-  };
+    },
+    [ref, ignoreRef, callback],
+  );
 
   useEffect(() => {
     window.addEventListener("mousedown", onClickHandler);
@@ -23,5 +26,5 @@ export const useClickOutside = (
     return () => {
       window.removeEventListener("mousedown", onClickHandler);
     };
-  }, [ref]);
+  }, [ref, onClickHandler]);
 };

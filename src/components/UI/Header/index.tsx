@@ -25,7 +25,7 @@ const Header: FunctionComponent = ({}) => {
       const token: string | null = getToken();
       if (token) dispatch(AuthService.loginByToken(token));
     }
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
   return (
     <header className={styles.header}>
