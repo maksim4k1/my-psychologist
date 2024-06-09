@@ -11,6 +11,7 @@ import { ApplicationData, ApplicationsState } from "./types";
 const initialState: ApplicationsState = {
   applications: [],
   getApplicationsState: createDefaultState(),
+  confirmApplicationState: createDefaultState(),
 };
 
 const applicationsSlice: Slice = createSlice({
@@ -28,8 +29,18 @@ const applicationsSlice: Slice = createSlice({
       state.getApplicationsState = createSuccessState();
       state.applications = payload;
     },
-    getApplicationsFailure: (state, { payload }) => {
+    getApplicationsFailure: (state, { payload }: PayloadAction<string>) => {
       state.getApplicationsState = createFailureState(payload);
+    },
+
+    confirmApplicationLoading: (state) => {
+      state.confirmApplicationState = createLoadingState();
+    },
+    confirmApplicationSuccess: (state) => {
+      state.confirmApplicationState = createSuccessState();
+    },
+    confirmApplicationError: (state, { payload }: PayloadAction<string>) => {
+      state.confirmApplicationState = createFailureState(payload);
     },
   },
 });

@@ -11,4 +11,5 @@ export interface ApplicationData {
 export interface ApplicationsState {
   applications: ApplicationData[];
   getApplicationsState: StatusState;
+  confirmApplicationState: StatusState;
 }
