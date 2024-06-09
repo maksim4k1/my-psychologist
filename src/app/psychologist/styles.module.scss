@@ -20,7 +20,7 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 265px);
+  grid-template-columns: repeat(4, 265px);
   justify-content: space-between;
   row-gap: 40px;
   column-gap: 20px;
