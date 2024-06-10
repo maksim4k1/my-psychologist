@@ -1,7 +1,7 @@
-import Container from "@/components/UI/Container";
+import LoadingLoop from "@/components/UI/LoadingLoop";
 
 function Loading() {
-  return <Container>Loading...</Container>;
+  return <LoadingLoop />;
 }
 
 export default Loading;
