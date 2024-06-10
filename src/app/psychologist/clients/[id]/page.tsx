@@ -21,6 +21,7 @@ import {
   selectClientState,
 } from "@/redux/features/clients/selectors";
 import ClientsService from "@/api/clients";
+import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 
 interface ClientCardProps {
   client: ClientProfileData;
@@ -102,40 +103,40 @@ function PsychologistClientPage() {
     <Container>
       <PageTitle className={styles.title}>Профиль клиента</PageTitle>
       <div className={styles.main}>
-        {clientState.isLoading
-          ? "Loading..."
-          : client && <ClientCard client={client} />}
-        <div>
-          <Subtitle>Пройденные тесты</Subtitle>
-          <div className={styles.tests}>
-            <TestCard
-              test={{
-                id: 1,
-                title: "Профессиональное выгорание",
-              }}
-            />
-            <TestCard
-              test={{
-                id: 2,
-                title: "Шкала депрессии, тревоги и стресса",
-              }}
-            />
-            <TestCard
-              test={{
-                id: 3,
-                title: "Шкала тревоги Спилбергера-Ханина",
-              }}
-            />
+        <LoadingWrapper status={clientState.isLoading}>
+          {client && <ClientCard client={client} />}
+          <div>
+            <Subtitle>Пройденные тесты</Subtitle>
+            <div className={styles.tests}>
+              <TestCard
+                test={{
+                  id: 1,
+                  title: "Профессиональное выгорание",
+                }}
+              />
+              <TestCard
+                test={{
+                  id: 2,
+                  title: "Шкала депрессии, тревоги и стресса",
+                }}
+              />
+              <TestCard
+                test={{
+                  id: 3,
+                  title: "Шкала тревоги Спилбергера-Ханина",
+                }}
+              />
+            </div>
+            <div className={styles.buttons}>
+              <PrimaryButton href="./result/overall">
+                Общий результат
+              </PrimaryButton>
+              <SecondaryButton href="./exercises">
+                Назначить задание
+              </SecondaryButton>
+            </div>
           </div>
-          <div className={styles.buttons}>
-            <PrimaryButton href="./result/overall">
-              Общий результат
-            </PrimaryButton>
-            <SecondaryButton href="./exercises">
-              Назначить задание
-            </SecondaryButton>
-          </div>
-        </div>
+        </LoadingWrapper>
       </div>
     </Container>
   );

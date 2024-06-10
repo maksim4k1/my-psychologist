@@ -24,6 +24,7 @@ import {
   selectClients,
   selectClientsState,
 } from "@/redux/features/clients/selectors";
+import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 
 function PsychologistPage() {
   const dispatch = useAppDispatch();
@@ -51,11 +52,11 @@ function PsychologistPage() {
         />
       </nav>
 
-      <div>
-        <h2 className={styles.subtitle}>Заявки</h2>
-        {applicationsState.isLoading ? (
-          "Loading..."
-        ) : (
+      <LoadingWrapper
+        status={[applicationsState.isLoading, clientsState.isLoading]}
+      >
+        <div>
+          <h2 className={styles.subtitle}>Заявки</h2>
           <div className={styles.list}>
             {applications.map((application) => {
               return (
@@ -66,15 +67,11 @@ function PsychologistPage() {
               );
             })}
           </div>
-        )}
-      </div>
-      <div>
-        <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
-          Мои клиенты
-        </h2>
-        {clientsState.isLoading ? (
-          "Loading..."
-        ) : (
+        </div>
+        <div>
+          <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
+            Мои клиенты
+          </h2>
           <div className={styles.list}>
             {clients.map((client) => {
               return (
@@ -85,8 +82,8 @@ function PsychologistPage() {
               );
             })}
           </div>
-        )}
-      </div>
+        </div>
+      </LoadingWrapper>
     </Container>
   );
 }
