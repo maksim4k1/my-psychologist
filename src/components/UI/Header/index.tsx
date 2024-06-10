@@ -68,7 +68,7 @@ const Header: FunctionComponent = ({}) => {
             className={styles.profileContainer}
           >
             <ProfileImage
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              src=""
               alt="profile"
               size={54}
             />

@@ -30,8 +30,7 @@ export default class ApplicationsService {
         const formattedData: ApplicationData[] = data.map(
           (el: ApplicationResponse) => ({
             userId: el.client_id,
-            profileImage:
-              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+            profileImage: "",
             username: el.username,
             isOnline: el.online,
             problem: el.text,
