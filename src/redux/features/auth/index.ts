@@ -7,17 +7,9 @@ import {
 import { Actions } from "./../../store";
 import { ACCESS } from "./../../../../config/access.config";
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
-import { AuthState } from "./types";
+import { AuthState, UserData } from "./types";
 import { getRole } from "@/utils/apiUtils";
 import { saveToken } from "@/storage/token";
-
-interface UserData {
-  token: string;
-  user_id: string;
-  role: number;
-  email: string;
-  username: string;
-}
 
 const initialState: AuthState = {
   isAuth: false,

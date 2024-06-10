@@ -9,6 +9,7 @@ import {
   selectAuthLoginState,
 } from "@/redux/features/auth/selectors";
 import { usePathname, useRouter } from "next/navigation";
+import LoadingLoop from "../UI/LoadingLoop";
 
 function checkAuth(
   Component: FunctionComponent,
@@ -53,7 +54,7 @@ function checkAuth(
     ]);
 
     if (isOnlyForUnauthorized || isOnlyForAuthorized || isOnlyForPsychologist)
-      return <div>Loading...</div>;
+      return <LoadingLoop />;
 
     if (
       accessFor.includes(ACCESS.public) ||

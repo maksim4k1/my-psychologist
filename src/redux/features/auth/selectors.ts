@@ -6,7 +6,7 @@ const selectAuthModule = (state: RootState): AuthState => {
   return state.authReducer;
 };
 
-export const selectAuth = (state: RootState) => {
+export const selectAuth = (state: RootState): AuthState => {
   return selectAuthModule(state);
 };
 

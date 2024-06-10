@@ -13,6 +13,7 @@ import MaskedInput from "@/components/UI/Inputs/MaskedInput";
 import { checkFormDataValidation } from "@/utils/formUtils";
 import FileInput from "@/components/UI/Inputs/FileInput";
 import Textarea from "@/components/UI/Inputs/Textarea";
+import { FormEvent } from "react";
 
 function PsychologistSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
@@ -35,7 +36,7 @@ function PsychologistSurveyPage() {
   const about = useInput("", { isEmpty: true });
   const unacceptableThings = useInput("", { isEmpty: true });
 
-  function onSubmitHandler(event: SubmitEvent) {
+  function onSubmitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (
@@ -56,26 +57,30 @@ function PsychologistSurveyPage() {
         phoneNumber,
         about,
         unacceptableThings,
-      )
+      ) &&
+      event.target instanceof HTMLFormElement
     ) {
-      const formData = {
-        fullName: fullName.value,
-        birthday: birthday.value,
-        education: education.value,
-        primaryMethod: primaryMethod.value,
-        additionalEducation: additionalEducation.value,
-        diploms: diploms.value,
-        careerStart: careerStart.value,
-        onlineExperience: onlineExperience.value,
-        currentClients: currentClients.value,
-        personalTherapy: personalTherapy.value,
-        supervisions: supervisions.value,
-        socialNetworkLink: socialNetworkLink.value,
-        photos: photos.value,
-        phoneNumber: phoneNumber.value,
-        about: about.value,
-        unacceptableThings: unacceptableThings.value,
-      };
+      // const formData = {
+      //   fullName: fullName.value,
+      //   birthday: birthday.value,
+      //   education: education.value,
+      //   primaryMethod: primaryMethod.value,
+      //   additionalEducation: additionalEducation.value,
+      //   diploms: diploms.value,
+      //   careerStart: careerStart.value,
+      //   onlineExperience: onlineExperience.value,
+      //   currentClients: currentClients.value,
+      //   personalTherapy: personalTherapy.value,
+      //   supervisions: supervisions.value,
+      //   socialNetworkLink: socialNetworkLink.value,
+      //   photos: photos.value,
+      //   phoneNumber: phoneNumber.value,
+      //   about: about.value,
+      //   unacceptableThings: unacceptableThings.value,
+      // };
+
+      const formData: FormData = new FormData(event.target);
+
       console.log(formData);
     }
   }

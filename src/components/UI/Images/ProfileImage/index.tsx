@@ -1,5 +1,7 @@
 import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
+import Image from "next/image";
+import DefaultAvatar from "@/assets/svg/Icons/DefaultAvatarIcon";
 
 interface Props {
   src: string;
@@ -17,14 +19,29 @@ const ProfileImage: FunctionComponent<Props> = ({
   ...props
 }) => {
   return (
-    <img
-      width={size}
-      height={size}
-      className={`${styles.image} ${className}`}
-      src={src}
-      alt={alt}
-      {...props}
-    />
+    <>
+      {src === "" ? (
+        <div
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+            minWidth: `${size}px`,
+          }}
+          className={`${styles.svgContainer} ${className}`}
+        >
+          <DefaultAvatar />
+        </div>
+      ) : (
+        <Image
+          width={size}
+          height={size}
+          className={`${styles.image} ${className}`}
+          src={src}
+          alt={alt}
+          {...props}
+        />
+      )}
+    </>
   );
 };
 

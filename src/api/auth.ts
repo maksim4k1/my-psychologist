@@ -4,7 +4,7 @@ import { authActions } from "@/redux/features/auth/";
 import { customAxios } from "../../config/api.config";
 import { deleteToken, saveToken } from "@/storage/token";
 
-export default class AuthServise {
+export default class AuthService {
   static login: Function =
     (formData: LoginPayload) => async (dispatch: AppDispatch) => {
       dispatch(authActions.loginLoading());
