@@ -1,0 +1,15 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.link {
+  color: $color-primary;
+  text-decoration: underline;
+  text-decoration-color: $color-primary;
+  @include labelLarge;
+  transition: text-decoration-color 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+  }
+}
