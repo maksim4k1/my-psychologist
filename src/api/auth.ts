@@ -20,11 +20,7 @@ export default class AuthService {
           saveToken(data.token);
         }
       } catch (err) {
-        dispatch(
-          authActions.loginError(
-            err instanceof Error ? err.message : String(err),
-          ),
-        );
+        dispatch(authActions.loginError(err));
       }
     };
 
@@ -48,11 +44,7 @@ export default class AuthService {
           dispatch(authActions.registerSuccess(data));
         }
       } catch (err) {
-        dispatch(
-          authActions.registerError(
-            err instanceof Error ? err.message : String(err),
-          ),
-        );
+        dispatch(authActions.registerError(err));
       }
     };
 

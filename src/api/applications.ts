@@ -24,27 +24,19 @@ export default class ApplicationsService {
 
       const data = response.data;
 
-      if (typeof data === "string") {
-        dispatch(applicationsActions.getApplicationsError(data));
-      } else {
-        const formattedData: ApplicationData[] = data.map(
-          (el: ApplicationResponse) => ({
-            userId: el.client_id,
-            profileImage: "",
-            username: el.username,
-            isOnline: el.online,
-            problem: el.text,
-          }),
-        );
-
-        dispatch(applicationsActions.getApplicationsSuccess(formattedData));
-      }
-    } catch (err) {
-      dispatch(
-        applicationsActions.getApplicationsError(
-          err instanceof Error ? err.message : String(err),
-        ),
+      const formattedData: ApplicationData[] = data.map(
+        (el: ApplicationResponse) => ({
+          userId: el.client_id,
+          profileImage: "",
+          username: el.username,
+          isOnline: el.online,
+          problem: el.text,
+        }),
       );
+
+      dispatch(applicationsActions.getApplicationsSuccess(formattedData));
+    } catch (err) {
+      dispatch(applicationsActions.getApplicationsError(err));
     }
   };
 
@@ -61,21 +53,11 @@ export default class ApplicationsService {
           },
         );
 
-        const data = response.data;
-
-        if (data === "Successfully") {
-          dispatch(applicationsActions.confirmApplicationSuccess());
-          dispatch(ApplicationsService.getApplications());
-          dispatch(ClientsService.getClients());
-        } else {
-          dispatch(applicationsActions.confirmApplicationError(data));
-        }
+        dispatch(applicationsActions.confirmApplicationSuccess(response.data));
+        dispatch(ApplicationsService.getApplications());
+        dispatch(ClientsService.getClients());
       } catch (err) {
-        dispatch(
-          applicationsActions.confirmApplicationError(
-            err instanceof Error ? err.message : String(err),
-          ),
-        );
+        dispatch(applicationsActions.confirmApplicationError(err));
       }
     };
 }
