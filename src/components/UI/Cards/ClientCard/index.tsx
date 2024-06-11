@@ -36,9 +36,9 @@ const ClientCard: FunctionComponent<Props> = ({ client }) => {
             {client.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
-        <button className={styles.moreButton}>
+        {/* <button className={styles.moreButton}>
           <MoreVerticalIcon />
-        </button>
+        </button> */}
       </div>
       <div className={styles.problems}>
         {client.problems.map((problem, index) => {

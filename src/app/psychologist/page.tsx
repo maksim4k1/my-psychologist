@@ -42,15 +42,15 @@ function PsychologistPage() {
 
   return (
     <Container>
-      <PageTitle>Кабинет психолога</PageTitle>
-      <nav className={styles.navigation}>
+      <PageTitle className={styles.title}>Кабинет психолога</PageTitle>
+      {/* <nav className={styles.navigation}>
         <IconTextLink
           href=""
           icon={<MessageIcon />}
           content="Сообщения"
           count={3}
         />
-      </nav>
+      </nav> */}
 
       <LoadingWrapper
         status={[applicationsState.isLoading, clientsState.isLoading]}

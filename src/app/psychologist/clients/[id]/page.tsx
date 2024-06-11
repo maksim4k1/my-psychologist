@@ -12,7 +12,6 @@ import Subtitle from "@/components/UI/Titles/Subtitle";
 import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../config/access.config";
-import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import { ClientProfileData } from "@/redux/features/clients/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useParams } from "next/navigation";
@@ -41,9 +40,9 @@ const ClientCard: FunctionComponent<ClientCardProps> = ({ client }) => {
             {client.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
-        <button className={styles.moreButton}>
+        {/* <button className={styles.moreButton}>
           <MoreVerticalIcon />
-        </button>
+        </button> */}
       </div>
       <ProfileImage
         className={styles.profileImage}
@@ -63,7 +62,7 @@ const ClientCard: FunctionComponent<ClientCardProps> = ({ client }) => {
           );
         })}
       </div>
-      <PrimaryButton className={styles.cardButton}>Чат</PrimaryButton>
+      {/* <PrimaryButton className={styles.cardButton}>Чат</PrimaryButton> */}
     </div>
   );
 };
@@ -128,12 +127,12 @@ function PsychologistClientPage() {
               />
             </div>
             <div className={styles.buttons}>
-              <PrimaryButton href="./result/overall">
+              {/* <PrimaryButton href="./result/overall">
                 Общий результат
-              </PrimaryButton>
-              <SecondaryButton href="./exercises">
+              </PrimaryButton> */}
+              <PrimaryButton href="./exercises">
                 Назначить задание
-              </SecondaryButton>
+              </PrimaryButton>
             </div>
           </div>
         </LoadingWrapper>
