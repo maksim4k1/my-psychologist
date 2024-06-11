@@ -9,7 +9,7 @@ import {
   selectAuthLoginState,
 } from "@/redux/features/auth/selectors";
 import { usePathname, useRouter } from "next/navigation";
-import LoadingLoop from "../UI/LoadingLoop";
+import LoadingLoop from "../statusLabels/LoadingLoop";
 
 function checkAuth(
   Component: FunctionComponent,

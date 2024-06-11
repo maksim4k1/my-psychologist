@@ -1,4 +1,4 @@
-import LoadingLoop from "@/components/UI/LoadingLoop";
+import LoadingLoop from "@/components/statusLabels/LoadingLoop";
 import { FunctionComponent, ReactNode } from "react";
 
 interface Props {

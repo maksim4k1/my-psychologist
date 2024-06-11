@@ -64,6 +64,7 @@
   flex-flow: column;
   @include card;
   border-radius: 6px;
+  z-index: 10;
 }
 
 .moreButtonAction {
