@@ -16,6 +16,7 @@ import AuthService from "@/api/auth";
 import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
+import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 
 function RegisterPage() {
   const name = useInput("");
@@ -95,7 +96,9 @@ function RegisterPage() {
           required
           disabled={registerStatus.isLoading}
         />
-        {registerStatus.isFailure && <div>{registerStatus.error}</div>}
+        {registerStatus.isFailure && (
+          <FormErrorLabel>{registerStatus.error}</FormErrorLabel>
+        )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"

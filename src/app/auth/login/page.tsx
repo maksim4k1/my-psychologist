@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { selectAuthLoginState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
+import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 
 function LoginPage() {
   const email = useInput("", { isEmpty: true, isEmail: true });
@@ -73,7 +74,7 @@ function LoginPage() {
           Забыли пароль?
         </Link>
         {loginStatus.isFailure && !!loginStatus.error && (
-          <div>{loginStatus.error}</div>
+          <FormErrorLabel>{loginStatus.error}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
