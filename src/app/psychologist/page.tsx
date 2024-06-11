@@ -55,19 +55,21 @@ function PsychologistPage() {
       <LoadingWrapper
         status={[applicationsState.isLoading, clientsState.isLoading]}
       >
-        <div>
-          <h2 className={styles.subtitle}>Заявки</h2>
-          <div className={styles.list}>
-            {applications.map((application) => {
-              return (
-                <ApplicationCard
-                  key={application.userId}
-                  client={application}
-                />
-              );
-            })}
+        {!!applications.length && (
+          <div>
+            <h2 className={styles.subtitle}>Заявки</h2>
+            <div className={styles.list}>
+              {applications.map((application) => {
+                return (
+                  <ApplicationCard
+                    key={application.userId}
+                    client={application}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
         <div>
           <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
             Мои клиенты
