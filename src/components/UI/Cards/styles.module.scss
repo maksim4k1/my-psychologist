@@ -81,20 +81,23 @@
 }
 
 .problems {
+  height: 72px;
   margin-top: 28px;
   margin-bottom: 32px;
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
   gap: 8px;
 }
 
 .problem {
+  height: 80px;
   margin-top: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   color: $color-on-surface-variant;
   @include bodyMedium;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
