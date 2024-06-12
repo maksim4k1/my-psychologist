@@ -8,10 +8,10 @@ interface Props {
 
 const Switch: FunctionComponent<Props> = ({ className = "", ...props }) => {
   return (
-    <label className={styles.label}>
+    <label className={`${styles.label} ${className}`}>
       <input
         type="checkbox"
-        className={`${styles.input} ${className}`}
+        className={styles.input}
         {...props}
       />
       <span className={styles.switch}>
