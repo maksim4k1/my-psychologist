@@ -23,33 +23,27 @@ const authSlice: Slice = createSlice({
   initialState,
   reducers: {
     loginLoading: (state) => {
-      console.log("login loading");
       state.loginState = createLoadingState();
     },
     loginSuccess: (state, { payload }: PayloadAction<UserData>) => {
-      console.log(payload);
       state.isAuth = true;
       state.role = getRole(payload.role);
       state.loginState = createSuccessState();
       saveToken(payload.token);
     },
     loginError: (state, { payload }: PayloadAction<string>) => {
-      console.log("login error");
       state.loginState = createFailureState(payload);
     },
     registerLoading: (state) => {
-      console.log("register loading");
       state.registerState = createLoadingState();
     },
     registerSuccess: (state, { payload }: PayloadAction<UserData>) => {
-      console.log(payload);
       state.isAuth = true;
       state.role = getRole(payload.role);
       state.registerState = createSuccessState();
       saveToken(payload.token);
     },
     registerError: (state, { payload }: PayloadAction<string>) => {
-      console.log("register error");
       state.registerState = createFailureState(payload);
     },
   },

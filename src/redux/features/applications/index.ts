@@ -25,7 +25,6 @@ const applicationsSlice: Slice = createSlice({
       state,
       { payload }: PayloadAction<ApplicationData[]>,
     ) => {
-      console.log(payload);
       state.getApplicationsState = createSuccessState();
       state.applications = payload;
     },

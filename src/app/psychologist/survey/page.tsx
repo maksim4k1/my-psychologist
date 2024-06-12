@@ -80,8 +80,6 @@ function PsychologistSurveyPage() {
       // };
 
       const formData: FormData = new FormData(event.target);
-
-      console.log(formData);
     }
   }
 
