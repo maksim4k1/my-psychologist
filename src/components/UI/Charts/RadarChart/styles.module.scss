@@ -15,6 +15,7 @@
 .chartGrid {
   stroke: $color-primary-fixed-dim;
   stroke-width: 4px;
+  fill: rgba($color-primary-fixed, 0.3);
 }
 
 .chartAxis {
