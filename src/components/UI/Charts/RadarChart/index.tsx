@@ -9,9 +9,10 @@ import {
   Text,
 } from "recharts";
 import styles from "./styles.module.scss";
+import { RadarChartItem } from "@/utils/chartUtils";
 
 interface Props {
-  data: any;
+  data: RadarChartItem[];
   className?: string;
 }
 
@@ -40,6 +41,14 @@ const TextPolarAngleAxis = ({ payload, x, y, cx, cy, ...rest }: TextProps) => {
 };
 
 const RadarChart: FunctionComponent<Props> = ({ data, className = "" }) => {
+  const dataSets = [];
+
+  for (let key in data[0]) {
+    if (key !== "subject" && key !== "fullMark") {
+      dataSets.push(key);
+    }
+  }
+
   return (
     <ResponsiveContainer className={`${styles.chartContainer} ${className}`}>
       <RechartsRadarChart
@@ -66,12 +75,26 @@ const RadarChart: FunctionComponent<Props> = ({ data, className = "" }) => {
           tick={(props) => TextPolarAngleAxis(props)}
         />
         <Radar
-          dot={{ r: 4 }}
-          className={styles.radarField}
-          name="Result"
-          dataKey="A"
-          fillOpacity={0.4}
+          isAnimationActive={false}
+          dot={{ r: 5 }}
+          className={styles.maxValues}
+          name="fullMark"
+          dataKey="fullMark"
+          fillOpacity={0}
         />
+        {dataSets.map((el) => {
+          return (
+            <Radar
+              isAnimationActive={false}
+              key={el}
+              dot={{ r: 5 }}
+              className={styles.radarField}
+              name={el}
+              dataKey={el}
+              fillOpacity={0.4}
+            />
+          );
+        })}
       </RechartsRadarChart>
     </ResponsiveContainer>
   );

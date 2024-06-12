@@ -6,77 +6,89 @@ import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../../config/access.config";
 import RadarChart from "@/components/UI/Charts/RadarChart";
+import ListItemWithSwitch from "@/components/UI/Lists/ListItemWithSwitch";
+import { useCheckbox } from "@/hooks/inputHooks";
+import { useEffect, useState } from "react";
+import {
+  DateData,
+  RadarChartItem,
+  mapToRadarChartData,
+} from "@/utils/chartUtils";
 
 function PsychologistClientsOverallResultPage() {
-  const data = [
+  const datesCheckboxes = useCheckbox();
+  const [data, setData] = useState<RadarChartItem[]>([]);
+  const dates: DateData[] = [
+    {
+      date: "15 апреля",
+      values: [34, 20, 17],
+    },
+    {
+      date: "8 мая",
+      values: [15, 35, 25],
+    },
+    {
+      date: "18 марта",
+      values: [45, 32, 20],
+    },
+    {
+      date: "12 февраля",
+      values: [46, 28, 25],
+    },
+    {
+      date: "12 января",
+      values: [15, 15, 15],
+    },
+    {
+      date: "5 декабря 2023 года",
+      values: [24, 20, 23],
+    },
+    {
+      date: "2  ноября 2023 года",
+      values: [12, 2, 10],
+    },
+  ];
+
+  const subjects: RadarChartItem[] = [
     {
       subject: "Эмоциональное истощение",
-      A: 15,
       fullMark: 54,
     },
     {
       subject: "Редукция проф. достижений",
-      A: 35,
       fullMark: 40,
     },
     {
       subject: "Деперсонализация",
-      A: 25,
       fullMark: 30,
     },
   ];
 
+  useEffect(() => {
+    setData(mapToRadarChartData(dates, subjects, datesCheckboxes.value));
+  }, [datesCheckboxes.value]);
+
   return (
     <Container>
-      <PageTitle className={styles.title}>История тестов</PageTitle>
+      <PageTitle className={styles.title}>История теста: Маслач</PageTitle>
       <RadarChart
         data={data}
         className={styles.radarChart}
       />
-      <div className={styles.descriptionTestContainer}>
-        <div className={styles.descriptionTextContainer}>
-          <h3 className={styles.descriptionTitle}>
-            Эмоциональное истощение — 15
-          </h3>
-          <p className={styles.descriptionText}>
-            Эмоциональное истощение рассматривается как основная составляющая
-            выгорания и проявляется в переживаниях сниженного эмоционального
-            тонуса, повышенной психической истощаемости и аффективной
-            лабильности, утраты интереса и позитивных чувств к окружающим,
-            ощущении «пресыщенности» работой, неудовлетворенностью жизнью в
-            целом.
-          </p>
-        </div>
-
-        <div className={styles.descriptionTextContainer}>
-          <h3 className={styles.descriptionTitle}>Деперсонализация — 25</h3>
-          <p className={styles.descriptionText}>
-            Деперсонализация проявляется в эмоциональном отстранении и
-            безразличии, формальном выполнении профессиональных обязанностей без
-            личностной включенности и сопереживания, а в отдельных случаях – в
-            негативизме и циничном отношении. В контексте синдрома перегорания
-            «деперсонализация» предполагает формирование особых, деструктивных
-            взаимоотношений с окружающими людьми.
-          </p>
-        </div>
-
-        <div className={styles.descriptionTextContainer}>
-          <h3 className={styles.descriptionTitle}>
-            Редукция профессиональных достижений — 24
-          </h3>
-          <p className={styles.descriptionText}>
-            Редукция профессиональных достижений отражает степень
-            удовлетворенности человека собой как личностью и как профессионалом.
-            Неудовлетворительное значение этого показателя отражает тенденцию к
-            негативной оценке своей компетентности и продуктивности и, как
-            следствие, – снижение профессиональной мотивации, нарастание
-            негативизма в отношении служебных обязанностей, тенденция к снятию с
-            себя ответственности, к изоляции от окружающих, отстраненности и
-            неучастия, избегания работы сначала психологически, а затем
-            физически.
-          </p>
-        </div>
-      </div>
+      <ul>
+        {dates.map((el) => {
+          return (
+            <ListItemWithSwitch
+              onChange={datesCheckboxes.onChange}
+              className={styles.listItem}
+              value={el.date}
+              key={el.date}
+              label={el.date}
+              link="./"
+            />
+          );
+        })}
+      </ul>
     </Container>
   );
 }
