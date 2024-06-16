@@ -16,6 +16,8 @@ export interface ApplicationProfileData extends ApplicationData {
 
 export interface ApplicationsState {
   applications: ApplicationData[];
+  application: ApplicationProfileData | null;
   getApplicationsState: StatusState;
+  getApplicationState: StatusState;
   confirmApplicationState: StatusState;
 }

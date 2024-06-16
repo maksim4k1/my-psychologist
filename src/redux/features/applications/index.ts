@@ -6,11 +6,17 @@ import {
   createSuccessState,
 } from "@/utils/stateCreators";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
-import { ApplicationData, ApplicationsState } from "./types";
+import {
+  ApplicationData,
+  ApplicationProfileData,
+  ApplicationsState,
+} from "./types";
 
 const initialState: ApplicationsState = {
   applications: [],
+  application: null,
   getApplicationsState: createDefaultState(),
+  getApplicationState: createDefaultState(),
   confirmApplicationState: createDefaultState(),
 };
 
@@ -30,6 +36,20 @@ const applicationsSlice: Slice = createSlice({
     },
     getApplicationsFailure: (state, { payload }: PayloadAction<string>) => {
       state.getApplicationsState = createFailureState(payload);
+    },
+
+    getApplicationLoading: (state) => {
+      state.getApplicationState = createLoadingState();
+    },
+    getApplicationSuccess: (
+      state,
+      { payload }: PayloadAction<ApplicationProfileData>,
+    ) => {
+      state.getApplicationState = createSuccessState();
+      state.application = payload;
+    },
+    getApplicationFailure: (state, { payload }: PayloadAction<string>) => {
+      state.getApplicationState = createFailureState(payload);
     },
 
     confirmApplicationLoading: (state) => {
