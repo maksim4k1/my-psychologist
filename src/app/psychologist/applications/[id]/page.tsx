@@ -12,24 +12,33 @@ import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
 import { ApplicationProfileData } from "@/redux/features/applications/types";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import {
+  selectApplication,
+  selectApplicationState,
+} from "@/redux/features/applications/selectors";
+import { useEffect } from "react";
+import ApplicationsService from "@/api/applications";
+import { StatusState } from "@/utils/stateCreators";
 
 function ApplicationPage() {
   const { id } = useParams();
-  const application: ApplicationProfileData = {
-    id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    username: "string",
-    profileImage: "",
-    isOnline: false,
-    age: 16,
-    problem: "string",
-  };
+  const getApplicationState: StatusState = useAppSelector(
+    selectApplicationState,
+  );
+  const application: ApplicationProfileData | null =
+    useAppSelector(selectApplication);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(ApplicationsService.getApplication(id));
+  }, [id]);
 
   return (
     <Container>
       <PageTitle className={styles.title}>Профиль клиента</PageTitle>
       <div className={styles.main}>
-        <LoadingWrapper status={false}>
+        <LoadingWrapper status={getApplicationState.isLoading}>
           {application && <ProfileCard profile={application} />}
           <div>
             <Subtitle>Пройденные тесты</Subtitle>
