@@ -1,8 +1,12 @@
 import { applicationsActions } from "@/redux/features/applications";
 import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../../config/api.config";
-import { ApplicationData } from "@/redux/features/applications/types";
+import {
+  ApplicationData,
+  ApplicationProfileData,
+} from "@/redux/features/applications/types";
 import ClientsService from "./clients";
+import { calculateAge } from "@/utils/dataUtils";
 
 interface ApplicationResponse {
   app_id: string;
@@ -41,6 +45,36 @@ export default class ApplicationsService {
       dispatch(applicationsActions.getApplicationsError(err));
     }
   };
+
+  static getApplication: Function =
+    (applicationId: string) => async (dispatch: AppDispatch) => {
+      dispatch(applicationsActions.getApplicationLoading());
+
+      try {
+        const response = await customAxios.post(
+          "/application/watch_application",
+          {
+            app_id: applicationId,
+          },
+        );
+
+        const data = response.data;
+
+        const formattedData: ApplicationProfileData = {
+          id: data.app_id,
+          userId: data.client_id,
+          profileImage: "",
+          age: calculateAge(data.birth_date),
+          username: data.username,
+          isOnline: data.online,
+          problem: data.text,
+        };
+
+        dispatch(applicationsActions.getApplicationSuccess(formattedData));
+      } catch (err) {
+        dispatch(applicationsActions.getApplicationFailure(err));
+      }
+    };
 
   static confirmApplication: Function =
     (userId: string, status: boolean) => async (dispatch: AppDispatch) => {
