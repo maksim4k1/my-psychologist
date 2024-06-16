@@ -57,6 +57,7 @@
 }
 
 .problems {
+  @include labelLarge;
   margin-top: 16px;
   display: flex;
   flex-wrap: wrap;

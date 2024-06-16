@@ -8,17 +8,10 @@ import styles from "../styles.module.scss";
 import { useClickOutside } from "@/hooks/clickOutsideHook";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import ApplicationsService from "@/api/applications";
-
-interface Application {
-  userId: number;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problem: string;
-}
+import { ApplicationData } from "@/redux/features/applications/types";
 
 interface Props {
-  client: Application;
+  client: ApplicationData;
 }
 
 const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
@@ -80,7 +73,7 @@ const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
       </div>
       <div className={styles.problem}>{client.problem}</div>
       <div className={styles.buttons}>
-        <PrimaryButton href={`/psychologist/applications/${client.userId}`}>
+        <PrimaryButton href={`/psychologist/applications/${client.id}`}>
           Профиль
         </PrimaryButton>
       </div>

@@ -4,17 +4,10 @@ import MoreVerticalIcon from "@/assets/svg/Icons/MoreVerticalIcon";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import styles from "../styles.module.scss";
 import Symptom from "../../Symptom";
-
-interface Client {
-  userId: number;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problems: string[];
-}
+import { ClientData } from "@/redux/features/clients/types";
 
 interface Props {
-  client: Client;
+  client: ClientData;
 }
 
 const ClientCard: FunctionComponent<Props> = ({ client }) => {
