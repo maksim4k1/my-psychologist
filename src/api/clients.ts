@@ -14,11 +14,9 @@ interface ClientResponse {
   request: string[];
 }
 
-interface ClientProfileResponse {
-  username: string;
-  birth_date: string;
+interface ClientProfileResponse extends ClientResponse {
   gender: string;
-  request: string[];
+  birth_date: string;
 }
 
 export default class ClientsService {
@@ -55,6 +53,7 @@ export default class ClientsService {
         const data: ClientProfileResponse = response.data;
 
         const formattedData: ClientProfileData = {
+          userId: data.client_id,
           username: data.username,
           profileImage: "",
           isOnline: false,
