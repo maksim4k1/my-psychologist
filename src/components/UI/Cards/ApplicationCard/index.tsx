@@ -80,7 +80,7 @@ const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
       </div>
       <div className={styles.problem}>{client.problem}</div>
       <div className={styles.buttons}>
-        <PrimaryButton href={`/psychologist/clients/${client.userId}`}>
+        <PrimaryButton href={`/psychologist/applications/${client.userId}`}>
           Профиль
         </PrimaryButton>
       </div>
