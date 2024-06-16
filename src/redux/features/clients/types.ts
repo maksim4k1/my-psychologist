@@ -1,19 +1,16 @@
 import { StatusState } from "@/utils/stateCreators";
 
-export interface ClientProfileData {
-  username: string;
+export interface ClientData {
+  userId: string;
   profileImage: string;
+  username: string;
   isOnline: boolean;
-  age: number;
   problems: string[];
 }
 
-export interface ClientData {
-  userId: number;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problems: string[];
+export interface ClientProfileData extends ClientData {
+  age: number;
+  problem?: never;
 }
 
 export interface ClientsState {

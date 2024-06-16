@@ -1,11 +1,17 @@
 import { StatusState } from "@/utils/stateCreators";
 
 export interface ApplicationData {
-  userId: number;
+  id: string;
+  userId: string;
   profileImage: string;
   username: string;
   isOnline: boolean;
   problem: string;
+}
+
+export interface ApplicationProfileData extends ApplicationData {
+  age: number;
+  problems?: never;
 }
 
 export interface ApplicationsState {

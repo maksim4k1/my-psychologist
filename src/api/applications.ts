@@ -5,6 +5,7 @@ import { ApplicationData } from "@/redux/features/applications/types";
 import ClientsService from "./clients";
 
 interface ApplicationResponse {
+  app_id: string;
   client_id: string;
   online: boolean;
   problem: null | string;
@@ -26,6 +27,7 @@ export default class ApplicationsService {
 
       const formattedData: ApplicationData[] = data.map(
         (el: ApplicationResponse) => ({
+          id: el.app_id,
           userId: el.client_id,
           profileImage: "",
           username: el.username,
