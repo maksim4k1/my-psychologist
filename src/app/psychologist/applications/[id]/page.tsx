@@ -38,13 +38,13 @@ function ApplicationPage() {
 
   useEffect(() => {
     dispatch(ApplicationsService.getApplication(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (confirmApplicationState.isSuccess) {
       router.push("/psychologist");
     }
-  }, [confirmApplicationState.isSuccess]);
+  }, [confirmApplicationState.isSuccess, router]);
 
   const onClickHandler = (status: boolean) => {
     if (application) {
