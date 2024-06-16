@@ -7,7 +7,7 @@ import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../config/access.config";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
@@ -16,23 +16,43 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectApplication,
   selectApplicationState,
+  selectConfirmApplicationState,
 } from "@/redux/features/applications/selectors";
 import { useEffect } from "react";
 import ApplicationsService from "@/api/applications";
 import { StatusState } from "@/utils/stateCreators";
+import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 
 function ApplicationPage() {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const confirmApplicationState: StatusState = useAppSelector(
+    selectConfirmApplicationState,
+  );
   const getApplicationState: StatusState = useAppSelector(
     selectApplicationState,
   );
   const application: ApplicationProfileData | null =
     useAppSelector(selectApplication);
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(ApplicationsService.getApplication(id));
   }, [id]);
+
+  useEffect(() => {
+    if (confirmApplicationState.isSuccess) {
+      router.push("/psychologist");
+    }
+  }, [confirmApplicationState.isSuccess]);
+
+  const onClickHandler = (status: boolean) => {
+    if (application) {
+      dispatch(
+        ApplicationsService.confirmApplication(application.userId, status),
+      );
+    }
+  };
 
   return (
     <Container>
@@ -41,6 +61,16 @@ function ApplicationPage() {
         <LoadingWrapper status={getApplicationState.isLoading}>
           {application && <ProfileCard profile={application} />}
           <div>
+            {application && (
+              <div className={styles.applicationButtons}>
+                <PrimaryButton onClick={() => onClickHandler(true)}>
+                  Принять заявку
+                </PrimaryButton>
+                <SecondaryButton onClick={() => onClickHandler(false)}>
+                  Отклонить
+                </SecondaryButton>
+              </div>
+            )}
             <Subtitle>Пройденные тесты</Subtitle>
             <div className={styles.tests}>
               <TestCard
