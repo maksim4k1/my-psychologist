@@ -1,13 +1,9 @@
 "use client";
 
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent } from "react";
 import ProfileImage from "../../Images/ProfileImage";
-import MoreVerticalIcon from "@/assets/svg/Icons/MoreVerticalIcon";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import styles from "../styles.module.scss";
-import { useClickOutside } from "@/hooks/clickOutsideHook";
-import { useAppDispatch } from "@/hooks/reduxHooks";
-import ApplicationsService from "@/api/applications";
 import { ApplicationData } from "@/redux/features/applications/types";
 
 interface Props {
@@ -15,17 +11,6 @@ interface Props {
 }
 
 const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
-  const dispatch = useAppDispatch();
-  const [moreIsOpen, setMoreIsOpen] = useState<boolean>(false);
-  const more = useRef(null);
-  const moreButton = useRef(null);
-
-  useClickOutside(more, () => setMoreIsOpen(false), moreButton);
-
-  function onClickHandler(status: boolean) {
-    dispatch(ApplicationsService.confirmApplication(client.userId, status));
-  }
-
   return (
     <div className={styles.clientCard}>
       <div className={styles.cardHeader}>
@@ -44,7 +29,7 @@ const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
             {client.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
-        <button
+        {/* <button
           className={styles.moreButton}
           ref={moreButton}
           onClick={() => setMoreIsOpen((val) => !val)}
@@ -69,7 +54,7 @@ const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
               Отклонить
             </button>
           </div>
-        )}
+        )} */}
       </div>
       <div className={styles.problem}>{client.problem}</div>
       <div className={styles.buttons}>

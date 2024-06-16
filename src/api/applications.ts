@@ -5,7 +5,6 @@ import {
   ApplicationData,
   ApplicationProfileData,
 } from "@/redux/features/applications/types";
-import ClientsService from "./clients";
 import { calculateAge } from "@/utils/dataUtils";
 
 interface ApplicationResponse {
@@ -90,8 +89,6 @@ export default class ApplicationsService {
         );
 
         dispatch(applicationsActions.confirmApplicationSuccess(response.data));
-        dispatch(ApplicationsService.getApplications());
-        dispatch(ClientsService.getClients());
       } catch (err) {
         dispatch(applicationsActions.confirmApplicationError(err));
       }
