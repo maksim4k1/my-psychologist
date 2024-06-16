@@ -4,6 +4,7 @@
 
 .card {
   width: 360px;
+  height: fit-content;
   padding: 16px;
   @include card;
 }

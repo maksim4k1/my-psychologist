@@ -17,7 +17,7 @@ import {
 import ClientsService from "@/api/clients";
 import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
-import ClientProfileCard from "@/components/UI/Cards/ClientProfileCard";
+import ProfileCard from "@/components/UI/Cards/ProfileCard";
 
 function PsychologistClientPage() {
   const { id } = useParams();
@@ -34,7 +34,7 @@ function PsychologistClientPage() {
       <PageTitle className={styles.title}>Профиль клиента</PageTitle>
       <div className={styles.main}>
         <LoadingWrapper status={clientState.isLoading}>
-          {client && <ClientProfileCard client={client} />}
+          {client && <ProfileCard profile={client} />}
           <div>
             <Subtitle>Пройденные тесты</Subtitle>
             <div className={styles.tests}>
