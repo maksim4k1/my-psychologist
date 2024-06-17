@@ -61,8 +61,10 @@ function checkAuth(
       }
     }, [
       isOnlyForUnauthorized,
+      forPsychologistAndHr,
       isOnlyForAuthorized,
       isOnlyForPsychologist,
+      isOnlyForHr,
       router,
       pathname,
       isLoading,
