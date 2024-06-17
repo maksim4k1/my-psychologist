@@ -10,11 +10,25 @@ import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
 import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import HrService from "@/api/hr";
+import { SendHrSurveyPayload } from "@/redux/features/hr/types";
+import { selectSendHrSurveyState } from "@/redux/features/hr/selectors";
+import { useRouter } from "next/navigation";
 
 function HrSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
   const company = useInput("", { isEmpty: true });
+  const dispatch = useAppDispatch();
+  const sendHrSurveyState = useAppSelector(selectSendHrSurveyState);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (sendHrSurveyState.isSuccess) {
+      router.push("/cabinet");
+    }
+  }, [sendHrSurveyState.isSuccess]);
 
   function onSubmitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -23,12 +37,12 @@ function HrSurveyPage() {
       checkFormDataValidation(fullName, company) &&
       event.target instanceof HTMLFormElement
     ) {
-      const formData = {
+      const formData: SendHrSurveyPayload = {
         fullName: fullName.value,
         company: company.value,
       };
 
-      console.log(formData);
+      dispatch(HrService.sendHrSurvey(formData));
     }
   }
 
