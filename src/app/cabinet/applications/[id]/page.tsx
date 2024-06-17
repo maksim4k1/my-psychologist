@@ -22,11 +22,13 @@ import { useEffect } from "react";
 import ApplicationsService from "@/api/applications";
 import { StatusState } from "@/utils/stateCreators";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
+import { selectRole } from "@/redux/features/auth/selectors";
 
 function ApplicationPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const role = useAppSelector(selectRole);
   const confirmApplicationState: StatusState = useAppSelector(
     selectConfirmApplicationState,
   );
@@ -56,7 +58,9 @@ function ApplicationPage() {
 
   return (
     <Container>
-      <PageTitle className={styles.title}>Профиль клиента</PageTitle>
+      <PageTitle className={styles.title}>
+        Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
+      </PageTitle>
       <div className={styles.main}>
         <LoadingWrapper status={getApplicationState.isLoading}>
           {application && <ProfileCard profile={application} />}

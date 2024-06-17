@@ -18,12 +18,14 @@ import ClientsService from "@/api/clients";
 import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
+import { selectRole } from "@/redux/features/auth/selectors";
 
 function PsychologistClientPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const client = useAppSelector(selectClient);
   const clientState = useAppSelector(selectClientState);
+  const role = useAppSelector(selectRole);
 
   useEffect(() => {
     dispatch(ClientsService.getClient(id));
@@ -31,7 +33,9 @@ function PsychologistClientPage() {
 
   return (
     <Container>
-      <PageTitle className={styles.title}>Профиль клиента</PageTitle>
+      <PageTitle className={styles.title}>
+        Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
+      </PageTitle>
       <div className={styles.main}>
         <LoadingWrapper status={clientState.isLoading}>
           {client && <ProfileCard profile={client} />}

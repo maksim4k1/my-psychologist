@@ -25,6 +25,7 @@ import {
   selectClientsState,
 } from "@/redux/features/clients/selectors";
 import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
+import { selectRole } from "@/redux/features/auth/selectors";
 
 function PsychologistPage() {
   const dispatch = useAppDispatch();
@@ -34,6 +35,7 @@ function PsychologistPage() {
   );
   const clients: ClientData[] = useAppSelector(selectClients);
   const clientsState: StatusState = useAppSelector(selectClientsState);
+  const role = useAppSelector(selectRole);
 
   useEffect(() => {
     dispatch(ApplicationsService.getApplications());
@@ -42,7 +44,9 @@ function PsychologistPage() {
 
   return (
     <Container>
-      <PageTitle className={styles.title}>Кабинет психолога</PageTitle>
+      <PageTitle className={styles.title}>
+        Кабинет {role === ACCESS.psychologist ? "психолога" : "HR-менеджера"}
+      </PageTitle>
       {/* <nav className={styles.navigation}>
         <IconTextLink
           href=""
@@ -72,7 +76,7 @@ function PsychologistPage() {
         )}
         <div>
           <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
-            Мои клиенты
+            Мои {role === ACCESS.psychologist ? "клиенты" : "сотрудники"}
           </h2>
           <div className={styles.list}>
             {clients.map((client) => {
