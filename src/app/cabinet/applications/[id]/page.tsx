@@ -61,16 +61,6 @@ function ApplicationPage() {
         <LoadingWrapper status={getApplicationState.isLoading}>
           {application && <ProfileCard profile={application} />}
           <div>
-            {application && (
-              <div className={styles.applicationButtons}>
-                <PrimaryButton onClick={() => onClickHandler(true)}>
-                  Принять заявку
-                </PrimaryButton>
-                <SecondaryButton onClick={() => onClickHandler(false)}>
-                  Отклонить
-                </SecondaryButton>
-              </div>
-            )}
             <Subtitle>Пройденные тесты</Subtitle>
             <div className={styles.tests}>
               <TestCard
@@ -92,14 +82,16 @@ function ApplicationPage() {
                 }}
               />
             </div>
-            <div className={styles.buttons}>
-              {/* <PrimaryButton href="./result/overall">
-                Общий результат
-              </PrimaryButton> */}
-              <PrimaryButton href="./exercises">
-                Назначить задание
-              </PrimaryButton>
-            </div>
+            {application && (
+              <div className={styles.buttons}>
+                <PrimaryButton onClick={() => onClickHandler(true)}>
+                  Принять заявку
+                </PrimaryButton>
+                <SecondaryButton onClick={() => onClickHandler(false)}>
+                  Отклонить
+                </SecondaryButton>
+              </div>
+            )}
           </div>
         </LoadingWrapper>
       </div>
