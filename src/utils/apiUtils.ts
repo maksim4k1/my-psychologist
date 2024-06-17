@@ -5,6 +5,8 @@ export function getRole(roleId: number = 0): AccessRole {
     return ACCESS.client;
   } else if (roleId === 2) {
     return ACCESS.psychologist;
+  } else if (roleId === 3) {
+    return ACCESS.hr;
   }
 
   return ACCESS.unauthorized;
