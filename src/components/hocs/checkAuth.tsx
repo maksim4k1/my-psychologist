@@ -42,7 +42,7 @@ function checkAuth(
           router.push("/auth/register/success");
         else if (isOnlyForUnauthorized) router.push("/");
         else if (isOnlyForAuthorized) router.push(`/auth/login`);
-        else if (isOnlyForPsychologist) router.push(`/psychologist/survey`);
+        else if (isOnlyForPsychologist) router.push(`/survey/psychologist`);
       }
     }, [
       isOnlyForUnauthorized,

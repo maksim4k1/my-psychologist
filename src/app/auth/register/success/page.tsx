@@ -16,9 +16,7 @@ function RegistrationSuccessPage() {
         <div className={styles.svgContainer}>
           <Completed />
         </div>
-        <PrimaryButton href="/psychologist/survey">
-          Заполнить анкету психолога
-        </PrimaryButton>
+        <PrimaryButton href="/survey/hr">Заполнить анкету HR</PrimaryButton>
       </div>
     </Container>
   );
