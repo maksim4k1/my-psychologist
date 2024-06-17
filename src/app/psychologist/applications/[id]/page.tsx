@@ -107,4 +107,7 @@ function ApplicationPage() {
   );
 }
 
-export default checkAuth(ApplicationPage, true, [ACCESS.psychologist]);
+export default checkAuth(ApplicationPage, true, [
+  ACCESS.psychologist,
+  ACCESS.hr,
+]);

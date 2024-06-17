@@ -72,4 +72,7 @@ function PsychologistClientPage() {
   );
 }
 
-export default checkAuth(PsychologistClientPage, true, [ACCESS.psychologist]);
+export default checkAuth(PsychologistClientPage, true, [
+  ACCESS.psychologist,
+  ACCESS.hr,
+]);

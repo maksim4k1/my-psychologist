@@ -142,4 +142,5 @@ function PsychologistClientExercises() {
 
 export default checkAuth(PsychologistClientExercises, true, [
   ACCESS.psychologist,
+  ACCESS.hr,
 ]);
