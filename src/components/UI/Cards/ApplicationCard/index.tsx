@@ -58,7 +58,7 @@ const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
       </div>
       <div className={styles.problem}>{client.problem}</div>
       <div className={styles.buttons}>
-        <PrimaryButton href={`/psychologist/applications/${client.id}`}>
+        <PrimaryButton href={`/cabinet/applications/${client.id}`}>
           Профиль
         </PrimaryButton>
       </div>

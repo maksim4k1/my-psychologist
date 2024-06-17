@@ -44,7 +44,7 @@ const ClientCard: FunctionComponent<Props> = ({ client }) => {
         })}
       </div>
       <div className={styles.buttons}>
-        <PrimaryButton href={`/psychologist/clients/${client.userId}`}>
+        <PrimaryButton href={`/cabinet/clients/${client.userId}`}>
           Профиль
         </PrimaryButton>
       </div>

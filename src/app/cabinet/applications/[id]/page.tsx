@@ -42,7 +42,7 @@ function ApplicationPage() {
 
   useEffect(() => {
     if (confirmApplicationState.isSuccess) {
-      router.push("/psychologist");
+      router.push("/cabinet");
     }
   }, [confirmApplicationState.isSuccess, router]);
 
