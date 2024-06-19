@@ -19,16 +19,24 @@ import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
 import { selectRole } from "@/redux/features/auth/selectors";
+import TestsService from "@/api/tests";
+import {
+  selectGetTestsByUserIdState,
+  selectTestsByUserId,
+} from "@/redux/features/tests/selectors";
 
 function PsychologistClientPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const client = useAppSelector(selectClient);
   const clientState = useAppSelector(selectClientState);
+  const tests = useAppSelector(selectTestsByUserId);
+  const testsState = useAppSelector(selectGetTestsByUserIdState);
   const role = useAppSelector(selectRole);
 
   useEffect(() => {
     dispatch(ClientsService.getClient(id));
+    dispatch(TestsService.getTestsByUserId(id));
   }, [dispatch, id]);
 
   return (
@@ -37,30 +45,24 @@ function PsychologistClientPage() {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <LoadingWrapper status={clientState.isLoading}>
+        <LoadingWrapper status={[clientState.isLoading, testsState.isLoading]}>
           {client && <ProfileCard profile={client} />}
           <div>
-            <Subtitle>Пройденные тесты</Subtitle>
-            <div className={styles.tests}>
-              <TestCard
-                test={{
-                  id: 1,
-                  title: "Профессиональное выгорание",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 2,
-                  title: "Шкала депрессии, тревоги и стресса",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 3,
-                  title: "Шкала тревоги Спилбергера-Ханина",
-                }}
-              />
-            </div>
+            <Subtitle>
+              {!!tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
+            </Subtitle>
+            {!!tests.length && (
+              <div className={styles.tests}>
+                {tests.map((el) => {
+                  return (
+                    <TestCard
+                      key={el.id}
+                      test={el}
+                    />
+                  );
+                })}
+              </div>
+            )}
             <div className={styles.buttons}>
               {/* <PrimaryButton href="./result/overall">
                 Общий результат

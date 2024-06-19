@@ -23,6 +23,11 @@ import ApplicationsService from "@/api/applications";
 import { StatusState } from "@/utils/stateCreators";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import { selectRole } from "@/redux/features/auth/selectors";
+import TestsService from "@/api/tests";
+import {
+  selectGetTestsByUserIdState,
+  selectTestsByUserId,
+} from "@/redux/features/tests/selectors";
 
 function ApplicationPage() {
   const { id } = useParams();
@@ -37,10 +42,18 @@ function ApplicationPage() {
   );
   const application: ApplicationProfileData | null =
     useAppSelector(selectApplication);
+  const tests = useAppSelector(selectTestsByUserId);
+  const testsState = useAppSelector(selectGetTestsByUserIdState);
 
   useEffect(() => {
     dispatch(ApplicationsService.getApplication(id));
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (application) {
+      dispatch(TestsService.getTestsByUserId(application.userId));
+    }
+  }, [dispatch, application]);
 
   useEffect(() => {
     if (confirmApplicationState.isSuccess) {
@@ -62,30 +75,26 @@ function ApplicationPage() {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <LoadingWrapper status={getApplicationState.isLoading}>
+        <LoadingWrapper
+          status={[getApplicationState.isLoading, testsState.isLoading]}
+        >
           {application && <ProfileCard profile={application} />}
           <div>
-            <Subtitle>Пройденные тесты</Subtitle>
-            <div className={styles.tests}>
-              <TestCard
-                test={{
-                  id: 1,
-                  title: "Профессиональное выгорание",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 2,
-                  title: "Шкала депрессии, тревоги и стресса",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 3,
-                  title: "Шкала тревоги Спилбергера-Ханина",
-                }}
-              />
-            </div>
+            <Subtitle>
+              {!!tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
+            </Subtitle>
+            {!!tests.length && (
+              <div className={styles.tests}>
+                {tests.map((el) => {
+                  return (
+                    <TestCard
+                      key={el.id}
+                      test={el}
+                    />
+                  );
+                })}
+              </div>
+            )}
             {application && (
               <div className={styles.buttons}>
                 <PrimaryButton onClick={() => onClickHandler(true)}>

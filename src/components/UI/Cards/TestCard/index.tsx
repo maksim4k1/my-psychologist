@@ -1,12 +1,10 @@
 import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import { TestData } from "@/redux/features/tests/types";
 
 interface TestProps {
-  test: {
-    id: number;
-    title: string;
-  };
+  test: TestData;
 }
 
 const TestCard: FunctionComponent<TestProps> = ({ test }) => {
