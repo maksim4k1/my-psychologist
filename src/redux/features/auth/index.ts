@@ -29,7 +29,9 @@ const authSlice: Slice = createSlice({
       state.isAuth = true;
       state.role = getRole(payload.role);
       state.loginState = createSuccessState();
-      saveToken(payload.token);
+      if (payload.token) {
+        saveToken(payload.token);
+      }
     },
     loginError: (state, { payload }: PayloadAction<string>) => {
       state.loginState = createFailureState(payload);
