@@ -2,6 +2,7 @@ import authReducer from "./features/auth/index";
 import applicationsReducer from "./features/applications/index";
 import clientsReducer from "./features/clients/index";
 import hrReducer from "./features/hr/index";
+import testsReducer from "./features/tests/index";
 import { combineReducers, configureStore, Store } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
   applicationsReducer,
   clientsReducer,
   hrReducer,
+  testsReducer,
 });
 
 const store: Store = configureStore({
