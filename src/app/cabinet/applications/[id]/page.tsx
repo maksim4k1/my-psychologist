@@ -83,13 +83,14 @@ function ApplicationPage() {
             <Subtitle>
               {!!tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
             </Subtitle>
-            {!!tests.length && (
+            {!!tests.length && application && (
               <div className={styles.tests}>
                 {tests.map((el) => {
                   return (
                     <TestCard
                       key={el.id}
                       test={el}
+                      params={{ userId: application.userId }}
                     />
                   );
                 })}

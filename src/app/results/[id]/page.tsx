@@ -14,7 +14,8 @@ import {
   mapToRadarChartData,
 } from "@/utils/chartUtils";
 import { ACCESS } from "../../../../config/access.config";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
+import { mapSearchParamsToObject } from "@/utils/urlUtils";
 
 const dates: DateData[] = [
   {
@@ -64,6 +65,7 @@ const subjects: RadarChartItem[] = [
 
 function PsychologistClientsOverallResultPage() {
   const { id } = useParams();
+  const searchParams = useSearchParams();
   const datesCheckboxes = useCheckbox();
   const [data, setData] = useState<RadarChartItem[]>([]);
 
@@ -88,6 +90,10 @@ function PsychologistClientsOverallResultPage() {
               key={el.date}
               label={el.date}
               link={`/results/detail/${id}`}
+              params={{
+                date: el.date,
+                ...mapSearchParamsToObject(searchParams),
+              }}
             />
           );
         })}

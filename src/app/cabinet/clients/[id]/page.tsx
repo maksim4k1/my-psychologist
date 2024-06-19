@@ -58,6 +58,7 @@ function PsychologistClientPage() {
                     <TestCard
                       key={el.id}
                       test={el}
+                      params={{ userId: id }}
                     />
                   );
                 })}
