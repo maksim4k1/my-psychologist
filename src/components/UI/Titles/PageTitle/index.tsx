@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, ReactNode } from "react";
 import styles from "./styles.module.scss";
 
 interface Props {
-  children: string;
+  children: ReactNode;
   className?: string;
   [key: string]: any;
 }

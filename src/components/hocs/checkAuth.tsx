@@ -9,7 +9,7 @@ import {
   selectAuthLoginState,
 } from "@/redux/features/auth/selectors";
 import { usePathname, useRouter } from "next/navigation";
-import LoadingLoop from "../UI/LoadingLoop";
+import LoadingLoop from "../statusLabels/LoadingLoop";
 
 function checkAuth(
   Component: FunctionComponent,
@@ -30,11 +30,24 @@ function checkAuth(
 
     const isOnlyForAuthorized = isNeedAuth && !isAuth;
 
+    const forPsychologistAndHr =
+      isAuth &&
+      accessFor.includes(ACCESS.psychologist) &&
+      accessFor.includes(ACCESS.hr) &&
+      role !== ACCESS.psychologist &&
+      role !== ACCESS.hr;
+
     const isOnlyForPsychologist =
       isAuth &&
       accessFor.includes(ACCESS.psychologist) &&
       accessFor.length === 1 &&
       role !== ACCESS.psychologist;
+
+    const isOnlyForHr =
+      isAuth &&
+      accessFor.includes(ACCESS.hr) &&
+      accessFor.length === 1 &&
+      role !== ACCESS.hr;
 
     useEffect(() => {
       if (!isLoading) {
@@ -42,12 +55,16 @@ function checkAuth(
           router.push("/auth/register/success");
         else if (isOnlyForUnauthorized) router.push("/");
         else if (isOnlyForAuthorized) router.push(`/auth/login`);
-        else if (isOnlyForPsychologist) router.push(`/psychologist/survey`);
+        else if (forPsychologistAndHr) router.push(`/auth/register/success`);
+        else if (isOnlyForPsychologist) router.push(`/survey/psychologist`);
+        else if (isOnlyForHr) router.push(`/survey/hr`);
       }
     }, [
       isOnlyForUnauthorized,
+      forPsychologistAndHr,
       isOnlyForAuthorized,
       isOnlyForPsychologist,
+      isOnlyForHr,
       router,
       pathname,
       isLoading,

@@ -7,7 +7,6 @@ import Input from "@/components/UI/Inputs/Input";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import AuthButtons from "@/components/UI/AuthButtons";
-import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import Link from "next/link";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../config/access.config";
@@ -17,6 +16,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { selectAuthLoginState } from "@/redux/features/auth/selectors";
 import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
+import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
+import AppLink from "@/components/UI/Links/AppLink";
 
 function LoginPage() {
   const email = useInput("", { isEmpty: true, isEmail: true });
@@ -73,22 +74,16 @@ function LoginPage() {
           Забыли пароль?
         </Link>
         {loginStatus.isFailure && !!loginStatus.error && (
-          <div>{loginStatus.error}</div>
+          <FormErrorLabel>{loginStatus.error}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"
-            isMedium={true}
             disabled={loginStatus.isLoading}
           >
             Войти
           </PrimaryButton>
-          <SecondaryButton
-            href="/auth/register"
-            isMedium={true}
-          >
-            Зарегистрироваться
-          </SecondaryButton>
+          <AppLink href="/auth/register">Зарегистрироваться</AppLink>
         </AuthButtons>
       </Form>
     </Container>

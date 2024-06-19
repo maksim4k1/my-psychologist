@@ -64,7 +64,7 @@ const Header: FunctionComponent = ({}) => {
         </nav> */}
         {isAuth ? (
           <Link
-            href="/psychologist"
+            href="/cabinet"
             className={styles.profileContainer}
           >
             <ProfileImage

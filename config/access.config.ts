@@ -3,7 +3,8 @@ export type AccessRole =
   | "unauthorized"
   | "authorized"
   | "psychologist"
-  | "client";
+  | "client"
+  | "hr";
 
 interface IAccess {
   [key: string]: AccessRole;
@@ -15,4 +16,5 @@ export const ACCESS: IAccess = {
   authorized: "authorized",
   psychologist: "psychologist",
   client: "client",
+  hr: "hr",
 };

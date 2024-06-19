@@ -25,6 +25,7 @@ import {
   selectClientsState,
 } from "@/redux/features/clients/selectors";
 import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
+import { selectRole } from "@/redux/features/auth/selectors";
 
 function PsychologistPage() {
   const dispatch = useAppDispatch();
@@ -34,6 +35,7 @@ function PsychologistPage() {
   );
   const clients: ClientData[] = useAppSelector(selectClients);
   const clientsState: StatusState = useAppSelector(selectClientsState);
+  const role = useAppSelector(selectRole);
 
   useEffect(() => {
     dispatch(ApplicationsService.getApplications());
@@ -42,35 +44,39 @@ function PsychologistPage() {
 
   return (
     <Container>
-      <PageTitle>Кабинет психолога</PageTitle>
-      <nav className={styles.navigation}>
+      <PageTitle className={styles.title}>
+        Кабинет {role === ACCESS.psychologist ? "психолога" : "HR-менеджера"}
+      </PageTitle>
+      {/* <nav className={styles.navigation}>
         <IconTextLink
           href=""
           icon={<MessageIcon />}
           content="Сообщения"
           count={3}
         />
-      </nav>
+      </nav> */}
 
       <LoadingWrapper
         status={[applicationsState.isLoading, clientsState.isLoading]}
       >
-        <div>
-          <h2 className={styles.subtitle}>Заявки</h2>
-          <div className={styles.list}>
-            {applications.map((application) => {
-              return (
-                <ApplicationCard
-                  key={application.userId}
-                  client={application}
-                />
-              );
-            })}
+        {!!applications.length && (
+          <div>
+            <h2 className={styles.subtitle}>Заявки</h2>
+            <div className={styles.list}>
+              {applications.map((application) => {
+                return (
+                  <ApplicationCard
+                    key={application.userId}
+                    client={application}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
         <div>
           <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
-            Мои клиенты
+            Мои {role === ACCESS.psychologist ? "клиенты" : "сотрудники"}
           </h2>
           <div className={styles.list}>
             {clients.map((client) => {
@@ -88,4 +94,7 @@ function PsychologistPage() {
   );
 }
 
-export default checkAuth(PsychologistPage, true, [ACCESS.psychologist]);
+export default checkAuth(PsychologistPage, true, [
+  ACCESS.psychologist,
+  ACCESS.hr,
+]);

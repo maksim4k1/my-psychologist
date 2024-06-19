@@ -2,35 +2,21 @@
 @import "@/styles/textStyles";
 @import "@/styles/mixins";
 
-.title {
-  margin-bottom: 40px;
-}
-
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 22px;
-}
-
-.clientCard {
-  max-width: 265px;
-  width: 25%;
-  display: flex;
-  flex-flow: column;
-  padding: 12px 16px 16px;
+.card {
+  width: 360px;
+  height: fit-content;
+  padding: 16px;
   @include card;
 }
 
 .cardHeader {
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.clientInfo {
-  width: 100%;
-  margin-left: 16px;
-  margin-right: 12px;
+.profileInfo {
   display: flex;
   flex-flow: column;
   gap: 4px;
@@ -52,24 +38,32 @@
 .moreButton {
   position: relative;
   right: -12px;
-  min-width: 48px;
+  width: 48px;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.profileImage {
+  display: flex;
+  margin: 0 auto 16px;
+}
+
+.info {
+  margin-bottom: 8px;
+  color: $color-on-surface-variant;
+  @include bodyMedium;
+}
+
 .problems {
-  margin-top: 28px;
-  margin-bottom: 32px;
+  @include labelLarge;
+  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.buttons {
-  margin-top: auto;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
+.cardButton {
+  margin-left: auto;
 }

@@ -14,11 +14,9 @@ interface ClientResponse {
   request: string[];
 }
 
-interface ClientProfileResponse {
-  username: string;
-  birth_date: string;
+interface ClientProfileResponse extends ClientResponse {
   gender: string;
-  request: string[];
+  birth_date: string;
 }
 
 export default class ClientsService {
@@ -30,24 +28,16 @@ export default class ClientsService {
 
       const data = response.data;
 
-      if (typeof data === "string") {
-        dispatch(clientsActions.getClientsError(data));
-      } else {
-        const formattedData: ClientData[] = data.map((el: ClientResponse) => ({
-          userId: el.client_id,
-          profileImage: "",
-          username: el.username,
-          isOnline: el.is_active,
-          problems: el.request,
-        }));
-        dispatch(clientsActions.getClientsSuccess(formattedData));
-      }
+      const formattedData: ClientData[] = data.map((el: ClientResponse) => ({
+        userId: el.client_id,
+        profileImage: "",
+        username: el.username,
+        isOnline: el.is_active,
+        problems: el.request,
+      }));
+      dispatch(clientsActions.getClientsSuccess(formattedData));
     } catch (err) {
-      dispatch(
-        clientsActions.getClientsError(
-          err instanceof Error ? err.message : String(err),
-        ),
-      );
+      dispatch(clientsActions.getClientsError(err));
     }
   };
 
@@ -62,24 +52,17 @@ export default class ClientsService {
 
         const data: ClientProfileResponse = response.data;
 
-        if (typeof data === "string") {
-          dispatch(clientsActions.getClientError(data));
-        } else {
-          const formattedData: ClientProfileData = {
-            username: data.username,
-            profileImage: "",
-            isOnline: false,
-            age: calculateAge(data.birth_date),
-            problems: data.request,
-          };
-          dispatch(clientsActions.getClientSuccess(formattedData));
-        }
+        const formattedData: ClientProfileData = {
+          userId: data.client_id,
+          username: data.username,
+          profileImage: "",
+          isOnline: false,
+          age: calculateAge(data.birth_date),
+          problems: data.request,
+        };
+        dispatch(clientsActions.getClientSuccess(formattedData));
       } catch (err) {
-        dispatch(
-          clientsActions.getClientError(
-            err instanceof Error ? err.message : String(err),
-          ),
-        );
+        dispatch(clientsActions.getClientError(err));
       }
     };
 }

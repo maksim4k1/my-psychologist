@@ -4,17 +4,10 @@ import MoreVerticalIcon from "@/assets/svg/Icons/MoreVerticalIcon";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import styles from "../styles.module.scss";
 import Symptom from "../../Symptom";
-
-interface Client {
-  userId: number;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problems: string[];
-}
+import { ClientData } from "@/redux/features/clients/types";
 
 interface Props {
-  client: Client;
+  client: ClientData;
 }
 
 const ClientCard: FunctionComponent<Props> = ({ client }) => {
@@ -36,9 +29,9 @@ const ClientCard: FunctionComponent<Props> = ({ client }) => {
             {client.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
-        <button className={styles.moreButton}>
+        {/* <button className={styles.moreButton}>
           <MoreVerticalIcon />
-        </button>
+        </button> */}
       </div>
       <div className={styles.problems}>
         {client.problems.map((problem, index) => {
@@ -51,7 +44,7 @@ const ClientCard: FunctionComponent<Props> = ({ client }) => {
         })}
       </div>
       <div className={styles.buttons}>
-        <PrimaryButton href={`/psychologist/clients/${client.userId}`}>
+        <PrimaryButton href={`/cabinet/clients/${client.userId}`}>
           Профиль
         </PrimaryButton>
       </div>

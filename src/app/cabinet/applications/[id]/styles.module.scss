@@ -1,0 +1,24 @@
+@import "@/styles/variables";
+@import "@/styles/textStyles";
+@import "@/styles/mixins";
+
+.main {
+  display: flex;
+  gap: 120px;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.tests {
+  margin: 20px 0;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}

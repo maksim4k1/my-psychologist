@@ -23,7 +23,6 @@ const clientsSlice = createSlice({
       state.getClientsState = createLoadingState();
     },
     getClientsSuccess: (state, { payload }: PayloadAction<ClientData[]>) => {
-      console.log(payload);
       state.getClientsState = createSuccessState();
       state.clients = payload;
     },
@@ -37,7 +36,6 @@ const clientsSlice = createSlice({
       state,
       { payload }: PayloadAction<ClientProfileData>,
     ) => {
-      console.log(payload);
       state.getClientState = createSuccessState();
       state.client = payload;
     },
