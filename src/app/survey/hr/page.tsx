@@ -28,7 +28,7 @@ function HrSurveyPage() {
     if (sendHrSurveyState.isSuccess) {
       router.push("/cabinet");
     }
-  }, [sendHrSurveyState.isSuccess]);
+  }, [sendHrSurveyState.isSuccess, router]);
 
   function onSubmitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
