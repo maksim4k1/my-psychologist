@@ -13,7 +13,7 @@ const TestCard: FunctionComponent<TestProps> = ({ test }) => {
       <div className={styles.testTitle}>{test.title}</div>
       <Link
         className={styles.testLink}
-        href={`/cabinet/clients/result/overall`}
+        href={`/results/${test.id}`}
       >
         Посмотреть результаты
       </Link>

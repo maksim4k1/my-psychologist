@@ -4,7 +4,6 @@ import styles from "./styles.module.scss";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import Container from "@/components/UI/Container";
 import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "../../../../../../config/access.config";
 import RadarChart from "@/components/UI/Charts/RadarChart";
 import ListItemWithSwitch from "@/components/UI/Lists/ListItemWithSwitch";
 import { useCheckbox } from "@/hooks/inputHooks";
@@ -14,6 +13,8 @@ import {
   RadarChartItem,
   mapToRadarChartData,
 } from "@/utils/chartUtils";
+import { ACCESS } from "../../../../config/access.config";
+import { useParams } from "next/navigation";
 
 const dates: DateData[] = [
   {
@@ -62,6 +63,7 @@ const subjects: RadarChartItem[] = [
 ];
 
 function PsychologistClientsOverallResultPage() {
+  const { id } = useParams();
   const datesCheckboxes = useCheckbox();
   const [data, setData] = useState<RadarChartItem[]>([]);
 
@@ -85,7 +87,7 @@ function PsychologistClientsOverallResultPage() {
               value={el.date}
               key={el.date}
               label={el.date}
-              link="./"
+              link={`/results/detail/${id}`}
             />
           );
         })}
