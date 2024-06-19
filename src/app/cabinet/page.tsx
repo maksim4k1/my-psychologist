@@ -76,7 +76,11 @@ function PsychologistPage() {
         )}
         <div>
           <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
-            Мои {role === ACCESS.psychologist ? "клиенты" : "сотрудники"}
+            {!!clients.length
+              ? `Мои ${role === ACCESS.psychologist ? "клиенты" : "сотрудники"}`
+              : `У вас нет ${
+                  role === ACCESS.psychologist ? "клиентов" : "сотрудников"
+                }`}
           </h2>
           <div className={styles.list}>
             {clients.map((client) => {
