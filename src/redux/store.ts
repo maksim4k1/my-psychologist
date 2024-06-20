@@ -1,8 +1,9 @@
-import authReducer from "./features/auth/index";
-import applicationsReducer from "./features/applications/index";
-import clientsReducer from "./features/clients/index";
-import hrReducer from "./features/hr/index";
-import testsReducer from "./features/tests/index";
+import authReducer from "./features/auth";
+import applicationsReducer from "./features/applications";
+import clientsReducer from "./features/clients";
+import hrReducer from "./features/hr";
+import testsReducer from "./features/tests";
+import popupsReducer from "./features/popups";
 import { combineReducers, configureStore, Store } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   clientsReducer,
   hrReducer,
   testsReducer,
+  popupsReducer,
 });
 
 const store: Store = configureStore({
