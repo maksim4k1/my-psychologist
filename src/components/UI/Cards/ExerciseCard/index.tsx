@@ -3,6 +3,9 @@
 import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import { TestData } from "@/redux/features/tests/types";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import TestsService from "@/api/tests";
+import { selectGiveTestState } from "@/redux/features/tests/selectors";
 
 interface Props {
   exercise: TestData;
@@ -10,8 +13,11 @@ interface Props {
 }
 
 const ExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
+  const dispatch = useAppDispatch();
+  const giveTestState = useAppSelector(selectGiveTestState);
+
   const onClickHandler = () => {
-    console.log({ id: exercise.id, userId });
+    dispatch(TestsService.giveTest(exercise.id, userId));
   };
 
   return (
@@ -21,6 +27,7 @@ const ExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
       <button
         className={styles.button}
         onClick={onClickHandler}
+        disabled={giveTestState.isLoading}
       >
         Назначить задание
       </button>

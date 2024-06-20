@@ -12,21 +12,31 @@ import ExerciseCard from "@/components/UI/Cards/ExerciseCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectGetTestsState,
+  selectGiveTestState,
   selectTests,
 } from "@/redux/features/tests/selectors";
 import { useEffect } from "react";
 import TestsService from "@/api/tests";
 import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
+import { testsActions } from "@/redux/features/tests";
 
 function GiveExercisePage() {
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
   const tests: TestData[] = useAppSelector(selectTests);
   const testsState = useAppSelector(selectGetTestsState);
+  const giveTestState = useAppSelector(selectGiveTestState);
 
   useEffect(() => {
     dispatch(TestsService.getTests());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (giveTestState.isSuccess) {
+      alert("Задание успешно назначено!");
+      dispatch(testsActions.giveTestStateDefault());
+    }
+  }, [giveTestState.isSuccess]);
 
   return (
     <Container>
