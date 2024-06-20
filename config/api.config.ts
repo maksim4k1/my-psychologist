@@ -23,7 +23,11 @@ customAxios.interceptors.response.use(
     };
 
     if (error?.response?.data?.detail) {
-      httpError.message = error.response.data.detail;
+      if (typeof error.response.data.detail === "string") {
+        httpError.message = error.response.data.detail;
+      } else {
+        httpError.message = error.response.data.detail[0].msg;
+      }
     } else if (error instanceof Error) {
       httpError.message = error.message;
     } else {
