@@ -2,7 +2,7 @@
 
 import { ACCESS, AccessRole } from "../../../config/access.config";
 import { FunctionComponent, useEffect } from "react";
-import AccessDeniedErrorPage from "../errors/AccessDenied";
+import AccessDeniedError from "../errors/AccessDeniedError";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuth,
@@ -81,7 +81,7 @@ function checkAuth(
       return <Component />;
     }
 
-    return <AccessDeniedErrorPage />;
+    return <AccessDeniedError />;
   };
 }
 
