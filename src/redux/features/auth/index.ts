@@ -10,6 +10,7 @@ import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { AuthState, UserData } from "./types";
 import { getRole } from "@/utils/apiUtils";
 import { saveToken } from "@/storage/token";
+import { HttpError } from "../../../../config/api.config";
 
 const initialState: AuthState = {
   isAuth: false,
@@ -33,7 +34,7 @@ const authSlice: Slice = createSlice({
         saveToken(payload.token);
       }
     },
-    loginError: (state, { payload }: PayloadAction<string>) => {
+    loginError: (state, { payload }: PayloadAction<HttpError>) => {
       state.loginState = createFailureState(payload);
     },
     registerLoading: (state) => {
@@ -45,7 +46,7 @@ const authSlice: Slice = createSlice({
       state.registerState = createSuccessState();
       saveToken(payload.token);
     },
-    registerError: (state, { payload }: PayloadAction<string>) => {
+    registerError: (state, { payload }: PayloadAction<HttpError>) => {
       state.registerState = createFailureState(payload);
     },
   },

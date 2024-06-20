@@ -7,6 +7,7 @@ import {
 } from "@/utils/stateCreators";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ClientData, ClientProfileData, ClientsState } from "./types";
+import { HttpError } from "../../../../config/api.config";
 
 const initialState: ClientsState = {
   client: null,
@@ -26,7 +27,7 @@ const clientsSlice = createSlice({
       state.getClientsState = createSuccessState();
       state.clients = payload;
     },
-    getClientsError: (state, { payload }: PayloadAction<string>) => {
+    getClientsError: (state, { payload }: PayloadAction<HttpError>) => {
       state.getClientsState = createFailureState(payload);
     },
     getClientLoading: (state) => {
@@ -39,7 +40,7 @@ const clientsSlice = createSlice({
       state.getClientState = createSuccessState();
       state.client = payload;
     },
-    getClientError: (state, { payload }: PayloadAction<string>) => {
+    getClientError: (state, { payload }: PayloadAction<HttpError>) => {
       state.getClientState = createFailureState(payload);
     },
   },

@@ -96,8 +96,8 @@ function RegisterPage() {
           required
           disabled={registerStatus.isLoading}
         />
-        {registerStatus.isFailure && (
-          <FormErrorLabel>{registerStatus.error}</FormErrorLabel>
+        {registerStatus.isFailure && registerStatus.error && (
+          <FormErrorLabel>{registerStatus.error.message}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton

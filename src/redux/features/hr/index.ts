@@ -7,6 +7,7 @@ import {
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
+import { HttpError } from "../../../../config/api.config";
 
 const initialState: HrState = {
   sendHrSurveyState: createDefaultState(),
@@ -22,7 +23,7 @@ const hrSlice = createSlice({
     sendHrSurveySuccess: (state) => {
       state.sendHrSurveyState = createSuccessState();
     },
-    sendHrSurveyFailure: (state, { payload }: PayloadAction<string>) => {
+    sendHrSurveyFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.sendHrSurveyState = createFailureState(payload);
     },
   },

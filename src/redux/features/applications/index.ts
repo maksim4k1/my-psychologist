@@ -11,6 +11,7 @@ import {
   ApplicationProfileData,
   ApplicationsState,
 } from "./types";
+import { HttpError } from "../../../../config/api.config";
 
 const initialState: ApplicationsState = {
   applications: [],
@@ -34,7 +35,7 @@ const applicationsSlice: Slice = createSlice({
       state.getApplicationsState = createSuccessState();
       state.applications = payload;
     },
-    getApplicationsFailure: (state, { payload }: PayloadAction<string>) => {
+    getApplicationsFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getApplicationsState = createFailureState(payload);
     },
 
@@ -48,7 +49,7 @@ const applicationsSlice: Slice = createSlice({
       state.getApplicationState = createSuccessState();
       state.application = payload;
     },
-    getApplicationFailure: (state, { payload }: PayloadAction<string>) => {
+    getApplicationFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getApplicationState = createFailureState(payload);
     },
 
@@ -58,7 +59,10 @@ const applicationsSlice: Slice = createSlice({
     confirmApplicationSuccess: (state) => {
       state.confirmApplicationState = createSuccessState();
     },
-    confirmApplicationError: (state, { payload }: PayloadAction<string>) => {
+    confirmApplicationFailure: (
+      state,
+      { payload }: PayloadAction<HttpError>,
+    ) => {
       state.confirmApplicationState = createFailureState(payload);
     },
   },
