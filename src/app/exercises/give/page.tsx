@@ -2,11 +2,11 @@
 
 import checkAuth from "@/components/hocs/checkAuth";
 import Container from "@/components/UI/Container";
-import { ACCESS } from "../../../../../config/access.config";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import { FunctionComponent } from "react";
+import { ACCESS } from "../../../../config/access.config";
 
 interface Props {
   title: string;
@@ -27,7 +27,7 @@ interface TaskInfo {
   description: string;
 }
 
-function PsychologistClientExercises() {
+function GiveExercisesPage() {
   const tests: TaskInfo[] = [
     {
       title: "Тест на депрессию",
@@ -140,7 +140,7 @@ function PsychologistClientExercises() {
   );
 }
 
-export default checkAuth(PsychologistClientExercises, true, [
+export default checkAuth(GiveExercisesPage, true, [
   ACCESS.psychologist,
   ACCESS.hr,
 ]);

@@ -68,7 +68,7 @@ function PsychologistClientPage() {
               {/* <PrimaryButton href="./result/overall">
                 Общий результат
               </PrimaryButton> */}
-              <PrimaryButton href="./exercises">
+              <PrimaryButton href="/exercises/give">
                 Назначить задание
               </PrimaryButton>
             </div>
