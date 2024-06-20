@@ -21,3 +21,7 @@ export const selectTestsByUserId = (state: RootState): TestData[] => {
 export const selectGetTestsByUserIdState = (state: RootState): StatusState => {
   return selectTestsModule(state).getTestsByUserIdState;
 };
+
+export const selectGiveTestState = (state: RootState): StatusState => {
+  return selectTestsModule(state).giveTestState;
+};

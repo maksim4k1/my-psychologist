@@ -13,6 +13,7 @@ const initialState: TestsState = {
   getTestsState: createDefaultState(),
   testsByUserId: [],
   getTestsByUserIdState: createDefaultState(),
+  giveTestState: createDefaultState(),
 };
 
 const testsSlice: Slice = createSlice({
@@ -42,6 +43,19 @@ const testsSlice: Slice = createSlice({
     },
     getTestsFailure: (state, { payload }: PayloadAction<string>) => {
       state.getTestsState = createFailureState(payload);
+    },
+
+    giveTestLoading: (state) => {
+      state.giveTestState = createLoadingState();
+    },
+    giveTestSuccess: (state) => {
+      state.giveTestState = createSuccessState();
+    },
+    giveTestFailure: (state, { payload }: PayloadAction<string>) => {
+      state.giveTestState = createFailureState(payload);
+    },
+    giveTestStateDefault: (state) => {
+      state.giveTestState = createDefaultState();
     },
   },
 });

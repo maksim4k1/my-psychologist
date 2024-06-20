@@ -11,4 +11,5 @@ export interface TestsState {
   getTestsState: StatusState;
   testsByUserId: TestData[];
   getTestsByUserIdState: StatusState;
+  giveTestState: StatusState;
 }
