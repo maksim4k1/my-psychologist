@@ -52,4 +52,28 @@ export default class TestsService {
       dispatch(testsActions.getTestsFailure(err));
     }
   };
+
+  static giveTest: Function =
+    (testId: string, userId: string) => async (dispatch: AppDispatch) => {
+      dispatch(testsActions.giveTestLoading());
+
+      try {
+        const response = await customAxios.post("/manager/give_task", {
+          text: "Задание для выполнения",
+          user_id: userId,
+          test_title: "Тест",
+          test_id: testId,
+        });
+
+        const data = response.data;
+
+        if (data === "Successfully") {
+          dispatch(testsActions.giveTestSuccess());
+        } else {
+          dispatch(testsActions.giveTestFailure(data));
+        }
+      } catch (err) {
+        dispatch(testsActions.giveTestFailure(err));
+      }
+    };
 }
