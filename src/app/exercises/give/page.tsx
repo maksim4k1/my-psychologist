@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import TestsService from "@/api/tests";
 import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import { testsActions } from "@/redux/features/tests";
+import HttpErrorWrapper from "@/components/wrappers/HttpErrorWrapper";
+import { checkQueryParams } from "@/utils/urlUtils";
 
 function GiveExercisePage() {
   const searchParams = useSearchParams();
@@ -36,28 +38,33 @@ function GiveExercisePage() {
       alert("Задание успешно назначено!");
       dispatch(testsActions.giveTestStateDefault());
     }
-  }, [giveTestState.isSuccess]);
+  }, [giveTestState.isSuccess, dispatch]);
 
   return (
-    <Container>
-      <PageTitle>Задания для клиента</PageTitle>
-      <div className={styles.section}>
-        <LoadingWrapper status={testsState.isLoading}>
-          <Subtitle>Тесты</Subtitle>
-          <div className={styles.list}>
-            {tests.map((test) => {
-              return (
-                <ExerciseCard
-                  key={test.id}
-                  exercise={test}
-                  userId={searchParams.get("userId") ?? ""}
-                />
-              );
-            })}
-          </div>
-        </LoadingWrapper>
-      </div>
-    </Container>
+    <HttpErrorWrapper
+      status={checkQueryParams(searchParams, true, "userId")}
+      error={{ status: 400, message: "" }}
+    >
+      <Container>
+        <PageTitle>Задания для клиента</PageTitle>
+        <div className={styles.section}>
+          <LoadingWrapper status={testsState.isLoading}>
+            <Subtitle>Тесты</Subtitle>
+            <div className={styles.list}>
+              {tests.map((test) => {
+                return (
+                  <ExerciseCard
+                    key={test.id}
+                    exercise={test}
+                    userId={searchParams.get("userId") ?? ""}
+                  />
+                );
+              })}
+            </div>
+          </LoadingWrapper>
+        </div>
+      </Container>
+    </HttpErrorWrapper>
   );
 }
 

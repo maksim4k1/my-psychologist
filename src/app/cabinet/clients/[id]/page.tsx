@@ -15,7 +15,6 @@ import {
   selectClientState,
 } from "@/redux/features/clients/selectors";
 import ClientsService from "@/api/clients";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
 import { selectRole } from "@/redux/features/auth/selectors";
@@ -25,6 +24,7 @@ import {
   selectTestsByUserId,
 } from "@/redux/features/tests/selectors";
 import { addQueryParams } from "@/utils/urlUtils";
+import StateWrapper from "@/components/wrappers/StateWrapper";
 
 function PsychologistClientPage() {
   const { id } = useParams();
@@ -46,7 +46,7 @@ function PsychologistClientPage() {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <LoadingWrapper status={[clientState.isLoading, testsState.isLoading]}>
+        <StateWrapper state={[clientState, testsState]}>
           {client && <ProfileCard profile={client} />}
           <div>
             <Subtitle>
@@ -78,7 +78,7 @@ function PsychologistClientPage() {
               </PrimaryButton>
             </div>
           </div>
-        </LoadingWrapper>
+        </StateWrapper>
       </div>
     </Container>
   );

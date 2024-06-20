@@ -15,7 +15,12 @@ import {
 } from "@/utils/chartUtils";
 import { ACCESS } from "../../../../config/access.config";
 import { useParams, useSearchParams } from "next/navigation";
-import { addQueryParams, mapSearchParamsToObject } from "@/utils/urlUtils";
+import {
+  addQueryParams,
+  checkQueryParams,
+  mapSearchParamsToObject,
+} from "@/utils/urlUtils";
+import HttpErrorWrapper from "@/components/wrappers/HttpErrorWrapper";
 
 const dates: DateData[] = [
   {
@@ -74,30 +79,35 @@ function PsychologistClientsOverallResultPage() {
   }, [datesCheckboxes.value]);
 
   return (
-    <Container>
-      <PageTitle className={styles.title}>История теста: Маслач</PageTitle>
-      <RadarChart
-        data={data}
-        className={styles.radarChart}
-      />
-      <ul>
-        {dates.map((el) => {
-          return (
-            <ListItemWithSwitch
-              onChange={datesCheckboxes.onChange}
-              className={styles.listItem}
-              value={el.date}
-              key={el.date}
-              label={el.date}
-              link={addQueryParams(`/results/detail/${id}`, {
-                date: el.date,
-                ...mapSearchParamsToObject(searchParams),
-              })}
-            />
-          );
-        })}
-      </ul>
-    </Container>
+    <HttpErrorWrapper
+      status={checkQueryParams(searchParams, true, "userId")}
+      error={{ status: 400, message: "" }}
+    >
+      <Container>
+        <PageTitle className={styles.title}>История теста: Маслач</PageTitle>
+        <RadarChart
+          data={data}
+          className={styles.radarChart}
+        />
+        <ul>
+          {dates.map((el) => {
+            return (
+              <ListItemWithSwitch
+                onChange={datesCheckboxes.onChange}
+                className={styles.listItem}
+                value={el.date}
+                key={el.date}
+                label={el.date}
+                link={addQueryParams(`/results/detail/${id}`, {
+                  date: el.date,
+                  ...mapSearchParamsToObject(searchParams),
+                })}
+              />
+            );
+          })}
+        </ul>
+      </Container>
+    </HttpErrorWrapper>
   );
 }
 

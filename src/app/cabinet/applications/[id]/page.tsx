@@ -8,7 +8,6 @@ import Subtitle from "@/components/UI/Titles/Subtitle";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../config/access.config";
 import { useParams, useRouter } from "next/navigation";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
 import { ApplicationProfileData } from "@/redux/features/applications/types";
@@ -28,6 +27,7 @@ import {
   selectGetTestsByUserIdState,
   selectTestsByUserId,
 } from "@/redux/features/tests/selectors";
+import StateWrapper from "@/components/wrappers/StateWrapper";
 
 function ApplicationPage() {
   const { id } = useParams();
@@ -75,9 +75,7 @@ function ApplicationPage() {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <LoadingWrapper
-          status={[getApplicationState.isLoading, testsState.isLoading]}
-        >
+        <StateWrapper state={[getApplicationState, testsState]}>
           {application && <ProfileCard profile={application} />}
           <div>
             <Subtitle>
@@ -107,7 +105,7 @@ function ApplicationPage() {
               </div>
             )}
           </div>
-        </LoadingWrapper>
+        </StateWrapper>
       </div>
     </Container>
   );

@@ -62,6 +62,7 @@ function HrSurveyPage() {
           onBlur={fullName.onBlur}
           labelText="Ваши Фамилия Имя Отчество"
           errorText={fullName.error}
+          disabled={sendHrSurveyState.isLoading}
           required
         />
         <Input
@@ -73,12 +74,14 @@ function HrSurveyPage() {
           value={company.value}
           onChange={company.onChange}
           onBlur={company.onBlur}
+          disabled={sendHrSurveyState.isLoading}
           required
         />
         <PrimaryButton
           type="submit"
           className={styles.button}
           isMedium={true}
+          disabled={sendHrSurveyState.isLoading}
         >
           Сохранить
         </PrimaryButton>

@@ -1,9 +1,7 @@
 "use client";
 
-import MessageIcon from "@/assets/svg/Icons/MessageIcon";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import IconTextLink from "@/components/UI/Links/IconTextLink";
 import styles from "./styles.module.scss";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../config/access.config";
@@ -24,8 +22,8 @@ import {
   selectClients,
   selectClientsState,
 } from "@/redux/features/clients/selectors";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import { selectRole } from "@/redux/features/auth/selectors";
+import StateWrapper from "@/components/wrappers/StateWrapper";
 
 function PsychologistPage() {
   const dispatch = useAppDispatch();
@@ -56,9 +54,7 @@ function PsychologistPage() {
         />
       </nav> */}
 
-      <LoadingWrapper
-        status={[applicationsState.isLoading, clientsState.isLoading]}
-      >
+      <StateWrapper state={[applicationsState, clientsState]}>
         {!!applications.length && (
           <div>
             <h2 className={styles.subtitle}>Заявки</h2>
@@ -93,7 +89,7 @@ function PsychologistPage() {
             })}
           </div>
         </div>
-      </LoadingWrapper>
+      </StateWrapper>
     </Container>
   );
 }
