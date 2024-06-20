@@ -26,7 +26,7 @@ function GiveExercisePage() {
 
   useEffect(() => {
     dispatch(TestsService.getTests());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>
@@ -39,9 +39,7 @@ function GiveExercisePage() {
               return (
                 <ExerciseCard
                   key={test.id}
-                  id={test.id}
-                  title={test.title}
-                  description={test.description}
+                  exercise={test}
                   userId={searchParams.get("userId") ?? ""}
                 />
               );
