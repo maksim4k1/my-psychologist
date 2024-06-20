@@ -1,0 +1,32 @@
+@import "@/styles/variables";
+@import "@/styles/textStyles";
+@import "@/styles/mixins";
+
+.card {
+  padding: 12px 12px 8px;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+  @include card;
+
+  &:hover > .button {
+    opacity: 1;
+  }
+}
+
+.title {
+  @include titleMedium;
+}
+
+.description {
+  color: $color-on-surface-variant;
+  @include bodyMedium;
+}
+
+.button {
+  margin-left: auto;
+  color: $color-primary;
+  @include labelSmall;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
