@@ -7,6 +7,8 @@ export interface TestData {
 }
 
 export interface TestsState {
+  tests: TestData[];
+  getTestsState: StatusState;
   testsByUserId: TestData[];
   getTestsByUserIdState: StatusState;
 }
