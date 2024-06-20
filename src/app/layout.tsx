@@ -5,6 +5,7 @@ import "../styles/global.scss";
 import Header from "@/components/UI/Header";
 import styles from "./styles.module.scss";
 import StoreProvider from "@/redux/StoreProvider";
+import SnackbarsPortal from "@/components/portals/SnackbarsPortal";
 
 const font = Roboto({
   weight: ["400", "500"],
@@ -28,6 +29,7 @@ export default function RootLayout({
         <StoreProvider>
           <Header />
           <main className={styles.main}>{children}</main>
+          <SnackbarsPortal />
         </StoreProvider>
       </body>
     </html>

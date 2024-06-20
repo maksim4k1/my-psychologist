@@ -5,3 +5,12 @@ body {
   background-color: $color-on-primary;
   color: $color-on-surface;
 }
+
+#snackbars {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+}
