@@ -24,6 +24,7 @@ import {
   selectGetTestsByUserIdState,
   selectTestsByUserId,
 } from "@/redux/features/tests/selectors";
+import { addQueryParams } from "@/utils/urlUtils";
 
 function PsychologistClientPage() {
   const { id } = useParams();
@@ -68,7 +69,11 @@ function PsychologistClientPage() {
               {/* <PrimaryButton href="./result/overall">
                 Общий результат
               </PrimaryButton> */}
-              <PrimaryButton href="/exercises/give">
+              <PrimaryButton
+                href={addQueryParams("/exercises/give", {
+                  userId: id,
+                })}
+              >
                 Назначить задание
               </PrimaryButton>
             </div>

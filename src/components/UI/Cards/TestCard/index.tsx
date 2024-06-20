@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { TestData } from "@/redux/features/tests/types";
-import { QueryParams, mapToQueryParams } from "@/utils/urlUtils";
+import { QueryParams, addQueryParams } from "@/utils/urlUtils";
 
 interface TestProps {
   test: TestData;
@@ -18,7 +18,7 @@ const TestCard: FunctionComponent<TestProps> = ({
       <div className={styles.testTitle}>{test.title}</div>
       <Link
         className={styles.testLink}
-        href={`/results/${test.id}` + mapToQueryParams(params)}
+        href={addQueryParams(`/results/${test.id}`, params)}
       >
         Посмотреть результаты
       </Link>

@@ -4,7 +4,8 @@ export interface QueryParams {
   [key: string]: any;
 }
 
-export const mapToQueryParams: Function = (
+export const addQueryParams: Function = (
+  url: string,
   obj: QueryParams | undefined,
 ): string => {
   if (!obj) return "";
@@ -17,7 +18,7 @@ export const mapToQueryParams: Function = (
 
   const result: string = "?" + params.join("&");
 
-  return result;
+  return url + result;
 };
 
 export const mapSearchParamsToObject = (

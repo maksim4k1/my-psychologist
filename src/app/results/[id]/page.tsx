@@ -15,7 +15,7 @@ import {
 } from "@/utils/chartUtils";
 import { ACCESS } from "../../../../config/access.config";
 import { useParams, useSearchParams } from "next/navigation";
-import { mapSearchParamsToObject } from "@/utils/urlUtils";
+import { addQueryParams, mapSearchParamsToObject } from "@/utils/urlUtils";
 
 const dates: DateData[] = [
   {
@@ -89,11 +89,10 @@ function PsychologistClientsOverallResultPage() {
               value={el.date}
               key={el.date}
               label={el.date}
-              link={`/results/detail/${id}`}
-              params={{
+              link={addQueryParams(`/results/detail/${id}`, {
                 date: el.date,
                 ...mapSearchParamsToObject(searchParams),
-              }}
+              })}
             />
           );
         })}
