@@ -32,4 +32,24 @@ export default class TestsService {
         dispatch(testsActions.getTestsByUserIdFailure(err));
       }
     };
+
+  static getTests: Function = () => async (dispatch: AppDispatch) => {
+    dispatch(testsActions.getTestsLoading());
+
+    try {
+      const response = await customAxios.get("/test/get_all_tests");
+
+      const data = response.data;
+
+      const formattedData: TestData = data.map((el: ResponseTestData) => ({
+        id: el.test_id,
+        title: el.title,
+        description: el.description,
+      }));
+
+      dispatch(testsActions.getTestsSuccess(formattedData));
+    } catch (err) {
+      dispatch(testsActions.getTestsFailure(err));
+    }
+  };
 }
