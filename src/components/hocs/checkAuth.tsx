@@ -51,9 +51,7 @@ function checkAuth(
 
     useEffect(() => {
       if (!isLoading) {
-        if (isOnlyForUnauthorized && pathname === "/auth/register")
-          router.push("/auth/register/success");
-        else if (isOnlyForUnauthorized) router.push("/");
+        if (isOnlyForUnauthorized) router.push("/");
         else if (isOnlyForAuthorized) router.push(`/auth/login`);
         else if (forPsychologistAndHr) router.push(`/auth/register/success`);
         else if (isOnlyForPsychologist) router.push(`/survey/psychologist`);

@@ -34,20 +34,24 @@ const authSlice: Slice = createSlice({
         saveToken(payload.token);
       }
     },
-    loginError: (state, { payload }: PayloadAction<HttpError>) => {
+    loginFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.loginState = createFailureState(payload);
     },
+    loginStateDefault: (state) => {
+      state.loginState = createDefaultState();
+    },
+
     registerLoading: (state) => {
       state.registerState = createLoadingState();
     },
-    registerSuccess: (state, { payload }: PayloadAction<UserData>) => {
-      state.isAuth = true;
-      state.role = getRole(payload.role);
+    registerSuccess: (state) => {
       state.registerState = createSuccessState();
-      saveToken(payload.token);
     },
-    registerError: (state, { payload }: PayloadAction<HttpError>) => {
+    registerFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.registerState = createFailureState(payload);
+    },
+    registerStateDefault: (state) => {
+      state.registerState = createDefaultState();
     },
   },
 });

@@ -14,13 +14,13 @@ export default class AuthService {
         const data = response.data;
 
         if (typeof data === "string") {
-          dispatch(authActions.loginError(data));
+          dispatch(authActions.loginFailure(data));
         } else {
           dispatch(authActions.loginSuccess(data));
           saveToken(data.token);
         }
       } catch (err) {
-        dispatch(authActions.loginError(err));
+        dispatch(authActions.loginFailure(err));
       }
     };
 
@@ -39,12 +39,12 @@ export default class AuthService {
         const data = response.data;
 
         if (typeof data === "string") {
-          dispatch(authActions.registerError(data));
+          dispatch(authActions.registerFailure(data));
         } else {
-          dispatch(authActions.registerSuccess(data));
+          dispatch(authActions.registerSuccess());
         }
       } catch (err) {
-        dispatch(authActions.registerError(err));
+        dispatch(authActions.registerFailure(err));
       }
     };
 
@@ -58,13 +58,13 @@ export default class AuthService {
 
         if (typeof data === "string") {
           deleteToken();
-          dispatch(authActions.loginError());
+          dispatch(authActions.loginFailure());
         } else {
           dispatch(authActions.loginSuccess(data));
         }
       } catch (err) {
         deleteToken();
-        dispatch(authActions.loginError());
+        dispatch(authActions.loginFailure());
       }
     };
 }

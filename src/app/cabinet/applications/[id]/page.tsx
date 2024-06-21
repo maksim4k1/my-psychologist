@@ -28,6 +28,7 @@ import {
   selectTestsByUserId,
 } from "@/redux/features/tests/selectors";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { PopupsService } from "@/redux/services/popups";
 
 function ApplicationPage() {
   const { id } = useParams();
@@ -57,9 +58,12 @@ function ApplicationPage() {
 
   useEffect(() => {
     if (confirmApplicationState.isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay("Операция успешно выполнена!"),
+      );
       router.push("/cabinet");
     }
-  }, [confirmApplicationState.isSuccess, router]);
+  }, [confirmApplicationState.isSuccess, dispatch, router]);
 
   const onClickHandler = (status: boolean) => {
     if (application) {

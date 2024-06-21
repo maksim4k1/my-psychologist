@@ -16,6 +16,7 @@ import HrService from "@/api/hr";
 import { SendHrSurveyPayload } from "@/redux/features/hr/types";
 import { selectSendHrSurveyState } from "@/redux/features/hr/selectors";
 import { useRouter } from "next/navigation";
+import { PopupsService } from "@/redux/services/popups";
 
 function HrSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
@@ -26,6 +27,9 @@ function HrSurveyPage() {
 
   useEffect(() => {
     if (sendHrSurveyState.isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay("Анкета HR-менеджера сохранена!"),
+      );
       router.push("/cabinet");
     }
   }, [sendHrSurveyState.isSuccess, router]);

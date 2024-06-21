@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
@@ -17,6 +17,9 @@ import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
 import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 import AppLink from "@/components/UI/Links/AppLink";
+import { PopupsService } from "@/redux/services/popups";
+import { useRouter } from "next/navigation";
+import { authActions } from "@/redux/features/auth";
 
 function RegisterPage() {
   const name = useInput("");
@@ -28,8 +31,21 @@ function RegisterPage() {
     confirmPassword: password.value,
   });
 
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const registerStatus = useAppSelector(selectAuthRegisterState);
+
+  useEffect(() => {
+    if (registerStatus.isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay(
+          "Регистрация прошла успешно! Авторизуйтесь в системе",
+        ),
+      );
+      dispatch(authActions.registerStateDefault());
+      router.push("/auth/login");
+    }
+  }, [registerStatus.isSuccess]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
