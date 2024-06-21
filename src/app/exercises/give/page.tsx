@@ -52,18 +52,22 @@ function GiveExercisePage() {
         <PageTitle>Задания для клиента</PageTitle>
         <div className={styles.section}>
           <LoadingWrapper status={testsState.isLoading}>
-            <Subtitle>Тесты</Subtitle>
-            <div className={styles.list}>
-              {tests.map((test) => {
-                return (
-                  <ExerciseCard
-                    key={test.id}
-                    exercise={test}
-                    userId={searchParams.get("userId") ?? ""}
-                  />
-                );
-              })}
-            </div>
+            <Subtitle>
+              {!!tests.length ? "Тесты" : "Нет доступных тестов"}
+            </Subtitle>
+            {!!tests.length && (
+              <div className={styles.list}>
+                {tests.map((test) => {
+                  return (
+                    <ExerciseCard
+                      key={test.id}
+                      exercise={test}
+                      userId={searchParams.get("userId") ?? ""}
+                    />
+                  );
+                })}
+              </div>
+            )}
           </LoadingWrapper>
         </div>
       </Container>

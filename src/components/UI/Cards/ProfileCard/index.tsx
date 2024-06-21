@@ -4,6 +4,7 @@ import ProfileImage from "../../Images/ProfileImage";
 import Symptom from "../../Symptom";
 import { ClientProfileData } from "@/redux/features/clients/types";
 import { ApplicationProfileData } from "@/redux/features/applications/types";
+import { mapAgeToText } from "@/utils/dataUtils";
 
 interface Props {
   profile: ClientProfileData | ApplicationProfileData;
@@ -33,7 +34,9 @@ const ProfileCard: FunctionComponent<Props> = ({ profile }) => {
         src={profile.profileImage}
         alt={profile.username}
       />
-      <div className={styles.info}>Возраст: {profile.age} лет</div>
+      <div className={styles.info}>
+        Возраст: {profile.age === 0 ? "не указан" : mapAgeToText(profile.age)}
+      </div>
       {(!!profile.problem || !!profile.problems?.length) && (
         <>
           <div className={styles.info}>Запрос:</div>
