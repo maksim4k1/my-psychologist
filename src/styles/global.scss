@@ -12,5 +12,6 @@ body {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  pointer-events: none;
   z-index: 1000;
 }

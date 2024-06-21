@@ -23,7 +23,7 @@ const SnackbarWithCloseAffordance: FunctionComponent<Props> = ({
   };
 
   return (
-    <Container>
+    <Container className={styles.snackbarContainer}>
       <div className={`${styles.snackbar} ${isOpen ? styles.opened : ""}`}>
         <div className={styles.label}>{label}</div>
         <div className={styles.closeButtonContainer}>
