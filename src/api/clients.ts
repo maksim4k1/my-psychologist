@@ -46,9 +46,9 @@ export default class ClientsService {
       dispatch(clientsActions.getClientLoading());
 
       try {
-        const response = await customAxios.post("/psychologist/get_client", {
-          user_id: userId,
-        });
+        const response = await customAxios.get(
+          `/psychologist/get_client/${userId}`,
+        );
 
         const data: ClientProfileResponse = response.data;
 

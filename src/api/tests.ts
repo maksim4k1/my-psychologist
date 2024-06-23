@@ -15,9 +15,9 @@ export default class TestsService {
       dispatch(testsActions.getTestsByUserIdLoading());
 
       try {
-        const response = await customAxios.post("/test/get_passed_tests", {
-          user_id: userId,
-        });
+        const response = await customAxios.get(
+          `/test/get_passed_tests/${userId}`,
+        );
 
         const data = response.data;
 

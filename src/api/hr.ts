@@ -2,8 +2,6 @@ import { hrActions } from "@/redux/features/hr";
 import { SendHrSurveyPayload } from "@/redux/features/hr/types";
 import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../../config/api.config";
-import AuthService from "./auth";
-import { getToken } from "@/storage/token";
 import { authActions } from "@/redux/features/auth";
 
 export default class HrService {
