@@ -50,11 +50,8 @@ export default class ApplicationsService {
       dispatch(applicationsActions.getApplicationLoading());
 
       try {
-        const response = await customAxios.post(
-          "/application/watch_application",
-          {
-            app_id: applicationId,
-          },
+        const response = await customAxios.get(
+          `/application/watch_application/${applicationId}`,
         );
 
         const data = response.data;
