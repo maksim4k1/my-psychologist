@@ -1,9 +1,9 @@
 import { testsActions } from "@/redux/features/tests";
 import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../../config/api.config";
-import { TestData } from "@/redux/features/tests/types";
+import { TestShortData } from "@/redux/features/tests/types";
 
-interface ResponseTestData {
+interface ResponseTestShortData {
   test_id: string;
   title: string;
   description: string;
@@ -21,11 +21,13 @@ export default class TestsService {
 
         const data = response.data;
 
-        const formattedData: TestData = data.map((el: ResponseTestData) => ({
-          id: el.test_id,
-          title: el.title,
-          description: el.description,
-        }));
+        const formattedData: TestShortData = data.map(
+          (el: ResponseTestShortData) => ({
+            id: el.test_id,
+            title: el.title,
+            description: el.description,
+          }),
+        );
 
         dispatch(testsActions.getTestsByUserIdSuccess(formattedData));
       } catch (err) {
@@ -41,11 +43,13 @@ export default class TestsService {
 
       const data = response.data;
 
-      const formattedData: TestData = data.map((el: ResponseTestData) => ({
-        id: el.test_id,
-        title: el.title,
-        description: el.description,
-      }));
+      const formattedData: TestShortData = data.map(
+        (el: ResponseTestShortData) => ({
+          id: el.test_id,
+          title: el.title,
+          description: el.description,
+        }),
+      );
 
       dispatch(testsActions.getTestsSuccess(formattedData));
     } catch (err) {

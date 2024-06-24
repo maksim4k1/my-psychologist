@@ -2,13 +2,13 @@
 
 import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
-import { TestData } from "@/redux/features/tests/types";
+import { TestShortData } from "@/redux/features/tests/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import TestsService from "@/api/tests";
 import { selectGiveTestState } from "@/redux/features/tests/selectors";
 
 interface Props {
-  exercise: TestData;
+  exercise: TestShortData;
   userId: string;
 }
 

@@ -6,7 +6,6 @@ import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import { ACCESS } from "../../../../config/access.config";
-import { TestData } from "@/redux/features/tests/types";
 import { useSearchParams } from "next/navigation";
 import ExerciseCard from "@/components/UI/Cards/ExerciseCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
@@ -26,7 +25,7 @@ import { PopupsService } from "@/redux/services/popups";
 function GiveExercisePage() {
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
-  const tests: TestData[] = useAppSelector(selectTests);
+  const tests = useAppSelector(selectTests);
   const testsState = useAppSelector(selectGetTestsState);
   const giveTestState = useAppSelector(selectGiveTestState);
 

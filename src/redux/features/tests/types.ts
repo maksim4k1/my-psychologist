@@ -1,15 +1,15 @@
 import { StatusState } from "@/utils/stateCreators";
 
-export interface TestData {
+export interface TestShortData {
   id: string;
   title: string;
   description: string;
 }
 
 export interface TestsState {
-  tests: TestData[];
+  tests: TestShortData[];
   getTestsState: StatusState;
-  testsByUserId: TestData[];
+  testsByUserId: TestShortData[];
   getTestsByUserIdState: StatusState;
   giveTestState: StatusState;
 }

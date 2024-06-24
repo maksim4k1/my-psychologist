@@ -1,11 +1,11 @@
 import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { TestData } from "@/redux/features/tests/types";
+import { TestShortData } from "@/redux/features/tests/types";
 import { QueryParams, addQueryParams } from "@/utils/urlUtils";
 
 interface TestProps {
-  test: TestData;
+  test: TestShortData;
   params?: QueryParams;
 }
 
