@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import TestsService from "@/api/tests";
 import StateWrapper from "@/components/wrappers/StateWrapper";
 
-function PsychologistClientsResultPage() {
+function DetailResultPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const getTestInfoState = useAppSelector(selectGetTestInfoState);
@@ -133,7 +133,7 @@ function PsychologistClientsResultPage() {
   );
 }
 
-export default checkAuth(PsychologistClientsResultPage, true, [
+export default checkAuth(DetailResultPage, true, [
   ACCESS.psychologist,
   ACCESS.hr,
 ]);

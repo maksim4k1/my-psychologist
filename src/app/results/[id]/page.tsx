@@ -23,7 +23,7 @@ import {
   selectTestResults,
 } from "@/redux/features/tests/selectors";
 
-function PsychologistClientsOverallResultPage() {
+function ResultPage() {
   const { id } = useParams();
   const searchParams = useSearchParams();
   const datesCheckboxes = useCheckbox();
@@ -89,7 +89,4 @@ function PsychologistClientsOverallResultPage() {
   );
 }
 
-export default checkAuth(PsychologistClientsOverallResultPage, true, [
-  ACCESS.psychologist,
-  ACCESS.hr,
-]);
+export default checkAuth(ResultPage, true, [ACCESS.psychologist, ACCESS.hr]);
