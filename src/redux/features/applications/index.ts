@@ -1,16 +1,16 @@
-import { Actions } from "@/redux/store";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   ApplicationData,
   ApplicationProfileData,
   ApplicationsState,
 } from "./types";
+import { HttpError } from "../../../../config/api.config";
 
 const initialState: ApplicationsState = {
   applications: [],
@@ -20,7 +20,7 @@ const initialState: ApplicationsState = {
   confirmApplicationState: createDefaultState(),
 };
 
-const applicationsSlice: Slice = createSlice({
+const applicationsSlice = createSlice({
   name: "applications",
   initialState,
   reducers: {
@@ -34,7 +34,7 @@ const applicationsSlice: Slice = createSlice({
       state.getApplicationsState = createSuccessState();
       state.applications = payload;
     },
-    getApplicationsFailure: (state, { payload }: PayloadAction<string>) => {
+    getApplicationsFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getApplicationsState = createFailureState(payload);
     },
 
@@ -48,7 +48,7 @@ const applicationsSlice: Slice = createSlice({
       state.getApplicationState = createSuccessState();
       state.application = payload;
     },
-    getApplicationFailure: (state, { payload }: PayloadAction<string>) => {
+    getApplicationFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getApplicationState = createFailureState(payload);
     },
 
@@ -58,12 +58,15 @@ const applicationsSlice: Slice = createSlice({
     confirmApplicationSuccess: (state) => {
       state.confirmApplicationState = createSuccessState();
     },
-    confirmApplicationError: (state, { payload }: PayloadAction<string>) => {
+    confirmApplicationFailure: (
+      state,
+      { payload }: PayloadAction<HttpError>,
+    ) => {
       state.confirmApplicationState = createFailureState(payload);
     },
   },
 });
 
-export const applicationsActions: Actions = applicationsSlice.actions;
+export const applicationsActions = applicationsSlice.actions;
 
 export default applicationsSlice.reducer;

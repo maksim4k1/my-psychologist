@@ -4,12 +4,12 @@ import {
   createSuccessState,
   createFailureState,
 } from "../../../utils/stateCreators";
-import { Actions } from "./../../store";
 import { ACCESS } from "./../../../../config/access.config";
-import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState, UserData } from "./types";
 import { getRole } from "@/utils/apiUtils";
 import { saveToken } from "@/storage/token";
+import { HttpError } from "../../../../config/api.config";
 
 const initialState: AuthState = {
   isAuth: false,
@@ -18,7 +18,7 @@ const initialState: AuthState = {
   registerState: createDefaultState(),
 };
 
-const authSlice: Slice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -29,26 +29,37 @@ const authSlice: Slice = createSlice({
       state.isAuth = true;
       state.role = getRole(payload.role);
       state.loginState = createSuccessState();
-      saveToken(payload.token);
+      if (payload.token) {
+        saveToken(payload.token);
+      }
     },
-    loginError: (state, { payload }: PayloadAction<string>) => {
+    loginFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.loginState = createFailureState(payload);
     },
+    loginStateDefault: (state) => {
+      state.loginState = createDefaultState();
+    },
+
     registerLoading: (state) => {
       state.registerState = createLoadingState();
     },
     registerSuccess: (state, { payload }: PayloadAction<UserData>) => {
       state.isAuth = true;
       state.role = getRole(payload.role);
+      if (payload.token) {
+        saveToken(payload.token);
+      }
       state.registerState = createSuccessState();
-      saveToken(payload.token);
     },
-    registerError: (state, { payload }: PayloadAction<string>) => {
+    registerFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.registerState = createFailureState(payload);
+    },
+    registerStateDefault: (state) => {
+      state.registerState = createDefaultState();
     },
   },
 });
 
-export const authActions: Actions = authSlice.actions;
+export const authActions = authSlice.actions;
 
 export default authSlice.reducer;

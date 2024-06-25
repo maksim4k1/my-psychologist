@@ -1,4 +1,3 @@
-import { Actions } from "@/redux/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { HrState } from "./types";
 import {
@@ -7,6 +6,7 @@ import {
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
+import { HttpError } from "../../../../config/api.config";
 
 const initialState: HrState = {
   sendHrSurveyState: createDefaultState(),
@@ -22,12 +22,12 @@ const hrSlice = createSlice({
     sendHrSurveySuccess: (state) => {
       state.sendHrSurveyState = createSuccessState();
     },
-    sendHrSurveyFailure: (state, { payload }: PayloadAction<string>) => {
+    sendHrSurveyFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.sendHrSurveyState = createFailureState(payload);
     },
   },
 });
 
-export const hrActions: Actions = hrSlice.actions;
+export const hrActions = hrSlice.actions;
 
 export default hrSlice.reducer;

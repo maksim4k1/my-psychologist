@@ -1,42 +1,57 @@
+import {
+  ScaleData,
+  ScaleResultData,
+  TestResultData,
+} from "@/redux/features/tests/types";
+
 export interface RadarChartItem {
   subject: string;
   fullMark: number;
   [key: string]: any;
 }
 
-export interface DateData {
-  date: string;
-  values: number[];
-}
-
 export function mapToRadarChartData(
-  dates: DateData[],
-  subjects: RadarChartItem[],
+  testResults: TestResultData[],
+  scales: ScaleData[],
   values: string[],
 ): RadarChartItem[] {
   const newData: RadarChartItem[] = [];
 
-  const map: Map<string, number[]> = new Map<string, number[]>();
-  for (let { date, values } of dates) {
-    map.set(date, values);
+  const map: Map<string, ScaleResultData[]> = new Map<
+    string,
+    ScaleResultData[]
+  >();
+  for (let { id, scaleResults } of testResults) {
+    map.set(id, scaleResults);
   }
 
-  let i = 0;
-  for (let subject of subjects) {
-    const subjectData: RadarChartItem = { ...subject };
+  let i: number = 0;
+  for (let scale of scales) {
+    const subjectData: RadarChartItem = {
+      subject: scale.title,
+      fullMark: scale.max,
+    };
+
     if (values.length) {
-      for (let date of values) {
-        subjectData[date] = map.get(date)![i];
+      for (let testId of values) {
+        const scaleResult = map.get(testId);
+        if (scaleResult && scaleResult[i]) {
+          subjectData[testId] = scaleResult[i].score;
+        }
       }
     } else {
-      let sum = 0;
-      for (let { values } of dates) {
-        sum += values[i];
+      subjectData["summary"] = 0;
+      for (let testResult of testResults) {
+        const scaleResult = map.get(testResult.id);
+        if (scaleResult && scaleResult[i]) {
+          subjectData["summary"] += scaleResult[i].score;
+        }
       }
-      subjectData["A"] = sum / dates.length;
+      subjectData["summary"] /= testResults.length;
     }
-    newData.push(subjectData);
     i++;
+
+    newData.push(subjectData);
   }
 
   return newData;

@@ -16,6 +16,7 @@ import HrService from "@/api/hr";
 import { SendHrSurveyPayload } from "@/redux/features/hr/types";
 import { selectSendHrSurveyState } from "@/redux/features/hr/selectors";
 import { useRouter } from "next/navigation";
+import { PopupsService } from "@/redux/services/popups";
 
 function HrSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
@@ -26,9 +27,12 @@ function HrSurveyPage() {
 
   useEffect(() => {
     if (sendHrSurveyState.isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay("Анкета HR-менеджера сохранена!"),
+      );
       router.push("/cabinet");
     }
-  }, [sendHrSurveyState.isSuccess, router]);
+  }, [sendHrSurveyState.isSuccess, dispatch, router]);
 
   function onSubmitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,6 +66,7 @@ function HrSurveyPage() {
           onBlur={fullName.onBlur}
           labelText="Ваши Фамилия Имя Отчество"
           errorText={fullName.error}
+          disabled={sendHrSurveyState.isLoading}
           required
         />
         <Input
@@ -73,12 +78,14 @@ function HrSurveyPage() {
           value={company.value}
           onChange={company.onChange}
           onBlur={company.onBlur}
+          disabled={sendHrSurveyState.isLoading}
           required
         />
         <PrimaryButton
           type="submit"
           className={styles.button}
           isMedium={true}
+          disabled={sendHrSurveyState.isLoading}
         >
           Сохранить
         </PrimaryButton>

@@ -7,13 +7,9 @@ interface Props {
 }
 
 const LoadingWrapper: FunctionComponent<Props> = ({ children, status }) => {
-  let isLoading: boolean;
+  if (!Array.isArray(status)) status = [status];
 
-  if (Array.isArray(status)) {
-    isLoading = status.reduce((acc, el) => acc || el, false);
-  } else {
-    isLoading = status;
-  }
+  const isLoading: boolean = status.reduce((acc, el) => acc || el, false);
 
   return isLoading ? <LoadingLoop /> : children;
 };

@@ -15,20 +15,29 @@ import {
   selectClientState,
 } from "@/redux/features/clients/selectors";
 import ClientsService from "@/api/clients";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
 import { selectRole } from "@/redux/features/auth/selectors";
+import TestsService from "@/api/tests";
+import {
+  selectGetTestsByUserIdState,
+  selectTestsByUserId,
+} from "@/redux/features/tests/selectors";
+import { addQueryParams } from "@/utils/urlUtils";
+import StateWrapper from "@/components/wrappers/StateWrapper";
 
 function PsychologistClientPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const client = useAppSelector(selectClient);
   const clientState = useAppSelector(selectClientState);
+  const tests = useAppSelector(selectTestsByUserId);
+  const testsState = useAppSelector(selectGetTestsByUserIdState);
   const role = useAppSelector(selectRole);
 
   useEffect(() => {
     dispatch(ClientsService.getClient(id));
+    dispatch(TestsService.getTestsByUserId(id));
   }, [dispatch, id]);
 
   return (
@@ -37,40 +46,39 @@ function PsychologistClientPage() {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <LoadingWrapper status={clientState.isLoading}>
+        <StateWrapper state={[clientState, testsState]}>
           {client && <ProfileCard profile={client} />}
           <div>
-            <Subtitle>Пройденные тесты</Subtitle>
-            <div className={styles.tests}>
-              <TestCard
-                test={{
-                  id: 1,
-                  title: "Профессиональное выгорание",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 2,
-                  title: "Шкала депрессии, тревоги и стресса",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 3,
-                  title: "Шкала тревоги Спилбергера-Ханина",
-                }}
-              />
-            </div>
+            <Subtitle>
+              {!!tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
+            </Subtitle>
+            {!!tests.length && (
+              <div className={styles.tests}>
+                {tests.map((el) => {
+                  return (
+                    <TestCard
+                      key={el.id}
+                      test={el}
+                      params={{ userId: id }}
+                    />
+                  );
+                })}
+              </div>
+            )}
             <div className={styles.buttons}>
               {/* <PrimaryButton href="./result/overall">
                 Общий результат
               </PrimaryButton> */}
-              <PrimaryButton href="./exercises">
+              <PrimaryButton
+                href={addQueryParams("/exercises/give", {
+                  userId: id,
+                })}
+              >
                 Назначить задание
               </PrimaryButton>
             </div>
           </div>
-        </LoadingWrapper>
+        </StateWrapper>
       </div>
     </Container>
   );

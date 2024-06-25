@@ -8,7 +8,6 @@ import Subtitle from "@/components/UI/Titles/Subtitle";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "../../../../../config/access.config";
 import { useParams, useRouter } from "next/navigation";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import TestCard from "@/components/UI/Cards/TestCard";
 import ProfileCard from "@/components/UI/Cards/ProfileCard";
 import { ApplicationProfileData } from "@/redux/features/applications/types";
@@ -23,6 +22,13 @@ import ApplicationsService from "@/api/applications";
 import { StatusState } from "@/utils/stateCreators";
 import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
 import { selectRole } from "@/redux/features/auth/selectors";
+import TestsService from "@/api/tests";
+import {
+  selectGetTestsByUserIdState,
+  selectTestsByUserId,
+} from "@/redux/features/tests/selectors";
+import StateWrapper from "@/components/wrappers/StateWrapper";
+import { PopupsService } from "@/redux/services/popups";
 
 function ApplicationPage() {
   const { id } = useParams();
@@ -37,16 +43,27 @@ function ApplicationPage() {
   );
   const application: ApplicationProfileData | null =
     useAppSelector(selectApplication);
+  const tests = useAppSelector(selectTestsByUserId);
+  const testsState = useAppSelector(selectGetTestsByUserIdState);
 
   useEffect(() => {
     dispatch(ApplicationsService.getApplication(id));
   }, [id, dispatch]);
 
   useEffect(() => {
+    if (application) {
+      dispatch(TestsService.getTestsByUserId(application.userId));
+    }
+  }, [dispatch, application]);
+
+  useEffect(() => {
     if (confirmApplicationState.isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay("Операция успешно выполнена!"),
+      );
       router.push("/cabinet");
     }
-  }, [confirmApplicationState.isSuccess, router]);
+  }, [confirmApplicationState.isSuccess, dispatch, router]);
 
   const onClickHandler = (status: boolean) => {
     if (application) {
@@ -62,30 +79,25 @@ function ApplicationPage() {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <LoadingWrapper status={getApplicationState.isLoading}>
+        <StateWrapper state={[getApplicationState, testsState]}>
           {application && <ProfileCard profile={application} />}
           <div>
-            <Subtitle>Пройденные тесты</Subtitle>
-            <div className={styles.tests}>
-              <TestCard
-                test={{
-                  id: 1,
-                  title: "Профессиональное выгорание",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 2,
-                  title: "Шкала депрессии, тревоги и стресса",
-                }}
-              />
-              <TestCard
-                test={{
-                  id: 3,
-                  title: "Шкала тревоги Спилбергера-Ханина",
-                }}
-              />
-            </div>
+            <Subtitle>
+              {!!tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
+            </Subtitle>
+            {!!tests.length && application && (
+              <div className={styles.tests}>
+                {tests.map((el) => {
+                  return (
+                    <TestCard
+                      key={el.id}
+                      test={el}
+                      params={{ userId: application.userId }}
+                    />
+                  );
+                })}
+              </div>
+            )}
             {application && (
               <div className={styles.buttons}>
                 <PrimaryButton onClick={() => onClickHandler(true)}>
@@ -97,7 +109,7 @@ function ApplicationPage() {
               </div>
             )}
           </div>
-        </LoadingWrapper>
+        </StateWrapper>
       </div>
     </Container>
   );

@@ -1,8 +1,10 @@
+import { HttpError } from "../../config/api.config";
+
 export interface StatusState {
   isSuccess: boolean;
   isLoading: boolean;
   isFailure: boolean;
-  error: string;
+  error: HttpError | null;
 }
 
 export const createDefaultState = (): StatusState => {
@@ -10,7 +12,7 @@ export const createDefaultState = (): StatusState => {
     isSuccess: false,
     isLoading: false,
     isFailure: false,
-    error: "",
+    error: null,
   };
 };
 
@@ -19,7 +21,7 @@ export const createLoadingState = (): StatusState => {
     isSuccess: false,
     isLoading: true,
     isFailure: false,
-    error: "",
+    error: null,
   };
 };
 
@@ -28,11 +30,11 @@ export const createSuccessState = (): StatusState => {
     isSuccess: true,
     isLoading: false,
     isFailure: false,
-    error: "",
+    error: null,
   };
 };
 
-export const createFailureState = (errorMessage: string): StatusState => {
+export const createFailureState = (errorMessage: HttpError): StatusState => {
   return {
     isSuccess: false,
     isLoading: false,

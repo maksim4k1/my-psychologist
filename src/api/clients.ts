@@ -6,6 +6,7 @@ import { customAxios } from "./../../config/api.config";
 import { clientsActions } from "@/redux/features/clients";
 import { AppDispatch } from "@/redux/store";
 import { calculateAge } from "@/utils/dataUtils";
+import { instanceofHttpError } from "@/utils/apiUtils";
 
 interface ClientResponse {
   client_id: string;
@@ -37,7 +38,9 @@ export default class ClientsService {
       }));
       dispatch(clientsActions.getClientsSuccess(formattedData));
     } catch (err) {
-      dispatch(clientsActions.getClientsError(err));
+      if (instanceofHttpError(err)) {
+        dispatch(clientsActions.getClientsError(err));
+      }
     }
   };
 
@@ -46,9 +49,9 @@ export default class ClientsService {
       dispatch(clientsActions.getClientLoading());
 
       try {
-        const response = await customAxios.post("/psychologist/get_client", {
-          user_id: userId,
-        });
+        const response = await customAxios.get(
+          `/psychologist/get_client/${userId}`,
+        );
 
         const data: ClientProfileResponse = response.data;
 
@@ -62,7 +65,9 @@ export default class ClientsService {
         };
         dispatch(clientsActions.getClientSuccess(formattedData));
       } catch (err) {
-        dispatch(clientsActions.getClientError(err));
+        if (instanceofHttpError(err)) {
+          dispatch(clientsActions.getClientError(err));
+        }
       }
     };
 }

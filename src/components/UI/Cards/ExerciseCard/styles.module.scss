@@ -2,26 +2,16 @@
 @import "@/styles/textStyles";
 @import "@/styles/mixins";
 
-.section {
-  margin-top: 40px;
-  display: flex;
-  flex-flow: column;
-  gap: 20px;
-}
-
-.list {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  column-gap: 20px;
-  row-gap: 20px;
-}
-
 .card {
-  padding: 12px 12px 32px;
+  padding: 12px 12px 8px;
   display: flex;
   flex-flow: column;
   gap: 8px;
   @include card;
+
+  &:hover > .button {
+    opacity: 1;
+  }
 }
 
 .title {
@@ -31,4 +21,12 @@
 .description {
   color: $color-on-surface-variant;
   @include bodyMedium;
+}
+
+.button {
+  margin-left: auto;
+  color: $color-primary;
+  @include labelSmall;
+  opacity: 0;
+  transition: opacity 0.2s;
 }

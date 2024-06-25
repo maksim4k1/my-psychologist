@@ -2,7 +2,7 @@
 
 import { ACCESS, AccessRole } from "../../../config/access.config";
 import { FunctionComponent, useEffect } from "react";
-import AccessDeniedErrorPage from "../errors/AccessDenied";
+import AccessDeniedError from "../errors/AccessDeniedError";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuth,
@@ -51,8 +51,8 @@ function checkAuth(
 
     useEffect(() => {
       if (!isLoading) {
-        if (isOnlyForUnauthorized && pathname === "/auth/register")
-          router.push("/auth/register/success");
+        if (pathname === "/auth/register" && isOnlyForUnauthorized)
+          router.push(`/auth/register/success`);
         else if (isOnlyForUnauthorized) router.push("/");
         else if (isOnlyForAuthorized) router.push(`/auth/login`);
         else if (forPsychologistAndHr) router.push(`/auth/register/success`);
@@ -81,7 +81,7 @@ function checkAuth(
       return <Component />;
     }
 
-    return <AccessDeniedErrorPage />;
+    return <AccessDeniedError />;
   };
 }
 

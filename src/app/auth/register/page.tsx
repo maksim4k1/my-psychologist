@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
@@ -17,6 +17,7 @@ import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
 import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 import AppLink from "@/components/UI/Links/AppLink";
+import { PopupsService } from "@/redux/services/popups";
 
 function RegisterPage() {
   const name = useInput("");
@@ -30,6 +31,14 @@ function RegisterPage() {
 
   const dispatch = useAppDispatch();
   const registerStatus = useAppSelector(selectAuthRegisterState);
+
+  useEffect(() => {
+    if (registerStatus.isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
+      );
+    }
+  }, [registerStatus.isSuccess, dispatch]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -96,8 +105,8 @@ function RegisterPage() {
           required
           disabled={registerStatus.isLoading}
         />
-        {registerStatus.isFailure && (
-          <FormErrorLabel>{registerStatus.error}</FormErrorLabel>
+        {registerStatus.isFailure && registerStatus.error && (
+          <FormErrorLabel>{registerStatus.error.message}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
