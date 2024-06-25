@@ -55,9 +55,10 @@ export const mapAgeToText = (age: number): string => {
 };
 
 export const mapDatetimeToText = (datetime: string): string => {
+  const offset = -(new Date().getTimezoneOffset() / 60);
   const date = new Date(datetime);
 
-  let hours = String(date.getHours());
+  let hours = String(date.getHours() + offset);
   hours = hours.length === 1 ? "0" + hours : hours;
 
   let minutes = String(date.getMinutes());
