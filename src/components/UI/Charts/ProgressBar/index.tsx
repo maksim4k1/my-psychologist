@@ -45,6 +45,7 @@ const ProgressBar: FunctionComponent<Props> = ({
           {borders.map((el, index) => {
             return (
               <div
+                key={el.leftBorder}
                 className={styles.range}
                 style={{
                   width: `${

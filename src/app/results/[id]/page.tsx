@@ -37,7 +37,7 @@ function ResultPage() {
   useEffect(() => {
     dispatch(TestsService.getTestInfo(id));
     dispatch(TestsService.getTestResults(id, searchParams.get("userId")));
-  }, [dispatch, id]);
+  }, [dispatch, id, searchParams]);
 
   useEffect(() => {
     if (testResults && testInfo) {

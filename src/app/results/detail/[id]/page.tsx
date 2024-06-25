@@ -29,13 +29,13 @@ function DetailResultPage() {
 
   useEffect(() => {
     dispatch(TestsService.getTestResult(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (getTestResultState.isSuccess && testResult) {
       dispatch(TestsService.getTestInfo(testResult.testId));
     }
-  }, [getTestResultState.isSuccess, testResult]);
+  }, [getTestResultState.isSuccess, dispatch, testResult]);
 
   return (
     <StateWrapper state={[getTestResultState, getTestInfoState]}>
@@ -47,7 +47,10 @@ function DetailResultPage() {
             <div className={styles.results}>
               {testInfo.scales.map((el) => {
                 return (
-                  <div className={styles.result}>
+                  <div
+                    className={styles.result}
+                    key={el.id}
+                  >
                     <h4 className={styles.resultTitle}>{el.title}</h4>
                     <ProgressBar
                       className={styles.scale}
@@ -65,7 +68,10 @@ function DetailResultPage() {
             <div className={styles.descriptionTestContainer}>
               {testInfo.scales.map((el) => {
                 return (
-                  <div className={styles.descriptionTextContainer}>
+                  <div
+                    className={styles.descriptionTextContainer}
+                    key={el.id}
+                  >
                     <h3 className={styles.descriptionTitle}>
                       {el.title} —{" "}
                       {testResult.scaleResults.find((res) => res.id === el.id)
