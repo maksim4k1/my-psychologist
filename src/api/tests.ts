@@ -1,12 +1,39 @@
 import { testsActions } from "@/redux/features/tests";
 import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../../config/api.config";
-import { TestShortData } from "@/redux/features/tests/types";
+import {
+  ScaleData,
+  TestData,
+  TestShortData,
+} from "@/redux/features/tests/types";
 
 interface ResponseTestShortData {
   test_id: string;
   title: string;
   description: string;
+}
+
+interface ResponseBorder {
+  left_border: number;
+  right_border: number;
+  color: string;
+  title: string;
+}
+
+interface ResponseScale {
+  scale_id: string;
+  title: string;
+  min: number;
+  max: number;
+  borders: ResponseBorder[];
+}
+
+interface ResponseTestData {
+  test_id: string;
+  title: string;
+  description: string;
+  short_desc: string;
+  scales: ResponseScale[];
 }
 
 export default class TestsService {
@@ -78,6 +105,42 @@ export default class TestsService {
         }
       } catch (err) {
         dispatch(testsActions.giveTestFailure(err));
+      }
+    };
+
+  static getTestInfo: Function =
+    (testId: string) => async (dispatch: AppDispatch) => {
+      dispatch(testsActions.getTestInfoLoading());
+
+      try {
+        const response = await customAxios.get<ResponseTestData>(
+          `/test/get_test_info/${testId}`,
+        );
+
+        const data: ResponseTestData = response.data;
+
+        const formattedData: TestData = {
+          id: data.test_id,
+          title: data.title,
+          description: data.description,
+          shortDescription: data.short_desc,
+          scales: data.scales.map((el: ResponseScale) => ({
+            id: el.scale_id,
+            title: el.title,
+            min: el.min,
+            max: el.max,
+            borders: el.borders.map((el: ResponseBorder) => ({
+              title: el.title,
+              leftBorder: el.left_border,
+              rightBorder: el.right_border,
+              color: el.color,
+            })),
+          })),
+        };
+
+        dispatch(testsActions.getTestInfoSuccess(formattedData));
+      } catch (err) {
+        dispatch(testsActions.getTestInfoFailure(err));
       }
     };
 }
