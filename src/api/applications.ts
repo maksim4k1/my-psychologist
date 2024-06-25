@@ -1,11 +1,12 @@
 import { applicationsActions } from "@/redux/features/applications";
 import { AppDispatch } from "@/redux/store";
-import { customAxios } from "../../config/api.config";
+import { HttpError, customAxios } from "../../config/api.config";
 import {
   ApplicationData,
   ApplicationProfileData,
 } from "@/redux/features/applications/types";
 import { calculateAge } from "@/utils/dataUtils";
+import { instanceofHttpError } from "@/utils/apiUtils";
 
 interface ApplicationResponse {
   app_id: string;
@@ -41,7 +42,9 @@ export default class ApplicationsService {
 
       dispatch(applicationsActions.getApplicationsSuccess(formattedData));
     } catch (err) {
-      dispatch(applicationsActions.getApplicationsError(err));
+      if (instanceofHttpError(err)) {
+        dispatch(applicationsActions.getApplicationsFailure(err));
+      }
     }
   };
 
@@ -68,7 +71,9 @@ export default class ApplicationsService {
 
         dispatch(applicationsActions.getApplicationSuccess(formattedData));
       } catch (err) {
-        dispatch(applicationsActions.getApplicationFailure(err));
+        if (instanceofHttpError(err)) {
+          dispatch(applicationsActions.getApplicationFailure(err));
+        }
       }
     };
 
@@ -87,7 +92,9 @@ export default class ApplicationsService {
 
         dispatch(applicationsActions.confirmApplicationSuccess(response.data));
       } catch (err) {
-        dispatch(applicationsActions.confirmApplicationError(err));
+        if (instanceofHttpError(err)) {
+          dispatch(applicationsActions.confirmApplicationFailure(err));
+        }
       }
     };
 }

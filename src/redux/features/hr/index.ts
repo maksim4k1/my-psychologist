@@ -1,4 +1,3 @@
-import { Actions } from "@/redux/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { HrState } from "./types";
 import {
@@ -29,6 +28,6 @@ const hrSlice = createSlice({
   },
 });
 
-export const hrActions: Actions = hrSlice.actions;
+export const hrActions = hrSlice.actions;
 
 export default hrSlice.reducer;

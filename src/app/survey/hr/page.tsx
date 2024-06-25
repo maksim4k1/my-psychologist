@@ -32,7 +32,7 @@ function HrSurveyPage() {
       );
       router.push("/cabinet");
     }
-  }, [sendHrSurveyState.isSuccess, router]);
+  }, [sendHrSurveyState.isSuccess, dispatch, router]);
 
   function onSubmitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

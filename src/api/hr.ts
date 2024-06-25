@@ -2,7 +2,9 @@ import { hrActions } from "@/redux/features/hr";
 import { SendHrSurveyPayload } from "@/redux/features/hr/types";
 import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../../config/api.config";
-import { authActions } from "@/redux/features/auth";
+import { getToken } from "@/storage/token";
+import { instanceofHttpError } from "@/utils/apiUtils";
+import AuthService from "./auth";
 
 export default class HrService {
   static sendHrSurvey: Function =
@@ -22,10 +24,12 @@ export default class HrService {
 
         const data = response.data;
 
+        await dispatch(AuthService.loginByToken(getToken()));
         dispatch(hrActions.sendHrSurveySuccess(data));
-        dispatch(authActions.loginSuccess({ role: 3 }));
       } catch (err) {
-        dispatch(hrActions.sendHrSurveyFailure(err));
+        if (instanceofHttpError(err)) {
+          dispatch(hrActions.sendHrSurveyFailure(err));
+        }
       }
     };
 }

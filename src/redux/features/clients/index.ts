@@ -1,4 +1,3 @@
-import { Actions } from "@/redux/store";
 import {
   createDefaultState,
   createFailureState,
@@ -46,6 +45,6 @@ const clientsSlice = createSlice({
   },
 });
 
-export const clientsActions: Actions = clientsSlice.actions;
+export const clientsActions = clientsSlice.actions;
 
 export default clientsSlice.reducer;

@@ -4,9 +4,8 @@ import {
   createSuccessState,
   createFailureState,
 } from "../../../utils/stateCreators";
-import { Actions } from "./../../store";
 import { ACCESS } from "./../../../../config/access.config";
-import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState, UserData } from "./types";
 import { getRole } from "@/utils/apiUtils";
 import { saveToken } from "@/storage/token";
@@ -19,7 +18,7 @@ const initialState: AuthState = {
   registerState: createDefaultState(),
 };
 
-const authSlice: Slice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -44,7 +43,12 @@ const authSlice: Slice = createSlice({
     registerLoading: (state) => {
       state.registerState = createLoadingState();
     },
-    registerSuccess: (state) => {
+    registerSuccess: (state, { payload }: PayloadAction<UserData>) => {
+      state.isAuth = true;
+      state.role = getRole(payload.role);
+      if (payload.token) {
+        saveToken(payload.token);
+      }
       state.registerState = createSuccessState();
     },
     registerFailure: (state, { payload }: PayloadAction<HttpError>) => {
@@ -56,6 +60,6 @@ const authSlice: Slice = createSlice({
   },
 });
 
-export const authActions: Actions = authSlice.actions;
+export const authActions = authSlice.actions;
 
 export default authSlice.reducer;

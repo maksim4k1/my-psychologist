@@ -22,8 +22,5 @@ const store: Store = configureStore({
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
-export interface Actions {
-  [key: string]: Function;
-}
 
 export default store;

@@ -6,6 +6,7 @@ import {
   TestData,
   TestShortData,
 } from "@/redux/features/tests/types";
+import { instanceofHttpError } from "@/utils/apiUtils";
 
 interface ResponseTestShortData {
   test_id: string;
@@ -48,7 +49,7 @@ export default class TestsService {
 
         const data = response.data;
 
-        const formattedData: TestShortData = data.map(
+        const formattedData: TestShortData[] = data.map(
           (el: ResponseTestShortData) => ({
             id: el.test_id,
             title: el.title,
@@ -58,7 +59,9 @@ export default class TestsService {
 
         dispatch(testsActions.getTestsByUserIdSuccess(formattedData));
       } catch (err) {
-        dispatch(testsActions.getTestsByUserIdFailure(err));
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.getTestsByUserIdFailure(err));
+        }
       }
     };
 
@@ -70,7 +73,7 @@ export default class TestsService {
 
       const data = response.data;
 
-      const formattedData: TestShortData = data.map(
+      const formattedData: TestShortData[] = data.map(
         (el: ResponseTestShortData) => ({
           id: el.test_id,
           title: el.title,
@@ -80,7 +83,9 @@ export default class TestsService {
 
       dispatch(testsActions.getTestsSuccess(formattedData));
     } catch (err) {
-      dispatch(testsActions.getTestsFailure(err));
+      if (instanceofHttpError(err)) {
+        dispatch(testsActions.getTestsFailure(err));
+      }
     }
   };
 
@@ -104,7 +109,9 @@ export default class TestsService {
           dispatch(testsActions.giveTestFailure(data));
         }
       } catch (err) {
-        dispatch(testsActions.giveTestFailure(err));
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.giveTestFailure(err));
+        }
       }
     };
 
@@ -140,7 +147,9 @@ export default class TestsService {
 
         dispatch(testsActions.getTestInfoSuccess(formattedData));
       } catch (err) {
-        dispatch(testsActions.getTestInfoFailure(err));
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.getTestInfoFailure(err));
+        }
       }
     };
 }

@@ -21,6 +21,10 @@ import {
   mapSearchParamsToObject,
 } from "@/utils/urlUtils";
 import HttpErrorWrapper from "@/components/wrappers/HttpErrorWrapper";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import TestsService from "@/api/tests";
+import StateWrapper from "@/components/wrappers/StateWrapper";
+import { selectGetTestInfoState } from "@/redux/features/tests/selectors";
 
 const dates: DateData[] = [
   {
@@ -73,6 +77,12 @@ function PsychologistClientsOverallResultPage() {
   const searchParams = useSearchParams();
   const datesCheckboxes = useCheckbox();
   const [data, setData] = useState<RadarChartItem[]>([]);
+  const dispatch = useAppDispatch();
+  const getTestInfoState = useAppSelector(selectGetTestInfoState);
+
+  useEffect(() => {
+    dispatch(TestsService.getTestInfo(id));
+  }, [dispatch, id]);
 
   useEffect(() => {
     setData(mapToRadarChartData(dates, subjects, datesCheckboxes.value));
@@ -84,28 +94,30 @@ function PsychologistClientsOverallResultPage() {
       error={{ status: 400, message: "" }}
     >
       <Container>
-        <PageTitle className={styles.title}>История теста: Маслач</PageTitle>
-        <RadarChart
-          data={data}
-          className={styles.radarChart}
-        />
-        <ul>
-          {dates.map((el) => {
-            return (
-              <ListItemWithSwitch
-                onChange={datesCheckboxes.onChange}
-                className={styles.listItem}
-                value={el.date}
-                key={el.date}
-                label={el.date}
-                link={addQueryParams(`/results/detail/${id}`, {
-                  date: el.date,
-                  ...mapSearchParamsToObject(searchParams),
-                })}
-              />
-            );
-          })}
-        </ul>
+        <StateWrapper state={getTestInfoState}>
+          <PageTitle className={styles.title}>История теста: Маслач</PageTitle>
+          <RadarChart
+            data={data}
+            className={styles.radarChart}
+          />
+          <ul>
+            {dates.map((el) => {
+              return (
+                <ListItemWithSwitch
+                  onChange={datesCheckboxes.onChange}
+                  className={styles.listItem}
+                  value={el.date}
+                  key={el.date}
+                  label={el.date}
+                  link={addQueryParams(`/results/detail/${id}`, {
+                    date: el.date,
+                    ...mapSearchParamsToObject(searchParams),
+                  })}
+                />
+              );
+            })}
+          </ul>
+        </StateWrapper>
       </Container>
     </HttpErrorWrapper>
   );

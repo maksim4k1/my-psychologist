@@ -1,11 +1,10 @@
-import { Actions } from "@/redux/store";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TestData, TestShortData, TestsState } from "./types";
 import { HttpError } from "../../../../config/api.config";
 
@@ -19,7 +18,7 @@ const initialState: TestsState = {
   testInfo: null,
 };
 
-const testsSlice: Slice = createSlice({
+const testsSlice = createSlice({
   name: "tests",
   initialState,
   reducers: {
@@ -74,6 +73,6 @@ const testsSlice: Slice = createSlice({
   },
 });
 
-export const testsActions: Actions = testsSlice.actions;
+export const testsActions = testsSlice.actions;
 
 export default testsSlice.reducer;

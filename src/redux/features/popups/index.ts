@@ -1,4 +1,3 @@
-import { Actions } from "@/redux/store";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 import { PopupsState } from "./types";
 
@@ -9,7 +8,7 @@ const initialState: PopupsState = {
   },
 };
 
-const popupsSlice: Slice = createSlice({
+const popupsSlice = createSlice({
   name: "popups",
   initialState,
   reducers: {
@@ -23,6 +22,6 @@ const popupsSlice: Slice = createSlice({
   },
 });
 
-export const popupsActions: Actions = popupsSlice.actions;
+export const popupsActions = popupsSlice.actions;
 
 export default popupsSlice.reducer;

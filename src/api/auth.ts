@@ -1,8 +1,10 @@
+import { HttpError } from "./../../config/api.config";
 import { LoginPayload, RegisterPayload } from "@/redux/features/auth/types";
 import { AppDispatch } from "./../redux/store";
 import { authActions } from "@/redux/features/auth/";
 import { customAxios } from "../../config/api.config";
 import { deleteToken, saveToken } from "@/storage/token";
+import { instanceofHttpError } from "@/utils/apiUtils";
 
 export default class AuthService {
   static login: Function =
@@ -13,14 +15,11 @@ export default class AuthService {
 
         const data = response.data;
 
-        if (typeof data === "string") {
-          dispatch(authActions.loginFailure(data));
-        } else {
-          dispatch(authActions.loginSuccess(data));
-          saveToken(data.token);
-        }
+        dispatch(authActions.loginSuccess(data));
       } catch (err) {
-        dispatch(authActions.loginFailure(err));
+        if (instanceofHttpError(err)) {
+          dispatch(authActions.loginFailure(err));
+        }
       }
     };
 
@@ -38,13 +37,11 @@ export default class AuthService {
 
         const data = response.data;
 
-        if (typeof data === "string") {
-          dispatch(authActions.registerFailure(data));
-        } else {
-          dispatch(authActions.registerSuccess());
-        }
+        dispatch(authActions.registerSuccess(data));
       } catch (err) {
-        dispatch(authActions.registerFailure(err));
+        if (instanceofHttpError(err)) {
+          dispatch(authActions.registerFailure(err));
+        }
       }
     };
 
@@ -56,15 +53,12 @@ export default class AuthService {
 
         const data = response.data;
 
-        if (typeof data === "string") {
-          deleteToken();
-          dispatch(authActions.loginFailure());
-        } else {
-          dispatch(authActions.loginSuccess(data));
-        }
+        dispatch(authActions.loginSuccess(data));
       } catch (err) {
-        deleteToken();
-        dispatch(authActions.loginFailure());
+        if (instanceofHttpError(err)) {
+          deleteToken();
+          dispatch(authActions.loginFailure(err));
+        }
       }
     };
 }

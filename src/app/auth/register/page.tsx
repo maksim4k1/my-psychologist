@@ -18,8 +18,6 @@ import { checkFormDataValidation } from "@/utils/formUtils";
 import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 import AppLink from "@/components/UI/Links/AppLink";
 import { PopupsService } from "@/redux/services/popups";
-import { useRouter } from "next/navigation";
-import { authActions } from "@/redux/features/auth";
 
 function RegisterPage() {
   const name = useInput("");
@@ -31,21 +29,16 @@ function RegisterPage() {
     confirmPassword: password.value,
   });
 
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const registerStatus = useAppSelector(selectAuthRegisterState);
 
   useEffect(() => {
     if (registerStatus.isSuccess) {
       dispatch(
-        PopupsService.openSnackbarWithDelay(
-          "Регистрация прошла успешно! Авторизуйтесь в системе",
-        ),
+        PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
       );
-      dispatch(authActions.registerStateDefault());
-      router.push("/auth/login");
     }
-  }, [registerStatus.isSuccess]);
+  }, [registerStatus.isSuccess, dispatch]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();

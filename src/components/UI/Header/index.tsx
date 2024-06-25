@@ -11,13 +11,16 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuthIsAuth,
   selectAuthLoginState,
+  selectRole,
 } from "@/redux/features/auth/selectors";
 import { getToken } from "@/storage/token";
 import AuthService from "@/api/auth";
+import { ACCESS } from "../../../../config/access.config";
 
 const Header: FunctionComponent = ({}) => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const { isLoading } = useAppSelector(selectAuthLoginState);
+  const userRole = useAppSelector(selectRole);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -64,7 +67,9 @@ const Header: FunctionComponent = ({}) => {
         </nav> */}
         {isAuth ? (
           <Link
-            href="/cabinet"
+            href={
+              userRole === ACCESS.client ? "/auth/register/success" : "/cabinet"
+            }
             className={styles.profileContainer}
           >
             <ProfileImage

@@ -16,7 +16,7 @@ customAxios.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
+  (error): Promise<HttpError> => {
     const httpError: HttpError = {
       status: 500,
       message: "",

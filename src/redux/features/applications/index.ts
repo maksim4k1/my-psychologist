@@ -1,11 +1,10 @@
-import { Actions } from "@/redux/store";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   ApplicationData,
   ApplicationProfileData,
@@ -21,7 +20,7 @@ const initialState: ApplicationsState = {
   confirmApplicationState: createDefaultState(),
 };
 
-const applicationsSlice: Slice = createSlice({
+const applicationsSlice = createSlice({
   name: "applications",
   initialState,
   reducers: {
@@ -68,6 +67,6 @@ const applicationsSlice: Slice = createSlice({
   },
 });
 
-export const applicationsActions: Actions = applicationsSlice.actions;
+export const applicationsActions = applicationsSlice.actions;
 
 export default applicationsSlice.reducer;
