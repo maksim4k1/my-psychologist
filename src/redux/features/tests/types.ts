@@ -51,4 +51,6 @@ export interface TestsState {
   testInfo: null | TestData;
   getTestResultsState: StatusState;
   testResults: null | TestResultData[];
+  getTestResultState: StatusState;
+  testResult: null | TestResultData;
 }

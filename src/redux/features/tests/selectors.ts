@@ -43,3 +43,11 @@ export const selectTestResults = (
 export const selectGetTestResultsState = (state: RootState): StatusState => {
   return selectTestsModule(state).getTestResultsState;
 };
+
+export const selectTestResult = (state: RootState): TestResultData | null => {
+  return selectTestsModule(state).testResult;
+};
+
+export const selectGetTestResultState = (state: RootState): StatusState => {
+  return selectTestsModule(state).getTestResultState;
+};

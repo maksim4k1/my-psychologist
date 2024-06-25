@@ -18,6 +18,8 @@ const initialState: TestsState = {
   testInfo: null,
   getTestResultsState: createDefaultState(),
   testResults: null,
+  getTestResultState: createDefaultState(),
+  testResult: null,
 };
 
 const testsSlice = createSlice({
@@ -85,6 +87,20 @@ const testsSlice = createSlice({
     },
     getTestResultsFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getTestResultsState = createFailureState(payload);
+    },
+
+    getTestResultLoading: (state) => {
+      state.getTestResultState = createLoadingState();
+    },
+    getTestResultSuccess: (
+      state,
+      { payload }: PayloadAction<TestResultData>,
+    ) => {
+      state.getTestResultState = createSuccessState();
+      state.testResult = payload;
+    },
+    getTestResultFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.getTestResultState = createFailureState(payload);
     },
   },
 });
