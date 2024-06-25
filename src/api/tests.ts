@@ -4,9 +4,11 @@ import { customAxios } from "../../config/api.config";
 import {
   ScaleData,
   TestData,
+  TestResultData,
   TestShortData,
 } from "@/redux/features/tests/types";
 import { instanceofHttpError } from "@/utils/apiUtils";
+import { mapDatetimeToText } from "@/utils/dataUtils";
 
 interface ResponseTestShortData {
   test_id: string;
@@ -35,6 +37,18 @@ interface ResponseTestData {
   description: string;
   short_desc: string;
   scales: ResponseScale[];
+}
+
+interface ResponseTestResultData {
+  test_id: string;
+  test_result_id: string;
+  datetime: string;
+  scale_results: ResponseScaleResultData[];
+}
+
+interface ResponseScaleResultData {
+  scale_id: string;
+  score: number;
 }
 
 export default class TestsService {
@@ -149,6 +163,35 @@ export default class TestsService {
       } catch (err) {
         if (instanceofHttpError(err)) {
           dispatch(testsActions.getTestInfoFailure(err));
+        }
+      }
+    };
+
+  static getTestResults: Function =
+    (testId: string, userId: string) => async (dispatch: AppDispatch) => {
+      dispatch(testsActions.getTestResultsLoading());
+
+      try {
+        const response = await customAxios.get<ResponseTestResultData[]>(
+          `/test/get_test_results/${testId}?user_id=${userId}`,
+        );
+
+        const data: ResponseTestResultData[] = response.data;
+
+        const formattedData: TestResultData[] = data.map((el) => ({
+          id: el.test_result_id,
+          testId: el.test_id,
+          datetime: mapDatetimeToText(el.datetime),
+          scaleResults: el.scale_results.map((scalse) => ({
+            id: scalse.scale_id,
+            score: scalse.score,
+          })),
+        }));
+
+        dispatch(testsActions.getTestResultsSuccess(formattedData));
+      } catch (err) {
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.getTestResultsFailure(err));
         }
       }
     };
