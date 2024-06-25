@@ -6,10 +6,35 @@ export interface TestShortData {
   description: string;
 }
 
+export interface TestData {
+  id: string;
+  title: string;
+  description: string;
+  shortDescription: string;
+  scales: ScaleData[];
+}
+
+export interface ScaleData {
+  id: string;
+  title: string;
+  min: number;
+  max: number;
+  borders: BorderData[];
+}
+
+export interface BorderData {
+  title: string;
+  leftBorder: number;
+  rightBorder: number;
+  color: string;
+}
+
 export interface TestsState {
   tests: TestShortData[];
   getTestsState: StatusState;
   testsByUserId: TestShortData[];
   getTestsByUserIdState: StatusState;
   giveTestState: StatusState;
+  getTestInfoState: StatusState;
+  testInfo: null | TestData;
 }
