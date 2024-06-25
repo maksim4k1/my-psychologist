@@ -45,86 +45,43 @@ function DetailResultPage() {
           <>
             <Subtitle className={styles.subtitle}>{testInfo.title}</Subtitle>
             <div className={styles.results}>
-              <div className={styles.result}>
-                <h4 className={styles.resultTitle}>Эмоциональное истощение</h4>
-                <ProgressBar
-                  className={styles.scale}
-                  value={15}
-                  maxGood={15}
-                  maxAverage={24}
-                  maxBad={54}
-                />
-              </div>
-              <div className={styles.result}>
-                <h4 className={styles.resultTitle}>Деперсонализация</h4>
-                <ProgressBar
-                  className={styles.scale}
-                  value={25}
-                  maxGood={5}
-                  maxAverage={10}
-                  maxBad={30}
-                />
-              </div>
-              <div className={styles.result}>
-                <h4 className={styles.resultTitle}>
-                  Редукция проф. достижений
-                </h4>
-                <ProgressBar
-                  className={styles.scale}
-                  value={35}
-                  maxBad={30}
-                  maxAverage={36}
-                  maxGood={40}
-                  isReversed={true}
-                />
-              </div>
+              {testInfo.scales.map((el) => {
+                return (
+                  <div className={styles.result}>
+                    <h4 className={styles.resultTitle}>{el.title}</h4>
+                    <ProgressBar
+                      className={styles.scale}
+                      value={
+                        testResult.scaleResults.find((res) => res.id === el.id)
+                          ?.score ?? 0
+                      }
+                      max={el.max}
+                      borders={el.borders}
+                    />
+                  </div>
+                );
+              })}
             </div>
             <div className={styles.descriptionTestContainer}>
-              <div className={styles.descriptionTextContainer}>
-                <h3 className={styles.descriptionTitle}>
-                  Эмоциональное истощение — 15
-                </h3>
-                <p className={styles.descriptionText}>
-                  Эмоциональное истощение рассматривается как основная
-                  составляющая выгорания и проявляется в переживаниях сниженного
-                  эмоционального тонуса, повышенной психической истощаемости и
-                  аффективной лабильности, утраты интереса и позитивных чувств к
-                  окружающим, ощущении «пресыщенности» работой,
-                  неудовлетворенностью жизнью в целом.
-                </p>
-              </div>
-
-              <div className={styles.descriptionTextContainer}>
-                <h3 className={styles.descriptionTitle}>
-                  Деперсонализация — 25
-                </h3>
-                <p className={styles.descriptionText}>
-                  Деперсонализация проявляется в эмоциональном отстранении и
-                  безразличии, формальном выполнении профессиональных
-                  обязанностей без личностной включенности и сопереживания, а в
-                  отдельных случаях – в негативизме и циничном отношении. В
-                  контексте синдрома перегорания «деперсонализация» предполагает
-                  формирование особых, деструктивных взаимоотношений с
-                  окружающими людьми.
-                </p>
-              </div>
-
-              <div className={styles.descriptionTextContainer}>
-                <h3 className={styles.descriptionTitle}>
-                  Редукция профессиональных достижений — 24
-                </h3>
-                <p className={styles.descriptionText}>
-                  Редукция профессиональных достижений отражает степень
-                  удовлетворенности человека собой как личностью и как
-                  профессионалом. Неудовлетворительное значение этого показателя
-                  отражает тенденцию к негативной оценке своей компетентности и
-                  продуктивности и, как следствие, – снижение профессиональной
-                  мотивации, нарастание негативизма в отношении служебных
-                  обязанностей, тенденция к снятию с себя ответственности, к
-                  изоляции от окружающих, отстраненности и неучастия, избегания
-                  работы сначала психологически, а затем физически.
-                </p>
-              </div>
+              {testInfo.scales.map((el) => {
+                return (
+                  <div className={styles.descriptionTextContainer}>
+                    <h3 className={styles.descriptionTitle}>
+                      {el.title} —{" "}
+                      {testResult.scaleResults.find((res) => res.id === el.id)
+                        ?.score ?? 0}
+                    </h3>
+                    <p className={styles.descriptionText}>
+                      Эмоциональное истощение рассматривается как основная
+                      составляющая выгорания и проявляется в переживаниях
+                      сниженного эмоционального тонуса, повышенной психической
+                      истощаемости и аффективной лабильности, утраты интереса и
+                      позитивных чувств к окружающим, ощущении «пресыщенности»
+                      работой, неудовлетворенностью жизнью в целом.
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </>
         )}
