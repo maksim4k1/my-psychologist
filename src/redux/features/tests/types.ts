@@ -29,6 +29,18 @@ export interface BorderData {
   color: string;
 }
 
+export interface TestResultData {
+  id: string;
+  testId: string;
+  datetime: string;
+  scaleResults: ScaleResultData[];
+}
+
+export interface ScaleResultData {
+  id: string;
+  score: number;
+}
+
 export interface TestsState {
   tests: TestShortData[];
   getTestsState: StatusState;
@@ -37,4 +49,6 @@ export interface TestsState {
   giveTestState: StatusState;
   getTestInfoState: StatusState;
   testInfo: null | TestData;
+  getTestResultsState: StatusState;
+  testResults: null | TestResultData[];
 }

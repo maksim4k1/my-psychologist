@@ -1,5 +1,5 @@
 import { RootState } from "@/redux/store";
-import { TestData, TestShortData, TestsState } from "./types";
+import { TestData, TestResultData, TestShortData, TestsState } from "./types";
 import { StatusState } from "@/utils/stateCreators";
 
 const selectTestsModule = (state: RootState): TestsState => {
@@ -32,4 +32,14 @@ export const selectTestInfo = (state: RootState): TestData | null => {
 
 export const selectGetTestInfoState = (state: RootState): StatusState => {
   return selectTestsModule(state).getTestInfoState;
+};
+
+export const selectTestResults = (
+  state: RootState,
+): TestResultData[] | null => {
+  return selectTestsModule(state).testResults;
+};
+
+export const selectGetTestResultsState = (state: RootState): StatusState => {
+  return selectTestsModule(state).getTestResultsState;
 };

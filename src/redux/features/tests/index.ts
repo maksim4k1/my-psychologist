@@ -5,7 +5,7 @@ import {
   createSuccessState,
 } from "@/utils/stateCreators";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TestData, TestShortData, TestsState } from "./types";
+import { TestData, TestResultData, TestShortData, TestsState } from "./types";
 import { HttpError } from "../../../../config/api.config";
 
 const initialState: TestsState = {
@@ -16,6 +16,8 @@ const initialState: TestsState = {
   giveTestState: createDefaultState(),
   getTestInfoState: createDefaultState(),
   testInfo: null,
+  getTestResultsState: createDefaultState(),
+  testResults: null,
 };
 
 const testsSlice = createSlice({
@@ -69,6 +71,20 @@ const testsSlice = createSlice({
     },
     getTestInfoFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getTestInfoState = createFailureState(payload);
+    },
+
+    getTestResultsLoading: (state) => {
+      state.getTestResultsState = createLoadingState();
+    },
+    getTestResultsSuccess: (
+      state,
+      { payload }: PayloadAction<TestResultData[]>,
+    ) => {
+      state.getTestResultsState = createSuccessState();
+      state.testResults = payload;
+    },
+    getTestResultsFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.getTestResultsState = createFailureState(payload);
     },
   },
 });
