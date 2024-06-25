@@ -1,3 +1,18 @@
+const monthes = [
+  "января",
+  "февраля",
+  "марта",
+  "апреля",
+  "мая",
+  "июня",
+  "июля",
+  "августа",
+  "сентября",
+  "октября",
+  "ноябра",
+  "декабря",
+];
+
 export const calculateAge = (date: string): number => {
   if (isNaN(Date.parse(date))) {
     return 0;
@@ -37,4 +52,20 @@ export const mapAgeToText = (age: number): string => {
     return ageStr + " " + ga;
 
   return ageStr + " " + l;
+};
+
+export const mapDatetimeToText = (datetime: string): string => {
+  const date = new Date(datetime);
+
+  let hours = String(date.getHours());
+  hours = hours.length === 1 ? "0" + hours : hours;
+
+  let minutes = String(date.getMinutes());
+  minutes = minutes.length === 1 ? "0" + minutes : minutes;
+
+  const result = `${date.getDate()} ${
+    monthes[date.getMonth()]
+  } ${date.getFullYear()}, ${hours}:${minutes}
+  `;
+  return result;
 };
