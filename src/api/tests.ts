@@ -195,4 +195,33 @@ export default class TestsService {
         }
       }
     };
+
+  static getTestResult: Function =
+    (testResultId: string) => async (dispatch: AppDispatch) => {
+      dispatch(testsActions.getTestResultLoading());
+
+      try {
+        const response = await customAxios.get<ResponseTestResultData>(
+          `/test/get_test_result/${testResultId}`,
+        );
+
+        const data: ResponseTestResultData = response.data;
+
+        const formattedData: TestResultData = {
+          id: data.test_result_id,
+          testId: data.test_id,
+          datetime: mapDatetimeToText(data.datetime),
+          scaleResults: data.scale_results.map((scalse) => ({
+            id: scalse.scale_id,
+            score: scalse.score,
+          })),
+        };
+
+        dispatch(testsActions.getTestResultSuccess(formattedData));
+      } catch (err) {
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.getTestResultFailure(err));
+        }
+      }
+    };
 }
