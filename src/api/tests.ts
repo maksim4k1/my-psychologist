@@ -173,7 +173,9 @@ export default class TestsService {
 
       try {
         const response = await customAxios.get<ResponseTestResultData[]>(
-          `/test/get_test_results/${testId}?user_id=${userId}`,
+          `/test/get_test_results/${testId}${
+            userId ? `?user_id=${userId}` : ""
+          }`,
         );
 
         const data: ResponseTestResultData[] = response.data;
