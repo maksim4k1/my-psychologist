@@ -1,4 +1,6 @@
-import React, { FunctionComponent } from "react";
+"use client";
+
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {
   Radar,
   RadarChart as RechartsRadarChart,
@@ -9,10 +11,13 @@ import {
   Text,
 } from "recharts";
 import styles from "./styles.module.scss";
-import { RadarChartItem } from "@/utils/chartUtils";
+import { RadarChartItem, mapToRadarChartData } from "@/utils/chartUtils";
+import { ScaleData, TestResultData } from "@/redux/features/tests/types";
 
 interface Props {
-  data: RadarChartItem[];
+  results: TestResultData[];
+  scales: ScaleData[];
+  values: string[];
   className?: string;
 }
 
@@ -40,10 +45,23 @@ const TextPolarAngleAxis = ({ payload, x, y, cx, cy, ...rest }: TextProps) => {
   );
 };
 
-const RadarChart: FunctionComponent<Props> = ({ data, className = "" }) => {
+const RadarChart: FunctionComponent<Props> = ({
+  results,
+  scales,
+  values,
+  className = "",
+}) => {
+  const [radarData, setRadarData] = useState<RadarChartItem[]>([]);
+
+  useEffect(() => {
+    if (results && scales) {
+      setRadarData(mapToRadarChartData(results, scales, values));
+    }
+  }, [values, results, scales]);
+
   const dataSets = [];
 
-  for (let key in data[0]) {
+  for (let key in radarData[0]) {
     if (key !== "subject" && key !== "fullMark") {
       dataSets.push(key);
     }
@@ -54,7 +72,7 @@ const RadarChart: FunctionComponent<Props> = ({ data, className = "" }) => {
       <RechartsRadarChart
         className={styles.radarChart}
         outerRadius={"80%"}
-        data={data}
+        data={radarData}
         cx="50%"
         cy="50%"
       >
@@ -87,7 +105,7 @@ const RadarChart: FunctionComponent<Props> = ({ data, className = "" }) => {
             <Radar
               isAnimationActive={false}
               key={el}
-              dot={{ r: 5 }}
+              dot={{ r: 5, className: styles.point }}
               className={styles.radarField}
               name={el}
               dataKey={el}
