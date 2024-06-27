@@ -67,6 +67,14 @@ function DetailResultPage() {
             </div>
             <div className={styles.descriptionTestContainer}>
               {testInfo.scales.map((el) => {
+                const score =
+                  testResult.scaleResults.find((res) => res.id === el.id)
+                    ?.score ?? 0;
+
+                const border = el.borders.find(
+                  (el) => score >= el.leftBorder && score <= el.rightBorder,
+                );
+
                 return (
                   <div
                     className={styles.descriptionTextContainer}
@@ -74,8 +82,11 @@ function DetailResultPage() {
                   >
                     <h3 className={styles.descriptionTitle}>
                       {el.title} —{" "}
-                      {testResult.scaleResults.find((res) => res.id === el.id)
-                        ?.score ?? 0}
+                      {border && (
+                        <span style={{ color: border.color }}>
+                          {score} ({border.title})
+                        </span>
+                      )}
                     </h3>
                     <p className={styles.descriptionText}>
                       Эмоциональное истощение рассматривается как основная
