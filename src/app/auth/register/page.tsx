@@ -18,6 +18,8 @@ import { checkFormDataValidation } from "@/utils/formUtils";
 import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 import AppLink from "@/components/UI/Links/AppLink";
 import { PopupsService } from "@/redux/services/popups";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { authActions } from "@/redux/features/auth";
 
 function RegisterPage() {
   const name = useInput("");
@@ -54,6 +56,13 @@ function RegisterPage() {
       dispatch(AuthService.register(formData));
     }
   };
+
+  useSetDefaultState(authActions.registerSetDefaultState(), [
+    name.value,
+    email.value,
+    password.value,
+    confirmPassword.value,
+  ]);
 
   return (
     <Container>

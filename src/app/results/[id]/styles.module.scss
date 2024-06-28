@@ -21,3 +21,7 @@
 .listItem {
   background-color: transparent;
 }
+
+.errorLabel {
+  @include titleLarge;
+}

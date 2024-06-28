@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
@@ -18,6 +18,8 @@ import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
 import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 import AppLink from "@/components/UI/Links/AppLink";
+import { authActions } from "@/redux/features/auth";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 
 function LoginPage() {
   const email = useInput("", { isEmpty: true, isEmail: true });
@@ -38,6 +40,11 @@ function LoginPage() {
       dispatch(AuthService.login(formData));
     }
   };
+
+  useSetDefaultState(authActions.loginSetDefaultState(), [
+    email.value,
+    password.value,
+  ]);
 
   return (
     <Container>

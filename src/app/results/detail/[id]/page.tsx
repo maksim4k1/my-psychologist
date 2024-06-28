@@ -18,6 +18,8 @@ import {
 import { useEffect } from "react";
 import TestsService from "@/api/tests";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 
 function DetailResultPage() {
   const { id } = useParams();
@@ -36,6 +38,9 @@ function DetailResultPage() {
       dispatch(TestsService.getTestInfo(testResult.testId));
     }
   }, [getTestResultState.isSuccess, dispatch, testResult]);
+
+  useSetDefaultState(testsActions.getTestInfoSetDefaultState());
+  useSetDefaultState(testsActions.getTestResultSetDefaultState());
 
   return (
     <StateWrapper state={[getTestResultState, getTestInfoState]}>
@@ -88,14 +93,6 @@ function DetailResultPage() {
                         </span>
                       )}
                     </h3>
-                    <p className={styles.descriptionText}>
-                      Эмоциональное истощение рассматривается как основная
-                      составляющая выгорания и проявляется в переживаниях
-                      сниженного эмоционального тонуса, повышенной психической
-                      истощаемости и аффективной лабильности, утраты интереса и
-                      позитивных чувств к окружающим, ощущении «пресыщенности»
-                      работой, неудовлетворенностью жизнью в целом.
-                    </p>
                   </div>
                 );
               })}

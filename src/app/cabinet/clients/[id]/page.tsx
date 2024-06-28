@@ -25,6 +25,9 @@ import {
 } from "@/redux/features/tests/selectors";
 import { addQueryParams } from "@/utils/urlUtils";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { testsActions } from "@/redux/features/tests";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { clientsActions } from "@/redux/features/clients";
 
 function PsychologistClientPage() {
   const { id } = useParams();
@@ -39,6 +42,9 @@ function PsychologistClientPage() {
     dispatch(ClientsService.getClient(id));
     dispatch(TestsService.getTestsByUserId(id));
   }, [dispatch, id]);
+
+  useSetDefaultState(clientsActions.getClientSetDefaultState());
+  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState());
 
   return (
     <Container>

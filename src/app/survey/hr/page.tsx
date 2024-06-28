@@ -17,6 +17,8 @@ import { SendHrSurveyPayload } from "@/redux/features/hr/types";
 import { selectSendHrSurveyState } from "@/redux/features/hr/selectors";
 import { useRouter } from "next/navigation";
 import { PopupsService } from "@/redux/services/popups";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { hrActions } from "@/redux/features/hr";
 
 function HrSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
@@ -49,6 +51,8 @@ function HrSurveyPage() {
       dispatch(HrService.sendHrSurvey(formData));
     }
   }
+
+  useSetDefaultState(hrActions.sendHrSurveySetDefaultState());
 
   return (
     <Container>

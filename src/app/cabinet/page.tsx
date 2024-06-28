@@ -24,6 +24,9 @@ import {
 } from "@/redux/features/clients/selectors";
 import { selectRole } from "@/redux/features/auth/selectors";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { applicationsActions } from "@/redux/features/applications";
+import { clientsActions } from "@/redux/features/clients";
 
 function PsychologistPage() {
   const dispatch = useAppDispatch();
@@ -39,6 +42,9 @@ function PsychologistPage() {
     dispatch(ApplicationsService.getApplications());
     dispatch(ClientsService.getClients());
   }, [dispatch]);
+
+  useSetDefaultState(applicationsActions.getApplicationsSetDefaultState());
+  useSetDefaultState(clientsActions.getClientsSetDefaultState());
 
   return (
     <Container>

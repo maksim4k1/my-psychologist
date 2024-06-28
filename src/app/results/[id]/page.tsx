@@ -20,6 +20,8 @@ import {
   selectTestResults,
 } from "@/redux/features/tests/selectors";
 import SimpleBarChart from "@/components/UI/Charts/SimpleBarChart";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 
 function ResultPage() {
   const { id } = useParams();
@@ -36,6 +38,9 @@ function ResultPage() {
     dispatch(TestsService.getTestResults(id, searchParams.get("userId")));
   }, [dispatch, id, searchParams]);
 
+  useSetDefaultState(testsActions.getTestInfoSetDefaultState());
+  useSetDefaultState(testsActions.getTestResultsSetDefaultState());
+
   return (
     <Container>
       <StateWrapper state={[getTestInfoState, getTestResultsState]}>
@@ -44,35 +49,43 @@ function ResultPage() {
             <PageTitle className={styles.title}>
               История теста: {testInfo.title}
             </PageTitle>
-            {testInfo.scales.length > 2 ? (
-              <RadarChart
-                results={testResults}
-                scales={testInfo.scales}
-                values={datesCheckboxes.value}
-                className={styles.radarChart}
-              />
-            ) : (
-              <SimpleBarChart
-                results={testResults}
-                scales={testInfo.scales}
-                values={datesCheckboxes.value}
-                className={styles.barChart}
-              />
-            )}
-            <ul>
-              {testResults.map((el) => {
-                return (
-                  <ListItemWithSwitch
-                    onChange={datesCheckboxes.onChange}
-                    className={styles.listItem}
-                    value={el.id}
-                    key={el.id}
-                    label={el.datetime}
-                    link={`/results/detail/${el.id}`}
+            {testResults.length ? (
+              <>
+                {testInfo.scales.length > 2 ? (
+                  <RadarChart
+                    results={testResults}
+                    scales={testInfo.scales}
+                    values={datesCheckboxes.value}
+                    className={styles.radarChart}
                   />
-                );
-              })}
-            </ul>
+                ) : (
+                  <SimpleBarChart
+                    results={testResults}
+                    scales={testInfo.scales}
+                    values={datesCheckboxes.value}
+                    className={styles.barChart}
+                  />
+                )}
+                <ul>
+                  {testResults.map((el) => {
+                    return (
+                      <ListItemWithSwitch
+                        onChange={datesCheckboxes.onChange}
+                        className={styles.listItem}
+                        value={el.id}
+                        key={el.id}
+                        label={el.datetime}
+                        link={`/results/detail/${el.id}`}
+                      />
+                    );
+                  })}
+                </ul>
+              </>
+            ) : (
+              <div className={styles.errorLabel}>
+                Отсутствует история прохождения теста
+              </div>
+            )}
           </>
         )}
       </StateWrapper>
