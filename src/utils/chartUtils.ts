@@ -47,7 +47,8 @@ export function mapToRadarChartData(
           subjectData["summary"] += scaleResult[i].score;
         }
       }
-      subjectData["summary"] /= testResults.length;
+      subjectData["summary"] =
+        Math.round((subjectData["summary"] / testResults.length) * 10) / 10;
     }
     i++;
 
@@ -118,7 +119,8 @@ export function mapToBarChartData(
     }
     for (let key in barData) {
       if (key !== "name") {
-        barData[key] /= testResults.length;
+        barData[key] =
+          Math.round((barData[key] / testResults.length) * 10) / 10;
       }
     }
     barChartData.data.push(barData);
