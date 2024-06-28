@@ -99,8 +99,8 @@ const RadarChart: FunctionComponent<Props> = ({
           wrapperClassName={styles.tooltipWrapper}
         />
         <Radar
-          dot={{ className: styles.maxValuesDot, r: 5 }}
-          activeDot={{ className: styles.activeDot, r: 5 }}
+          dot={{ r: 5 }}
+          activeDot={{ className: styles.maxValuesActiveDot, r: 5 }}
           className={styles.maxValues}
           name="Максимальное значение"
           dataKey="fullMark"
