@@ -42,6 +42,7 @@ const testsSlice = createSlice({
     },
     getTestsByUserIdSetDefaultState: (state) => {
       state.getTestsByUserIdState = createDefaultState();
+      state.testsByUserId = initialState.testsByUserId;
     },
 
     // get tests actions
@@ -57,6 +58,7 @@ const testsSlice = createSlice({
     },
     getTestsSetDefaultState: (state) => {
       state.getTestsState = createDefaultState();
+      state.tests = initialState.tests;
     },
 
     // give test actions
@@ -68,9 +70,6 @@ const testsSlice = createSlice({
     },
     giveTestFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.giveTestState = createFailureState(payload);
-    },
-    giveTestStateDefault: (state) => {
-      state.giveTestState = createDefaultState();
     },
     giveTestSetDefaultState: (state) => {
       state.giveTestState = createDefaultState();
@@ -89,6 +88,7 @@ const testsSlice = createSlice({
     },
     getTestInfoSetDefaultState: (state) => {
       state.getTestInfoState = createDefaultState();
+      state.testInfo = initialState.testInfo;
     },
 
     // get test results actions
@@ -107,6 +107,7 @@ const testsSlice = createSlice({
     },
     getTestResultsSetDefaultState: (state) => {
       state.getTestResultsState = createDefaultState();
+      state.testResults = initialState.testResults;
     },
 
     // get test result actions
@@ -125,6 +126,7 @@ const testsSlice = createSlice({
     },
     getTestResultSetDefaultState: (state) => {
       state.getTestResultState = createDefaultState();
+      state.testResult = initialState.testResult;
     },
   },
 });

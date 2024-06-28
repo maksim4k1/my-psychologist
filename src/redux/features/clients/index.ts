@@ -32,6 +32,7 @@ const clientsSlice = createSlice({
     },
     getClientsSetDefaultState: (state) => {
       state.getClientsState = createDefaultState();
+      state.clients = initialState.clients;
     },
 
     // get client actions
@@ -50,6 +51,7 @@ const clientsSlice = createSlice({
     },
     getClientSetDefaultState: (state) => {
       state.getClientState = createDefaultState();
+      state.client = initialState.client;
     },
   },
 });

@@ -40,6 +40,7 @@ const applicationsSlice = createSlice({
     },
     getApplicationsSetDefaultState: (state) => {
       state.getApplicationsState = createDefaultState();
+      state.applications = initialState.applications;
     },
 
     // get application actions
@@ -58,6 +59,7 @@ const applicationsSlice = createSlice({
     },
     getApplicationSetDefaultState: (state) => {
       state.getApplicationState = createDefaultState();
+      state.application = initialState.application;
     },
 
     // confirm application actions
