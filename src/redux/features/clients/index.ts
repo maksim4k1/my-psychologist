@@ -19,6 +19,7 @@ const clientsSlice = createSlice({
   name: "clients",
   initialState,
   reducers: {
+    // get clients actions
     getClientsLoading: (state) => {
       state.getClientsState = createLoadingState();
     },
@@ -29,7 +30,11 @@ const clientsSlice = createSlice({
     getClientsFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getClientsState = createFailureState(payload);
     },
+    getClientsSetDefaultState: (state) => {
+      state.getClientsState = createDefaultState();
+    },
 
+    // get client actions
     getClientLoading: (state) => {
       state.getClientState = createLoadingState();
     },
@@ -42,6 +47,9 @@ const clientsSlice = createSlice({
     },
     getClientFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getClientState = createFailureState(payload);
+    },
+    getClientSetDefaultState: (state) => {
+      state.getClientState = createDefaultState();
     },
   },
 });

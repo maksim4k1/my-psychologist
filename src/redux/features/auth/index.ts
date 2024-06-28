@@ -22,6 +22,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    // login actions
     loginLoading: (state) => {
       state.loginState = createLoadingState();
     },
@@ -36,10 +37,11 @@ const authSlice = createSlice({
     loginFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.loginState = createFailureState(payload);
     },
-    loginStateDefault: (state) => {
+    loginSetDefaultState: (state) => {
       state.loginState = createDefaultState();
     },
 
+    // register actions
     registerLoading: (state) => {
       state.registerState = createLoadingState();
     },
@@ -54,7 +56,7 @@ const authSlice = createSlice({
     registerFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.registerState = createFailureState(payload);
     },
-    registerStateDefault: (state) => {
+    registerSetDefaultState: (state) => {
       state.registerState = createDefaultState();
     },
   },

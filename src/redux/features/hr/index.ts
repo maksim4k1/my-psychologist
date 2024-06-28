@@ -16,6 +16,7 @@ const hrSlice = createSlice({
   name: "hr",
   initialState,
   reducers: {
+    // send hr survey actions
     sendHrSurveyLoading: (state) => {
       state.sendHrSurveyState = createLoadingState();
     },
@@ -24,6 +25,9 @@ const hrSlice = createSlice({
     },
     sendHrSurveyFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.sendHrSurveyState = createFailureState(payload);
+    },
+    sendHrSurveySetDefaultState: (state) => {
+      state.sendHrSurveyState = createDefaultState();
     },
   },
 });
