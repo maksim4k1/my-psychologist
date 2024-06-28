@@ -32,6 +32,9 @@ const SimpleBarChart: FunctionComponent<Props> = ({
     }
   }, [values, results, scales]);
 
+  const primaryColor = "#2E628C";
+  const secondaryColor = "#9BCBFA";
+
   return (
     <ResponsiveContainer className={`${styles.chartContainer} ${className}`}>
       <BarChart
@@ -43,7 +46,8 @@ const SimpleBarChart: FunctionComponent<Props> = ({
         <XAxis dataKey="name" />
         <Legend />
         <Tooltip
-          cursor={{ fill: "rgb(224, 226, 232)" }}
+          labelClassName={styles.tooltipLabel}
+          cursor={{ className: styles.tooltipCursor }}
           wrapperClassName={styles.tooltipWrapper}
         />
         {barData.bars.map((el, index) => {
@@ -52,7 +56,7 @@ const SimpleBarChart: FunctionComponent<Props> = ({
               key={el.dataKey}
               dataKey={el.dataKey}
               name={el.name}
-              fill={index % 2 === 0 ? "#2E628C" : "#9BCBFA"}
+              fill={index % 2 === 0 ? primaryColor : secondaryColor}
             />
           );
         })}

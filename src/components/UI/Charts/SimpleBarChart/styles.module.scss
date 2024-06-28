@@ -11,3 +11,11 @@
   @include bodyMedium;
   @include card;
 }
+
+.tooltipLabel {
+  @include labelLarge;
+}
+
+.tooltipCursor {
+  fill: $color-surface-container-highest;
+}

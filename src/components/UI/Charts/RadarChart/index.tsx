@@ -9,6 +9,7 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   Text,
+  Tooltip,
 } from "recharts";
 import styles from "./styles.module.scss";
 import { RadarChartItem, mapToRadarChartData } from "@/utils/chartUtils";
@@ -59,7 +60,7 @@ const RadarChart: FunctionComponent<Props> = ({
     }
   }, [values, results, scales]);
 
-  const dataSets = [];
+  const dataSets: string[] = [];
 
   for (let key in radarData[0]) {
     if (key !== "subject" && key !== "fullMark") {
@@ -92,22 +93,28 @@ const RadarChart: FunctionComponent<Props> = ({
           dataKey="subject"
           tick={(props) => TextPolarAngleAxis(props)}
         />
+        <Tooltip
+          labelClassName={styles.tooltipLabel}
+          cursor={{ className: styles.tooltipCursor }}
+          wrapperClassName={styles.tooltipWrapper}
+        />
         <Radar
-          isAnimationActive={false}
-          dot={{ r: 5 }}
+          dot={{ className: styles.maxValuesDot, r: 5 }}
+          activeDot={{ className: styles.activeDot, r: 5 }}
           className={styles.maxValues}
-          name="fullMark"
+          name="Максимальное значение"
           dataKey="fullMark"
           fillOpacity={0}
         />
         {dataSets.map((el) => {
+          const res = results.find((res) => res.id === el);
           return (
             <Radar
-              isAnimationActive={false}
               key={el}
-              dot={{ r: 5, className: styles.point }}
+              dot={{ r: 5, className: styles.dot }}
+              activeDot={{ className: styles.activeDot, r: 5 }}
               className={styles.radarField}
-              name={el}
+              name={res?.datetime ?? "Среднее значение"}
               dataKey={el}
               fillOpacity={0.4}
             />
