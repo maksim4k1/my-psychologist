@@ -39,7 +39,7 @@ export default class ClientsService {
       dispatch(clientsActions.getClientsSuccess(formattedData));
     } catch (err) {
       if (instanceofHttpError(err)) {
-        dispatch(clientsActions.getClientsError(err));
+        dispatch(clientsActions.getClientsFailure(err));
       }
     }
   };
@@ -66,7 +66,7 @@ export default class ClientsService {
         dispatch(clientsActions.getClientSuccess(formattedData));
       } catch (err) {
         if (instanceofHttpError(err)) {
-          dispatch(clientsActions.getClientError(err));
+          dispatch(clientsActions.getClientFailure(err));
         }
       }
     };
