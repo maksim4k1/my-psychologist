@@ -2,7 +2,6 @@ import { hrActions } from "@/redux/features/hr";
 import { SendHrSurveyPayload } from "@/redux/features/hr/types";
 import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../../config/api.config";
-import { getToken } from "@/storage/token";
 import { instanceofHttpError } from "@/utils/apiUtils";
 import AuthService from "./auth";
 
@@ -24,7 +23,7 @@ export default class HrService {
 
         const data = response.data;
 
-        await dispatch(AuthService.loginByToken(getToken()));
+        await dispatch(AuthService.loginByToken());
         dispatch(hrActions.sendHrSurveySuccess(data));
       } catch (err) {
         if (instanceofHttpError(err)) {

@@ -1,9 +1,8 @@
-import { HttpError } from "./../../config/api.config";
 import { LoginPayload, RegisterPayload } from "@/redux/features/auth/types";
 import { AppDispatch } from "./../redux/store";
 import { authActions } from "@/redux/features/auth/";
 import { customAxios } from "../../config/api.config";
-import { deleteToken, saveToken } from "@/storage/token";
+import { deleteToken, getToken } from "@/storage/token";
 import { instanceofHttpError } from "@/utils/apiUtils";
 
 export default class AuthService {
@@ -45,11 +44,14 @@ export default class AuthService {
       }
     };
 
-  static loginByToken: Function =
-    (token: string) => async (dispatch: AppDispatch) => {
+  static loginByToken: Function = () => async (dispatch: AppDispatch) => {
+    const token = getToken();
+    if (token) {
       dispatch(authActions.loginLoading());
       try {
-        const response = await customAxios.post("/users/auth_token", { token });
+        const response = await customAxios.post("/users/auth_token", {
+          token: token,
+        });
 
         const data = response.data;
 
@@ -60,5 +62,6 @@ export default class AuthService {
           dispatch(authActions.loginFailure(err));
         }
       }
-    };
+    }
+  };
 }
