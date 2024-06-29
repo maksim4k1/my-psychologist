@@ -6,6 +6,7 @@ export interface AuthState {
   role: AccessRole;
   loginState: StatusState;
   registerState: StatusState;
+  sendHrSurveyState: StatusState;
 }
 
 export interface LoginPayload {
@@ -18,6 +19,11 @@ export interface RegisterPayload {
   email: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface SendHrSurveyPayload {
+  fullName: string;
+  company: string;
 }
 
 export interface UserData {

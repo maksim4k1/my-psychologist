@@ -12,13 +12,13 @@ import { useInput } from "@/hooks/inputHooks";
 import { checkFormDataValidation } from "@/utils/formUtils";
 import { FormEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import HrService from "@/api/hr";
-import { SendHrSurveyPayload } from "@/redux/features/hr/types";
-import { selectSendHrSurveyState } from "@/redux/features/hr/selectors";
+import AuthService from "@/api/auth";
+import { SendHrSurveyPayload } from "@/redux/features/auth/types";
+import { selectSendHrSurveyState } from "@/redux/features/auth/selectors";
 import { useRouter } from "next/navigation";
 import { PopupsService } from "@/redux/services/popups";
 import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { hrActions } from "@/redux/features/hr";
+import { authActions } from "@/redux/features/auth";
 
 function HrSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
@@ -48,11 +48,11 @@ function HrSurveyPage() {
         company: company.value,
       };
 
-      dispatch(HrService.sendHrSurvey(formData));
+      dispatch(AuthService.sendHrSurvey(formData));
     }
   }
 
-  useSetDefaultState(hrActions.sendHrSurveySetDefaultState());
+  useSetDefaultState(authActions.sendHrSurveySetDefaultState());
 
   return (
     <Container>

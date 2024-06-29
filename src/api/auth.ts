@@ -1,4 +1,8 @@
-import { LoginPayload, RegisterPayload } from "@/redux/features/auth/types";
+import {
+  LoginPayload,
+  RegisterPayload,
+  SendHrSurveyPayload,
+} from "@/redux/features/auth/types";
 import { AppDispatch } from "./../redux/store";
 import { authActions } from "@/redux/features/auth/";
 import { customAxios } from "../../config/api.config";
@@ -64,4 +68,30 @@ export default class AuthService {
       }
     }
   };
+
+  static sendHrSurvey: Function =
+    (formData: SendHrSurveyPayload) => async (dispatch: AppDispatch) => {
+      dispatch(authActions.sendHrSurveyLoading());
+
+      try {
+        const response = await customAxios.post("/manager/send_manager", {
+          username: formData.fullName,
+          description: "",
+          city: "",
+          company: formData.company,
+          online: false,
+          gender: "1",
+          birth_date: "2000-01-01",
+        });
+
+        const data = response.data;
+
+        await dispatch(AuthService.loginByToken());
+        dispatch(authActions.sendHrSurveySuccess(data));
+      } catch (err) {
+        if (instanceofHttpError(err)) {
+          dispatch(authActions.sendHrSurveyFailure(err));
+        }
+      }
+    };
 }

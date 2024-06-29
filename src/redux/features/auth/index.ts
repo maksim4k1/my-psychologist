@@ -16,6 +16,7 @@ const initialState: AuthState = {
   role: ACCESS.unauthorized,
   loginState: createDefaultState(),
   registerState: createDefaultState(),
+  sendHrSurveyState: createDefaultState(),
 };
 
 const authSlice = createSlice({
@@ -58,6 +59,20 @@ const authSlice = createSlice({
     },
     registerSetDefaultState: (state) => {
       state.registerState = createDefaultState();
+    },
+
+    // send hr survey actions
+    sendHrSurveyLoading: (state) => {
+      state.sendHrSurveyState = createLoadingState();
+    },
+    sendHrSurveySuccess: (state) => {
+      state.sendHrSurveyState = createSuccessState();
+    },
+    sendHrSurveyFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.sendHrSurveyState = createFailureState(payload);
+    },
+    sendHrSurveySetDefaultState: (state) => {
+      state.sendHrSurveyState = createDefaultState();
     },
   },
 });
