@@ -67,6 +67,7 @@ const authSlice = createSlice({
     },
     sendHrSurveySuccess: (state) => {
       state.sendHrSurveyState = createSuccessState();
+      state.role = ACCESS.hr;
     },
     sendHrSurveyFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.sendHrSurveyState = createFailureState(payload);

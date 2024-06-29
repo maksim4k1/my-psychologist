@@ -86,7 +86,6 @@ export default class AuthService {
 
         const data = response.data;
 
-        await dispatch(AuthService.loginByToken());
         dispatch(authActions.sendHrSurveySuccess(data));
       } catch (err) {
         if (instanceofHttpError(err)) {
