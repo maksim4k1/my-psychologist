@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect } from "react";
+import { FormEvent } from "react";
 import styles from "./styles.module.scss";
 import Form from "@/components/UI/Forms/AuthForm";
 import Input from "@/components/UI/Inputs/Input";
@@ -26,7 +26,7 @@ function LoginPage() {
   const password = useInput("", { isEmpty: true });
 
   const dispatch = useAppDispatch();
-  const loginStatus = useAppSelector(selectAuthLoginState);
+  const loginState = useAppSelector(selectAuthLoginState);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -60,7 +60,7 @@ function LoginPage() {
           onChange={email.onChange}
           onBlur={email.onBlur}
           errorText={email.error}
-          disabled={loginStatus.isLoading}
+          disabled={loginState.isLoading}
           required
         />
         <Input
@@ -71,7 +71,7 @@ function LoginPage() {
           onChange={password.onChange}
           onBlur={password.onBlur}
           errorText={password.error}
-          disabled={loginStatus.isLoading}
+          disabled={loginState.isLoading}
           required
         />
         <Link
@@ -80,13 +80,13 @@ function LoginPage() {
         >
           Забыли пароль?
         </Link>
-        {loginStatus.isFailure && !!loginStatus.error && (
-          <FormErrorLabel>{loginStatus.error.message}</FormErrorLabel>
+        {loginState.isFailure && !!loginState.error && (
+          <FormErrorLabel>{loginState.error.message}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"
-            disabled={loginStatus.isLoading}
+            disabled={loginState.isLoading}
           >
             Войти
           </PrimaryButton>
