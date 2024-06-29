@@ -12,11 +12,11 @@ export const useSetDefaultState = (
     if (deps.length) {
       dispatch(action);
     }
-  }, [deps.length, ...deps]);
+  }, [dispatch, deps.length, ...deps]);
 
   useEffect(() => {
     return () => {
       dispatch(action);
     };
-  }, []);
+  }, [dispatch]);
 };
