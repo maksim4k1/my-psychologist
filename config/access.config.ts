@@ -7,7 +7,12 @@ export type AccessRole =
   | "hr";
 
 interface IAccess {
-  [key: string]: AccessRole;
+  public: "public";
+  unauthorized: "unauthorized";
+  authorized: "authorized";
+  psychologist: "psychologist";
+  client: "client";
+  hr: "hr";
 }
 
 export const ACCESS: IAccess = {
