@@ -29,9 +29,12 @@ import {
 } from "@/redux/features/tests/selectors";
 import StateWrapper from "@/components/wrappers/StateWrapper";
 import { PopupsService } from "@/redux/services/popups";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { applicationsActions } from "@/redux/features/applications";
+import { testsActions } from "@/redux/features/tests";
 
 function ApplicationPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const role = useAppSelector(selectRole);
@@ -72,6 +75,9 @@ function ApplicationPage() {
       );
     }
   };
+
+  useSetDefaultState(applicationsActions.getApplicationSetDefaultState);
+  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
 
   return (
     <Container>

@@ -7,6 +7,7 @@ import {
 } from "@/redux/features/applications/types";
 import { calculateAge } from "@/utils/dataUtils";
 import { instanceofHttpError } from "@/utils/apiUtils";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 interface ApplicationResponse {
   app_id: string;
@@ -19,7 +20,7 @@ interface ApplicationResponse {
 }
 
 export default class ApplicationsService {
-  static getApplications: Function = () => async (dispatch: AppDispatch) => {
+  static getApplications = () => async (dispatch: AppDispatch) => {
     dispatch(applicationsActions.getApplicationsLoading());
 
     try {
@@ -48,7 +49,7 @@ export default class ApplicationsService {
     }
   };
 
-  static getApplication: Function =
+  static getApplication =
     (applicationId: string) => async (dispatch: AppDispatch) => {
       dispatch(applicationsActions.getApplicationLoading());
 
@@ -77,7 +78,7 @@ export default class ApplicationsService {
       }
     };
 
-  static confirmApplication: Function =
+  static confirmApplication =
     (userId: string, status: boolean) => async (dispatch: AppDispatch) => {
       dispatch(applicationsActions.confirmApplicationLoading());
 

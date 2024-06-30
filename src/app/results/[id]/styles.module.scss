@@ -12,6 +12,16 @@
   min-height: 400px;
 }
 
+.barChart {
+  margin-bottom: 40px;
+  width: 100%;
+  min-height: 400px;
+}
+
 .listItem {
   background-color: transparent;
+}
+
+.errorLabel {
+  @include titleLarge;
 }

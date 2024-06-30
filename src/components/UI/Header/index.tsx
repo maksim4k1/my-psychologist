@@ -13,22 +13,20 @@ import {
   selectAuthLoginState,
   selectRole,
 } from "@/redux/features/auth/selectors";
-import { getToken } from "@/storage/token";
 import AuthService from "@/api/auth";
 import { ACCESS } from "../../../../config/access.config";
 
 const Header: FunctionComponent = ({}) => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
-  const { isLoading } = useAppSelector(selectAuthLoginState);
+  const loginState = useAppSelector(selectAuthLoginState);
   const userRole = useAppSelector(selectRole);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!isAuth) {
-      const token: string | null = getToken();
-      if (token) dispatch(AuthService.loginByToken(token));
+    if (!isAuth && !loginState.isLoading) {
+      dispatch(AuthService.loginByToken());
     }
-  }, [isAuth, dispatch]);
+  }, [isAuth, loginState.isLoading, dispatch]);
 
   return (
     <header className={styles.header}>
@@ -78,8 +76,8 @@ const Header: FunctionComponent = ({}) => {
               size={54}
             />
           </Link>
-        ) : isLoading ? (
-          <PrimaryButton disabled={isLoading}>Загрузка...</PrimaryButton>
+        ) : loginState.isLoading ? (
+          <PrimaryButton disabled>Загрузка...</PrimaryButton>
         ) : (
           <PrimaryButton href="/auth/login">Войти</PrimaryButton>
         )}

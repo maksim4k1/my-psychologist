@@ -12,10 +12,13 @@ const popupsSlice = createSlice({
   name: "popups",
   initialState,
   reducers: {
+    // open snackbar action
     openSnackbar: (state, { payload }: PayloadAction<string>) => {
       state.snackbar.isOpen = true;
       state.snackbar.label = payload;
     },
+
+    // close snackbar action
     closeSnackbar: (state) => {
       state.snackbar.isOpen = false;
     },

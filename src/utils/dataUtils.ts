@@ -66,7 +66,6 @@ export const mapDatetimeToText = (datetime: string): string => {
 
   const result = `${date.getDate()} ${
     monthes[date.getMonth()]
-  } ${date.getFullYear()}, ${hours}:${minutes}
-  `;
+  } ${date.getFullYear()}, ${hours}:${minutes}`;
   return result;
 };

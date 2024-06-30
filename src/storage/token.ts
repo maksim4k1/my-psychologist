@@ -1,11 +1,13 @@
+import { getCookie } from "@/utils/cookieUtils";
+
 export const saveToken = (token: string): void => {
-  sessionStorage.setItem("token", token);
+  document.cookie = `session_cookie=${token}; path=/`;
 };
 
 export const getToken = (): string | null => {
-  return sessionStorage.getItem("token");
+  return getCookie("session_cookie");
 };
 
 export const deleteToken = (): void => {
-  sessionStorage.removeItem("token");
+  document.cookie = "session_cookie=; Max-Age=-1;";
 };

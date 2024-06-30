@@ -16,12 +16,14 @@ const initialState: AuthState = {
   role: ACCESS.unauthorized,
   loginState: createDefaultState(),
   registerState: createDefaultState(),
+  sendHrSurveyState: createDefaultState(),
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    // login actions
     loginLoading: (state) => {
       state.loginState = createLoadingState();
     },
@@ -36,10 +38,11 @@ const authSlice = createSlice({
     loginFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.loginState = createFailureState(payload);
     },
-    loginStateDefault: (state) => {
+    loginSetDefaultState: (state) => {
       state.loginState = createDefaultState();
     },
 
+    // register actions
     registerLoading: (state) => {
       state.registerState = createLoadingState();
     },
@@ -54,8 +57,23 @@ const authSlice = createSlice({
     registerFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.registerState = createFailureState(payload);
     },
-    registerStateDefault: (state) => {
+    registerSetDefaultState: (state) => {
       state.registerState = createDefaultState();
+    },
+
+    // send hr survey actions
+    sendHrSurveyLoading: (state) => {
+      state.sendHrSurveyState = createLoadingState();
+    },
+    sendHrSurveySuccess: (state) => {
+      state.sendHrSurveyState = createSuccessState();
+      state.role = ACCESS.hr;
+    },
+    sendHrSurveyFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.sendHrSurveyState = createFailureState(payload);
+    },
+    sendHrSurveySetDefaultState: (state) => {
+      state.sendHrSurveyState = createDefaultState();
     },
   },
 });

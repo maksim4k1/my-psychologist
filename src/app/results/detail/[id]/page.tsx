@@ -18,9 +18,11 @@ import {
 import { useEffect } from "react";
 import TestsService from "@/api/tests";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 
 function DetailResultPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const getTestInfoState = useAppSelector(selectGetTestInfoState);
   const testInfo = useAppSelector(selectTestInfo);
@@ -36,6 +38,9 @@ function DetailResultPage() {
       dispatch(TestsService.getTestInfo(testResult.testId));
     }
   }, [getTestResultState.isSuccess, dispatch, testResult]);
+
+  useSetDefaultState(testsActions.getTestInfoSetDefaultState);
+  useSetDefaultState(testsActions.getTestResultSetDefaultState);
 
   return (
     <StateWrapper state={[getTestResultState, getTestInfoState]}>
@@ -67,6 +72,14 @@ function DetailResultPage() {
             </div>
             <div className={styles.descriptionTestContainer}>
               {testInfo.scales.map((el) => {
+                const score =
+                  testResult.scaleResults.find((res) => res.id === el.id)
+                    ?.score ?? 0;
+
+                const border = el.borders.find(
+                  (el) => score >= el.leftBorder && score <= el.rightBorder,
+                );
+
                 return (
                   <div
                     className={styles.descriptionTextContainer}
@@ -74,17 +87,12 @@ function DetailResultPage() {
                   >
                     <h3 className={styles.descriptionTitle}>
                       {el.title} —{" "}
-                      {testResult.scaleResults.find((res) => res.id === el.id)
-                        ?.score ?? 0}
+                      {border && (
+                        <span style={{ color: border.color }}>
+                          {score} ({border.title})
+                        </span>
+                      )}
                     </h3>
-                    <p className={styles.descriptionText}>
-                      Эмоциональное истощение рассматривается как основная
-                      составляющая выгорания и проявляется в переживаниях
-                      сниженного эмоционального тонуса, повышенной психической
-                      истощаемости и аффективной лабильности, утраты интереса и
-                      позитивных чувств к окружающим, ощущении «пресыщенности»
-                      работой, неудовлетворенностью жизнью в целом.
-                    </p>
                   </div>
                 );
               })}

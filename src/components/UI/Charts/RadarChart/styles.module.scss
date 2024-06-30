@@ -1,5 +1,6 @@
 @import "@/styles/textStyles";
 @import "@/styles/variables";
+@import "@/styles/mixins";
 
 .chartContainer {
   width: 100%;
@@ -37,11 +38,43 @@
   fill: $color-primary;
 }
 
-.points {
+.point {
   fill: $color-primary;
+  fill-opacity: 1;
 }
 
 .maxValues {
   stroke: transparent;
   stroke-width: 0;
+}
+
+.tooltipWrapper {
+  @include bodyMedium;
+  @include card;
+}
+
+.tooltipCursor {
+  stroke: $color-primary-fixed-dim;
+  stroke-linecap: round;
+  stroke-width: 4px;
+}
+
+.tooltipLabel {
+  @include labelLarge;
+}
+
+.dot {
+  fill: $color-primary;
+  fill-opacity: 1;
+  stroke-width: 5px;
+}
+
+.activeDot {
+  fill: $color-primary-fixed;
+  stroke-width: 3px;
+  stroke: $color-primary;
+}
+
+.maxValuesActiveDot {
+  opacity: 0;
 }

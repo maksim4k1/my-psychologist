@@ -21,6 +21,7 @@ import { testsActions } from "@/redux/features/tests";
 import HttpErrorWrapper from "@/components/wrappers/HttpErrorWrapper";
 import { checkQueryParams } from "@/utils/urlUtils";
 import { PopupsService } from "@/redux/services/popups";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 
 function GiveExercisePage() {
   const searchParams = useSearchParams();
@@ -38,9 +39,11 @@ function GiveExercisePage() {
       dispatch(
         PopupsService.openSnackbarWithDelay("Задание успешно назначено!"),
       );
-      dispatch(testsActions.giveTestStateDefault());
+      dispatch(testsActions.giveTestSetDefaultState());
     }
   }, [giveTestState.isSuccess, dispatch]);
+
+  useSetDefaultState(testsActions.getTestsSetDefaultState);
 
   return (
     <HttpErrorWrapper

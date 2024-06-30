@@ -47,7 +47,8 @@ export function mapToRadarChartData(
           subjectData["summary"] += scaleResult[i].score;
         }
       }
-      subjectData["summary"] /= testResults.length;
+      subjectData["summary"] =
+        Math.round((subjectData["summary"] / testResults.length) * 10) / 10;
     }
     i++;
 
@@ -55,4 +56,75 @@ export function mapToRadarChartData(
   }
 
   return newData;
+}
+
+export interface BarChartData {
+  bars: Bar[];
+  data: BarChartDataItem[];
+}
+
+interface Bar {
+  name: string;
+  dataKey: string;
+}
+
+interface BarChartDataItem {
+  name: string;
+  [key: string]: any;
+}
+
+export function mapToBarChartData(
+  testResults: TestResultData[],
+  scales: ScaleData[],
+  values: string[],
+): BarChartData {
+  const barChartData: BarChartData = {
+    bars: [],
+    data: [],
+  };
+
+  for (let scale of scales) {
+    barChartData.bars.push({
+      dataKey: scale.id,
+      name: scale.title,
+    });
+  }
+
+  if (values.length) {
+    for (let testResult of testResults) {
+      if (!values.includes(testResult.id)) continue;
+
+      const barData: BarChartDataItem = {
+        name: testResult.datetime,
+      };
+
+      for (let scale of scales) {
+        barData[scale.id] = testResult.scaleResults.find(
+          (el) => el.id === scale.id,
+        )!.score;
+      }
+
+      barChartData.data.push(barData);
+    }
+  } else {
+    const barData: BarChartDataItem = {
+      name: "Средний результат",
+    };
+    for (let testResult of testResults) {
+      for (let scale of scales) {
+        barData[scale.id] =
+          (barData[scale.id] ?? 0) +
+          testResult.scaleResults.find((el) => el.id === scale.id)!.score;
+      }
+    }
+    for (let key in barData) {
+      if (key !== "name") {
+        barData[key] =
+          Math.round((barData[key] / testResults.length) * 10) / 10;
+      }
+    }
+    barChartData.data.push(barData);
+  }
+
+  return barChartData;
 }

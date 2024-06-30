@@ -4,7 +4,7 @@ import { AppDispatch } from "../store";
 export class PopupsService {
   static timer: ReturnType<typeof setTimeout> | null = null;
 
-  static openSnackbarWithDelay: Function =
+  static openSnackbarWithDelay =
     (label: string = "", delay: number = 5000) =>
     (dispatch: AppDispatch) => {
       dispatch(popupsActions.openSnackbar(label));
@@ -14,16 +14,15 @@ export class PopupsService {
       }, delay);
     };
 
-  static openSnackbar: Function =
-    (label: string) => (dispatch: AppDispatch) => {
-      dispatch(popupsActions.openSnackbar(label));
+  static openSnackbar = (label: string) => (dispatch: AppDispatch) => {
+    dispatch(popupsActions.openSnackbar(label));
 
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-    };
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+  };
 
-  static closeSnackbar: Function = () => (dispatch: AppDispatch) => {
+  static closeSnackbar = () => (dispatch: AppDispatch) => {
     dispatch(popupsActions.closeSnackbar());
 
     if (this.timer) {

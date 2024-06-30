@@ -26,6 +26,7 @@ const testsSlice = createSlice({
   name: "tests",
   initialState,
   reducers: {
+    // get tests by user id actions
     getTestsByUserIdLoading: (state) => {
       state.getTestsByUserIdState = createLoadingState();
     },
@@ -39,7 +40,12 @@ const testsSlice = createSlice({
     getTestsByUserIdFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getTestsByUserIdState = createFailureState(payload);
     },
+    getTestsByUserIdSetDefaultState: (state) => {
+      state.getTestsByUserIdState = createDefaultState();
+      state.testsByUserId = initialState.testsByUserId;
+    },
 
+    // get tests actions
     getTestsLoading: (state) => {
       state.getTestsState = createLoadingState();
     },
@@ -50,7 +56,12 @@ const testsSlice = createSlice({
     getTestsFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getTestsState = createFailureState(payload);
     },
+    getTestsSetDefaultState: (state) => {
+      state.getTestsState = createDefaultState();
+      state.tests = initialState.tests;
+    },
 
+    // give test actions
     giveTestLoading: (state) => {
       state.giveTestState = createLoadingState();
     },
@@ -60,10 +71,11 @@ const testsSlice = createSlice({
     giveTestFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.giveTestState = createFailureState(payload);
     },
-    giveTestStateDefault: (state) => {
+    giveTestSetDefaultState: (state) => {
       state.giveTestState = createDefaultState();
     },
 
+    // get test info actions
     getTestInfoLoading: (state) => {
       state.getTestInfoState = createLoadingState();
     },
@@ -74,7 +86,12 @@ const testsSlice = createSlice({
     getTestInfoFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getTestInfoState = createFailureState(payload);
     },
+    getTestInfoSetDefaultState: (state) => {
+      state.getTestInfoState = createDefaultState();
+      state.testInfo = initialState.testInfo;
+    },
 
+    // get test results actions
     getTestResultsLoading: (state) => {
       state.getTestResultsState = createLoadingState();
     },
@@ -88,7 +105,12 @@ const testsSlice = createSlice({
     getTestResultsFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getTestResultsState = createFailureState(payload);
     },
+    getTestResultsSetDefaultState: (state) => {
+      state.getTestResultsState = createDefaultState();
+      state.testResults = initialState.testResults;
+    },
 
+    // get test result actions
     getTestResultLoading: (state) => {
       state.getTestResultState = createLoadingState();
     },
@@ -101,6 +123,10 @@ const testsSlice = createSlice({
     },
     getTestResultFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.getTestResultState = createFailureState(payload);
+    },
+    getTestResultSetDefaultState: (state) => {
+      state.getTestResultState = createDefaultState();
+      state.testResult = initialState.testResult;
     },
   },
 });

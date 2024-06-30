@@ -18,6 +18,8 @@ import { checkFormDataValidation } from "@/utils/formUtils";
 import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
 import AppLink from "@/components/UI/Links/AppLink";
 import { PopupsService } from "@/redux/services/popups";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { authActions } from "@/redux/features/auth";
 
 function RegisterPage() {
   const name = useInput("");
@@ -30,15 +32,15 @@ function RegisterPage() {
   });
 
   const dispatch = useAppDispatch();
-  const registerStatus = useAppSelector(selectAuthRegisterState);
+  const registerState = useAppSelector(selectAuthRegisterState);
 
   useEffect(() => {
-    if (registerStatus.isSuccess) {
+    if (registerState.isSuccess) {
       dispatch(
         PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
       );
     }
-  }, [registerStatus.isSuccess, dispatch]);
+  }, [registerState.isSuccess, dispatch]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -55,6 +57,13 @@ function RegisterPage() {
     }
   };
 
+  useSetDefaultState(authActions.registerSetDefaultState, [
+    name.value,
+    email.value,
+    password.value,
+    confirmPassword.value,
+  ]);
+
   return (
     <Container>
       <Form
@@ -70,7 +79,7 @@ function RegisterPage() {
           onBlur={name.onBlur}
           errorText={name.error}
           required
-          disabled={registerStatus.isLoading}
+          disabled={registerState.isLoading}
         />
         <Input
           name="email"
@@ -81,7 +90,7 @@ function RegisterPage() {
           onBlur={email.onBlur}
           errorText={email.error}
           required
-          disabled={registerStatus.isLoading}
+          disabled={registerState.isLoading}
         />
         <Input
           name="password"
@@ -92,7 +101,7 @@ function RegisterPage() {
           onBlur={password.onBlur}
           errorText={password.error}
           required
-          disabled={registerStatus.isLoading}
+          disabled={registerState.isLoading}
         />
         <Input
           name="confirmPassword"
@@ -103,15 +112,15 @@ function RegisterPage() {
           onBlur={confirmPassword.onBlur}
           errorText={confirmPassword.error}
           required
-          disabled={registerStatus.isLoading}
+          disabled={registerState.isLoading}
         />
-        {registerStatus.isFailure && registerStatus.error && (
-          <FormErrorLabel>{registerStatus.error.message}</FormErrorLabel>
+        {registerState.isFailure && registerState.error && (
+          <FormErrorLabel>{registerState.error.message}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"
-            disabled={registerStatus.isLoading}
+            disabled={registerState.isLoading}
           >
             Зарегистрироваться
           </PrimaryButton>
