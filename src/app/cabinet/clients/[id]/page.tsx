@@ -30,7 +30,7 @@ import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 import { clientsActions } from "@/redux/features/clients";
 
 function PsychologistClientPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const client = useAppSelector(selectClient);
   const clientState = useAppSelector(selectClientState);

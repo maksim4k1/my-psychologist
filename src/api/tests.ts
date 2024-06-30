@@ -52,7 +52,7 @@ interface ResponseScaleResultData {
 }
 
 export default class TestsService {
-  static getTestsByUserId: Function =
+  static getTestsByUserId =
     (userId: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.getTestsByUserIdLoading());
 
@@ -79,7 +79,7 @@ export default class TestsService {
       }
     };
 
-  static getTests: Function = () => async (dispatch: AppDispatch) => {
+  static getTests = () => async (dispatch: AppDispatch) => {
     dispatch(testsActions.getTestsLoading());
 
     try {
@@ -103,7 +103,7 @@ export default class TestsService {
     }
   };
 
-  static giveTest: Function =
+  static giveTest =
     (testId: string, userId: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.giveTestLoading());
 
@@ -129,45 +129,44 @@ export default class TestsService {
       }
     };
 
-  static getTestInfo: Function =
-    (testId: string) => async (dispatch: AppDispatch) => {
-      dispatch(testsActions.getTestInfoLoading());
+  static getTestInfo = (testId: string) => async (dispatch: AppDispatch) => {
+    dispatch(testsActions.getTestInfoLoading());
 
-      try {
-        const response = await customAxios.get<ResponseTestData>(
-          `/test/get_test_info/${testId}`,
-        );
+    try {
+      const response = await customAxios.get<ResponseTestData>(
+        `/test/get_test_info/${testId}`,
+      );
 
-        const data: ResponseTestData = response.data;
+      const data: ResponseTestData = response.data;
 
-        const formattedData: TestData = {
-          id: data.test_id,
-          title: data.title,
-          description: data.description,
-          shortDescription: data.short_desc,
-          scales: data.scales.map((el: ResponseScale) => ({
-            id: el.scale_id,
+      const formattedData: TestData = {
+        id: data.test_id,
+        title: data.title,
+        description: data.description,
+        shortDescription: data.short_desc,
+        scales: data.scales.map((el: ResponseScale) => ({
+          id: el.scale_id,
+          title: el.title,
+          min: el.min,
+          max: el.max,
+          borders: el.borders.map((el: ResponseBorder) => ({
             title: el.title,
-            min: el.min,
-            max: el.max,
-            borders: el.borders.map((el: ResponseBorder) => ({
-              title: el.title,
-              leftBorder: el.left_border,
-              rightBorder: el.right_border,
-              color: el.color,
-            })),
+            leftBorder: el.left_border,
+            rightBorder: el.right_border,
+            color: el.color,
           })),
-        };
+        })),
+      };
 
-        dispatch(testsActions.getTestInfoSuccess(formattedData));
-      } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(testsActions.getTestInfoFailure(err));
-        }
+      dispatch(testsActions.getTestInfoSuccess(formattedData));
+    } catch (err) {
+      if (instanceofHttpError(err)) {
+        dispatch(testsActions.getTestInfoFailure(err));
       }
-    };
+    }
+  };
 
-  static getTestResults: Function =
+  static getTestResults =
     (testId: string, userId: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.getTestResultsLoading());
 
@@ -198,7 +197,7 @@ export default class TestsService {
       }
     };
 
-  static getTestResult: Function =
+  static getTestResult =
     (testResultId: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.getTestResultLoading());
 

@@ -21,7 +21,7 @@ interface ClientProfileResponse extends ClientResponse {
 }
 
 export default class ClientsService {
-  static getClients: Function = () => async (dispatch: AppDispatch) => {
+  static getClients = () => async (dispatch: AppDispatch) => {
     dispatch(clientsActions.getClientsLoading());
 
     try {
@@ -44,30 +44,29 @@ export default class ClientsService {
     }
   };
 
-  static getClient: Function =
-    (userId: string) => async (dispatch: AppDispatch) => {
-      dispatch(clientsActions.getClientLoading());
+  static getClient = (userId: string) => async (dispatch: AppDispatch) => {
+    dispatch(clientsActions.getClientLoading());
 
-      try {
-        const response = await customAxios.get(
-          `/psychologist/get_client/${userId}`,
-        );
+    try {
+      const response = await customAxios.get(
+        `/psychologist/get_client/${userId}`,
+      );
 
-        const data: ClientProfileResponse = response.data;
+      const data: ClientProfileResponse = response.data;
 
-        const formattedData: ClientProfileData = {
-          userId: data.client_id,
-          username: data.username,
-          profileImage: "",
-          isOnline: false,
-          age: calculateAge(data.birth_date),
-          problems: data.request,
-        };
-        dispatch(clientsActions.getClientSuccess(formattedData));
-      } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(clientsActions.getClientFailure(err));
-        }
+      const formattedData: ClientProfileData = {
+        userId: data.client_id,
+        username: data.username,
+        profileImage: "",
+        isOnline: false,
+        age: calculateAge(data.birth_date),
+        problems: data.request,
+      };
+      dispatch(clientsActions.getClientSuccess(formattedData));
+    } catch (err) {
+      if (instanceofHttpError(err)) {
+        dispatch(clientsActions.getClientFailure(err));
       }
-    };
+    }
+  };
 }

@@ -34,7 +34,7 @@ import { applicationsActions } from "@/redux/features/applications";
 import { testsActions } from "@/redux/features/tests";
 
 function ApplicationPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const role = useAppSelector(selectRole);

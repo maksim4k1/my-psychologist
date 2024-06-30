@@ -10,23 +10,22 @@ import { deleteToken, getToken } from "@/storage/token";
 import { instanceofHttpError } from "@/utils/apiUtils";
 
 export default class AuthService {
-  static login: Function =
-    (formData: LoginPayload) => async (dispatch: AppDispatch) => {
-      dispatch(authActions.loginLoading());
-      try {
-        const response = await customAxios.post("/users/auth", formData);
+  static login = (formData: LoginPayload) => async (dispatch: AppDispatch) => {
+    dispatch(authActions.loginLoading());
+    try {
+      const response = await customAxios.post("/users/auth", formData);
 
-        const data = response.data;
+      const data = response.data;
 
-        dispatch(authActions.loginSuccess(data));
-      } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(authActions.loginFailure(err));
-        }
+      dispatch(authActions.loginSuccess(data));
+    } catch (err) {
+      if (instanceofHttpError(err)) {
+        dispatch(authActions.loginFailure(err));
       }
-    };
+    }
+  };
 
-  static register: Function =
+  static register =
     (formData: RegisterPayload) => async (dispatch: AppDispatch) => {
       dispatch(authActions.registerLoading());
 
@@ -48,7 +47,7 @@ export default class AuthService {
       }
     };
 
-  static loginByToken: Function = () => async (dispatch: AppDispatch) => {
+  static loginByToken = () => async (dispatch: AppDispatch) => {
     const token = getToken();
     if (token) {
       dispatch(authActions.loginLoading());
@@ -69,7 +68,7 @@ export default class AuthService {
     }
   };
 
-  static sendHrSurvey: Function =
+  static sendHrSurvey =
     (formData: SendHrSurveyPayload) => async (dispatch: AppDispatch) => {
       dispatch(authActions.sendHrSurveyLoading());
 

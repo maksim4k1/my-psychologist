@@ -22,7 +22,7 @@ import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 import { testsActions } from "@/redux/features/tests";
 
 function DetailResultPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const getTestInfoState = useAppSelector(selectGetTestInfoState);
   const testInfo = useAppSelector(selectTestInfo);

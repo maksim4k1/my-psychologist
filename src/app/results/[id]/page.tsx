@@ -24,7 +24,7 @@ import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 import { testsActions } from "@/redux/features/tests";
 
 function ResultPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const searchParams = useSearchParams();
   const datesCheckboxes = useCheckbox();
   const dispatch = useAppDispatch();
@@ -34,8 +34,11 @@ function ResultPage() {
   const testResults = useAppSelector(selectTestResults);
 
   useEffect(() => {
-    dispatch(TestsService.getTestInfo(id));
-    dispatch(TestsService.getTestResults(id, searchParams.get("userId")));
+    const userId = searchParams.get("userId");
+    if (userId) {
+      dispatch(TestsService.getTestInfo(id));
+      dispatch(TestsService.getTestResults(id, userId));
+    }
   }, [dispatch, id, searchParams]);
 
   useSetDefaultState(testsActions.getTestInfoSetDefaultState());
