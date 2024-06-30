@@ -43,8 +43,8 @@ function PsychologistClientPage() {
     dispatch(TestsService.getTestsByUserId(id));
   }, [dispatch, id]);
 
-  useSetDefaultState(clientsActions.getClientSetDefaultState());
-  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState());
+  useSetDefaultState(clientsActions.getClientSetDefaultState);
+  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
 
   return (
     <Container>

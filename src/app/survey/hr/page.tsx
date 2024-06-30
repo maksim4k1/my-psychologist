@@ -52,7 +52,7 @@ function HrSurveyPage() {
     }
   }
 
-  useSetDefaultState(authActions.sendHrSurveySetDefaultState());
+  useSetDefaultState(authActions.sendHrSurveySetDefaultState);
 
   return (
     <Container>

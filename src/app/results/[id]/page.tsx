@@ -41,8 +41,8 @@ function ResultPage() {
     }
   }, [dispatch, id, searchParams]);
 
-  useSetDefaultState(testsActions.getTestInfoSetDefaultState());
-  useSetDefaultState(testsActions.getTestResultsSetDefaultState());
+  useSetDefaultState(testsActions.getTestInfoSetDefaultState);
+  useSetDefaultState(testsActions.getTestResultsSetDefaultState);
 
   return (
     <Container>

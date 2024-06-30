@@ -39,8 +39,8 @@ function DetailResultPage() {
     }
   }, [getTestResultState.isSuccess, dispatch, testResult]);
 
-  useSetDefaultState(testsActions.getTestInfoSetDefaultState());
-  useSetDefaultState(testsActions.getTestResultSetDefaultState());
+  useSetDefaultState(testsActions.getTestInfoSetDefaultState);
+  useSetDefaultState(testsActions.getTestResultSetDefaultState);
 
   return (
     <StateWrapper state={[getTestResultState, getTestInfoState]}>

@@ -76,8 +76,8 @@ function ApplicationPage() {
     }
   };
 
-  useSetDefaultState(applicationsActions.getApplicationSetDefaultState());
-  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState());
+  useSetDefaultState(applicationsActions.getApplicationSetDefaultState);
+  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
 
   return (
     <Container>

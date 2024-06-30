@@ -41,7 +41,7 @@ function LoginPage() {
     }
   };
 
-  useSetDefaultState(authActions.loginSetDefaultState(), [
+  useSetDefaultState(authActions.loginSetDefaultState, [
     email.value,
     password.value,
   ]);

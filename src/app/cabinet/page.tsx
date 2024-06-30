@@ -43,8 +43,8 @@ function PsychologistPage() {
     dispatch(ClientsService.getClients());
   }, [dispatch]);
 
-  useSetDefaultState(applicationsActions.getApplicationsSetDefaultState());
-  useSetDefaultState(clientsActions.getClientsSetDefaultState());
+  useSetDefaultState(applicationsActions.getApplicationsSetDefaultState);
+  useSetDefaultState(clientsActions.getClientsSetDefaultState);
 
   return (
     <Container>

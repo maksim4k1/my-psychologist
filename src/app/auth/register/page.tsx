@@ -57,7 +57,7 @@ function RegisterPage() {
     }
   };
 
-  useSetDefaultState(authActions.registerSetDefaultState(), [
+  useSetDefaultState(authActions.registerSetDefaultState, [
     name.value,
     email.value,
     password.value,

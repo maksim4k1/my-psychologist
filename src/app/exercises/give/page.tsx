@@ -43,7 +43,7 @@ function GiveExercisePage() {
     }
   }, [giveTestState.isSuccess, dispatch]);
 
-  useSetDefaultState(testsActions.getTestsSetDefaultState());
+  useSetDefaultState(testsActions.getTestsSetDefaultState);
 
   return (
     <HttpErrorWrapper
