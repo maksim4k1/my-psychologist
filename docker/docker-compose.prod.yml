@@ -13,6 +13,7 @@ services:
       - "3000"
     networks:
       - demo
+    mac_address: 02:42:ac:12:00:12
 
   nginx-prod:
     container_name: nginx-prod
