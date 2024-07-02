@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3"
 
 services:
   nextjs-prod:
@@ -19,7 +19,6 @@ services:
     image: nginx:latest
     restart: on-failure
     volumes:
-      - /app/node_modules
       - ./nginx/default.prod.conf:/etc/nginx/conf.d/default.conf
     expose:
       - "80"
@@ -31,4 +30,3 @@ services:
 networks:
   demo:
     external: true
-    driver: bridge
