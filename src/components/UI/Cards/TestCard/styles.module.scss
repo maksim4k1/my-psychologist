@@ -1,0 +1,22 @@
+@import "@/styles/variables";
+@import "@/styles/textStyles";
+@import "@/styles/mixins";
+
+.testCard {
+  width: 360px;
+  padding: 16px;
+  display: flex;
+  flex-flow: column;
+  gap: 6px;
+  @include card;
+}
+
+.testTitle {
+  color: $color-on-surface-variant;
+  @include titleSmall;
+}
+
+.testLink {
+  color: $color-primary;
+  @include labelSmall;
+}
