@@ -1,0 +1,33 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.header {
+  width: 100%;
+  height: 88px;
+  background-color: $color-on-primary;
+  margin-bottom: 70px;
+}
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color-surface-container;
+}
+.logo {
+  width: 120px;
+}
+.nav {
+  display: flex;
+  gap: 40px;
+}
+.navLink {
+  color: $color-secondary;
+  @include titleMedium;
+}
+.profileContainer {
+  margin-right: 18px;
+  margin-left: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+}

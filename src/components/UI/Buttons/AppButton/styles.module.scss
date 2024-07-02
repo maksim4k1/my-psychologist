@@ -1,0 +1,13 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.button {
+  height: 40px;
+  padding: 0 24px;
+  @include labelLarge;
+  border-radius: 20px;
+
+  &.medium {
+    width: 168px;
+  }
+}

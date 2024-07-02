@@ -1,0 +1,32 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.link {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 4px;
+}
+.count {
+  position: absolute;
+  left: calc(50% + 4px);
+  top: -6px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-on-error;
+  @include labelSmall;
+  background-color: $color-error;
+  border-radius: 8px;
+
+  &.bigCount {
+    width: 21px;
+  }
+}
+.content {
+  color: $color-secondary;
+  @include labelMedium;
+}

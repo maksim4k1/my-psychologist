@@ -1,0 +1,31 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+@import "@/styles/mixins";
+
+.title {
+  margin-bottom: 40px;
+}
+
+.navigation {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 34px;
+  justify-content: flex-end;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  @include titleLarge;
+}
+
+.clientsSubtitle {
+  margin-top: 40px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 265px);
+  justify-content: space-between;
+  row-gap: 40px;
+  column-gap: 20px;
+}

@@ -1,0 +1,27 @@
+@import "@/styles/textStyles";
+@import "@/styles/variables";
+
+.title {
+  margin-bottom: 40px;
+}
+
+.radarChart {
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 800px;
+  min-height: 400px;
+}
+
+.barChart {
+  margin-bottom: 40px;
+  width: 100%;
+  min-height: 400px;
+}
+
+.listItem {
+  background-color: transparent;
+}
+
+.errorLabel {
+  @include titleLarge;
+}
