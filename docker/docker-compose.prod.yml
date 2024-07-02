@@ -13,7 +13,7 @@ services:
       - "3000"
     networks:
       - demo
-    mac_address: 02:42:ac:12:00:12
+    mac_address: 02:42:ac:18:06:01
 
   nginx-prod:
     container_name: nginx-prod
@@ -27,6 +27,7 @@ services:
       - demo
     depends_on:
       - nextjs-prod
+    mac_address: 02:42:ac:18:06:02
 
 networks:
   demo:
