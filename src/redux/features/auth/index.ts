@@ -4,12 +4,12 @@ import {
   createSuccessState,
   createFailureState,
 } from "../../../utils/stateCreators";
-import { ACCESS } from "./../../../../config/access.config";
+import { ACCESS } from "@/config/access.config";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState, UserData } from "./types";
 import { getRole } from "@/utils/apiUtils";
 import { saveToken } from "@/storage/token";
-import { HttpError } from "../../../../config/api.config";
+import { HttpError } from "../../../config/api.config";
 
 const initialState: AuthState = {
   isAuth: false,

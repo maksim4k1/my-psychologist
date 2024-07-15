@@ -14,7 +14,7 @@ import {
   selectRole,
 } from "@/redux/features/auth/selectors";
 import AuthService from "@/api/auth";
-import { ACCESS } from "../../../../config/access.config";
+import { ACCESS } from "@/config/access.config";
 
 const Header: FunctionComponent = ({}) => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);

@@ -1,6 +1,6 @@
 import { StatusState } from "@/utils/stateCreators";
 import { FunctionComponent, ReactNode } from "react";
-import { HttpError } from "../../../../config/api.config";
+import { HttpError } from "../../../config/api.config";
 import LoadingWrapper from "../LoadingWrapper";
 import HttpErrorWrapper from "../HttpErrorWrapper";
 

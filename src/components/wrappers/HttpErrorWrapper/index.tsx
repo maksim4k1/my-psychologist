@@ -1,6 +1,6 @@
 import NotFoundError from "@/components/errors/NotFoundError";
 import { FunctionComponent, ReactNode } from "react";
-import { HttpError } from "../../../../config/api.config";
+import { HttpError } from "../../../config/api.config";
 import AccessDeniedError from "@/components/errors/AccessDeniedError";
 import ServerError from "@/components/errors/ServerError";
 import BadRequestError from "@/components/errors/BadRequestError";

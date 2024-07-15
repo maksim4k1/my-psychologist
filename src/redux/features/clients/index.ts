@@ -6,7 +6,7 @@ import {
 } from "@/utils/stateCreators";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ClientData, ClientProfileData, ClientsState } from "./types";
-import { HttpError } from "../../../../config/api.config";
+import { HttpError } from "../../../config/api.config";
 
 const initialState: ClientsState = {
   client: null,

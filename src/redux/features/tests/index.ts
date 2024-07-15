@@ -6,7 +6,7 @@ import {
 } from "@/utils/stateCreators";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TestData, TestResultData, TestShortData, TestsState } from "./types";
-import { HttpError } from "../../../../config/api.config";
+import { HttpError } from "../../../config/api.config";
 
 const initialState: TestsState = {
   tests: [],

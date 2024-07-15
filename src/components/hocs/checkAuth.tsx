@@ -1,6 +1,6 @@
 "use client";
 
-import { ACCESS, AccessRole } from "../../../config/access.config";
+import { ACCESS, AccessRole } from "../../config/access.config";
 import { FunctionComponent, useEffect } from "react";
 import AccessDeniedError from "../errors/AccessDeniedError";
 import { useAppSelector } from "@/hooks/reduxHooks";
@@ -8,7 +8,7 @@ import {
   selectAuth,
   selectAuthLoginState,
 } from "@/redux/features/auth/selectors";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import LoadingLoop from "../statusLabels/LoadingLoop";
 
 function checkAuth(

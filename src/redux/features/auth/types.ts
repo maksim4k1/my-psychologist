@@ -1,5 +1,5 @@
 import { StatusState } from "../../../utils/stateCreators";
-import { AccessRole } from "./../../../../config/access.config";
+import { AccessRole } from "../../../config/access.config";
 
 export interface AuthState {
   isAuth: boolean;

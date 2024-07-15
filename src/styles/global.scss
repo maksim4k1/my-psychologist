@@ -1,9 +1,14 @@
 @import "@/styles/variables.scss";
 
+html {
+  font-family: "--font-roboto";
+}
+
 body {
   font-size: 16px;
   background-color: $color-on-primary;
   color: $color-on-surface;
+  overflow-x: hidden;
 }
 
 #snackbars {
