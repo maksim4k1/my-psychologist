@@ -1,15 +1,26 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import "../styles/reset.scss";
-import "../styles/global.scss";
-import Header from "@/components/UI/Header";
-import styles from "./styles.module.scss";
+import { Roboto, Victor_Mono, Montserrat } from "next/font/google";
+import "@/styles/reset.scss";
+import "@/styles/global.scss";
 import StoreProvider from "@/redux/StoreProvider";
 import SnackbarsPortal from "@/components/portals/SnackbarsPortal";
 
-const font = Roboto({
+export const fontRoboto = Roboto({
   weight: ["400", "500"],
   subsets: ["latin", "cyrillic"],
+  variable: "--font-roboto",
+});
+
+export const fontVictorMono = Victor_Mono({
+  weight: ["700"],
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-victor-mono",
+});
+
+export const fontMontserrat = Montserrat({
+  weight: ["400", "600"],
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -25,10 +36,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={font.className}>
+      <body
+        className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable}`}
+      >
         <StoreProvider>
-          <Header />
-          <main className={styles.main}>{children}</main>
+          {children}
           <SnackbarsPortal />
         </StoreProvider>
       </body>

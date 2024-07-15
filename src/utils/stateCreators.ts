@@ -1,4 +1,4 @@
-import { HttpError } from "../../config/api.config";
+import { HttpError } from "../config/api.config";
 
 export interface StatusState {
   isSuccess: boolean;

@@ -1,6 +1,6 @@
 import { applicationsActions } from "@/redux/features/applications";
 import { AppDispatch } from "@/redux/store";
-import { HttpError, customAxios } from "../../config/api.config";
+import { HttpError, customAxios } from "../config/api.config";
 import {
   ApplicationData,
   ApplicationProfileData,

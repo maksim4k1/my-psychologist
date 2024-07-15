@@ -1,6 +1,6 @@
 "use client";
 
-import { FunctionComponent, ReactNode, useState } from "react";
+import { FunctionComponent, ReactNode } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/scss";
@@ -18,13 +18,14 @@ const PrimarySwiper: FunctionComponent<Props> = ({
   children,
   className = "",
   gap,
-  slides = 3,
+  slides = 4,
 }) => {
-  const [style, setStyle] = useState({});
-
   return (
     <div className={styles.container}>
       <Swiper
+        autoplay={{
+          delay: 4000,
+        }}
         modules={[Navigation]}
         spaceBetween={gap}
         slidesPerView={slides}
@@ -36,13 +37,6 @@ const PrimarySwiper: FunctionComponent<Props> = ({
         setWrapperSize={false}
         wrapperClass={styles.wrapper}
         className={`${styles.swiper} ${className}`}
-        style={style}
-        onReachBeginning={() => {
-          setStyle({ marginLeft: 0 });
-        }}
-        onReachEnd={() => {
-          setStyle({ marginLeft: "auto" });
-        }}
       >
         {children.map((child, i) => (
           <SwiperSlide

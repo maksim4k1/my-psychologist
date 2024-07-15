@@ -1,6 +1,6 @@
 import { testsActions } from "@/redux/features/tests";
 import { AppDispatch } from "@/redux/store";
-import { customAxios } from "../../config/api.config";
+import { customAxios } from "../config/api.config";
 import {
   ScaleData,
   TestData,

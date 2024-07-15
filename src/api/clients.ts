@@ -2,7 +2,7 @@ import {
   ClientData,
   ClientProfileData,
 } from "./../redux/features/clients/types";
-import { customAxios } from "./../../config/api.config";
+import { customAxios } from "../config/api.config";
 import { clientsActions } from "@/redux/features/clients";
 import { AppDispatch } from "@/redux/store";
 import { calculateAge } from "@/utils/dataUtils";

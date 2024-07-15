@@ -1,0 +1,60 @@
+@import "@/styles/variables.scss";
+@import "@/styles/textStyles.scss";
+
+.header {
+  height: 118px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  font-family: var(--font-montserrat);
+}
+
+.logo {
+  width: 174px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  gap: 70px;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLink {
+  font-size: 20px;
+  line-height: 22px;
+  color: $color-landing-primary-text;
+}
+
+.button {
+  width: 174px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-landing-white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 22px;
+  border-radius: 20px;
+  background-color: $color-landing-primary;
+  background-image: url("/textures/buttonTexture.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &:disabled {
+    background-color: $color-landing-secondary-text;
+  }
+}
+
+.profileImage {
+  margin-left: 104px;
+}

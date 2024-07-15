@@ -5,7 +5,7 @@ import {
 } from "@/redux/features/auth/types";
 import { AppDispatch } from "./../redux/store";
 import { authActions } from "@/redux/features/auth/";
-import { customAxios } from "../../config/api.config";
+import { customAxios } from "../config/api.config";
 import { deleteToken, getToken } from "@/storage/token";
 import { instanceofHttpError } from "@/utils/apiUtils";
 

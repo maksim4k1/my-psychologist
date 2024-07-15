@@ -1,0 +1,222 @@
+@import "@/styles/variables";
+@import "@/styles/textStyles";
+
+.body {
+  background-color: $color-landing-white;
+  font-family: var(--font-montserrat);
+}
+
+.main {
+  padding-bottom: 100px;
+}
+
+.strong {
+  color: $color-landing-primary;
+}
+
+.title {
+  font-family: var(--font-victor-mono);
+  font-weight: 700;
+}
+
+h1.title {
+  font-size: 56px;
+  line-height: 62px;
+}
+
+h2.title {
+  font-size: 32px;
+  line-height: 36px;
+}
+
+h3.title {
+  font-size: 40px;
+  line-height: 44px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.container {
+  display: flex;
+  flex-flow: column;
+  gap: 140px;
+  font-size: 20px;
+}
+
+.mainSection {
+  display: flex;
+  align-items: center;
+}
+
+.mainSectionImage {
+  padding-right: 39px;
+}
+
+.infoSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  row-gap: 10px;
+  column-gap: 15px;
+}
+
+.info {
+  padding: 60px;
+  background-color: $color-landing-white;
+  box-shadow: $shadow-landing-primary;
+  border-radius: 70px;
+  background-repeat: no-repeat;
+}
+
+.info1 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  background-image: url("/landing/pet-love.webp");
+  background-position-x: calc(100% - 40px);
+  background-position-y: calc(100% - 10px);
+}
+
+.info2 {
+  background-image: url("/landing/flower.webp");
+  background-position-x: calc(100% - 56px);
+  background-position-y: 100%;
+}
+
+.info3 {
+  background-image: url("/landing/coffee.webp");
+  background-position-x: calc(100% - 46px);
+  background-position-y: calc(100% - 2px);
+}
+
+.infoTitle {
+  margin-bottom: 20px;
+}
+
+.infoList {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+.infoListItem1 {
+  max-width: 500px;
+}
+
+.infoListItem2 {
+  max-width: 550px;
+}
+
+.infoDescription {
+  max-width: 500px;
+}
+
+.partners {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.partnerLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.partnerImage {
+  max-width: 180px;
+  max-height: 100px;
+  object-fit: contain;
+  filter: grayscale(1);
+}
+
+.achievements {
+  display: flex;
+  gap: 15px;
+}
+
+.achievementCard {
+  min-width: 322px;
+  height: 200px;
+  padding: 40px 23px 50px 30px;
+  background-color: $color-landing-white;
+  border-radius: 40px;
+  box-shadow: $shadow-landing-primary;
+  background-repeat: no-repeat;
+}
+
+.achievementCard1 {
+  background-image: url("/landing/freedom.webp");
+  background-position-x: calc(100% - 35px);
+  background-position-y: calc(100% - 7px);
+}
+
+.achievementCard2 {
+  background-image: url("/landing/comments.webp");
+  background-position-x: 50%;
+  background-position-y: calc(100% - 11px);
+}
+
+.achievementCard3 {
+  background-image: url("/landing/wave-2.webp");
+  background-position-x: 50%;
+  background-position-y: 100%;
+}
+
+.achievementCard4 {
+  background-image: url("/landing/sunshine.webp");
+  background-position-x: calc(100% - 31px);
+  background-position-y: calc(100% - 18px);
+}
+
+.achievementCard5 {
+  background-image: url("/landing/wave.webp");
+  background-position-x: 50%;
+  background-position-y: 100%;
+}
+
+.achievementTitle {
+  font-size: 20px;
+  line-height: 22px;
+}
+
+.team {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 30px;
+  column-gap: 15px;
+}
+
+.teamMember {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+.teamMemberPhotoContainer {
+  width: 100%;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.teamMemberPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teamMemberInfo {
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+}
+
+.teamMemberRole {
+  color: $color-landing-secondary-text;
+}
+
+.footer {
+  margin-top: 100px;
+}
