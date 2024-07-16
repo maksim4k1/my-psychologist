@@ -17,7 +17,7 @@ const ExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
   const giveTestState = useAppSelector(selectGiveTestState);
 
   const onClickHandler = () => {
-    dispatch(TestsService.giveTest(exercise.id, userId));
+    dispatch(TestsService.giveTest(exercise, userId));
   };
 
   return (
