@@ -104,15 +104,15 @@ export default class TestsService {
   };
 
   static giveTest =
-    (testId: string, userId: string) => async (dispatch: AppDispatch) => {
+    (test: TestShortData, userId: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.giveTestLoading());
 
       try {
         const response = await customAxios.post("/manager/give_task", {
           text: "Задание для выполнения",
           user_id: userId,
-          test_title: "Тест",
-          test_id: testId,
+          test_title: test.title,
+          test_id: test.id,
         });
 
         const data = response.data;
