@@ -1,6 +1,6 @@
 import Container from "@/components/UI/Container";
 import { FunctionComponent } from "react";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 import PrimarySwiper from "@/components/UI/PrimarySwiper";
 
 import Dialectica from "@/assets/webp/partners/dialectica.webp";
@@ -19,6 +19,8 @@ import PolinaOzerova from "@/assets/webp/team/PolinaOzerova.webp";
 import IlyaFomin from "@/assets/webp/team/IlyaFomin.webp";
 import DmitryBespalov from "@/assets/webp/team/DmitryBespalov.webp";
 import IslambekMaratov from "@/assets/webp/team/IslambekMaratov.webp";
+import AlexanderPak from "@/assets/webp/team/AlexanderPak.jpg";
+import PavelPupenko from "@/assets/webp/team/PavelPupenko.jpg";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -126,6 +128,16 @@ const team = [
     image: IslambekMaratov,
     name: "Исламбек Маратов",
     role: "backend-разработчик",
+  },
+  {
+    image: PavelPupenko,
+    name: "Павел Пупенко",
+    role: "backend-разработчик",
+  },
+  {
+    image: AlexanderPak,
+    name: "Александр Пак",
+    role: "тестировщик",
   },
 ];
 
