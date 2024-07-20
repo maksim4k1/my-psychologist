@@ -18,6 +18,9 @@ import MariaAnyutina from "@/assets/webp/team/MariaAnyutina.webp";
 import PolinaOzerova from "@/assets/webp/team/PolinaOzerova.webp";
 import IlyaFomin from "@/assets/webp/team/IlyaFomin.webp";
 import DmitryBespalov from "@/assets/webp/team/DmitryBespalov.webp";
+import IslambekMaratov from "@/assets/webp/team/IslambekMaratov.webp";
+import AlexanderPak from "@/assets/webp/team/AlexanderPak.webp";
+import PavelPupenko from "@/assets/webp/team/PavelPupenko.webp";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -75,7 +78,7 @@ const achievements = [
   },
   {
     title:
-      "Диплом 2 степени на XXI Международной конференции «Перспективы развития фундаментальных наук».",
+      "Диплом 2 степени на XXI Международной конференции «Перспективы развития фундаментальных наук»",
     className: styles.achievementCard5,
   },
 ];
@@ -121,6 +124,21 @@ const team = [
     name: "Дмитрий Беспалов",
     role: "backend-разработчик",
   },
+  {
+    image: IslambekMaratov,
+    name: "Исламбек Маратов",
+    role: "backend-разработчик",
+  },
+  {
+    image: PavelPupenko,
+    name: "Павел Пупенко",
+    role: "backend-разработчик",
+  },
+  {
+    image: AlexanderPak,
+    name: "Александр Пак",
+    role: "тестировщик",
+  },
 ];
 
 const Home: FunctionComponent = () => {
@@ -154,17 +172,16 @@ const Home: FunctionComponent = () => {
           </h2>
           <ul className={styles.infoList}>
             <li className={`${styles.infoListItem} ${styles.infoListItem1}`}>
-              1 шаг. Знакомство с основами самопомощи и принципами КПТ, согласно
-              своему запросу.
+              1 шаг. Знакомство с основами самопомощи и принципами
+              когнитивно-поведенческой терапии (КПТ)
             </li>
             <li className={`${styles.infoListItem} ${styles.infoListItem2}`}>
-              2 шаг. Уточнение запроса: выполнение тестов, получение
-              рекомендаций по своему состоянию, определение целей работы.
+              2 шаг. Уточнение своего запроса: прохождение тестов, получение
+              рекомендаций, определение целей работы
             </li>
             <li className={`${styles.infoListItem} ${styles.infoListItem3}`}>
-              3 шаг. Работа с иррациональными автоматическими мыслями,
-              промежуточными и глубинными убеждениями, далее - закрепление
-              альтернативных убеждений.
+              3 шаг. Работа с иррациональными мыслями, формирование и
+              закрепление альтернативных убеждений
             </li>
           </ul>
         </div>
@@ -174,7 +191,7 @@ const Home: FunctionComponent = () => {
           </h2>
           <p className={styles.infoDescription}>
             Предоставление психологической поддержки от профессионала при
-            необходимости.
+            необходимости
           </p>
         </div>
         <div className={`${styles.info} ${styles.info3}`}>
@@ -182,9 +199,8 @@ const Home: FunctionComponent = () => {
             Научно-доказанный подход
           </h2>
           <p className={styles.infoDescription}>
-            Мы проводим научные исследования для оценки и проверки эффективности
-            нашего приложения в различных условиях и с разными группами
-            пользователей.
+            Мы основываемся на научных данных и сами проводим исследования
+            эффективности нашего приложения
           </p>
         </div>
       </section>
