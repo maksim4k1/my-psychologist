@@ -1,0 +1,17 @@
+.title {
+  margin-bottom: 40px;
+}
+
+.section {
+  margin-top: 40px;
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  column-gap: 20px;
+  row-gap: 20px;
+}

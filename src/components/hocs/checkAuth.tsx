@@ -34,6 +34,7 @@ function checkAuth(
       isAuth &&
       accessFor.includes(ACCESS.psychologist) &&
       accessFor.includes(ACCESS.hr) &&
+      accessFor.length === 2 &&
       role !== ACCESS.psychologist &&
       role !== ACCESS.hr;
 

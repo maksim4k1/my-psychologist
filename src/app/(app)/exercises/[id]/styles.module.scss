@@ -1,0 +1,10 @@
+@import "@/styles/textStyles";
+
+.title {
+  margin-bottom: 40px;
+}
+
+.description {
+  @include bodyMedium;
+  margin-bottom: 40px;
+}

@@ -3,15 +3,19 @@ import Container from "@/components/UI/Container";
 import { FunctionComponent } from "react";
 
 interface Props {
+  status?: number;
   message?: string;
 }
 
 const ServerError: FunctionComponent<Props> = ({
+  status = 500,
   message = "ошибка сервера",
 }) => {
   return (
     <Container>
-      <PageTitle>500 - {message}</PageTitle>
+      <PageTitle>
+        {status} - {message}
+      </PageTitle>
     </Container>
   );
 };

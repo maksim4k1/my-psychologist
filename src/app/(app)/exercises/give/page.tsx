@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import { ACCESS } from "@/config/access.config";
 import { useSearchParams } from "next/navigation";
-import ExerciseCard from "@/components/UI/Cards/ExerciseCard";
+import GiveExerciseCard from "@/components/UI/Cards/GiveExerciseCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectGetTestsState,
@@ -61,7 +61,7 @@ function GiveExercisePage() {
               <div className={styles.list}>
                 {tests.map((test) => {
                   return (
-                    <ExerciseCard
+                    <GiveExerciseCard
                       key={test.id}
                       exercise={test}
                       userId={searchParams.get("userId") ?? ""}
