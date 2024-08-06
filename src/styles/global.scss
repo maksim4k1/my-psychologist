@@ -16,3 +16,11 @@ body {
   pointer-events: none;
   z-index: 1000;
 }
+
+#modals {
+  z-index: 100;
+}
+
+body.disable-scroll {
+  overflow: hidden;
+}
