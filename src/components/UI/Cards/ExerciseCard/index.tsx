@@ -26,7 +26,9 @@ const ExerciseCard: FC<Props> = ({ exercise }) => {
           <SecondaryButton href={`/results/${exercise.id}`}>
             История
           </SecondaryButton>
-          <PrimaryButton>Пройти</PrimaryButton>
+          <PrimaryButton href={`/exercises/${exercise.id}`}>
+            Пройти
+          </PrimaryButton>
         </div>
       </div>
     );
