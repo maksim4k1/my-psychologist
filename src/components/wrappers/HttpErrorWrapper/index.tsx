@@ -33,8 +33,20 @@ const HttpErrorWrapper: FunctionComponent<Props> = ({
         case 403: {
           return <AccessDeniedError />;
         }
-        default: {
+        case 500: {
           return <ServerError />;
+        }
+        default: {
+          if (status && error) {
+            return (
+              <ServerError
+                status={err.status}
+                message={err.message}
+              />
+            );
+          } else {
+            return <ServerError />;
+          }
         }
       }
     }
