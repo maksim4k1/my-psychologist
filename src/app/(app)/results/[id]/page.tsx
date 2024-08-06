@@ -35,9 +35,11 @@ function ResultPage() {
 
   useEffect(() => {
     const userId = searchParams.get("userId");
+    dispatch(TestsService.getTestInfo(id));
     if (userId) {
-      dispatch(TestsService.getTestInfo(id));
       dispatch(TestsService.getTestResults(id, userId));
+    } else {
+      dispatch(TestsService.getTestResults(id));
     }
   }, [dispatch, id, searchParams]);
 
@@ -96,4 +98,8 @@ function ResultPage() {
   );
 }
 
-export default checkAuth(ResultPage, true, [ACCESS.psychologist, ACCESS.hr]);
+export default checkAuth(ResultPage, true, [
+  ACCESS.psychologist,
+  ACCESS.hr,
+  ACCESS.client,
+]);

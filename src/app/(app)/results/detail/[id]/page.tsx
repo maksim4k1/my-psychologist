@@ -107,4 +107,5 @@ function DetailResultPage() {
 export default checkAuth(DetailResultPage, true, [
   ACCESS.psychologist,
   ACCESS.hr,
+  ACCESS.client,
 ]);

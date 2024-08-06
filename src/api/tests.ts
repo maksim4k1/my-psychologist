@@ -167,7 +167,7 @@ export default class TestsService {
   };
 
   static getTestResults =
-    (testId: string, userId: string) => async (dispatch: AppDispatch) => {
+    (testId: string, userId?: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.getTestResultsLoading());
 
       try {
