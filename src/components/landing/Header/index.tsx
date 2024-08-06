@@ -68,16 +68,13 @@ const LandingHeader: FunctionComponent = ({}) => {
         </nav>
         {isAuth ? (
           <Link
-            href={
-              userRole === ACCESS.client ? "/auth/register/success" : "/cabinet"
-            }
+            href={userRole === ACCESS.client ? "/profile" : "/cabinet"}
             className={styles.profileContainer}
           >
             <ProfileImage
               src=""
               alt="profile"
               size={70}
-              className={styles.profileImage}
             />
           </Link>
         ) : loginState.isLoading ? (
