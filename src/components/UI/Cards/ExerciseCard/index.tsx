@@ -1,23 +1,35 @@
 "use client";
 
-import { FunctionComponent } from "react";
+import { FC, FunctionComponent, useState } from "react";
 import styles from "./styles.module.scss";
 import { TestShortData } from "@/redux/features/tests/types";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import TestsService from "@/api/tests";
-import { selectGiveTestState } from "@/redux/features/tests/selectors";
+import Modal from "../../Popups/Modal";
+import PrimaryButton from "../../Buttons/PrimaryButton";
+import SecondaryButton from "../../Buttons/SecondaryButton";
 
 interface Props {
   exercise: TestShortData;
-  userId: string;
 }
 
-const ExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
-  const dispatch = useAppDispatch();
-  const giveTestState = useAppSelector(selectGiveTestState);
+const ExerciseCard: FC<Props> = ({ exercise }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const onClickHandler = () => {
-    dispatch(TestsService.giveTest(exercise, userId));
+    setIsOpen(true);
+  };
+
+  const renderModalContent = () => {
+    return (
+      <div>
+        <p className={styles.modalDescription}>{exercise.description}</p>
+        <div className={styles.modalButtons}>
+          <SecondaryButton href={`/results/${exercise.id}`}>
+            История
+          </SecondaryButton>
+          <PrimaryButton>Пройти</PrimaryButton>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -27,10 +39,15 @@ const ExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
       <button
         className={styles.button}
         onClick={onClickHandler}
-        disabled={giveTestState.isLoading}
       >
-        Назначить задание
+        Подробнее
       </button>
+      <Modal
+        isOpen={isOpen}
+        title={exercise.title}
+        onClose={() => setIsOpen(false)}
+        content={renderModalContent()}
+      />
     </div>
   );
 };
