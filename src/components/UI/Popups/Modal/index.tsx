@@ -21,6 +21,10 @@ const Modal: FC<Props> = ({ isOpen, title, onClose, content }) => {
     } else {
       document.body.classList.remove("disable-scroll");
     }
+
+    return () => {
+      document.body.classList.remove("disable-scroll");
+    };
   }, [isOpen]);
 
   const clickContainerHandler = (event: MouseEvent<HTMLElement>) => {
