@@ -67,4 +67,5 @@ export interface TestsState {
   testResult: null | TestResultData;
   getTestQuestionsState: StatusState;
   testQuestions: null | TestQuestionData[];
+  sendTestResultState: StatusState;
 }

@@ -28,6 +28,7 @@ const initialState: TestsState = {
   testResult: null,
   getTestQuestionsState: createDefaultState(),
   testQuestions: null,
+  sendTestResultState: createDefaultState(),
 };
 
 const testsSlice = createSlice({
@@ -154,6 +155,20 @@ const testsSlice = createSlice({
     getTestQuestionsSetDefaultState: (state) => {
       state.getTestQuestionsState = createDefaultState();
       state.testQuestions = initialState.testQuestions;
+    },
+
+    // send test result actions
+    sendTestResultLoading: (state) => {
+      state.sendTestResultState = createLoadingState();
+    },
+    sendTestResultSuccess: (state) => {
+      state.sendTestResultState = createSuccessState();
+    },
+    sendTestResultFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.sendTestResultState = createFailureState(payload);
+    },
+    sendTestResultSetDefaultState: (state) => {
+      state.sendTestResultState = createDefaultState();
     },
   },
 });

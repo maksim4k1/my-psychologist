@@ -67,3 +67,7 @@ export const selectTestQuestions = (
 export const selectGetTestQuestionsState = (state: RootState): StatusState => {
   return selectTestsModule(state).getTestQuestionsState;
 };
+
+export const selectSendTestResultState = (state: RootState): StatusState => {
+  return selectTestsModule(state).sendTestResultState;
+};
