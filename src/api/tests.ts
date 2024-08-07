@@ -267,4 +267,32 @@ export default class TestsService {
         }
       }
     };
+
+  static sendTestResult =
+    (testId: string, answers: number[]) => async (dispatch: AppDispatch) => {
+      dispatch(testsActions.sendTestResultLoading());
+
+      try {
+        const response = await customAxios.post(`/test/save_test_result`, {
+          test_id: testId,
+          date: new Date().toJSON(),
+          results: answers,
+        });
+
+        if (response.status === 200) {
+          dispatch(testsActions.sendTestResultSuccess());
+        } else {
+          dispatch(
+            testsActions.sendTestResultFailure({
+              status: response.status,
+              message: "Ошибка сервера",
+            }),
+          );
+        }
+      } catch (err) {
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.sendTestResultFailure(err));
+        }
+      }
+    };
 }
