@@ -27,7 +27,7 @@
 .labelText {
   display: inline-block;
   padding-left: 34px;
-  @include labelLarge;
+  @include bodyLarge;
 
   &::before {
     content: "";

@@ -4,6 +4,7 @@ import { customAxios } from "../config/api.config";
 import {
   ScaleData,
   TestData,
+  TestQuestionData,
   TestResultData,
   TestShortData,
 } from "@/redux/features/tests/types";
@@ -48,6 +49,18 @@ interface ResponseTestResultData {
 
 interface ResponseScaleResultData {
   scale_id: string;
+  score: number;
+}
+
+interface ResponseTestQuesitionData {
+  number: number;
+  text: string;
+  answer_options: ResponseQuestionAnswerData[];
+}
+
+interface ResponseQuestionAnswerData {
+  id: string;
+  text: string;
   score: number;
 }
 
@@ -222,6 +235,63 @@ export default class TestsService {
       } catch (err) {
         if (instanceofHttpError(err)) {
           dispatch(testsActions.getTestResultFailure(err));
+        }
+      }
+    };
+
+  static getTestQuestions =
+    (testId: string) => async (dispatch: AppDispatch) => {
+      dispatch(testsActions.getTestQuestionsLoading());
+
+      try {
+        const response = await customAxios.get<ResponseTestQuesitionData[]>(
+          `/test/get_test_questions/${testId}`,
+        );
+
+        const data: ResponseTestQuesitionData[] = response.data;
+
+        const formattedData: TestQuestionData[] = data.map((question) => ({
+          number: question.number,
+          title: question.text,
+          answers: question.answer_options.map((answer) => ({
+            id: answer.id,
+            text: answer.text,
+            score: answer.score,
+          })),
+        }));
+
+        dispatch(testsActions.getTestQuestionsSuccess(formattedData));
+      } catch (err) {
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.getTestQuestionsFailure(err));
+        }
+      }
+    };
+
+  static sendTestResult =
+    (testId: string, answers: number[]) => async (dispatch: AppDispatch) => {
+      dispatch(testsActions.sendTestResultLoading());
+
+      try {
+        const response = await customAxios.post(`/test/save_test_result`, {
+          test_id: testId,
+          date: new Date().toJSON(),
+          results: answers,
+        });
+
+        if (response.status === 200) {
+          dispatch(testsActions.sendTestResultSuccess());
+        } else {
+          dispatch(
+            testsActions.sendTestResultFailure({
+              status: response.status,
+              message: "Ошибка сервера",
+            }),
+          );
+        }
+      } catch (err) {
+        if (instanceofHttpError(err)) {
+          dispatch(testsActions.sendTestResultFailure(err));
         }
       }
     };

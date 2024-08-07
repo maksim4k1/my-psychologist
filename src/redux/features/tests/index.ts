@@ -5,7 +5,13 @@ import {
   createSuccessState,
 } from "@/utils/stateCreators";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TestData, TestResultData, TestShortData, TestsState } from "./types";
+import {
+  TestData,
+  TestResultData,
+  TestShortData,
+  TestsState,
+  TestQuestionData,
+} from "./types";
 import { HttpError } from "../../../config/api.config";
 
 const initialState: TestsState = {
@@ -20,6 +26,9 @@ const initialState: TestsState = {
   testResults: null,
   getTestResultState: createDefaultState(),
   testResult: null,
+  getTestQuestionsState: createDefaultState(),
+  testQuestions: null,
+  sendTestResultState: createDefaultState(),
 };
 
 const testsSlice = createSlice({
@@ -127,6 +136,39 @@ const testsSlice = createSlice({
     getTestResultSetDefaultState: (state) => {
       state.getTestResultState = createDefaultState();
       state.testResult = initialState.testResult;
+    },
+
+    // get test questions actions
+    getTestQuestionsLoading: (state) => {
+      state.getTestQuestionsState = createLoadingState();
+    },
+    getTestQuestionsSuccess: (
+      state,
+      { payload }: PayloadAction<TestQuestionData[]>,
+    ) => {
+      state.getTestQuestionsState = createSuccessState();
+      state.testQuestions = payload;
+    },
+    getTestQuestionsFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.getTestQuestionsState = createFailureState(payload);
+    },
+    getTestQuestionsSetDefaultState: (state) => {
+      state.getTestQuestionsState = createDefaultState();
+      state.testQuestions = initialState.testQuestions;
+    },
+
+    // send test result actions
+    sendTestResultLoading: (state) => {
+      state.sendTestResultState = createLoadingState();
+    },
+    sendTestResultSuccess: (state) => {
+      state.sendTestResultState = createSuccessState();
+    },
+    sendTestResultFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.sendTestResultState = createFailureState(payload);
+    },
+    sendTestResultSetDefaultState: (state) => {
+      state.sendTestResultState = createDefaultState();
     },
   },
 });

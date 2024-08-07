@@ -41,6 +41,18 @@ export interface ScaleResultData {
   score: number;
 }
 
+export interface TestQuestionData {
+  number: number;
+  title: string;
+  answers: QuestionAnswerData[];
+}
+
+export interface QuestionAnswerData {
+  id: string;
+  text: string;
+  score: number;
+}
+
 export interface TestsState {
   tests: TestShortData[];
   getTestsState: StatusState;
@@ -53,4 +65,7 @@ export interface TestsState {
   testResults: null | TestResultData[];
   getTestResultState: StatusState;
   testResult: null | TestResultData;
+  getTestQuestionsState: StatusState;
+  testQuestions: null | TestQuestionData[];
+  sendTestResultState: StatusState;
 }
