@@ -53,8 +53,6 @@ const ExercisePage: FC = () => {
     const newAnswers = [...answers];
     newAnswers[number - 1] = score;
     setAnswers(newAnswers);
-
-    console.log(newAnswers);
   };
 
   const showQuestion = (index: number) => {

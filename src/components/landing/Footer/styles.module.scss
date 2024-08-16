@@ -1,0 +1,38 @@
+@import "@/styles/variables.scss";
+
+.footer {
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  font-family: var(--font-montserrat);
+}
+
+.logo {
+  width: 120px;
+}
+
+.container {
+  display: flex;
+  align-items: flex;
+  justify-content: space-between;
+}
+
+.contacts {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.socials {
+  display: flex;
+  gap: 15px;
+}
+
+.iconButton {
+  background-color: $color-landing-white;
+  box-shadow: $shadow-landing-primary;
+}

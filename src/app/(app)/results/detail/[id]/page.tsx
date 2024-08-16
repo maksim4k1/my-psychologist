@@ -64,6 +64,7 @@ function DetailResultPage() {
                           ?.score ?? 0
                       }
                       max={el.max}
+                      min={el.min}
                       borders={el.borders}
                     />
                   </div>

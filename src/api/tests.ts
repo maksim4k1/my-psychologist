@@ -162,12 +162,14 @@ export default class TestsService {
           title: el.title,
           min: el.min,
           max: el.max,
-          borders: el.borders.map((el: ResponseBorder) => ({
-            title: el.title,
-            leftBorder: el.left_border,
-            rightBorder: el.right_border,
-            color: el.color,
-          })),
+          borders: el.borders
+            .map((el: ResponseBorder) => ({
+              title: el.title,
+              leftBorder: el.left_border,
+              rightBorder: el.right_border,
+              color: el.color,
+            }))
+            .sort((a, b) => a.leftBorder - b.leftBorder),
         })),
       };
 

@@ -115,6 +115,7 @@
 .range {
   display: flex;
   justify-content: space-between;
+  min-width: 50px;
 
   &.good {
     color: $color-good-result;
