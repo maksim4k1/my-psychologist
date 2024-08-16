@@ -9,12 +9,12 @@ import Mercuria from "@/assets/webp/partners/mercuria.webp";
 import Tokp from "@/assets/webp/partners/tokp.webp";
 import Tusur from "@/assets/webp/partners/tusur.webp";
 import Tsu from "@/assets/webp/partners/tsu.webp";
+import Fasie from "@/assets/webp/partners/fasie.webp";
 
 import AlinaTisheva from "@/assets/webp/team/AlinaTishaeva.webp";
 import TimofeySimonov from "@/assets/webp/team/TimofeySimonov.webp";
 import EkaterinaLarionova from "@/assets/webp/team/EkaterinaLarionova.webp";
 import MaksimBazhenov from "@/assets/webp/team/MaksimBazhenov.webp";
-import MariaAnyutina from "@/assets/webp/team/MariaAnyutina.webp";
 import PolinaOzerova from "@/assets/webp/team/PolinaOzerova.webp";
 import IlyaFomin from "@/assets/webp/team/IlyaFomin.webp";
 import DmitryBespalov from "@/assets/webp/team/DmitryBespalov.webp";
@@ -46,6 +46,11 @@ const partners = [
     alt: "Dialectica Центр найчно-практической психологии",
     image: Dialectica,
     link: "https://cnpp.ru/",
+  },
+  {
+    alt: "Фонд содействия инновациям",
+    image: Fasie,
+    link: "https://fasie.ru/",
   },
   {
     alt: "Национальный Исследовательский Томский Государственный Университет",
@@ -93,11 +98,6 @@ const team = [
     image: IlyaFomin,
     name: "Илья Фомин",
     role: "android-разработчик",
-  },
-  {
-    image: MariaAnyutina,
-    name: "Мария Анютина",
-    role: "SMM",
   },
   {
     image: AlinaTisheva,

@@ -6,7 +6,6 @@ import Link from "next/link";
 import LogoIcon from "@/assets/svg/Icons/Logo";
 import Container from "@/components/UI/Container";
 import ProfileImage from "@/components/UI/Images/ProfileImage";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuthIsAuth,
