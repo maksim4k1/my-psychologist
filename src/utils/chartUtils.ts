@@ -7,7 +7,7 @@ import {
 export interface RadarChartItem {
   subject: string;
   fullMark: number;
-  [key: string]: any;
+  [key: string]: number | string;
 }
 
 export function mapToRadarChartData(
@@ -29,14 +29,16 @@ export function mapToRadarChartData(
   for (let scale of scales) {
     const subjectData: RadarChartItem = {
       subject: scale.title,
-      fullMark: scale.max,
+      fullMark: 100,
     };
 
     if (values.length) {
       for (let testId of values) {
         const scaleResult = map.get(testId);
         if (scaleResult && scaleResult[i]) {
-          subjectData[testId] = scaleResult[i].score;
+          subjectData[testId] =
+            (scaleResult[i].score - scale.min) /
+            ((scale.max - scale.min) / 100);
         }
       }
     } else {
@@ -48,7 +50,9 @@ export function mapToRadarChartData(
         }
       }
       subjectData["summary"] =
-        Math.round((subjectData["summary"] / testResults.length) * 10) / 10;
+        (subjectData["summary"] - scale.min) /
+        ((scale.max - scale.min) / 100) /
+        testResults.length;
     }
     i++;
 

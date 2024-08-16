@@ -4,6 +4,7 @@ import { BorderData } from "@/redux/features/tests/types";
 
 interface Props {
   value: number;
+  min: number;
   max: number;
   borders: BorderData[];
   className?: string;
@@ -11,12 +12,13 @@ interface Props {
 
 const ProgressBar: FunctionComponent<Props> = ({
   value,
+  min,
   max,
   borders,
   className = "",
 }) => {
-  const percent = max / 100;
-  const valuePercent = value / percent;
+  const percent = (max - min) / 100;
+  const valuePercent = (value - min) / percent;
 
   const color = borders.reduce((acc, el) => {
     if (value <= el.rightBorder && value >= el.leftBorder) {
@@ -51,7 +53,9 @@ const ProgressBar: FunctionComponent<Props> = ({
                   width: `${
                     (index === 0
                       ? el.rightBorder - el.leftBorder
-                      : el.rightBorder - el.leftBorder + 1) / percent
+                      : el.rightBorder -
+                        el.leftBorder +
+                        percent * (borders.length + 1)) / percent
                   }%`,
                   color: el.color,
                 }}

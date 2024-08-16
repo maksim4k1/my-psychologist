@@ -97,6 +97,17 @@ const RadarChart: FunctionComponent<Props> = ({
           labelClassName={styles.tooltipLabel}
           cursor={{ className: styles.tooltipCursor }}
           wrapperClassName={styles.tooltipWrapper}
+          formatter={(value, name, payload) => {
+            const scale = scales.find(
+              (scale) => scale.title === payload.payload.subject,
+            );
+            if (scale)
+              return (
+                Math.round(((scale.max - scale.min) / 100) * +value * 10) / 10 +
+                scale.min
+              );
+            return value;
+          }}
         />
         <Radar
           dot={{ r: 5 }}
@@ -117,6 +128,7 @@ const RadarChart: FunctionComponent<Props> = ({
               name={res?.datetime ?? "Среднее значение"}
               dataKey={el}
               fillOpacity={0.4}
+              label={false}
             />
           );
         })}
