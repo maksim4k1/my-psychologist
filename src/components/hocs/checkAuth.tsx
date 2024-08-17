@@ -3,13 +3,14 @@
 import { ACCESS, AccessRole } from "../../config/access.config";
 import { FunctionComponent, useEffect } from "react";
 import AccessDeniedError from "../errors/AccessDeniedError";
-import { useAppSelector } from "@/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuth,
   selectAuthLoginState,
 } from "@/redux/features/auth/selectors";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LoadingLoop from "../statusLabels/LoadingLoop";
+import { authActions } from "@/redux/features/auth";
 
 function checkAuth(
   Component: FunctionComponent,
@@ -18,7 +19,8 @@ function checkAuth(
 ): FunctionComponent {
   return function CheckAuthComponent() {
     const { isAuth, role } = useAppSelector(selectAuth);
-    const { isLoading } = useAppSelector(selectAuthLoginState);
+    const { isLoading, isSuccess } = useAppSelector(selectAuthLoginState);
+    const dispatch = useAppDispatch();
     const router = useRouter();
     const pathname = usePathname();
 
@@ -70,6 +72,12 @@ function checkAuth(
       pathname,
       isLoading,
     ]);
+
+    useEffect(() => {
+      if (isSuccess) {
+        dispatch(authActions.loginSetDefaultState());
+      }
+    }, [isSuccess]);
 
     if (isOnlyForUnauthorized || isOnlyForAuthorized || isOnlyForPsychologist)
       return <LoadingLoop />;

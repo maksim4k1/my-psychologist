@@ -75,6 +75,12 @@ const authSlice = createSlice({
     sendHrSurveySetDefaultState: (state) => {
       state.sendHrSurveyState = createDefaultState();
     },
+
+    // logout actions
+    logout: (state) => {
+      state.isAuth = false;
+      state.role = ACCESS.unauthorized;
+    },
   },
 });
 
