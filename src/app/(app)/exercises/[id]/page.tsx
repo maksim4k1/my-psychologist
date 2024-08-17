@@ -47,7 +47,7 @@ const ExercisePage: FC = () => {
       router.push(`/results/${id}`);
       dispatch(PopupsService.openSnackbarWithDelay("Тест успешно пройден!"));
     }
-  }, [sendTestResultState.isSuccess]);
+  }, [sendTestResultState.isSuccess, dispatch, id, router]);
 
   const selectAnswerHandler = (number: number, score: number) => {
     const newAnswers = [...answers];

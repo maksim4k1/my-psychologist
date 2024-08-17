@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuth,
   selectAuthLoginState,
+  selectRole,
 } from "@/redux/features/auth/selectors";
 import { usePathname, useRouter } from "next/navigation";
 import LoadingLoop from "../statusLabels/LoadingLoop";
@@ -18,7 +19,8 @@ function checkAuth(
   accessFor: AccessRole[] = [ACCESS.public],
 ): FunctionComponent {
   return function CheckAuthComponent() {
-    const { isAuth, role } = useAppSelector(selectAuth);
+    const { isAuth } = useAppSelector(selectAuth);
+    const role = useAppSelector(selectRole);
     const { isLoading, isSuccess } = useAppSelector(selectAuthLoginState);
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -77,7 +79,7 @@ function checkAuth(
       if (isSuccess) {
         dispatch(authActions.loginSetDefaultState());
       }
-    }, [isSuccess]);
+    }, [isSuccess, dispatch]);
 
     if (isOnlyForUnauthorized || isOnlyForAuthorized || isOnlyForPsychologist)
       return <LoadingLoop />;

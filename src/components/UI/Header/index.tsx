@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuthIsAuth,
   selectAuthLoginState,
-  selectRole,
+  selectProfile,
 } from "@/redux/features/auth/selectors";
 import AuthService from "@/api/auth";
 import { ACCESS } from "@/config/access.config";
@@ -21,7 +21,7 @@ import { useClickOutside } from "@/hooks/clickOutsideHook";
 const Header: FunctionComponent = ({}) => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const loginState = useAppSelector(selectAuthLoginState);
-  const userRole = useAppSelector(selectRole);
+  const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
   const popupRef = useRef(null);
   const buttonRef = useRef(null);
@@ -46,7 +46,6 @@ const Header: FunctionComponent = ({}) => {
   };
 
   const logout = () => {
-    setIsPopupOpen(false);
     dispatch(AuthService.logout());
   };
 
@@ -103,21 +102,31 @@ const Header: FunctionComponent = ({}) => {
                 className={styles.popup}
                 ref={popupRef}
               >
+                <div className={styles.profileInfo}>
+                  <div className={styles.name}>
+                    {profile.username || profile.email}
+                  </div>
+                  {profile.username && (
+                    <div className={styles.email}>{profile.email}</div>
+                  )}
+                </div>
+                <div className={styles.divider}></div>
                 <Button
                   className={styles.popupItem}
                   href="/profile"
                 >
                   Профиль
                 </Button>
-                {(userRole === ACCESS.hr ||
-                  userRole === ACCESS.psychologist) && (
+                {(profile.role === ACCESS.hr ||
+                  profile.role === ACCESS.psychologist) && (
                   <Button
                     href="/cabinet"
                     className={styles.popupItem}
                   >
-                    Кабинет {userRole === ACCESS.hr ? "HR" : "психолога"}
+                    Кабинет {profile.role === ACCESS.hr ? "HR" : "психолога"}
                   </Button>
                 )}
+                <div className={styles.divider}></div>
                 <Button
                   className={styles.popupItem}
                   onClick={logout}

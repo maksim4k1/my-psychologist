@@ -13,7 +13,12 @@ import { HttpError } from "../../../config/api.config";
 
 const initialState: AuthState = {
   isAuth: false,
-  role: ACCESS.unauthorized,
+  profile: {
+    id: "",
+    email: "",
+    username: "",
+    role: ACCESS.unauthorized,
+  },
   loginState: createDefaultState(),
   registerState: createDefaultState(),
   sendHrSurveyState: createDefaultState(),
@@ -29,7 +34,12 @@ const authSlice = createSlice({
     },
     loginSuccess: (state, { payload }: PayloadAction<UserData>) => {
       state.isAuth = true;
-      state.role = getRole(payload.role);
+      state.profile = {
+        id: payload.user_id,
+        email: payload.email,
+        username: payload.username,
+        role: getRole(payload.role),
+      };
       state.loginState = createSuccessState();
       if (payload.token) {
         saveToken(payload.token);
@@ -48,7 +58,12 @@ const authSlice = createSlice({
     },
     registerSuccess: (state, { payload }: PayloadAction<UserData>) => {
       state.isAuth = true;
-      state.role = getRole(payload.role);
+      state.profile = {
+        id: payload.user_id,
+        email: payload.email,
+        username: payload.username,
+        role: getRole(payload.role),
+      };
       if (payload.token) {
         saveToken(payload.token);
       }
@@ -67,7 +82,7 @@ const authSlice = createSlice({
     },
     sendHrSurveySuccess: (state) => {
       state.sendHrSurveyState = createSuccessState();
-      state.role = ACCESS.hr;
+      state.profile.role = ACCESS.hr;
     },
     sendHrSurveyFailure: (state, { payload }: PayloadAction<HttpError>) => {
       state.sendHrSurveyState = createFailureState(payload);
@@ -79,7 +94,7 @@ const authSlice = createSlice({
     // logout actions
     logout: (state) => {
       state.isAuth = false;
-      state.role = ACCESS.unauthorized;
+      state.profile = initialState.profile;
     },
   },
 });
