@@ -1,7 +1,7 @@
 import { getCookie } from "@/utils/cookieUtils";
 
 export const saveToken = (token: string): void => {
-  document.cookie = `session_cookie=${token}; path=/`;
+  document.cookie = `session_cookie=${token}; path=/;`;
 };
 
 export const getToken = (): string | null => {
@@ -9,5 +9,5 @@ export const getToken = (): string | null => {
 };
 
 export const deleteToken = (): void => {
-  document.cookie = "session_cookie=; Max-Age=-1;";
+  document.cookie = "session_cookie=; path=/; Max-Age=-1;";
 };
