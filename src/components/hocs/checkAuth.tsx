@@ -54,7 +54,7 @@ function checkAuth(
       if (!isLoading) {
         if (pathname === "/auth/register" && isOnlyForUnauthorized)
           router.push(`/auth/register/success`);
-        else if (isOnlyForUnauthorized) router.push("/");
+        else if (isOnlyForUnauthorized) router.push("/profile");
         else if (isOnlyForAuthorized) router.push(`/auth/login`);
         else if (forPsychologistAndHr) router.push(`/auth/register/success`);
         else if (isOnlyForPsychologist) router.push(`/survey/psychologist`);
