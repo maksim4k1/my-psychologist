@@ -1,10 +1,12 @@
+import { usePathname } from "next/navigation";
 import { RefObject, useCallback, useEffect } from "react";
 
 export const useClickOutside = (
   ref: RefObject<any>,
-  callback: Function,
+  closeCallback: Function,
   ignoreRef?: RefObject<any>,
 ) => {
+  const pathname = usePathname();
   const onClickHandler = useCallback(
     (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -13,11 +15,11 @@ export const useClickOutside = (
           (event.target !== ignoreRef.current &&
             !ignoreRef.current.contains(event.target))
         ) {
-          callback();
+          closeCallback();
         }
       }
     },
-    [ref, ignoreRef, callback],
+    [ref, ignoreRef, closeCallback],
   );
 
   useEffect(() => {
@@ -27,4 +29,8 @@ export const useClickOutside = (
       window.removeEventListener("mousedown", onClickHandler);
     };
   }, [ref, onClickHandler]);
+
+  useEffect(() => {
+    closeCallback();
+  }, [pathname]);
 };

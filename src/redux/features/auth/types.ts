@@ -1,9 +1,16 @@
 import { StatusState } from "../../../utils/stateCreators";
 import { AccessRole } from "../../../config/access.config";
 
+export interface ProfileState {
+  id: string;
+  role: AccessRole;
+  email: string;
+  username: string;
+}
+
 export interface AuthState {
   isAuth: boolean;
-  role: AccessRole;
+  profile: ProfileState;
   loginState: StatusState;
   registerState: StatusState;
   sendHrSurveyState: StatusState;

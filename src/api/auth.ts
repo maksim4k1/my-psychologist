@@ -68,6 +68,11 @@ export default class AuthService {
     }
   };
 
+  static logout = () => (dispatch: AppDispatch) => {
+    deleteToken();
+    dispatch(authActions.logout());
+  };
+
   static sendHrSurvey =
     (formData: SendHrSurveyPayload) => async (dispatch: AppDispatch) => {
       dispatch(authActions.sendHrSurveyLoading());
