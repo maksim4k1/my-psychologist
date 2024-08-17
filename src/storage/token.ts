@@ -9,8 +9,5 @@ export const getToken = (): string | null => {
 };
 
 export const deleteToken = (): void => {
-  document.cookie =
-    "session_cookie=; Path=/; Domain=" +
-    process.env.NEXT_PUBLIC_DOMAIN +
-    "; Max-Age=-1;";
+  document.cookie = "session_cookie=; Max-Age=-1;";
 };
