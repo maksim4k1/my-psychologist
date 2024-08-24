@@ -18,9 +18,9 @@
 }
 
 .clientInfo {
+  max-width: calc(100% - 56px);
   width: 100%;
   margin-left: 16px;
-  margin-right: 12px;
   display: flex;
   flex-flow: column;
   gap: 4px;
@@ -28,6 +28,9 @@
 
 .username {
   @include titleMedium;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .status {
@@ -107,4 +110,18 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+}
+
+.info {
+  margin: 24px 0;
+}
+
+.modalForm {
+  display: flex;
+  flex-flow: column;
+  gap: 32px;
+}
+
+.modalFormButton {
+  align-self: flex-start;
 }

@@ -20,4 +20,5 @@ export interface ApplicationsState {
   getApplicationsState: StatusState;
   getApplicationState: StatusState;
   confirmApplicationState: StatusState;
+  sendApplicationState: StatusState;
 }

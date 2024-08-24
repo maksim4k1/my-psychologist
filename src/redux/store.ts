@@ -3,6 +3,7 @@ import applicationsReducer from "./features/applications";
 import clientsReducer from "./features/clients";
 import testsReducer from "./features/tests";
 import popupsReducer from "./features/popups";
+import psychologistsReducer from "./features/psychologists";
 import {
   combineReducers,
   configureStore,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   clientsReducer,
   testsReducer,
   popupsReducer,
+  psychologistsReducer,
 });
 
 const store: Store = configureStore({

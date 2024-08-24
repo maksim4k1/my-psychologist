@@ -58,32 +58,20 @@ const Header: FunctionComponent = ({}) => {
         >
           <LogoIcon />
         </Link>
-        {/* <nav className={styles.nav}>
+        <nav className={styles.nav}>
           <Link
             className={styles.navLink}
-            href="/"
+            href="/profile"
           >
-            План
+            Моя программа
           </Link>
           <Link
             className={styles.navLink}
-            href="/"
+            href="/psychologist"
           >
-            Теория
+            Психологи
           </Link>
-          <Link
-            className={styles.navLink}
-            href="/"
-          >
-            Практика
-          </Link>
-          <Link
-            className={styles.navLink}
-            href="/"
-          >
-            Психолог
-          </Link>
-        </nav> */}
+        </nav>
         {isAuth ? (
           <div className={styles.profileContainer}>
             <button

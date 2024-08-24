@@ -3,6 +3,7 @@
 
 .problem {
   display: inline-block;
+  height: fit-content;
   padding: 6px 8px;
   @include labelLarge;
   background-color: $color-secondary-container;

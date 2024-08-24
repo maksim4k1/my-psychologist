@@ -33,3 +33,7 @@ export const selectApplication = (
 ): ApplicationProfileData | null => {
   return selectApplicationsModule(state).application;
 };
+
+export const selectSendApplicationState = (state: RootState): StatusState => {
+  return selectApplicationsModule(state).sendApplicationState;
+};
