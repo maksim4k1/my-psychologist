@@ -16,3 +16,15 @@ export function getRole(roleId: number = 0): AccessRole {
 
   return ACCESS.unauthorized;
 }
+
+export function getRoleId(role: AccessRole): 0 | 1 | 2 | 3 {
+  if (role === ACCESS.client) {
+    return 1;
+  } else if (role === ACCESS.psychologist) {
+    return 2;
+  } else if (role === ACCESS.hr) {
+    return 3;
+  }
+
+  return 0;
+}

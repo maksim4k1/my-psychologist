@@ -25,11 +25,13 @@ export default class ClientsService {
     dispatch(clientsActions.getClientsLoading());
 
     try {
-      const response = await customAxios.get("/psychologist/get_list_client");
+      const response = await customAxios.get<ClientResponse[]>(
+        "/psychologist/get_list_client",
+      );
 
       const data = response.data;
 
-      const formattedData: ClientData[] = data.map((el: ClientResponse) => ({
+      const formattedData: ClientData[] = data.map((el) => ({
         userId: el.client_id,
         profileImage: "",
         username: el.username,

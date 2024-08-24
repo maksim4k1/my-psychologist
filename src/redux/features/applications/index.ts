@@ -18,6 +18,7 @@ const initialState: ApplicationsState = {
   getApplicationsState: createDefaultState(),
   getApplicationState: createDefaultState(),
   confirmApplicationState: createDefaultState(),
+  sendApplicationState: createDefaultState(),
 };
 
 const applicationsSlice = createSlice({
@@ -77,6 +78,20 @@ const applicationsSlice = createSlice({
     },
     confirmApplicationSetDefaultState: (state) => {
       state.confirmApplicationState = createDefaultState();
+    },
+
+    // send application actions
+    sendApplicationLoading: (state) => {
+      state.sendApplicationState = createLoadingState();
+    },
+    sendApplicationSuccess: (state) => {
+      state.sendApplicationState = createSuccessState();
+    },
+    sendApplicationFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.sendApplicationState = createFailureState(payload);
+    },
+    sendApplicationSetDefaultState: (state) => {
+      state.sendApplicationState = createDefaultState();
     },
   },
 });
