@@ -73,9 +73,10 @@ function DetailResultPage() {
             </div>
             <div className={styles.descriptionTestContainer}>
               {testInfo.scales.map((el) => {
-                const score =
-                  testResult.scaleResults.find((res) => res.id === el.id)
-                    ?.score ?? 0;
+                const scale = testResult.scaleResults.find(
+                  (res) => res.id === el.id,
+                );
+                const score = scale?.score ?? 0;
 
                 const border = el.borders.find(
                   (el) => score >= el.leftBorder && score <= el.rightBorder,
@@ -94,6 +95,9 @@ function DetailResultPage() {
                         </span>
                       )}
                     </h3>
+                    <p className={styles.descriptionText}>
+                      {scale?.recomendations}
+                    </p>
                   </div>
                 );
               })}

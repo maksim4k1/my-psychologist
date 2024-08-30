@@ -50,6 +50,7 @@ interface ResponseTestResultData {
 interface ResponseScaleResultData {
   scale_id: string;
   score: number;
+  user_recommendation: string;
 }
 
 interface ResponseTestQuesitionData {
@@ -201,6 +202,7 @@ export default class TestsService {
           scaleResults: el.scale_results.map((scalse) => ({
             id: scalse.scale_id,
             score: scalse.score,
+            recomendations: scalse.user_recommendation,
           })),
         }));
 
@@ -230,6 +232,7 @@ export default class TestsService {
           scaleResults: data.scale_results.map((scalse) => ({
             id: scalse.scale_id,
             score: scalse.score,
+            recomendations: scalse.user_recommendation,
           })),
         };
 
