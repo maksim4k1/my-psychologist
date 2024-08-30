@@ -55,7 +55,7 @@ const ExercisePage: FC = () => {
     setAnswers(newAnswers);
 
     if (number >= answers.length && number !== testQuestions?.length) {
-      showQuestion(number);
+      setTimeout(() => showQuestion(number), 500);
     }
   };
 

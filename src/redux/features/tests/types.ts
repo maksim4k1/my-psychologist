@@ -39,6 +39,7 @@ export interface TestResultData {
 export interface ScaleResultData {
   id: string;
   score: number;
+  recomendations: string;
 }
 
 export interface TestQuestionData {
