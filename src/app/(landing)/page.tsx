@@ -13,7 +13,6 @@ import Fasie from "@/assets/webp/partners/fasie.webp";
 
 import AlinaTisheva from "@/assets/webp/team/AlinaTishaeva.webp";
 import TimofeySimonov from "@/assets/webp/team/TimofeySimonov.webp";
-import EkaterinaLarionova from "@/assets/webp/team/EkaterinaLarionova.webp";
 import MaksimBazhenov from "@/assets/webp/team/MaksimBazhenov.webp";
 import PolinaOzerova from "@/assets/webp/team/PolinaOzerova.webp";
 import IlyaFomin from "@/assets/webp/team/IlyaFomin.webp";
@@ -108,11 +107,6 @@ const team = [
     image: PolinaOzerova,
     name: "Полина Озерова",
     role: "дизайнер",
-  },
-  {
-    image: EkaterinaLarionova,
-    name: "Екатерина Ларионова",
-    role: "менеджер",
   },
   {
     image: MaksimBazhenov,
