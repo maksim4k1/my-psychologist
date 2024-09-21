@@ -1,8 +1,8 @@
 "use client";
 
-import { FunctionComponent } from "react";
 import styles from "../styles.module.scss";
 import { IMaskInput } from "react-imask";
+import { type FunctionComponent } from "react";
 
 interface Props {
   labelText?: string;
@@ -11,6 +11,7 @@ interface Props {
   className?: string;
   type?: string;
   mask?: any;
+  required?: boolean;
   [key: string]: any;
 }
 

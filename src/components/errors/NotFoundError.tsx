@@ -1,6 +1,6 @@
-import PageTitle from "@/components/UI/Titles/PageTitle";
 import Container from "@/components/UI/Container";
-import { FunctionComponent } from "react";
+import PageTitle from "@/components/UI/Titles/PageTitle";
+import { type FunctionComponent } from "react";
 
 interface Props {
   message: string;

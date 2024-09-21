@@ -1,10 +1,10 @@
 "use client";
 
+import styles from "./styles.module.scss";
+import Completed from "@/assets/svg/Completed";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import Completed from "@/assets/svg/Completed";
-import styles from "./styles.module.scss";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "@/config/access.config";
 

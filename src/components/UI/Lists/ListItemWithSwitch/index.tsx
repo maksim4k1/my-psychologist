@@ -1,7 +1,7 @@
-import { FunctionComponent } from "react";
-import styles from "./styles.module.scss";
 import Switch from "../../Inputs/Switch";
+import styles from "./styles.module.scss";
 import Link from "next/link";
+import { type FunctionComponent } from "react";
 
 interface Props {
   label: string;

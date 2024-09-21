@@ -1,11 +1,11 @@
 "use client";
 
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
-import Container from "@/components/UI/Container";
 import CloseIcon from "@/assets/svg/Icons/CloseIcon";
+import Container from "@/components/UI/Container";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { PopupsService } from "@/redux/services/popups";
+import { type FunctionComponent } from "react";
 
 interface Props {
   isOpen: boolean;

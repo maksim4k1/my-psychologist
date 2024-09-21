@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { type FC } from "react";
 
-const TelegramIcon: FC<any> = (props) => {
+const TelegramIcon: FC<any> = () => {
   return (
     <svg
       width="24"

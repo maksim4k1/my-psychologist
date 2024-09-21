@@ -1,6 +1,6 @@
-import { RootState } from "@/redux/store";
-import { Theme, TheoryState } from "./types";
-import { StatusState } from "@/utils/stateCreators";
+import { type Theme, type TheoryState } from "./types";
+import { type RootState } from "@/redux/store";
+import { type StatusState } from "@/utils/stateCreators";
 
 const selectTheoryModule = (state: RootState): TheoryState => {
   return state.theoryReducer;

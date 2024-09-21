@@ -1,9 +1,9 @@
 import { usePathname } from "next/navigation";
-import { RefObject, useCallback, useEffect } from "react";
+import { type RefObject, useCallback, useEffect } from "react";
 
 export const useClickOutside = (
   ref: RefObject<any>,
-  closeCallback: Function,
+  closeCallback: () => void,
   ignoreRef?: RefObject<any>,
 ) => {
   const pathname = usePathname();

@@ -1,8 +1,8 @@
-import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../config/api.config";
-import { instanceofHttpError } from "@/utils/apiUtils";
-import { Theme } from "@/redux/features/theory/types";
 import { theoryActions } from "@/redux/features/theory";
+import { type Theme } from "@/redux/features/theory/types";
+import { type AppDispatch } from "@/redux/store";
+import { instanceofHttpError } from "@/utils/apiUtils";
 
 interface ResponseTheme {
   id: string;

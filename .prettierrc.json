@@ -10,12 +10,16 @@
   "jsxSingleQuote": false,
   "printWidth": 80,
   "proseWrap": "preserve",
-  "quoteProps": "as-needed",
+  "quoteProps": "preserve",
   "semi": true,
   "singleAttributePerLine": true,
   "singleQuote": false,
   "tabWidth": 2,
   "trailingComma": "all",
   "useTabs": false,
-  "vueIndentScriptAndStyle": false
+  "vueIndentScriptAndStyle": false,
+  "importOrder": ["(^@.*|<THIRD_PARTY_MODULES>)", "react$", "^src($|/.+)"],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

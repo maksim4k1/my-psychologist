@@ -1,19 +1,22 @@
 "use client";
 
-import React, { FunctionComponent, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
 import {
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
   Radar,
   RadarChart as RechartsRadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
   Text,
   Tooltip,
 } from "recharts";
-import styles from "./styles.module.scss";
-import { RadarChartItem, mapToRadarChartData } from "@/utils/chartUtils";
-import { ScaleData, TestResultData } from "@/redux/features/tests/types";
+import {
+  type ScaleData,
+  type TestResultData,
+} from "@/redux/features/tests/types";
+import { type RadarChartItem, mapToRadarChartData } from "@/utils/chartUtils";
+import React, { type FunctionComponent, useEffect, useState } from "react";
 
 interface Props {
   results: TestResultData[];
@@ -62,7 +65,7 @@ const RadarChart: FunctionComponent<Props> = ({
 
   const dataSets: string[] = [];
 
-  for (let key in radarData[0]) {
+  for (const key in radarData[0]) {
     if (key !== "subject" && key !== "fullMark") {
       dataSets.push(key);
     }

@@ -1,33 +1,33 @@
 "use client";
 
+import styles from "./styles.module.scss";
+import { useParams } from "next/navigation";
+import ClientsService from "@/api/clients";
+import TestsService from "@/api/tests";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
+import ProfileCard from "@/components/UI/Cards/ProfileCard";
+import TestCard from "@/components/UI/Cards/TestCard";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import styles from "./styles.module.scss";
-import { useEffect } from "react";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import checkAuth from "@/components/hocs/checkAuth";
+import StateWrapper from "@/components/wrappers/StateWrapper";
 import { ACCESS } from "@/config/access.config";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useParams } from "next/navigation";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { selectRole } from "@/redux/features/auth/selectors";
+import { clientsActions } from "@/redux/features/clients";
 import {
   selectClient,
   selectClientState,
 } from "@/redux/features/clients/selectors";
-import ClientsService from "@/api/clients";
-import TestCard from "@/components/UI/Cards/TestCard";
-import ProfileCard from "@/components/UI/Cards/ProfileCard";
-import { selectRole } from "@/redux/features/auth/selectors";
-import TestsService from "@/api/tests";
+import { testsActions } from "@/redux/features/tests";
 import {
   selectGetTestsByUserIdState,
   selectTestsByUserId,
 } from "@/redux/features/tests/selectors";
 import { addQueryParams } from "@/utils/urlUtils";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { testsActions } from "@/redux/features/tests";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { clientsActions } from "@/redux/features/clients";
+import { useEffect } from "react";
 
 function PsychologistClientPage() {
   const { id } = useParams<{ id: string }>();
@@ -56,7 +56,7 @@ function PsychologistClientPage() {
           {client && <ProfileCard profile={client} />}
           <div>
             <Subtitle>
-              {!!tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
+              {tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
             </Subtitle>
             {!!tests.length && (
               <div className={styles.tests}>

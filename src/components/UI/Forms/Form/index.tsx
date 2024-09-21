@@ -1,15 +1,13 @@
-import { FunctionComponent, ReactNode } from "react";
+import { type FunctionComponent, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  title?: string;
   className?: string;
   [key: string]: any;
 }
 
 const Form: FunctionComponent<Props> = ({
   children,
-  title,
   className = "",
   ...props
 }) => {

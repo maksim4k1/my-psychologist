@@ -1,20 +1,25 @@
-import { FormEvent, FunctionComponent, useEffect, useState } from "react";
-import ProfileImage from "../../Images/ProfileImage";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import styles from "../styles.module.scss";
-import { PsychologistData } from "@/redux/features/psychologists/types";
-import Modal from "../../Popups/Modal";
-import Input from "../../Inputs/Input";
-import { useInput } from "@/hooks/inputHooks";
-import { useSelector } from "react-redux";
-import { selectSendApplicationState } from "@/redux/features/applications/selectors";
 import Form from "../../Forms/Form";
-import { useAppDispatch } from "@/hooks/reduxHooks";
+import ProfileImage from "../../Images/ProfileImage";
+import Input from "../../Inputs/Input";
+import Modal from "../../Popups/Modal";
+import styles from "../styles.module.scss";
+import { useSelector } from "react-redux";
 import ApplicationsService from "@/api/applications";
-import { selectProfile } from "@/redux/features/auth/selectors";
 import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
-import { checkFormDataValidation } from "@/utils/formUtils";
+import { useInput } from "@/hooks/inputHooks";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { selectSendApplicationState } from "@/redux/features/applications/selectors";
+import { selectProfile } from "@/redux/features/auth/selectors";
+import { type PsychologistData } from "@/redux/features/psychologists/types";
 import { PopupsService } from "@/redux/services/popups";
+import { checkFormDataValidation } from "@/utils/formUtils";
+import {
+  type FormEvent,
+  type FunctionComponent,
+  useEffect,
+  useState,
+} from "react";
 
 interface Props {
   psychologist: PsychologistData;
@@ -41,7 +46,7 @@ const PsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {
       closeModal();
       dispatch(PopupsService.openSnackbarWithDelay("Заявка отправлена!"));
     }
-  }, [sendApplicationState.isSuccess]);
+  }, [sendApplicationState.isSuccess, dispatch]);
 
   const renderModalContent = () => {
     const submitFormHandler = (event: FormEvent<HTMLFormElement>) => {

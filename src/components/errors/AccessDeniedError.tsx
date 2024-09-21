@@ -1,5 +1,5 @@
-import PageTitle from "@/components/UI/Titles/PageTitle";
 import Container from "@/components/UI/Container";
+import PageTitle from "@/components/UI/Titles/PageTitle";
 
 function AccessDeniedError() {
   return (

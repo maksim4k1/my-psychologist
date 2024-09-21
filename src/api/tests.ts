@@ -1,13 +1,12 @@
-import { testsActions } from "@/redux/features/tests";
-import { AppDispatch } from "@/redux/store";
 import { customAxios } from "../config/api.config";
+import { testsActions } from "@/redux/features/tests";
 import {
-  ScaleData,
-  TestData,
-  TestQuestionData,
-  TestResultData,
-  TestShortData,
+  type TestData,
+  type TestQuestionData,
+  type TestResultData,
+  type TestShortData,
 } from "@/redux/features/tests/types";
+import { type AppDispatch } from "@/redux/store";
 import { instanceofHttpError } from "@/utils/apiUtils";
 import { mapDatetimeToText } from "@/utils/dataUtils";
 

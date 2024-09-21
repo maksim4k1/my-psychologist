@@ -1,6 +1,6 @@
-import { RootState } from "@/redux/store";
-import { PsychologistData, PsychologistsState } from "./types";
-import { StatusState } from "@/utils/stateCreators";
+import { type PsychologistData, type PsychologistsState } from "./types";
+import { type RootState } from "@/redux/store";
+import { type StatusState } from "@/utils/stateCreators";
 
 const selectPsychologistsModule = (state: RootState): PsychologistsState => {
   return state.psychologistsReducer;

@@ -1,10 +1,9 @@
-import { FunctionComponent } from "react";
-import ProfileImage from "../../Images/ProfileImage";
-import MoreVerticalIcon from "@/assets/svg/Icons/MoreVerticalIcon";
 import PrimaryButton from "../../Buttons/PrimaryButton";
-import styles from "../styles.module.scss";
+import ProfileImage from "../../Images/ProfileImage";
 import Symptom from "../../Symptom";
-import { ClientData } from "@/redux/features/clients/types";
+import styles from "../styles.module.scss";
+import { type ClientData } from "@/redux/features/clients/types";
+import { type FunctionComponent } from "react";
 
 interface Props {
   client: ClientData;

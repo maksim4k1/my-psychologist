@@ -1,12 +1,12 @@
 "use client";
 
+import styles from "./styles.module.scss";
+import Link from "next/link";
+import Tasks from "@/assets/svg/Tasks";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import styles from "./styles.module.scss";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "@/config/access.config";
-import Tasks from "@/assets/svg/Tasks";
-import Link from "next/link";
 
 const cards = [
   {

@@ -1,37 +1,37 @@
 "use client";
 
+import styles from "./styles.module.scss";
+import { useParams, useRouter } from "next/navigation";
+import ApplicationsService from "@/api/applications";
+import TestsService from "@/api/tests";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
+import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
+import ProfileCard from "@/components/UI/Cards/ProfileCard";
+import TestCard from "@/components/UI/Cards/TestCard";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import styles from "./styles.module.scss";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Subtitle from "@/components/UI/Titles/Subtitle";
 import checkAuth from "@/components/hocs/checkAuth";
+import StateWrapper from "@/components/wrappers/StateWrapper";
 import { ACCESS } from "@/config/access.config";
-import { useParams, useRouter } from "next/navigation";
-import TestCard from "@/components/UI/Cards/TestCard";
-import ProfileCard from "@/components/UI/Cards/ProfileCard";
-import { ApplicationProfileData } from "@/redux/features/applications/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { applicationsActions } from "@/redux/features/applications";
 import {
   selectApplication,
   selectApplicationState,
   selectConfirmApplicationState,
 } from "@/redux/features/applications/selectors";
-import { useEffect } from "react";
-import ApplicationsService from "@/api/applications";
-import { StatusState } from "@/utils/stateCreators";
-import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
+import { type ApplicationProfileData } from "@/redux/features/applications/types";
 import { selectRole } from "@/redux/features/auth/selectors";
-import TestsService from "@/api/tests";
+import { testsActions } from "@/redux/features/tests";
 import {
   selectGetTestsByUserIdState,
   selectTestsByUserId,
 } from "@/redux/features/tests/selectors";
-import StateWrapper from "@/components/wrappers/StateWrapper";
 import { PopupsService } from "@/redux/services/popups";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { applicationsActions } from "@/redux/features/applications";
-import { testsActions } from "@/redux/features/tests";
+import { type StatusState } from "@/utils/stateCreators";
+import { useEffect } from "react";
 
 function ApplicationPage() {
   const { id } = useParams<{ id: string }>();
@@ -89,7 +89,7 @@ function ApplicationPage() {
           {application && <ProfileCard profile={application} />}
           <div>
             <Subtitle>
-              {!!tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
+              {tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
             </Subtitle>
             {!!tests.length && application && (
               <div className={styles.tests}>

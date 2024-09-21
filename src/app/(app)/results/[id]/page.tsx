@@ -1,27 +1,27 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import Container from "@/components/UI/Container";
-import checkAuth from "@/components/hocs/checkAuth";
-import RadarChart from "@/components/UI/Charts/RadarChart";
-import ListItemWithSwitch from "@/components/UI/Lists/ListItemWithSwitch";
-import { useCheckbox } from "@/hooks/inputHooks";
-import { useEffect } from "react";
-import { ACCESS } from "@/config/access.config";
 import { useParams, useSearchParams } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import TestsService from "@/api/tests";
+import RadarChart from "@/components/UI/Charts/RadarChart";
+import SimpleBarChart from "@/components/UI/Charts/SimpleBarChart";
+import Container from "@/components/UI/Container";
+import ListItemWithSwitch from "@/components/UI/Lists/ListItemWithSwitch";
+import PageTitle from "@/components/UI/Titles/PageTitle";
+import checkAuth from "@/components/hocs/checkAuth";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { ACCESS } from "@/config/access.config";
+import { useCheckbox } from "@/hooks/inputHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 import {
   selectGetTestInfoState,
   selectGetTestResultsState,
   selectTestInfo,
   selectTestResults,
 } from "@/redux/features/tests/selectors";
-import SimpleBarChart from "@/components/UI/Charts/SimpleBarChart";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { testsActions } from "@/redux/features/tests";
+import { useEffect } from "react";
 
 function ResultPage() {
   const { id } = useParams<{ id: string }>();

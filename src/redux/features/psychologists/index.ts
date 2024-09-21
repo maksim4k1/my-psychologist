@@ -1,12 +1,12 @@
+import { type PsychologistData, type PsychologistsState } from "./types";
+import { type HttpError } from "@/config/api.config";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { PsychologistData, PsychologistsState } from "./types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { HttpError } from "@/config/api.config";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: PsychologistsState = {
   psychologists: [],

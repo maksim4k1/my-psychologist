@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
 import {
   Bar,
   BarChart,
@@ -7,9 +7,12 @@ import {
   Tooltip,
   XAxis,
 } from "recharts";
-import styles from "./styles.module.scss";
-import { BarChartData, mapToBarChartData } from "@/utils/chartUtils";
-import { ScaleData, TestResultData } from "@/redux/features/tests/types";
+import {
+  type ScaleData,
+  type TestResultData,
+} from "@/redux/features/tests/types";
+import { type BarChartData, mapToBarChartData } from "@/utils/chartUtils";
+import { type FunctionComponent, useEffect, useState } from "react";
 
 interface Props {
   results: TestResultData[];

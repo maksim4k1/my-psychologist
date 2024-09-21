@@ -1,27 +1,27 @@
 "use client";
 
-import checkAuth from "@/components/hocs/checkAuth";
+import styles from "./styles.module.scss";
+import { useSearchParams } from "next/navigation";
+import TestsService from "@/api/tests";
+import GiveExerciseCard from "@/components/UI/Cards/GiveExerciseCard";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import styles from "./styles.module.scss";
 import Subtitle from "@/components/UI/Titles/Subtitle";
+import checkAuth from "@/components/hocs/checkAuth";
+import HttpErrorWrapper from "@/components/wrappers/HttpErrorWrapper";
+import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import { ACCESS } from "@/config/access.config";
-import { useSearchParams } from "next/navigation";
-import GiveExerciseCard from "@/components/UI/Cards/GiveExerciseCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 import {
   selectGetTestsState,
   selectGiveTestState,
   selectTests,
 } from "@/redux/features/tests/selectors";
-import { useEffect } from "react";
-import TestsService from "@/api/tests";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
-import { testsActions } from "@/redux/features/tests";
-import HttpErrorWrapper from "@/components/wrappers/HttpErrorWrapper";
-import { checkQueryParams } from "@/utils/urlUtils";
 import { PopupsService } from "@/redux/services/popups";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { checkQueryParams } from "@/utils/urlUtils";
+import { useEffect } from "react";
 
 function GiveExercisePage() {
   const searchParams = useSearchParams();
@@ -55,7 +55,7 @@ function GiveExercisePage() {
         <div className={styles.section}>
           <LoadingWrapper status={testsState.isLoading}>
             <Subtitle>
-              {!!tests.length ? "Тесты" : "Нет доступных тестов"}
+              {tests.length ? "Тесты" : "Нет доступных тестов"}
             </Subtitle>
             {!!tests.length && (
               <div className={styles.list}>

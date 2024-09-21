@@ -1,6 +1,10 @@
-import { RootState } from "@/redux/store";
-import { ClientData, ClientProfileData, ClientsState } from "./types";
-import { StatusState } from "@/utils/stateCreators";
+import {
+  type ClientData,
+  type ClientProfileData,
+  type ClientsState,
+} from "./types";
+import { type RootState } from "@/redux/store";
+import { type StatusState } from "@/utils/stateCreators";
 
 const selectClientsModule = (state: RootState): ClientsState => {
   return state.clientsReducer;

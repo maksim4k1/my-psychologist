@@ -1,16 +1,16 @@
 "use client";
 
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
-import Container from "@/components/UI/Container";
-import IconButton from "@/components/UI/Buttons/IconButton";
-import VkIcon from "@/assets/svg/Icons/VkIcon";
-import TelegramIcon from "@/assets/svg/Icons/TelegramIcon";
-import AppLink from "@/components/UI/Links/AppLink";
 import Link from "next/link";
 import LogoIcon from "@/assets/svg/Icons/Logo";
+import TelegramIcon from "@/assets/svg/Icons/TelegramIcon";
+import VkIcon from "@/assets/svg/Icons/VkIcon";
+import IconButton from "@/components/UI/Buttons/IconButton";
+import Container from "@/components/UI/Container";
+import AppLink from "@/components/UI/Links/AppLink";
+import { type FunctionComponent } from "react";
 
-const LandingFooter: FunctionComponent = ({}) => {
+const LandingFooter: FunctionComponent = () => {
   return (
     <footer className={styles.footer}>
       <Container

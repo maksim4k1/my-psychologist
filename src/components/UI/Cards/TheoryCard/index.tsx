@@ -1,7 +1,6 @@
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
-import { QueryParams } from "@/utils/urlUtils";
-import { Theme } from "@/redux/features/theory/types";
+import { type Theme } from "@/redux/features/theory/types";
+import { type FunctionComponent } from "react";
 
 interface TheoryProps {
   theory: Theme;

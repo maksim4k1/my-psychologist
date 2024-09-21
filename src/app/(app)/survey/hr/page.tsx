@@ -1,24 +1,24 @@
 "use client";
 
-import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";
+import { useRouter } from "next/navigation";
+import AuthService from "@/api/auth";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import Form from "@/components/UI/Forms/Form";
 import Input from "@/components/UI/Inputs/Input";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
+import PageTitle from "@/components/UI/Titles/PageTitle";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "@/config/access.config";
 import { useInput } from "@/hooks/inputHooks";
-import { checkFormDataValidation } from "@/utils/formUtils";
-import { FormEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import AuthService from "@/api/auth";
-import { SendHrSurveyPayload } from "@/redux/features/auth/types";
-import { selectSendHrSurveyState } from "@/redux/features/auth/selectors";
-import { useRouter } from "next/navigation";
-import { PopupsService } from "@/redux/services/popups";
 import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 import { authActions } from "@/redux/features/auth";
+import { selectSendHrSurveyState } from "@/redux/features/auth/selectors";
+import { type SendHrSurveyPayload } from "@/redux/features/auth/types";
+import { PopupsService } from "@/redux/services/popups";
+import { checkFormDataValidation } from "@/utils/formUtils";
+import { type FormEvent, useEffect } from "react";
 
 function HrSurveyPage() {
   const fullName = useInput("", { isEmpty: true });

@@ -1,5 +1,5 @@
 import { popupsActions } from "../features/popups";
-import { AppDispatch } from "../store";
+import { type AppDispatch } from "../store";
 
 export class PopupsService {
   static timer: ReturnType<typeof setTimeout> | null = null;

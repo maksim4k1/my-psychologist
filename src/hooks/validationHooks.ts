@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface InputValidationSetup {
   isEmpty?: boolean;
@@ -42,7 +42,7 @@ export const useInputValidation = (
     setIsValid(true);
     setError("");
 
-    validationCycle: for (let validation in validations) {
+    validationCycle: for (const validation in validations) {
       switch (validation) {
         case "isEmpty": {
           const { isEmpty } = validations;
@@ -134,7 +134,7 @@ export const useCheckboxValidation = (
     setError("");
     setIsValid(true);
 
-    validationCycle: for (let validation in validations) {
+    validationCycle: for (const validation in validations) {
       switch (validation) {
         case "isEmpty": {
           const { isEmpty } = validations;
@@ -181,7 +181,7 @@ export const useFileInputValidation = (
     setIsValid(true);
     setError("");
 
-    validationCycle: for (let validation in validations) {
+    validationCycle: for (const validation in validations) {
       switch (validation) {
         case "isEmpty": {
           const { isEmpty } = validations;
@@ -215,7 +215,7 @@ export const useFileInputValidation = (
 
           if (value && minSize) {
             for (let i = 0; i < value.length; i++) {
-              let file = value[i];
+              const file = value[i];
               if (file.size / (1024 * 1024) < minSize) {
                 setIsValid(false);
                 setError(`Минимальный размер файла: ${minSize} Мб`);
@@ -229,7 +229,7 @@ export const useFileInputValidation = (
           const { maxSize } = validations;
           if (value && maxSize) {
             for (let i = 0; i < value.length; i++) {
-              let file = value[i];
+              const file = value[i];
               if (file.size / (1024 * 1024) > maxSize) {
                 setIsValid(false);
                 setError(`Максимальный размер файла: ${maxSize} Мб`);
@@ -243,7 +243,7 @@ export const useFileInputValidation = (
           const { formats } = validations;
           if (value && formats) {
             for (let i = 0; i < value.length; i++) {
-              let file = value[i];
+              const file = value[i];
               const fileFormat = file.name.split(".").at(-1);
               if (!fileFormat || !formats.includes(fileFormat)) {
                 setIsValid(false);

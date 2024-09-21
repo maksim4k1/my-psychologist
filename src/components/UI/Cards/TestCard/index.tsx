@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { TestShortData } from "@/redux/features/tests/types";
-import { QueryParams, addQueryParams } from "@/utils/urlUtils";
+import { type TestShortData } from "@/redux/features/tests/types";
+import { type QueryParams, addQueryParams } from "@/utils/urlUtils";
+import { type FunctionComponent } from "react";
 
 interface TestProps {
   test: TestShortData;

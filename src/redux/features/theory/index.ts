@@ -1,12 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TheoryState, Theme } from "./types";
+import { type Theme, type TheoryState } from "./types";
+import { type HttpError } from "@/config/api.config";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { HttpError } from "@/config/api.config";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TheoryState = {
   themes: [],

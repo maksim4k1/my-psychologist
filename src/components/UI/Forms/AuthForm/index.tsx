@@ -1,8 +1,8 @@
-import { FunctionComponent, ReactNode } from "react";
+import PageTitle from "../../Titles/PageTitle";
+import Form from "../Form";
 import styles from "./styles.module.scss";
 import Meditation from "@/assets/svg/Meditation";
-import Form from "../Form";
-import PageTitle from "../../Titles/PageTitle";
+import { type FunctionComponent, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

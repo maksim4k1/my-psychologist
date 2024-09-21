@@ -1,6 +1,6 @@
-import { UnknownAction } from "@reduxjs/toolkit";
-import { DependencyList, useEffect } from "react";
 import { useAppDispatch } from "./reduxHooks";
+import { type UnknownAction } from "@reduxjs/toolkit";
+import { type DependencyList, useEffect } from "react";
 
 export const useSetDefaultState = (
   action: () => UnknownAction,

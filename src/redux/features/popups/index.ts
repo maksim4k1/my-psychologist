@@ -1,5 +1,5 @@
-import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
-import { PopupsState } from "./types";
+import { type PopupsState } from "./types";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: PopupsState = {
   snackbar: {

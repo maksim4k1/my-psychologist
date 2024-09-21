@@ -1,25 +1,25 @@
 "use client";
 
-import { FormEvent, useEffect } from "react";
 import styles from "./styles.module.scss";
-import Form from "@/components/UI/Forms/AuthForm";
-import Input from "@/components/UI/Inputs/Input";
+import AuthService from "@/api/auth";
+import AuthButtons from "@/components/UI/AuthButtons";
 import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
-import AuthButtons from "@/components/UI/AuthButtons";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
-import { RegisterPayload } from "@/redux/features/auth/types";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import AuthService from "@/api/auth";
-import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
-import { useInput } from "@/hooks/inputHooks";
-import { checkFormDataValidation } from "@/utils/formUtils";
-import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
+import Form from "@/components/UI/Forms/AuthForm";
+import Input from "@/components/UI/Inputs/Input";
 import AppLink from "@/components/UI/Links/AppLink";
-import { PopupsService } from "@/redux/services/popups";
+import checkAuth from "@/components/hocs/checkAuth";
+import FormErrorLabel from "@/components/statusLabels/FormErrorLabel";
+import { ACCESS } from "@/config/access.config";
+import { useInput } from "@/hooks/inputHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 import { authActions } from "@/redux/features/auth";
+import { selectAuthRegisterState } from "@/redux/features/auth/selectors";
+import { type RegisterPayload } from "@/redux/features/auth/types";
+import { PopupsService } from "@/redux/services/popups";
+import { checkFormDataValidation } from "@/utils/formUtils";
+import { type FormEvent, useEffect } from "react";
 
 function RegisterPage() {
   const name = useInput("");

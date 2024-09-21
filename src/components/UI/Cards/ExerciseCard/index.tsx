@@ -1,11 +1,11 @@
 "use client";
 
-import { FC, FunctionComponent, useState } from "react";
-import styles from "./styles.module.scss";
-import { TestShortData } from "@/redux/features/tests/types";
-import Modal from "../../Popups/Modal";
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
+import Modal from "../../Popups/Modal";
+import styles from "./styles.module.scss";
+import { type TestShortData } from "@/redux/features/tests/types";
+import { type FC, useState } from "react";
 
 interface Props {
   exercise: TestShortData;

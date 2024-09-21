@@ -1,10 +1,10 @@
 "use client";
 
-import { FunctionComponent } from "react";
-import ProfileImage from "../../Images/ProfileImage";
 import PrimaryButton from "../../Buttons/PrimaryButton";
+import ProfileImage from "../../Images/ProfileImage";
 import styles from "../styles.module.scss";
-import { ApplicationData } from "@/redux/features/applications/types";
+import { type ApplicationData } from "@/redux/features/applications/types";
+import { type FunctionComponent } from "react";
 
 interface Props {
   client: ApplicationData;

@@ -1,22 +1,22 @@
 "use client";
 
+import styles from "./styles.module.scss";
+import TestsService from "@/api/tests";
+import ExerciseCard from "@/components/UI/Cards/ExerciseCard";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
-import styles from "./styles.module.scss";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
 import Subtitle from "@/components/UI/Titles/Subtitle";
-import ExerciseCard from "@/components/UI/Cards/ExerciseCard";
+import checkAuth from "@/components/hocs/checkAuth";
+import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
+import { ACCESS } from "@/config/access.config";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 import {
   selectGetTestsState,
   selectTests,
 } from "@/redux/features/tests/selectors";
-import TestsService from "@/api/tests";
 import { useEffect } from "react";
-import { testsActions } from "@/redux/features/tests";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 
 function ExercisesPage() {
   const dispatch = useAppDispatch();

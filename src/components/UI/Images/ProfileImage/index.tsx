@@ -1,7 +1,7 @@
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import DefaultAvatar from "@/assets/svg/Icons/DefaultAvatarIcon";
+import { type FunctionComponent } from "react";
 
 interface Props {
   src: string;

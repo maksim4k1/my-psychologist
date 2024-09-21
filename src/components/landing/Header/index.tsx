@@ -1,23 +1,23 @@
 "use client";
 
-import { FunctionComponent, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import AuthService from "@/api/auth";
 import LogoIcon from "@/assets/svg/Icons/Logo";
+import Button from "@/components/UI/Buttons/Button";
 import Container from "@/components/UI/Container";
 import ProfileImage from "@/components/UI/Images/ProfileImage";
+import { ACCESS } from "@/config/access.config";
+import { useClickOutside } from "@/hooks/clickOutsideHook";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuthIsAuth,
   selectAuthLoginState,
   selectProfile,
 } from "@/redux/features/auth/selectors";
-import AuthService from "@/api/auth";
-import { ACCESS } from "@/config/access.config";
-import Button from "@/components/UI/Buttons/Button";
-import { useClickOutside } from "@/hooks/clickOutsideHook";
+import { type FunctionComponent, useEffect, useRef, useState } from "react";
 
-const LandingHeader: FunctionComponent = ({}) => {
+const LandingHeader: FunctionComponent = () => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const loginState = useAppSelector(selectAuthLoginState);
   const profile = useAppSelector(selectProfile);

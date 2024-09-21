@@ -1,4 +1,4 @@
-import { StatusState } from "@/utils/stateCreators";
+import { type StatusState } from "@/utils/stateCreators";
 
 export interface ApplicationData {
   id: string;

@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
+import PrimaryButton from "../../Buttons/PrimaryButton";
 import ProfileImage from "../../Images/ProfileImage";
 import styles from "../styles.module.scss";
-import { PsychologistData } from "@/redux/features/psychologists/types";
-import PrimaryButton from "../../Buttons/PrimaryButton";
+import { type PsychologistData } from "@/redux/features/psychologists/types";
+import { type FunctionComponent } from "react";
 
 interface Props {
   psychologist: PsychologistData;
