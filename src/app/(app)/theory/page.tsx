@@ -5,6 +5,7 @@ import TheoryService from "@/api/theory";
 import TheoryCard from "@/components/UI/Cards/TheoryCard";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
+import Subtitle from "@/components/UI/Titles/Subtitle";
 import checkAuth from "@/components/hocs/checkAuth";
 import StateWrapper from "@/components/wrappers/StateWrapper";
 import { ACCESS } from "@/config/access.config";
@@ -32,6 +33,7 @@ function TheoryPage() {
     <Container>
       <PageTitle className={styles.title}>Теория</PageTitle>
       <StateWrapper state={getThemesState}>
+        {!themes.length && <Subtitle>Статей пока нет</Subtitle>}
         <div className={styles.theoryList}>
           {themes.map((el) => (
             <TheoryCard

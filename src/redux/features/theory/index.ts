@@ -1,4 +1,4 @@
-import { type Theme, type TheoryState } from "./types";
+import { type Theme, type ThemeContentItem, type TheoryState } from "./types";
 import { type HttpError } from "@/config/api.config";
 import {
   createDefaultState,
@@ -10,7 +10,9 @@ import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TheoryState = {
   themes: [],
+  themeContent: [],
   getThemesState: createDefaultState(),
+  getThemeContentState: createDefaultState(),
 };
 
 const theorySlice = createSlice({
@@ -29,6 +31,23 @@ const theorySlice = createSlice({
     },
     getThemesDefaultState: (state) => {
       state.getThemesState = createDefaultState();
+    },
+
+    getThemeContentLoading: (state) => {
+      state.getThemeContentState = createLoadingState();
+    },
+    getThemeContentSuccess: (
+      state,
+      { payload }: PayloadAction<ThemeContentItem[]>,
+    ) => {
+      state.getThemeContentState = createSuccessState();
+      state.themeContent = payload;
+    },
+    getThemeContentFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.getThemeContentState = createFailureState(payload);
+    },
+    getThemeContentDefaultState: (state) => {
+      state.getThemeContentState = createDefaultState();
     },
   },
 });

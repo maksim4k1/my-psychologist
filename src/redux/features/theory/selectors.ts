@@ -1,4 +1,4 @@
-import { type Theme, type TheoryState } from "./types";
+import { type Theme, type ThemeContentItem, type TheoryState } from "./types";
 import { type RootState } from "@/redux/store";
 import { type StatusState } from "@/utils/stateCreators";
 
@@ -12,4 +12,12 @@ export const selectGetThemesState = (state: RootState): StatusState => {
 
 export const selectThemes = (state: RootState): Theme[] => {
   return selectTheoryModule(state).themes;
+};
+
+export const selectGetThemeContentState = (state: RootState): StatusState => {
+  return selectTheoryModule(state).getThemeContentState;
+};
+
+export const selectThemeContent = (state: RootState): ThemeContentItem[] => {
+  return selectTheoryModule(state).themeContent;
 };

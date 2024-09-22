@@ -1,6 +1,9 @@
 import { customAxios } from "../config/api.config";
 import { theoryActions } from "@/redux/features/theory";
-import { type Theme } from "@/redux/features/theory/types";
+import {
+  type Theme,
+  type ThemeContentItem,
+} from "@/redux/features/theory/types";
 import { type AppDispatch } from "@/redux/store";
 import { instanceofHttpError } from "@/utils/apiUtils";
 
@@ -31,6 +34,24 @@ export default class TheoryService {
     } catch (err) {
       if (instanceofHttpError(err)) {
         dispatch(theoryActions.getThemesFailure(err));
+      }
+    }
+  };
+
+  static getThemeContent = (id: string) => async (dispatch: AppDispatch) => {
+    dispatch(theoryActions.getThemeContentLoading());
+
+    try {
+      const response = await customAxios.get<ThemeContentItem[]>(
+        `/education/get_all_education_material/${id}`,
+      );
+
+      const data = response.data;
+
+      dispatch(theoryActions.getThemeContentSuccess(data));
+    } catch (err) {
+      if (instanceofHttpError(err)) {
+        dispatch(theoryActions.getThemeContentFailure(err));
       }
     }
   };
