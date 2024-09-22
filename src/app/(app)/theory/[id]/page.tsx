@@ -6,7 +6,9 @@ import TheoryService from "@/api/theory";
 import PatternImage from "@/assets/webp/pattern.webp";
 import TheoryCard from "@/components/UI/Cards/TheoryCard";
 import Container from "@/components/UI/Container";
+import checkAuth from "@/components/hocs/checkAuth";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { ACCESS } from "@/config/access.config";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 import { theoryActions } from "@/redux/features/theory";
@@ -78,4 +80,4 @@ const TheoryPage: FC = () => {
   );
 };
 
-export default TheoryPage;
+export default checkAuth(TheoryPage, true, [ACCESS.public]);
