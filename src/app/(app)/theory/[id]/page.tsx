@@ -39,7 +39,7 @@ const TheoryPage: FC = () => {
 
   const currentTheme = themes.find((el) => el.id === id);
 
-  const filteredThemes = themes.filter((el) => el.id === id);
+  const filteredThemes = themes.filter((el) => el.id !== id);
 
   return (
     <Container>

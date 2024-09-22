@@ -10,7 +10,7 @@ interface TheoryProps {
 
 const TheoryCard: FunctionComponent<TheoryProps> = ({ theory }) => {
   return (
-    <Link href={`/theory/${theory.id}?title=${theory.title}`}>
+    <Link href={`/theory/${theory.id}`}>
       <div className={styles.theoryCard}>
         <div
           className={styles.imageContainer}
