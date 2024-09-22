@@ -6,10 +6,13 @@ import MyPsychologistCard from "@/components/UI/Cards/MyPsychologistCard";
 import PsychologistCard from "@/components/UI/Cards/PsychologistCard";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
+import checkAuth from "@/components/hocs/checkAuth";
 import StateWrapper from "@/components/wrappers/StateWrapper";
+import { ACCESS } from "@/config/access.config";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
 import { selectSendApplicationState } from "@/redux/features/applications/selectors";
+import { selectProfile } from "@/redux/features/auth/selectors";
 import { psychologistsActions } from "@/redux/features/psychologists";
 import {
   selectGetMyPsychologistsState,
@@ -26,6 +29,7 @@ const PsychologistPage: FC = () => {
   const getPsychologistsState = useAppSelector(selectGetPsychologistsState);
   const getMyPsychologistsState = useAppSelector(selectGetMyPsychologistsState);
   const sendApplicationState = useAppSelector(selectSendApplicationState);
+  const profile = useAppSelector(selectProfile);
 
   useEffect(() => {
     dispatch(PsychologistsService.getMyPsychologists());
@@ -33,7 +37,9 @@ const PsychologistPage: FC = () => {
   }, [dispatch, sendApplicationState.isSuccess]);
 
   const filteredPsychologists = psychologists.filter(
-    (el) => myPsychologists.findIndex((val) => el.userId === val.userId) === -1,
+    (el) =>
+      myPsychologists.findIndex((val) => el.userId === val.userId) === -1 &&
+      el.userId !== profile.id,
   );
 
   useSetDefaultState(psychologistsActions.getPsychologistsSetDefaultState);
@@ -57,15 +63,17 @@ const PsychologistPage: FC = () => {
         <h2 className={styles.subtitle}>
           {filteredPsychologists.length ? "Все психологи" : ""}
         </h2>
-        {filteredPsychologists.map((psychologist) => (
-          <PsychologistCard
-            key={psychologist.userId}
-            psychologist={psychologist}
-          />
-        ))}
+        <div className={styles.psychologistList}>
+          {filteredPsychologists.map((psychologist) => (
+            <PsychologistCard
+              key={psychologist.userId}
+              psychologist={psychologist}
+            />
+          ))}
+        </div>
       </StateWrapper>
     </Container>
   );
 };
 
-export default PsychologistPage;
+export default checkAuth(PsychologistPage, true, [ACCESS.public]);
