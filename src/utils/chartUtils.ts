@@ -1,7 +1,7 @@
 import {
-  ScaleData,
-  ScaleResultData,
-  TestResultData,
+  type ScaleData,
+  type ScaleResultData,
+  type TestResultData,
 } from "@/redux/features/tests/types";
 
 export interface RadarChartItem {
@@ -21,19 +21,19 @@ export function mapToRadarChartData(
     string,
     ScaleResultData[]
   >();
-  for (let { id, scaleResults } of testResults) {
+  for (const { id, scaleResults } of testResults) {
     map.set(id, scaleResults);
   }
 
   let i: number = 0;
-  for (let scale of scales) {
+  for (const scale of scales) {
     const subjectData: RadarChartItem = {
       subject: scale.title,
       fullMark: 100,
     };
 
     if (values.length) {
-      for (let testId of values) {
+      for (const testId of values) {
         const scaleResult = map.get(testId);
         if (scaleResult && scaleResult[i]) {
           subjectData[testId] =
@@ -43,7 +43,7 @@ export function mapToRadarChartData(
       }
     } else {
       subjectData["summary"] = 0;
-      for (let testResult of testResults) {
+      for (const testResult of testResults) {
         const scaleResult = map.get(testResult.id);
         if (scaleResult && scaleResult[i]) {
           subjectData["summary"] += scaleResult[i].score;
@@ -87,7 +87,7 @@ export function mapToBarChartData(
     data: [],
   };
 
-  for (let scale of scales) {
+  for (const scale of scales) {
     barChartData.bars.push({
       dataKey: scale.id,
       name: scale.title,
@@ -95,14 +95,14 @@ export function mapToBarChartData(
   }
 
   if (values.length) {
-    for (let testResult of testResults) {
+    for (const testResult of testResults) {
       if (!values.includes(testResult.id)) continue;
 
       const barData: BarChartDataItem = {
         name: testResult.datetime,
       };
 
-      for (let scale of scales) {
+      for (const scale of scales) {
         barData[scale.id] = testResult.scaleResults.find(
           (el) => el.id === scale.id,
         )!.score;
@@ -114,14 +114,14 @@ export function mapToBarChartData(
     const barData: BarChartDataItem = {
       name: "Средний результат",
     };
-    for (let testResult of testResults) {
-      for (let scale of scales) {
+    for (const testResult of testResults) {
+      for (const scale of scales) {
         barData[scale.id] =
           (barData[scale.id] ?? 0) +
           testResult.scaleResults.find((el) => el.id === scale.id)!.score;
       }
     }
-    for (let key in barData) {
+    for (const key in barData) {
       if (key !== "name") {
         barData[key] =
           Math.round((barData[key] / testResults.length) * 10) / 10;

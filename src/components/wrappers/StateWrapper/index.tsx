@@ -1,8 +1,8 @@
-import { StatusState } from "@/utils/stateCreators";
-import { FunctionComponent, ReactNode } from "react";
-import { HttpError } from "../../../config/api.config";
-import LoadingWrapper from "../LoadingWrapper";
 import HttpErrorWrapper from "../HttpErrorWrapper";
+import LoadingWrapper from "../LoadingWrapper";
+import { type HttpError } from "@/config/api.config";
+import { type StatusState } from "@/utils/stateCreators";
+import { type FunctionComponent, type ReactNode } from "react";
 
 interface Props {
   state: StatusState[] | StatusState;
@@ -12,9 +12,9 @@ interface Props {
 const StateWrapper: FunctionComponent<Props> = ({ state, children }) => {
   if (!Array.isArray(state)) state = [state];
 
-  let isLoadingStatus: boolean[] = state.map((el) => el.isLoading);
-  let isFailureStatus: boolean[] = state.map((el) => el.isFailure);
-  let errors: Array<HttpError | null> = state.map((el) => el.error);
+  const isLoadingStatus: boolean[] = state.map((el) => el.isLoading);
+  const isFailureStatus: boolean[] = state.map((el) => el.isFailure);
+  const errors: Array<HttpError | null> = state.map((el) => el.error);
 
   return (
     <LoadingWrapper status={isLoadingStatus}>

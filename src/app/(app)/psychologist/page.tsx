@@ -1,23 +1,23 @@
 "use client";
 
+import styles from "./styles.module.scss";
 import PsychologistsService from "@/api/psychologists";
+import MyPsychologistCard from "@/components/UI/Cards/MyPsychologistCard";
+import PsychologistCard from "@/components/UI/Cards/PsychologistCard";
 import Container from "@/components/UI/Container";
 import PageTitle from "@/components/UI/Titles/PageTitle";
 import StateWrapper from "@/components/wrappers/StateWrapper";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { selectSendApplicationState } from "@/redux/features/applications/selectors";
+import { psychologistsActions } from "@/redux/features/psychologists";
 import {
   selectGetMyPsychologistsState,
   selectGetPsychologistsState,
   selectMyPsychologists,
   selectPsychologists,
 } from "@/redux/features/psychologists/selectors";
-import { FC, useEffect } from "react";
-import styles from "./styles.module.scss";
-import PsychologistCard from "@/components/UI/Cards/PsychologistCard";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { psychologistsActions } from "@/redux/features/psychologists";
-import MyPsychologistCard from "@/components/UI/Cards/MyPsychologistCard";
-import { selectSendApplicationState } from "@/redux/features/applications/selectors";
+import { type FC, useEffect } from "react";
 
 const PsychologistPage: FC = () => {
   const dispatch = useAppDispatch();

@@ -1,0 +1,65 @@
+@import "@/styles/textStyles";
+@import "@/styles/variables";
+
+.main {
+  margin-top: -70px;
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  padding: 40px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 0 0 40px 40px;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(57, 172, 204, 0) 0%,
+      #00385a 106.34%
+    );
+  }
+}
+
+.title {
+  @include displayLarge;
+  color: $color-white;
+  z-index: 1;
+}
+
+.content {
+  margin-top: 32px;
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+
+  @include bodyLarge;
+}
+
+.recomendations {
+  margin-top: 64px;
+}
+
+.recomendationsTitle {
+  margin-bottom: 32px;
+
+  @include headlineMedium;
+}
+
+.theoryList {
+  display: flex;
+  gap: 36px 24px;
+  flex-flow: wrap;
+}

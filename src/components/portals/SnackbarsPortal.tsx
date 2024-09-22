@@ -1,10 +1,10 @@
 "use client";
 
-import { FunctionComponent } from "react";
 import SnackbarWithCloseAffordance from "../UI/Popups/Snackbars/SnackbarWithCloseAffordance";
+import styles from "./styles.module.scss";
 import { useAppSelector } from "@/hooks/reduxHooks";
 import { selectSnackbar } from "@/redux/features/popups/selectors";
-import styles from "./styles.module.scss";
+import { type FunctionComponent } from "react";
 
 const SnackbarsPortal: FunctionComponent = () => {
   const snackbar = useAppSelector(selectSnackbar);

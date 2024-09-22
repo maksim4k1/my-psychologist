@@ -1,7 +1,7 @@
 import { customAxios } from "@/config/api.config";
 import { psychologistsActions } from "@/redux/features/psychologists";
-import { PsychologistData } from "@/redux/features/psychologists/types";
-import { AppDispatch } from "@/redux/store";
+import { type PsychologistData } from "@/redux/features/psychologists/types";
+import { type AppDispatch } from "@/redux/store";
 import { instanceofHttpError } from "@/utils/apiUtils";
 
 interface PsychologistDataResponse {

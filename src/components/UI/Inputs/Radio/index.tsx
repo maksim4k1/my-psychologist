@@ -1,7 +1,7 @@
 "use client";
 
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
+import { type FunctionComponent } from "react";
 
 interface Props {
   labelText: string;

@@ -1,6 +1,6 @@
-import LoadingIcon from "@/assets/svg/Icons/LoadingIcon";
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
+import LoadingIcon from "@/assets/svg/Icons/LoadingIcon";
+import { type FunctionComponent } from "react";
 
 const LoadingLoop: FunctionComponent = () => {
   return (

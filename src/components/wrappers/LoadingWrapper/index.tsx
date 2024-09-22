@@ -1,5 +1,5 @@
 import LoadingLoop from "@/components/statusLabels/LoadingLoop";
-import { FunctionComponent, ReactNode } from "react";
+import { type FunctionComponent, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

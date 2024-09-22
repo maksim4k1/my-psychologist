@@ -1,18 +1,18 @@
+import { type HttpError } from "../../../config/api.config";
+import {
+  type TestData,
+  type TestQuestionData,
+  type TestResultData,
+  type TestShortData,
+  type TestsState,
+} from "./types";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import {
-  TestData,
-  TestResultData,
-  TestShortData,
-  TestsState,
-  TestQuestionData,
-} from "./types";
-import { HttpError } from "../../../config/api.config";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TestsState = {
   tests: [],

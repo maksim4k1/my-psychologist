@@ -1,7 +1,7 @@
 "use client";
 
-import { ChangeEvent, FunctionComponent, useEffect, useRef } from "react";
 import styles from "../styles.module.scss";
+import { type ChangeEvent, type FunctionComponent } from "react";
 
 interface Props {
   labelText?: string;
@@ -10,6 +10,7 @@ interface Props {
   className?: string;
   value?: string;
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  required?: boolean;
   [key: string]: any;
 }
 

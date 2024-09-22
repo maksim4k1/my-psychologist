@@ -1,6 +1,6 @@
-import { FunctionComponent, useState } from "react";
 import styles from "./styles.module.scss";
-import { BorderData } from "@/redux/features/tests/types";
+import { type BorderData } from "@/redux/features/tests/types";
+import { type FunctionComponent } from "react";
 
 interface Props {
   value: number;

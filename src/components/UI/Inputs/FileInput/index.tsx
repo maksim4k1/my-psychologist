@@ -1,15 +1,15 @@
 "use client";
 
+import styles from "../styles.module.scss";
+import localStyles from "./styles.module.scss";
 import {
-  ChangeEvent,
-  DragEventHandler,
-  FocusEvent,
-  FunctionComponent,
+  type ChangeEvent,
+  type DragEventHandler,
+  type FocusEvent,
+  type FunctionComponent,
   useRef,
   useState,
 } from "react";
-import styles from "../styles.module.scss";
-import localStyles from "./styles.module.scss";
 
 interface Props {
   labelText?: string;
@@ -19,6 +19,7 @@ interface Props {
   multiple?: boolean;
   onChoose?: (input: HTMLInputElement) => void;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  required?: boolean;
   [key: string]: any;
 }
 

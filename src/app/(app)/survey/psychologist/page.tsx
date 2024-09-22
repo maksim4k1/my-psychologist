@@ -1,19 +1,19 @@
 "use client";
 
-import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
 import Form from "@/components/UI/Forms/Form";
+import FileInput from "@/components/UI/Inputs/FileInput";
 import Input from "@/components/UI/Inputs/Input";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
+import MaskedInput from "@/components/UI/Inputs/MaskedInput";
+import Textarea from "@/components/UI/Inputs/Textarea";
+import PageTitle from "@/components/UI/Titles/PageTitle";
 import checkAuth from "@/components/hocs/checkAuth";
 import { ACCESS } from "@/config/access.config";
 import { useFileInput, useInput, useMaskedInput } from "@/hooks/inputHooks";
-import MaskedInput from "@/components/UI/Inputs/MaskedInput";
 import { checkFormDataValidation } from "@/utils/formUtils";
-import FileInput from "@/components/UI/Inputs/FileInput";
-import Textarea from "@/components/UI/Inputs/Textarea";
-import { FormEvent } from "react";
+import { type FormEvent } from "react";
 
 function PsychologistSurveyPage() {
   const fullName = useInput("", { isEmpty: true });
@@ -78,8 +78,7 @@ function PsychologistSurveyPage() {
       //   about: about.value,
       //   unacceptableThings: unacceptableThings.value,
       // };
-
-      const formData: FormData = new FormData(event.target);
+      // const formData: FormData = new FormData(event.target);
     }
   }
 

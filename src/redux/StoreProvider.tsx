@@ -1,8 +1,8 @@
 "use client";
 
-import { FunctionComponent, ReactNode } from "react";
-import { Provider } from "react-redux";
 import store from "./store";
+import { Provider } from "react-redux";
+import { type FunctionComponent, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

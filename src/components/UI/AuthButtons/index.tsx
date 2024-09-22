@@ -1,8 +1,8 @@
-import { FunctionComponent, ReactNode } from "react";
-import styles from "./styles.module.scss";
 import IconButton from "../Buttons/IconButton";
-import YandexIcon from "@/assets/svg/Icons/YandexIcon";
+import styles from "./styles.module.scss";
 import VkIcon from "@/assets/svg/Icons/VkIcon";
+import YandexIcon from "@/assets/svg/Icons/YandexIcon";
+import { type FunctionComponent, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;

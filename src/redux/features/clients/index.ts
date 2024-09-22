@@ -1,12 +1,16 @@
+import { type HttpError } from "../../../config/api.config";
+import {
+  type ClientData,
+  type ClientProfileData,
+  type ClientsState,
+} from "./types";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ClientData, ClientProfileData, ClientsState } from "./types";
-import { HttpError } from "../../../config/api.config";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ClientsState = {
   client: null,

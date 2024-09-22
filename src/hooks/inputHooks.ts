@@ -1,12 +1,12 @@
 import {
-  useInputValidation,
-  InputValidationSetup,
+  type CheckboxValidationSetup,
+  type FileInputValidationSetup,
+  type InputValidationSetup,
   useCheckboxValidation,
-  CheckboxValidationSetup,
-  FileInputValidationSetup,
   useFileInputValidation,
+  useInputValidation,
 } from "./validationHooks";
-import { ChangeEvent, FocusEvent, useState } from "react";
+import { type ChangeEvent, type FocusEvent, useState } from "react";
 
 interface ValidationData {
   isValid: boolean;
@@ -67,9 +67,7 @@ export const useInput = (
     setValue(event.target.value);
   };
 
-  const onBlur = (
-    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const onBlur = () => {
     setIsDirty(!(!validations.isEmpty && value === ""));
   };
 
@@ -94,11 +92,11 @@ export const useMaskedInput = (
   const [isDirty, setIsDirty] = useState(false);
   const { isValid, error } = useInputValidation(value, validations);
 
-  const onAccept = (value: any, mask: any) => {
+  const onAccept = (value: any) => {
     setValue(value);
   };
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+  const onBlur = () => {
     setIsDirty(!(!validations.isEmpty && value === ""));
   };
 

@@ -1,24 +1,24 @@
 "use client";
 
-import { FunctionComponent, useEffect, useRef, useState } from "react";
-import styles from "./styles.module.scss";
-import Link from "next/link";
-import LogoIcon from "@/assets/svg/Icons/Logo";
+import Button from "../Buttons/Button";
+import PrimaryButton from "../Buttons/PrimaryButton";
 import Container from "../Container";
 import ProfileImage from "../Images/ProfileImage";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import styles from "./styles.module.scss";
+import Link from "next/link";
+import AuthService from "@/api/auth";
+import LogoIcon from "@/assets/svg/Icons/Logo";
+import { ACCESS } from "@/config/access.config";
+import { useClickOutside } from "@/hooks/clickOutsideHook";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import {
   selectAuthIsAuth,
   selectAuthLoginState,
   selectProfile,
 } from "@/redux/features/auth/selectors";
-import AuthService from "@/api/auth";
-import { ACCESS } from "@/config/access.config";
-import Button from "../Buttons/Button";
-import { useClickOutside } from "@/hooks/clickOutsideHook";
+import { type FunctionComponent, useEffect, useRef, useState } from "react";
 
-const Header: FunctionComponent = ({}) => {
+const Header: FunctionComponent = () => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const loginState = useAppSelector(selectAuthLoginState);
   const profile = useAppSelector(selectProfile);
@@ -64,6 +64,12 @@ const Header: FunctionComponent = ({}) => {
             href="/profile"
           >
             Моя программа
+          </Link>
+          <Link
+            className={styles.navLink}
+            href="/theory"
+          >
+            Теория
           </Link>
           <Link
             className={styles.navLink}

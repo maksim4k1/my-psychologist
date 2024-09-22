@@ -1,5 +1,5 @@
-import { StatusState } from "../../../utils/stateCreators";
-import { AccessRole } from "../../../config/access.config";
+import { type AccessRole } from "../../../config/access.config";
+import { type StatusState } from "../../../utils/stateCreators";
 
 export interface ProfileState {
   id: string;

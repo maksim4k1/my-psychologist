@@ -18,10 +18,10 @@ export const calculateAge = (date: string): number => {
     return 0;
   }
 
-  let now = new Date();
-  let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  let birthday = new Date(date);
-  let birthdayInThisYear = new Date(
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const birthday = new Date(date);
+  const birthdayInThisYear = new Date(
     today.getFullYear(),
     birthday.getMonth(),
     birthday.getDate(),

@@ -1,12 +1,12 @@
-import { RootState } from "@/redux/store";
 import {
-  TestData,
-  TestQuestionData,
-  TestResultData,
-  TestShortData,
-  TestsState,
+  type TestData,
+  type TestQuestionData,
+  type TestResultData,
+  type TestShortData,
+  type TestsState,
 } from "./types";
-import { StatusState } from "@/utils/stateCreators";
+import { type RootState } from "@/redux/store";
+import { type StatusState } from "@/utils/stateCreators";
 
 const selectTestsModule = (state: RootState): TestsState => {
   return state.testsReducer;

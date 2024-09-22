@@ -1,32 +1,32 @@
 "use client";
 
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
 import styles from "./styles.module.scss";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
+import ApplicationsService from "@/api/applications";
+import ClientsService from "@/api/clients";
 import ApplicationCard from "@/components/UI/Cards/ApplicationCard";
 import ClientCard from "@/components/UI/Cards/ClientCard";
-import { ApplicationData } from "@/redux/features/applications/types";
+import Container from "@/components/UI/Container";
+import PageTitle from "@/components/UI/Titles/PageTitle";
+import checkAuth from "@/components/hocs/checkAuth";
+import StateWrapper from "@/components/wrappers/StateWrapper";
+import { ACCESS } from "@/config/access.config";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useEffect } from "react";
-import ApplicationsService from "@/api/applications";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { applicationsActions } from "@/redux/features/applications";
 import {
   selectApplications,
   selectApplicationsState,
 } from "@/redux/features/applications/selectors";
-import { StatusState } from "@/utils/stateCreators";
-import ClientsService from "@/api/clients";
-import { ClientData } from "@/redux/features/clients/types";
+import { type ApplicationData } from "@/redux/features/applications/types";
+import { selectRole } from "@/redux/features/auth/selectors";
+import { clientsActions } from "@/redux/features/clients";
 import {
   selectClients,
   selectClientsState,
 } from "@/redux/features/clients/selectors";
-import { selectRole } from "@/redux/features/auth/selectors";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { applicationsActions } from "@/redux/features/applications";
-import { clientsActions } from "@/redux/features/clients";
+import { type ClientData } from "@/redux/features/clients/types";
+import { type StatusState } from "@/utils/stateCreators";
+import { useEffect } from "react";
 
 function PsychologistPage() {
   const dispatch = useAppDispatch();
@@ -78,7 +78,7 @@ function PsychologistPage() {
         )}
         <div>
           <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
-            {!!clients.length
+            {clients.length
               ? `Мои ${role === ACCESS.psychologist ? "клиенты" : "сотрудники"}`
               : `У вас нет ${
                   role === ACCESS.psychologist ? "клиентов" : "сотрудников"

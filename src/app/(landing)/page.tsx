@@ -1,29 +1,26 @@
-import Container from "@/components/UI/Container";
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
-import PrimarySwiper from "@/components/UI/PrimarySwiper";
-
+import Image from "next/image";
+import Link from "next/link";
+import MainImage from "@/assets/webp/meditaion.webp";
 import Dialectica from "@/assets/webp/partners/dialectica.webp";
+import Fasie from "@/assets/webp/partners/fasie.webp";
 import Gazprom from "@/assets/webp/partners/gazprom.webp";
 import Mercuria from "@/assets/webp/partners/mercuria.webp";
 import Tokp from "@/assets/webp/partners/tokp.webp";
-import Tusur from "@/assets/webp/partners/tusur.webp";
 import Tsu from "@/assets/webp/partners/tsu.webp";
-import Fasie from "@/assets/webp/partners/fasie.webp";
-
-import AlinaTisheva from "@/assets/webp/team/AlinaTishaeva.webp";
-import TimofeySimonov from "@/assets/webp/team/TimofeySimonov.webp";
-import MaksimBazhenov from "@/assets/webp/team/MaksimBazhenov.webp";
-import PolinaOzerova from "@/assets/webp/team/PolinaOzerova.webp";
-import IlyaFomin from "@/assets/webp/team/IlyaFomin.webp";
-import DmitryBespalov from "@/assets/webp/team/DmitryBespalov.webp";
-import IslambekMaratov from "@/assets/webp/team/IslambekMaratov.webp";
+import Tusur from "@/assets/webp/partners/tusur.webp";
 import AlexanderPak from "@/assets/webp/team/AlexanderPak.webp";
+import AlinaTisheva from "@/assets/webp/team/AlinaTishaeva.webp";
+import DmitryBespalov from "@/assets/webp/team/DmitryBespalov.webp";
+import IlyaFomin from "@/assets/webp/team/IlyaFomin.webp";
+import IslambekMaratov from "@/assets/webp/team/IslambekMaratov.webp";
+import MaksimBazhenov from "@/assets/webp/team/MaksimBazhenov.webp";
 import PavelPupenko from "@/assets/webp/team/PavelPupenko.webp";
-import Link from "next/link";
-import Image from "next/image";
-
-import MainImage from "@/assets/webp/meditaion.webp";
+import PolinaOzerova from "@/assets/webp/team/PolinaOzerova.webp";
+import TimofeySimonov from "@/assets/webp/team/TimofeySimonov.webp";
+import Container from "@/components/UI/Container";
+import PrimarySwiper from "@/components/UI/PrimarySwiper";
+import { type FunctionComponent } from "react";
 
 const partners = [
   {

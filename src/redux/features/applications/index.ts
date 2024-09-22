@@ -1,16 +1,16 @@
+import { type HttpError } from "../../../config/api.config";
+import {
+  type ApplicationData,
+  type ApplicationProfileData,
+  type ApplicationsState,
+} from "./types";
 import {
   createDefaultState,
   createFailureState,
   createLoadingState,
   createSuccessState,
 } from "@/utils/stateCreators";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import {
-  ApplicationData,
-  ApplicationProfileData,
-  ApplicationsState,
-} from "./types";
-import { HttpError } from "../../../config/api.config";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ApplicationsState = {
   applications: [],

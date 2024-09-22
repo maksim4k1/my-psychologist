@@ -1,15 +1,15 @@
+import { type HttpError } from "../../../config/api.config";
 import {
   createDefaultState,
+  createFailureState,
   createLoadingState,
   createSuccessState,
-  createFailureState,
 } from "../../../utils/stateCreators";
+import { type AuthState, type UserData } from "./types";
 import { ACCESS } from "@/config/access.config";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthState, UserData } from "./types";
-import { getRole } from "@/utils/apiUtils";
 import { saveToken } from "@/storage/token";
-import { HttpError } from "../../../config/api.config";
+import { getRole } from "@/utils/apiUtils";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: AuthState = {
   isAuth: false,

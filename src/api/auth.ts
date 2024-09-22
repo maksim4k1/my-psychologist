@@ -1,11 +1,11 @@
-import {
-  LoginPayload,
-  RegisterPayload,
-  SendHrSurveyPayload,
-} from "@/redux/features/auth/types";
-import { AppDispatch } from "./../redux/store";
-import { authActions } from "@/redux/features/auth/";
 import { customAxios } from "../config/api.config";
+import { type AppDispatch } from "./../redux/store";
+import { authActions } from "@/redux/features/auth/";
+import {
+  type LoginPayload,
+  type RegisterPayload,
+  type SendHrSurveyPayload,
+} from "@/redux/features/auth/types";
 import { deleteToken, getToken } from "@/storage/token";
 import { instanceofHttpError } from "@/utils/apiUtils";
 

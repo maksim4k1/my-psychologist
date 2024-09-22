@@ -1,12 +1,12 @@
-import {
-  ClientData,
-  ClientProfileData,
-} from "./../redux/features/clients/types";
 import { customAxios } from "../config/api.config";
+import {
+  type ClientData,
+  type ClientProfileData,
+} from "./../redux/features/clients/types";
 import { clientsActions } from "@/redux/features/clients";
-import { AppDispatch } from "@/redux/store";
-import { calculateAge } from "@/utils/dataUtils";
+import { type AppDispatch } from "@/redux/store";
 import { instanceofHttpError } from "@/utils/apiUtils";
+import { calculateAge } from "@/utils/dataUtils";
 
 interface ClientResponse {
   client_id: string;

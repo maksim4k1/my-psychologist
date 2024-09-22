@@ -1,12 +1,20 @@
 "use client";
 
+import styles from "./styles.module.scss";
+import { useParams, useRouter } from "next/navigation";
 import TestsService from "@/api/tests";
-import checkAuth from "@/components/hocs/checkAuth";
+import ArrowIcon from "@/assets/svg/Icons/ArrowIcon";
+import Button from "@/components/UI/Buttons/Button";
+import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import Container from "@/components/UI/Container";
+import Radio from "@/components/UI/Inputs/Radio";
 import PageTitle from "@/components/UI/Titles/PageTitle";
+import checkAuth from "@/components/hocs/checkAuth";
 import StateWrapper from "@/components/wrappers/StateWrapper";
 import { ACCESS } from "@/config/access.config";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 import {
   selectGetTestInfoState,
   selectGetTestQuestionsState,
@@ -14,16 +22,8 @@ import {
   selectTestInfo,
   selectTestQuestions,
 } from "@/redux/features/tests/selectors";
-import { useParams, useRouter } from "next/navigation";
-import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
-import Radio from "@/components/UI/Inputs/Radio";
-import Button from "@/components/UI/Buttons/Button";
-import ArrowIcon from "@/assets/svg/Icons/ArrowIcon";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { testsActions } from "@/redux/features/tests";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
 import { PopupsService } from "@/redux/services/popups";
+import { type FC, useEffect, useState } from "react";
 
 const ExercisePage: FC = () => {
   const { id } = useParams<{ id: string }>();

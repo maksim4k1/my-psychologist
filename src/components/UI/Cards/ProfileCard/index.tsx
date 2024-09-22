@@ -1,10 +1,10 @@
-import { FunctionComponent } from "react";
-import styles from "./styles.module.scss";
 import ProfileImage from "../../Images/ProfileImage";
 import Symptom from "../../Symptom";
-import { ClientProfileData } from "@/redux/features/clients/types";
-import { ApplicationProfileData } from "@/redux/features/applications/types";
+import styles from "./styles.module.scss";
+import { type ApplicationProfileData } from "@/redux/features/applications/types";
+import { type ClientProfileData } from "@/redux/features/clients/types";
 import { mapAgeToText } from "@/utils/dataUtils";
+import { type FunctionComponent } from "react";
 
 interface Props {
   profile: ClientProfileData | ApplicationProfileData;

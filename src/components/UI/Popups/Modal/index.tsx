@@ -1,9 +1,9 @@
 "use client";
 
-import { FC, ReactNode, MouseEvent, useEffect } from "react";
 import styles from "./styles.module.scss";
-import CloseIcon from "@/assets/svg/Icons/CloseIcon";
 import { createPortal } from "react-dom";
+import CloseIcon from "@/assets/svg/Icons/CloseIcon";
+import { type FC, type MouseEvent, type ReactNode, useEffect } from "react";
 
 interface Props {
   isOpen: boolean;

@@ -1,14 +1,13 @@
+import { customAxios } from "../config/api.config";
+import { type AccessRole } from "@/config/access.config";
 import { applicationsActions } from "@/redux/features/applications";
-import { AppDispatch } from "@/redux/store";
-import { HttpError, customAxios } from "../config/api.config";
 import {
-  ApplicationData,
-  ApplicationProfileData,
+  type ApplicationData,
+  type ApplicationProfileData,
 } from "@/redux/features/applications/types";
-import { calculateAge } from "@/utils/dataUtils";
+import { type AppDispatch } from "@/redux/store";
 import { getRoleId, instanceofHttpError } from "@/utils/apiUtils";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AccessRole } from "@/config/access.config";
+import { calculateAge } from "@/utils/dataUtils";
 
 interface ApplicationResponse {
   app_id: string;

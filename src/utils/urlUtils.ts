@@ -1,10 +1,10 @@
-import { ReadonlyURLSearchParams } from "next/navigation";
+import { type ReadonlyURLSearchParams } from "next/navigation";
 
 export interface QueryParams {
   [key: string]: any;
 }
 
-export const addQueryParams: Function = (
+export const addQueryParams = (
   url: string,
   obj: QueryParams | undefined,
 ): string => {
@@ -12,7 +12,7 @@ export const addQueryParams: Function = (
 
   const params: string[] = [];
 
-  for (let key in obj) {
+  for (const key in obj) {
     params.push(`${key}=${String(obj[key])}`);
   }
 

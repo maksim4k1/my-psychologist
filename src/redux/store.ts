@@ -1,15 +1,16 @@
-import authReducer from "./features/auth";
 import applicationsReducer from "./features/applications";
+import authReducer from "./features/auth";
 import clientsReducer from "./features/clients";
-import testsReducer from "./features/tests";
 import popupsReducer from "./features/popups";
 import psychologistsReducer from "./features/psychologists";
+import testsReducer from "./features/tests";
+import theoryReducer from "./features/theory";
 import {
+  type Store,
+  type ThunkDispatch,
+  type UnknownAction,
   combineReducers,
   configureStore,
-  Store,
-  ThunkDispatch,
-  UnknownAction,
 } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   testsReducer,
   popupsReducer,
   psychologistsReducer,
+  theoryReducer,
 });
 
 const store: Store = configureStore({

@@ -1,10 +1,10 @@
-import { RootState } from "@/redux/store";
 import {
-  ApplicationData,
-  ApplicationProfileData,
-  ApplicationsState,
+  type ApplicationData,
+  type ApplicationProfileData,
+  type ApplicationsState,
 } from "./types";
-import { StatusState } from "@/utils/stateCreators";
+import { type RootState } from "@/redux/store";
+import { type StatusState } from "@/utils/stateCreators";
 
 const selectApplicationsModule = (state: RootState): ApplicationsState => {
   return state.applicationsReducer;

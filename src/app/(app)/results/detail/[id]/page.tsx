@@ -1,14 +1,18 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import Container from "@/components/UI/Container";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
-import Subtitle from "@/components/UI/Titles/Subtitle";
-import ProgressBar from "@/components/UI/Charts/ProgressBar";
 import { useParams } from "next/navigation";
+import TestsService from "@/api/tests";
+import ProgressBar from "@/components/UI/Charts/ProgressBar";
+import Container from "@/components/UI/Container";
+import PageTitle from "@/components/UI/Titles/PageTitle";
+import Subtitle from "@/components/UI/Titles/Subtitle";
+import checkAuth from "@/components/hocs/checkAuth";
+import StateWrapper from "@/components/wrappers/StateWrapper";
+import { ACCESS } from "@/config/access.config";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
+import { testsActions } from "@/redux/features/tests";
 import {
   selectGetTestInfoState,
   selectGetTestResultState,
@@ -16,10 +20,6 @@ import {
   selectTestResult,
 } from "@/redux/features/tests/selectors";
 import { useEffect } from "react";
-import TestsService from "@/api/tests";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { testsActions } from "@/redux/features/tests";
 
 function DetailResultPage() {
   const { id } = useParams<{ id: string }>();

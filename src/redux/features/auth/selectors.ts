@@ -1,7 +1,7 @@
-import { StatusState } from "./../../../utils/stateCreators";
-import { RootState } from "../../store";
-import { AuthState, ProfileState } from "./types";
-import { AccessRole } from "../../../config/access.config";
+import { type AccessRole } from "../../../config/access.config";
+import { type RootState } from "../../store";
+import { type StatusState } from "./../../../utils/stateCreators";
+import { type AuthState, type ProfileState } from "./types";
 
 const selectAuthModule = (state: RootState): AuthState => {
   return state.authReducer;

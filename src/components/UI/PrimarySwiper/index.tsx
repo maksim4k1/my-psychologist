@@ -1,11 +1,11 @@
 "use client";
 
-import { FunctionComponent, ReactNode } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import styles from "./styles.module.scss";
 import { Navigation } from "swiper/modules";
 import "swiper/scss";
-import styles from "./styles.module.scss";
 import NextIcon from "@/assets/svg/Icons/NextIcon";
+import { type FunctionComponent, type ReactNode } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 interface Props {
   children: ReactNode[];

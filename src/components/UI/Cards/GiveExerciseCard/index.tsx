@@ -1,11 +1,11 @@
 "use client";
 
-import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
-import { TestShortData } from "@/redux/features/tests/types";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import TestsService from "@/api/tests";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { selectGiveTestState } from "@/redux/features/tests/selectors";
+import { type TestShortData } from "@/redux/features/tests/types";
+import { type FunctionComponent } from "react";
 
 interface Props {
   exercise: TestShortData;

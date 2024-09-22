@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Roboto, Victor_Mono, Montserrat } from "next/font/google";
-import "@/styles/reset.scss";
-import "@/styles/global.scss";
-import StoreProvider from "@/redux/StoreProvider";
-import SnackbarsPortal from "@/components/portals/SnackbarsPortal";
+import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
 import ModalsPortal from "@/components/portals/ModalsPortal";
+import SnackbarsPortal from "@/components/portals/SnackbarsPortal";
+import StoreProvider from "@/redux/StoreProvider";
+import "@/styles/global.scss";
+import "@/styles/reset.scss";
+import { type ReactNode } from "react";
 
 export const fontRoboto = Roboto({
   weight: ["400", "500"],
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ru">

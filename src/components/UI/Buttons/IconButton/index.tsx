@@ -1,6 +1,6 @@
-import { FunctionComponent, ReactNode } from "react";
-import styles from "./styles.module.scss";
 import Button from "../Button";
+import styles from "./styles.module.scss";
+import { type FunctionComponent, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
