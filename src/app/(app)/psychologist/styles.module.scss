@@ -5,3 +5,9 @@
   margin-bottom: 20px;
   @include titleLarge;
 }
+
+.psychologistList {
+  display: flex;
+  flex-flow: wrap;
+  gap: 16px;
+}
