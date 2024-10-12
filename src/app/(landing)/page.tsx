@@ -2,6 +2,7 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import MainImage from "@/assets/webp/meditaion.webp";
+import Cbt from "@/assets/webp/partners/cbt.webp";
 import Dialectica from "@/assets/webp/partners/dialectica.webp";
 import Fasie from "@/assets/webp/partners/fasie.webp";
 import Gazprom from "@/assets/webp/partners/gazprom.webp";
@@ -57,6 +58,11 @@ const partners = [
     alt: "ОГАУЗ Томская Клиническая Психиотрическая Больница",
     image: Tokp,
     link: "https://tokpb.ru/main/",
+  },
+  {
+    alt: "Ассоциация когнитивно-бихевиоральных терапевтов",
+    image: Cbt,
+    link: "https://russian-cbt.ru/",
   },
 ];
 
@@ -202,7 +208,10 @@ const Home: FunctionComponent = () => {
         <h3 className={`${styles.title} ${styles.partnersTitle}`}>
           Наши партнёры
         </h3>
-        <div className={styles.partners}>
+        <PrimarySwiper
+          gap={20}
+          slides={6}
+        >
           {partners.map((el) => {
             return (
               <Link
@@ -221,7 +230,7 @@ const Home: FunctionComponent = () => {
               </Link>
             );
           })}
-        </div>
+        </PrimarySwiper>
       </section>
       <section
         id="landing-achievements"
