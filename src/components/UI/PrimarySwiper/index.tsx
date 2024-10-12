@@ -30,8 +30,8 @@ const PrimarySwiper: FunctionComponent<Props> = ({
         spaceBetween={gap}
         slidesPerView={slides}
         navigation={{
-          nextEl: `.${styles.nextButton}`,
-          prevEl: `.${styles.prevButton}`,
+          nextEl: ".swiper-next-" + gap,
+          prevEl: ".swiper-prev-" + gap,
           disabledClass: styles.disabledButton,
         }}
         setWrapperSize={false}
@@ -47,10 +47,14 @@ const PrimarySwiper: FunctionComponent<Props> = ({
           </SwiperSlide>
         ))}
       </Swiper>
-      <button className={`${styles.button} ${styles.prevButton}`}>
+      <button
+        className={`${styles.button} ${styles.prevButton} ${"swiper-prev-" + gap}`}
+      >
         <NextIcon />
       </button>
-      <button className={`${styles.button} ${styles.nextButton}`}>
+      <button
+        className={`${styles.button} ${styles.nextButton} ${"swiper-next-" + gap}`}
+      >
         <NextIcon />
       </button>
     </div>
