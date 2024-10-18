@@ -12,6 +12,7 @@ import Tsu from "@/assets/webp/partners/tsu.webp";
 import Tusur from "@/assets/webp/partners/tusur.webp";
 import AlexanderPak from "@/assets/webp/team/AlexanderPak.webp";
 import AlinaTisheva from "@/assets/webp/team/AlinaTishaeva.webp";
+import DaniilKostin from "@/assets/webp/team/DaniilKostin.webp";
 import DmitryBespalov from "@/assets/webp/team/DmitryBespalov.webp";
 import IlyaFomin from "@/assets/webp/team/IlyaFomin.webp";
 import IslambekMaratov from "@/assets/webp/team/IslambekMaratov.webp";
@@ -105,6 +106,11 @@ const team = [
     image: AlinaTisheva,
     name: "Алина Тишаева",
     role: "психолог",
+  },
+  {
+    image: DaniilKostin,
+    name: "Даниил Костин",
+    role: "дизайнер",
   },
   {
     image: PolinaOzerova,
