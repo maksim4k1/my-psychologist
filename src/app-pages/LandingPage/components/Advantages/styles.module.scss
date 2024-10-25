@@ -1,5 +1,15 @@
 @import "@/styles/variables";
 
+.title {
+  font-family: var(--font-victor-mono);
+  font-weight: 700;
+}
+
+h2.title {
+  font-size: 32px;
+  line-height: 36px;
+}
+
 .infoSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
