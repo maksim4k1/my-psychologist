@@ -1,1 +1,1 @@
-export { Landing as default } from "@/components/pages";
+export { Landing as default } from "@/app-pages";
