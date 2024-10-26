@@ -1,0 +1,28 @@
+@import "@/client/styles/variables.scss";
+@import "@/client/styles/textStyles.scss";
+
+.item {
+  width: 360px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: $color-surface;
+}
+
+.switch {
+  min-width: 52px;
+}
+
+.label {
+  margin-right: auto;
+  @include bodyLarge;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link {
+  color: $color-primary;
+  @include labelMedium;
+}

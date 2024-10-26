@@ -2,22 +2,22 @@
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
-import AuthService from "@/api/auth";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
-import Container from "@/components/UI/Container";
-import Form from "@/components/UI/Forms/Form";
-import Input from "@/components/UI/Inputs/Input";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
-import { useInput } from "@/hooks/inputHooks";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { authActions } from "@/redux/features/auth";
-import { selectSendHrSurveyState } from "@/redux/features/auth/selectors";
-import { type SendHrSurveyPayload } from "@/redux/features/auth/types";
-import { PopupsService } from "@/redux/services/popups";
-import { checkFormDataValidation } from "@/utils/formUtils";
+import AuthService from "@/client/api/auth";
+import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
+import Container from "@/client/components/UI/Container";
+import Form from "@/client/components/UI/Forms/Form";
+import Input from "@/client/components/UI/Inputs/Input";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import { useInput } from "@/client/hooks/inputHooks";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { authActions } from "@/client/redux/features/auth";
+import { selectSendHrSurveyState } from "@/client/redux/features/auth/selectors";
+import { type SendHrSurveyPayload } from "@/client/redux/features/auth/types";
+import { PopupsService } from "@/client/redux/services/popups";
+import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { ACCESS } from "@/shared/config/access.config";
 import { type FormEvent, useEffect } from "react";
 
 function HrSurveyPage() {

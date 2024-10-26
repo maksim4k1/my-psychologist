@@ -2,25 +2,25 @@
 
 import styles from "./styles.module.scss";
 import { useSearchParams } from "next/navigation";
-import TestsService from "@/api/tests";
-import GiveExerciseCard from "@/components/UI/Cards/GiveExerciseCard";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import Subtitle from "@/components/UI/Titles/Subtitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import HttpErrorWrapper from "@/components/wrappers/HttpErrorWrapper";
-import LoadingWrapper from "@/components/wrappers/LoadingWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { testsActions } from "@/redux/features/tests";
+import TestsService from "@/client/api/tests";
+import GiveExerciseCard from "@/client/components/UI/Cards/GiveExerciseCard";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import Subtitle from "@/client/components/UI/Titles/Subtitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import HttpErrorWrapper from "@/client/components/wrappers/HttpErrorWrapper";
+import LoadingWrapper from "@/client/components/wrappers/LoadingWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestsState,
   selectGiveTestState,
   selectTests,
-} from "@/redux/features/tests/selectors";
-import { PopupsService } from "@/redux/services/popups";
-import { checkQueryParams } from "@/utils/urlUtils";
+} from "@/client/redux/features/tests/selectors";
+import { PopupsService } from "@/client/redux/services/popups";
+import { checkQueryParams } from "@/client/utils/urlUtils";
+import { ACCESS } from "@/shared/config/access.config";
 import { useEffect } from "react";
 
 function GiveExercisePage() {

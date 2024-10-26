@@ -1,0 +1,11 @@
+@import "@/client/styles/textStyles.scss";
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:disabled {
+    cursor: default;
+  }
+}

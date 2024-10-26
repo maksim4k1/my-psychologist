@@ -2,31 +2,31 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import ClientsService from "@/api/clients";
-import TestsService from "@/api/tests";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
-import ProfileCard from "@/components/UI/Cards/ProfileCard";
-import TestCard from "@/components/UI/Cards/TestCard";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import Subtitle from "@/components/UI/Titles/Subtitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { selectRole } from "@/redux/features/auth/selectors";
-import { clientsActions } from "@/redux/features/clients";
+import ClientsService from "@/client/api/clients";
+import TestsService from "@/client/api/tests";
+import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
+import ProfileCard from "@/client/components/UI/Cards/ProfileCard";
+import TestCard from "@/client/components/UI/Cards/TestCard";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import Subtitle from "@/client/components/UI/Titles/Subtitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { selectRole } from "@/client/redux/features/auth/selectors";
+import { clientsActions } from "@/client/redux/features/clients";
 import {
   selectClient,
   selectClientState,
-} from "@/redux/features/clients/selectors";
-import { testsActions } from "@/redux/features/tests";
+} from "@/client/redux/features/clients/selectors";
+import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestsByUserIdState,
   selectTestsByUserId,
-} from "@/redux/features/tests/selectors";
-import { addQueryParams } from "@/utils/urlUtils";
+} from "@/client/redux/features/tests/selectors";
+import { addQueryParams } from "@/client/utils/urlUtils";
+import { ACCESS } from "@/shared/config/access.config";
 import { useEffect } from "react";
 
 function PsychologistClientPage() {

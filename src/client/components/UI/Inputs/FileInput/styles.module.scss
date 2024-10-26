@@ -1,0 +1,67 @@
+@import "@/client/styles/variables.scss";
+@import "@/client/styles/textStyles.scss";
+
+.label {
+  position: relative;
+  min-height: 120px;
+  padding: 34px;
+  flex-flow: column;
+  justify-content: center;
+  gap: 4px;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+
+  &.active {
+    background-color: $color-primary-container;
+    border-color: $color-on-surface;
+  }
+
+  &.focus {
+    border-color: transparent;
+    outline: 2px solid $color-primary;
+    outline-offset: -2px;
+  }
+}
+
+.input {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.fileNames {
+  max-width: 90%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.fileName {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.primaryPlaceholder {
+  min-width: 168px;
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  color: $color-on-surface-variant;
+  @include bodyMedium;
+  border: 1px solid $color-outline;
+  border-radius: 4px;
+}
+
+.secondaryPlaceholder {
+  color: $color-outline;
+  @include bodySmall;
+  pointer-events: none;
+}

@@ -1,0 +1,80 @@
+@import "@/client/styles/textStyles";
+@import "@/client/styles/variables";
+@import "@/client/styles/mixins";
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.radarChart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chartGrid {
+  stroke: $color-primary-fixed-dim;
+  stroke-width: 4px;
+  fill: rgba($color-primary-fixed, 0.3);
+}
+
+.chartAxis {
+  stroke: transparent;
+}
+
+.chartAxisText {
+  font-size: 0px;
+}
+
+.chartText {
+  fill: $color-primary;
+  @include titleMedium;
+}
+
+.radarField {
+  stroke: $color-primary;
+  stroke-width: 5px;
+  fill: $color-primary;
+}
+
+.point {
+  fill: $color-primary;
+  fill-opacity: 1;
+}
+
+.maxValues {
+  stroke: transparent;
+  stroke-width: 0;
+}
+
+.tooltipWrapper {
+  @include bodyMedium;
+  @include card;
+}
+
+.tooltipCursor {
+  stroke: $color-primary-fixed-dim;
+  stroke-linecap: round;
+  stroke-width: 4px;
+}
+
+.tooltipLabel {
+  @include labelLarge;
+}
+
+.dot {
+  fill: $color-primary;
+  fill-opacity: 1;
+  stroke-width: 5px;
+}
+
+.activeDot {
+  fill: $color-primary-fixed;
+  stroke-width: 3px;
+  stroke: $color-primary;
+}
+
+.maxValuesActiveDot {
+  opacity: 0;
+}

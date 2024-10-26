@@ -1,18 +1,22 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
-import Container from "@/components/UI/Container";
-import Form from "@/components/UI/Forms/Form";
-import FileInput from "@/components/UI/Inputs/FileInput";
-import Input from "@/components/UI/Inputs/Input";
-import MaskedInput from "@/components/UI/Inputs/MaskedInput";
-import Textarea from "@/components/UI/Inputs/Textarea";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
-import { useFileInput, useInput, useMaskedInput } from "@/hooks/inputHooks";
-import { checkFormDataValidation } from "@/utils/formUtils";
+import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
+import Container from "@/client/components/UI/Container";
+import Form from "@/client/components/UI/Forms/Form";
+import FileInput from "@/client/components/UI/Inputs/FileInput";
+import Input from "@/client/components/UI/Inputs/Input";
+import MaskedInput from "@/client/components/UI/Inputs/MaskedInput";
+import Textarea from "@/client/components/UI/Inputs/Textarea";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import {
+  useFileInput,
+  useInput,
+  useMaskedInput,
+} from "@/client/hooks/inputHooks";
+import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { ACCESS } from "@/shared/config/access.config";
 import { type FormEvent } from "react";
 
 function PsychologistSurveyPage() {

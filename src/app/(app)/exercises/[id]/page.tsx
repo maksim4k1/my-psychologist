@@ -2,27 +2,27 @@
 
 import styles from "./styles.module.scss";
 import { useParams, useRouter } from "next/navigation";
-import TestsService from "@/api/tests";
-import ArrowIcon from "@/assets/svg/Icons/ArrowIcon";
-import Button from "@/components/UI/Buttons/Button";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
-import Container from "@/components/UI/Container";
-import Radio from "@/components/UI/Inputs/Radio";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { testsActions } from "@/redux/features/tests";
+import TestsService from "@/client/api/tests";
+import ArrowIcon from "@/client/assets/svg/Icons/ArrowIcon";
+import Button from "@/client/components/UI/Buttons/Button";
+import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
+import Container from "@/client/components/UI/Container";
+import Radio from "@/client/components/UI/Inputs/Radio";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestInfoState,
   selectGetTestQuestionsState,
   selectSendTestResultState,
   selectTestInfo,
   selectTestQuestions,
-} from "@/redux/features/tests/selectors";
-import { PopupsService } from "@/redux/services/popups";
+} from "@/client/redux/features/tests/selectors";
+import { PopupsService } from "@/client/redux/services/popups";
+import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect, useState } from "react";
 
 const ExercisePage: FC = () => {

@@ -2,23 +2,23 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import TestsService from "@/api/tests";
-import ProgressBar from "@/components/UI/Charts/ProgressBar";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import Subtitle from "@/components/UI/Titles/Subtitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { testsActions } from "@/redux/features/tests";
+import TestsService from "@/client/api/tests";
+import ProgressBar from "@/client/components/UI/Charts/ProgressBar";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import Subtitle from "@/client/components/UI/Titles/Subtitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestInfoState,
   selectGetTestResultState,
   selectTestInfo,
   selectTestResult,
-} from "@/redux/features/tests/selectors";
+} from "@/client/redux/features/tests/selectors";
+import { ACCESS } from "@/shared/config/access.config";
 import { useEffect } from "react";
 
 function DetailResultPage() {

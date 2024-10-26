@@ -1,0 +1,21 @@
+@import "@/client/styles/variables";
+@import "@/client/styles/textStyles";
+@import "@/client/styles/mixins";
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.tooltipWrapper {
+  @include bodyMedium;
+  @include card;
+}
+
+.tooltipLabel {
+  @include labelLarge;
+}
+
+.tooltipCursor {
+  fill: $color-surface-container-highest;
+}
