@@ -1,0 +1,69 @@
+@import "@/client/styles/variables";
+
+.title {
+  font-family: var(--font-victor-mono);
+  font-weight: 700;
+}
+
+h2.title {
+  font-size: 32px;
+  line-height: 36px;
+}
+
+.infoSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  row-gap: 10px;
+  column-gap: 15px;
+}
+
+.info {
+  padding: 60px;
+  background-color: $color-landing-white;
+  box-shadow: $shadow-landing-primary;
+  border-radius: 70px;
+  background-repeat: no-repeat;
+}
+
+.info1 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  background-image: url("/static/landing/pet-love.webp");
+  background-position-x: calc(100% - 40px);
+  background-position-y: calc(100% - 10px);
+}
+
+.info2 {
+  background-image: url("/static/landing/flower.webp");
+  background-position-x: calc(100% - 56px);
+  background-position-y: 100%;
+}
+
+.info3 {
+  background-image: url("/static/landing/coffee.webp");
+  background-position-x: calc(100% - 46px);
+  background-position-y: calc(100% - 2px);
+}
+
+.infoTitle {
+  margin-bottom: 20px;
+}
+
+.infoList {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+.infoListItem1 {
+  max-width: 500px;
+}
+
+.infoListItem2 {
+  max-width: 550px;
+}
+
+.infoDescription {
+  max-width: 500px;
+}

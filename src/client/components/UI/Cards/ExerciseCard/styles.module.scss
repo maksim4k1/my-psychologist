@@ -1,0 +1,43 @@
+@import "@/client/styles/variables";
+@import "@/client/styles/textStyles";
+@import "@/client/styles/mixins";
+
+.card {
+  padding: 12px 12px 8px;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+  @include card;
+
+  &:hover > .button {
+    opacity: 1;
+  }
+}
+
+.title {
+  @include titleMedium;
+}
+
+.description {
+  color: $color-on-surface-variant;
+  @include bodyMedium;
+}
+
+.button {
+  margin-top: auto;
+  margin-left: auto;
+  color: $color-primary;
+  @include labelSmall;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.modalDescription {
+  margin-bottom: 40px;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}

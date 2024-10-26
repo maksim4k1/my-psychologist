@@ -1,31 +1,31 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import ApplicationsService from "@/api/applications";
-import ClientsService from "@/api/clients";
-import ApplicationCard from "@/components/UI/Cards/ApplicationCard";
-import ClientCard from "@/components/UI/Cards/ClientCard";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { applicationsActions } from "@/redux/features/applications";
+import ApplicationsService from "@/client/api/applications";
+import ClientsService from "@/client/api/clients";
+import ApplicationCard from "@/client/components/UI/Cards/ApplicationCard";
+import ClientCard from "@/client/components/UI/Cards/ClientCard";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { applicationsActions } from "@/client/redux/features/applications";
 import {
   selectApplications,
   selectApplicationsState,
-} from "@/redux/features/applications/selectors";
-import { type ApplicationData } from "@/redux/features/applications/types";
-import { selectRole } from "@/redux/features/auth/selectors";
-import { clientsActions } from "@/redux/features/clients";
+} from "@/client/redux/features/applications/selectors";
+import { type ApplicationData } from "@/client/redux/features/applications/types";
+import { selectRole } from "@/client/redux/features/auth/selectors";
+import { clientsActions } from "@/client/redux/features/clients";
 import {
   selectClients,
   selectClientsState,
-} from "@/redux/features/clients/selectors";
-import { type ClientData } from "@/redux/features/clients/types";
-import { type StatusState } from "@/utils/stateCreators";
+} from "@/client/redux/features/clients/selectors";
+import { type ClientData } from "@/client/redux/features/clients/types";
+import { type StatusState } from "@/client/utils/stateCreators";
+import { ACCESS } from "@/shared/config/access.config";
 import { useEffect } from "react";
 
 function PsychologistPage() {

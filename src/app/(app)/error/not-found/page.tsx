@@ -1,5 +1,5 @@
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
 
 function NotFoundPage() {
   return (

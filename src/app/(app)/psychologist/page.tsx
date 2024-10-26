@@ -1,25 +1,25 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import PsychologistsService from "@/api/psychologists";
-import MyPsychologistCard from "@/components/UI/Cards/MyPsychologistCard";
-import PsychologistCard from "@/components/UI/Cards/PsychologistCard";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { selectSendApplicationState } from "@/redux/features/applications/selectors";
-import { selectProfile } from "@/redux/features/auth/selectors";
-import { psychologistsActions } from "@/redux/features/psychologists";
+import PsychologistsService from "@/client/api/psychologists";
+import MyPsychologistCard from "@/client/components/UI/Cards/MyPsychologistCard";
+import PsychologistCard from "@/client/components/UI/Cards/PsychologistCard";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { selectSendApplicationState } from "@/client/redux/features/applications/selectors";
+import { selectProfile } from "@/client/redux/features/auth/selectors";
+import { psychologistsActions } from "@/client/redux/features/psychologists";
 import {
   selectGetMyPsychologistsState,
   selectGetPsychologistsState,
   selectMyPsychologists,
   selectPsychologists,
-} from "@/redux/features/psychologists/selectors";
+} from "@/client/redux/features/psychologists/selectors";
+import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect } from "react";
 
 const PsychologistPage: FC = () => {

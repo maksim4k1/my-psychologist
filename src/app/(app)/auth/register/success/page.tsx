@@ -1,12 +1,12 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import Completed from "@/assets/svg/Completed";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
+import Completed from "@/client/assets/svg/Completed";
+import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import { ACCESS } from "@/shared/config/access.config";
 
 function RegistrationSuccessPage() {
   return (

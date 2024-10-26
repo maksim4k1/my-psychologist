@@ -2,35 +2,35 @@
 
 import styles from "./styles.module.scss";
 import { useParams, useRouter } from "next/navigation";
-import ApplicationsService from "@/api/applications";
-import TestsService from "@/api/tests";
-import PrimaryButton from "@/components/UI/Buttons/PrimaryButton";
-import SecondaryButton from "@/components/UI/Buttons/SecondaryButton";
-import ProfileCard from "@/components/UI/Cards/ProfileCard";
-import TestCard from "@/components/UI/Cards/TestCard";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import Subtitle from "@/components/UI/Titles/Subtitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { applicationsActions } from "@/redux/features/applications";
+import ApplicationsService from "@/client/api/applications";
+import TestsService from "@/client/api/tests";
+import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
+import SecondaryButton from "@/client/components/UI/Buttons/SecondaryButton";
+import ProfileCard from "@/client/components/UI/Cards/ProfileCard";
+import TestCard from "@/client/components/UI/Cards/TestCard";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import Subtitle from "@/client/components/UI/Titles/Subtitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { applicationsActions } from "@/client/redux/features/applications";
 import {
   selectApplication,
   selectApplicationState,
   selectConfirmApplicationState,
-} from "@/redux/features/applications/selectors";
-import { type ApplicationProfileData } from "@/redux/features/applications/types";
-import { selectRole } from "@/redux/features/auth/selectors";
-import { testsActions } from "@/redux/features/tests";
+} from "@/client/redux/features/applications/selectors";
+import { type ApplicationProfileData } from "@/client/redux/features/applications/types";
+import { selectRole } from "@/client/redux/features/auth/selectors";
+import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestsByUserIdState,
   selectTestsByUserId,
-} from "@/redux/features/tests/selectors";
-import { PopupsService } from "@/redux/services/popups";
-import { type StatusState } from "@/utils/stateCreators";
+} from "@/client/redux/features/tests/selectors";
+import { PopupsService } from "@/client/redux/services/popups";
+import { type StatusState } from "@/client/utils/stateCreators";
+import { ACCESS } from "@/shared/config/access.config";
 import { useEffect } from "react";
 
 function ApplicationPage() {

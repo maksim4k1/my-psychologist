@@ -1,0 +1,131 @@
+@import "@/client/styles/variables";
+@import "@/client/styles/textStyles";
+
+.contatiner {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.progressBar {
+  position: relative;
+  width: 100%;
+  height: 4px;
+}
+
+.progressLine {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 2px;
+  background-color: $color-primary-container;
+  overflow: hidden;
+}
+
+.progress {
+  position: relative;
+  box-sizing: content-box;
+  min-width: 4px;
+  height: 100%;
+  border-radius: 2px;
+  background-color: $color-primary;
+  z-index: 1;
+
+  &::before {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    content: "";
+    height: 4px;
+    width: 4px;
+    border-radius: 2px;
+    background-color: inherit;
+  }
+
+  &::after {
+    position: absolute;
+    right: -7px;
+    top: 0;
+    content: "";
+    height: 4px;
+    width: 4px;
+    border-radius: 2px;
+    background-color: $color-primary-container;
+  }
+
+  &.good,
+  &.good::before {
+    background-color: $color-good-result;
+  }
+
+  &.average,
+  &.average::before {
+    background-color: $color-average-result;
+  }
+
+  &.bad,
+  &.bad::before {
+    background-color: $color-bad-result;
+  }
+}
+
+.progressBarGap {
+  position: absolute;
+  right: -5px;
+  top: 0;
+  content: "";
+  height: 4px;
+  width: 7px;
+  background-color: $color-white;
+  z-index: -1;
+}
+
+.progressBarMaxValue {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 4px;
+  border-radius: 2px;
+  background-color: $color-primary;
+  z-index: 1;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.maxValue {
+  @include bodyMedium;
+}
+
+.values {
+  width: 100%;
+  position: absolute;
+  top: 4px;
+  display: flex;
+  gap: 4px;
+  @include labelSmall;
+}
+
+.range {
+  display: flex;
+  justify-content: space-between;
+  min-width: 50px;
+
+  &.good {
+    color: $color-good-result;
+  }
+
+  &.average {
+    color: $color-average-result;
+  }
+
+  &.bad {
+    color: $color-bad-result;
+  }
+}

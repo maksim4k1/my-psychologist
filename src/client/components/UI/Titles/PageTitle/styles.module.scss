@@ -1,0 +1,5 @@
+@import "@/client/styles/textStyles.scss";
+
+.title {
+  @include displayMedium;
+}

@@ -1,1 +1,1 @@
-export { LandingPage as default } from "@/app-pages";
+export { LandingPage as default } from "@/client/pages";

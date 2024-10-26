@@ -2,22 +2,22 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import TheoryService from "@/api/theory";
-import PatternImage from "@/assets/webp/pattern.webp";
-import TheoryCard from "@/components/UI/Cards/TheoryCard";
-import Container from "@/components/UI/Container";
-import checkAuth from "@/components/hocs/checkAuth";
-import StateWrapper from "@/components/wrappers/StateWrapper";
-import { ACCESS } from "@/config/access.config";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { useSetDefaultState } from "@/hooks/setDefaultStateHook";
-import { theoryActions } from "@/redux/features/theory";
+import TheoryService from "@/client/api/theory";
+import PatternImage from "@/client/assets/webp/pattern.webp";
+import TheoryCard from "@/client/components/UI/Cards/TheoryCard";
+import Container from "@/client/components/UI/Container";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
+import { theoryActions } from "@/client/redux/features/theory";
 import {
   selectGetThemeContentState,
   selectGetThemesState,
   selectThemeContent,
   selectThemes,
-} from "@/redux/features/theory/selectors";
+} from "@/client/redux/features/theory/selectors";
+import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect } from "react";
 
 const TheoryPage: FC = () => {

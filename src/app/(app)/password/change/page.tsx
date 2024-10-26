@@ -2,14 +2,14 @@
 
 import styles from "./styles.module.scss";
 import { useSearchParams } from "next/navigation";
-import Button from "@/components/UI/Buttons/PrimaryButton";
-import Container from "@/components/UI/Container";
-import Form from "@/components/UI/Forms/AuthForm";
-import Input from "@/components/UI/Inputs/Input";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
-import { useInput } from "@/hooks/inputHooks";
-import { checkFormDataValidation } from "@/utils/formUtils";
+import Button from "@/client/components/UI/Buttons/PrimaryButton";
+import Container from "@/client/components/UI/Container";
+import Form from "@/client/components/UI/Forms/AuthForm";
+import Input from "@/client/components/UI/Inputs/Input";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import { useInput } from "@/client/hooks/inputHooks";
+import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { ACCESS } from "@/shared/config/access.config";
 import { type FormEvent } from "react";
 
 function PasswordChangePage() {

@@ -2,11 +2,11 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import Tasks from "@/assets/svg/Tasks";
-import Container from "@/components/UI/Container";
-import PageTitle from "@/components/UI/Titles/PageTitle";
-import checkAuth from "@/components/hocs/checkAuth";
-import { ACCESS } from "@/config/access.config";
+import Tasks from "@/client/assets/svg/Tasks";
+import Container from "@/client/components/UI/Container";
+import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import checkAuth from "@/client/components/hocs/checkAuth";
+import { ACCESS } from "@/shared/config/access.config";
 
 const cards = [
   {

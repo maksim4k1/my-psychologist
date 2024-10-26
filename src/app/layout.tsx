@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
-import ModalsPortal from "@/components/portals/ModalsPortal";
-import SnackbarsPortal from "@/components/portals/SnackbarsPortal";
-import StoreProvider from "@/redux/StoreProvider";
-import "@/styles/global.scss";
-import "@/styles/reset.scss";
+import ModalsPortal from "@/client/components/portals/ModalsPortal";
+import SnackbarsPortal from "@/client/components/portals/SnackbarsPortal";
+import StoreProvider from "@/client/redux/StoreProvider";
+import "@/client/styles/global.scss";
+import "@/client/styles/reset.scss";
 import { type ReactNode } from "react";
 
 export const fontRoboto = Roboto({
