@@ -67,13 +67,13 @@ const Header: FunctionComponent = () => {
           </Link>
           <Link
             className={styles.navLink}
-            href="/theory"
+            href="/articles"
           >
             Теория
           </Link>
           <Link
             className={styles.navLink}
-            href="/psychologist"
+            href="/psychologists"
           >
             Психологи
           </Link>
