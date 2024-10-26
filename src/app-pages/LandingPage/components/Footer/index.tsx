@@ -10,7 +10,7 @@ import Container from "@/components/UI/Container";
 import AppLink from "@/components/UI/Links/AppLink";
 import { type FunctionComponent } from "react";
 
-const LandingFooter: FunctionComponent = () => {
+export const Footer: FunctionComponent = () => {
   return (
     <footer className={styles.footer}>
       <Container
@@ -46,5 +46,3 @@ const LandingFooter: FunctionComponent = () => {
     </footer>
   );
 };
-
-export default LandingFooter;

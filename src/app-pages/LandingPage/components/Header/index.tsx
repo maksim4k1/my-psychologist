@@ -17,7 +17,7 @@ import {
 } from "@/redux/features/auth/selectors";
 import { type FunctionComponent, useEffect, useRef, useState } from "react";
 
-const LandingHeader: FunctionComponent = () => {
+export const Header: FunctionComponent = () => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const loginState = useAppSelector(selectAuthLoginState);
   const profile = useAppSelector(selectProfile);
@@ -157,5 +157,3 @@ const LandingHeader: FunctionComponent = () => {
     </header>
   );
 };
-
-export default LandingHeader;
