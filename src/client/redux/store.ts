@@ -1,10 +1,10 @@
 import applicationsReducer from "./features/applications";
+import articlesReducer from "./features/articles";
 import authReducer from "./features/auth";
 import clientsReducer from "./features/clients";
 import popupsReducer from "./features/popups";
 import psychologistsReducer from "./features/psychologists";
 import testsReducer from "./features/tests";
-import theoryReducer from "./features/theory";
 import {
   type Store,
   type ThunkDispatch,
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   testsReducer,
   popupsReducer,
   psychologistsReducer,
-  theoryReducer,
+  articlesReducer,
 });
 
 const store: Store = configureStore({

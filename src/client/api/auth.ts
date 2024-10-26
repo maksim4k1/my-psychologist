@@ -2,7 +2,7 @@ import { type AppDispatch } from "./../redux/store";
 import { authActions } from "@/client/redux/features/auth/";
 import {
   type LoginPayload,
-  type RegisterPayload,
+  type RegistrationPayload,
   type SendHrSurveyPayload,
 } from "@/client/redux/features/auth/types";
 import { deleteToken, getToken } from "@/client/storage/token";
@@ -25,9 +25,9 @@ export default class AuthService {
     }
   };
 
-  static register =
-    (formData: RegisterPayload) => async (dispatch: AppDispatch) => {
-      dispatch(authActions.registerLoading());
+  static registration =
+    (formData: RegistrationPayload) => async (dispatch: AppDispatch) => {
+      dispatch(authActions.registrationLoading());
 
       try {
         const response = await customAxios.post("/users/reg", {
@@ -39,10 +39,10 @@ export default class AuthService {
 
         const data = response.data;
 
-        dispatch(authActions.registerSuccess(data));
+        dispatch(authActions.registrationSuccess(data));
       } catch (err) {
         if (instanceofHttpError(err)) {
-          dispatch(authActions.registerFailure(err));
+          dispatch(authActions.registrationFailure(err));
         }
       }
     };

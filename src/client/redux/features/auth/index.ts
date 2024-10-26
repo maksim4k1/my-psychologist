@@ -20,7 +20,7 @@ const initialState: AuthState = {
     role: ACCESS.unauthorized,
   },
   loginState: createDefaultState(),
-  registerState: createDefaultState(),
+  registrationState: createDefaultState(),
   sendHrSurveyState: createDefaultState(),
 };
 
@@ -52,11 +52,11 @@ const authSlice = createSlice({
       state.loginState = createDefaultState();
     },
 
-    // register actions
-    registerLoading: (state) => {
-      state.registerState = createLoadingState();
+    // registration actions
+    registrationLoading: (state) => {
+      state.registrationState = createLoadingState();
     },
-    registerSuccess: (state, { payload }: PayloadAction<UserData>) => {
+    registrationSuccess: (state, { payload }: PayloadAction<UserData>) => {
       state.isAuth = true;
       state.profile = {
         id: payload.user_id,
@@ -67,13 +67,13 @@ const authSlice = createSlice({
       if (payload.token) {
         saveToken(payload.token);
       }
-      state.registerState = createSuccessState();
+      state.registrationState = createSuccessState();
     },
-    registerFailure: (state, { payload }: PayloadAction<HttpError>) => {
-      state.registerState = createFailureState(payload);
+    registrationFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.registrationState = createFailureState(payload);
     },
-    registerSetDefaultState: (state) => {
-      state.registerState = createDefaultState();
+    registrationSetDefaultState: (state) => {
+      state.registrationState = createDefaultState();
     },
 
     // send hr survey actions

@@ -14,11 +14,11 @@ export const routes: Route[] = [
     access: [ACCESS.unauthorized],
   },
   {
-    path: "/auth/register",
+    path: "/auth/registration",
     access: [ACCESS.unauthorized],
   },
   {
-    path: "/auth/register/success",
+    path: "/auth/registration/success",
     access: [ACCESS.client],
   },
   {
@@ -58,7 +58,7 @@ export const routes: Route[] = [
     access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
   },
   {
-    path: "/psychologist",
+    path: "/psychologists",
     access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
   },
   {
@@ -78,11 +78,11 @@ export const routes: Route[] = [
     access: [ACCESS.client],
   },
   {
-    path: "/theory",
+    path: "/articles",
     access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
   },
   {
-    path: "/theory/:id",
+    path: "/articles/:id",
     access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
   },
 ].toSorted((a, b) => {

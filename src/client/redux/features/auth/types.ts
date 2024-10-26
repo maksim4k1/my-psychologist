@@ -12,7 +12,7 @@ export interface AuthState {
   isAuth: boolean;
   profile: ProfileState;
   loginState: StatusState;
-  registerState: StatusState;
+  registrationState: StatusState;
   sendHrSurveyState: StatusState;
 }
 
@@ -21,7 +21,7 @@ export interface LoginPayload {
   password: string;
 }
 
-export interface RegisterPayload {
+export interface RegistrationPayload {
   name: string;
   email: string;
   password: string;
