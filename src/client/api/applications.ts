@@ -4,10 +4,10 @@ import {
   type ApplicationProfileData,
 } from "@/client/redux/features/applications/types";
 import { type AppDispatch } from "@/client/redux/store";
-import { getRoleId, instanceofHttpError } from "@/client/utils/apiUtils";
-import { calculateAge } from "@/client/utils/dataUtils";
+import { calculateAge } from "@/client/utils";
 import { type AccessRole } from "@/shared/config/access.config";
 import { customAxios } from "@/shared/config/api.config";
+import { getRoleId, instanceofHttpError } from "@/shared/utils/api";
 
 interface ApplicationResponse {
   app_id: string;

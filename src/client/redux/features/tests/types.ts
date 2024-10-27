@@ -1,4 +1,4 @@
-import { type StatusState } from "@/client/utils/stateCreators";
+import { type StatusState } from "@/client/utils";
 
 export interface TestShortData {
   id: string;

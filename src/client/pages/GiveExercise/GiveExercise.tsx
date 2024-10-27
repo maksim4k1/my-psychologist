@@ -18,7 +18,7 @@ import {
   selectTests,
 } from "@/client/redux/features/tests/selectors";
 import { PopupsService } from "@/client/redux/services/popups";
-import { checkQueryParams } from "@/client/utils/urlUtils";
+import { checkQueryParams } from "@/client/utils";
 import { type FC, useEffect } from "react";
 
 export const GiveExercisePage: FC = () => {

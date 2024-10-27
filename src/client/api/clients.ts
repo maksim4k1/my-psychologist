@@ -4,9 +4,9 @@ import {
 } from "./../redux/features/clients/types";
 import { clientsActions } from "@/client/redux/features/clients";
 import { type AppDispatch } from "@/client/redux/store";
-import { instanceofHttpError } from "@/client/utils/apiUtils";
-import { calculateAge } from "@/client/utils/dataUtils";
+import { calculateAge } from "@/client/utils";
 import { customAxios } from "@/shared/config/api.config";
+import { instanceofHttpError } from "@/shared/utils/api";
 
 interface ClientResponse {
   client_id: string;

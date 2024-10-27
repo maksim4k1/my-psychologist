@@ -28,7 +28,7 @@ import {
   selectTestsByUserId,
 } from "@/client/redux/features/tests/selectors";
 import { PopupsService } from "@/client/redux/services/popups";
-import { type StatusState } from "@/client/utils/stateCreators";
+import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect } from "react";
 

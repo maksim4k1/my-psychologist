@@ -16,7 +16,7 @@ import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
 import { authActions } from "@/client/redux/features/auth";
 import { selectAuthLoginState } from "@/client/redux/features/auth/selectors";
 import { type LoginPayload } from "@/client/redux/features/auth/types";
-import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { checkFormDataValidation } from "@/client/utils";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const LoginPage: FC = () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppDispatch } from "../hooks/reduxHooks";
-import { getCookie } from "../utils/cookieUtils";
+import { getCookie } from "../utils";
 import { authActions } from "./features/auth";
 import store from "./store";
 import { Provider } from "react-redux";

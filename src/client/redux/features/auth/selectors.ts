@@ -1,5 +1,5 @@
 import { type RootState } from "../../store";
-import { type StatusState } from "./../../../utils/stateCreators";
+import { type StatusState } from "./../../../utils";
 import { type AuthState, type ProfileState } from "./types";
 import { type AccessRole } from "@/shared/config/access.config";
 

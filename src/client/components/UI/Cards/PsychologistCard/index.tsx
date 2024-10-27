@@ -13,7 +13,7 @@ import { selectSendApplicationState } from "@/client/redux/features/applications
 import { selectProfile } from "@/client/redux/features/auth/selectors";
 import { type PsychologistData } from "@/client/redux/features/psychologists/types";
 import { PopupsService } from "@/client/redux/services/popups";
-import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { checkFormDataValidation } from "@/client/utils";
 import {
   type FormEvent,
   type FunctionComponent,

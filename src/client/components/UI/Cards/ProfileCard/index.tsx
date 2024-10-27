@@ -3,7 +3,7 @@ import Symptom from "../../Symptom";
 import styles from "./styles.module.scss";
 import { type ApplicationProfileData } from "@/client/redux/features/applications/types";
 import { type ClientProfileData } from "@/client/redux/features/clients/types";
-import { mapAgeToText } from "@/client/utils/dataUtils";
+import { mapAgeToText } from "@/client/utils";
 import { type FunctionComponent } from "react";
 
 interface Props {
