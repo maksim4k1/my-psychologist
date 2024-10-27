@@ -17,7 +17,7 @@ import { authActions } from "@/client/redux/features/auth";
 import { selectAuthLoginState } from "@/client/redux/features/auth/selectors";
 import { type LoginPayload } from "@/client/redux/features/auth/types";
 import { checkFormDataValidation } from "@/client/utils/formUtils";
-import { type FC, type FormEvent } from "react";
+import { type FC, type FormEvent, useEffect } from "react";
 
 export const LoginPage: FC = () => {
   const email = useInput("", { isEmpty: true, isEmail: true });
@@ -25,6 +25,12 @@ export const LoginPage: FC = () => {
 
   const dispatch = useAppDispatch();
   const loginState = useAppSelector(selectAuthLoginState);
+
+  useEffect(() => {
+    if (loginState.isSuccess) {
+      window.location.href = "/profile";
+    }
+  }, [loginState.isSuccess]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();

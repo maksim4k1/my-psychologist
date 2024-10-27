@@ -5,7 +5,7 @@ import SnackbarsPortal from "@/client/components/portals/SnackbarsPortal";
 import StoreProvider from "@/client/redux/StoreProvider";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
-import { type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 export const fontRoboto = Roboto({
   weight: ["400", "500"],
@@ -31,11 +31,15 @@ export const metadata: Metadata = {
     "Программная система для сопровождения психотерапии и самостоятельной проработки психологических проблем",
 };
 
-export default function RootLayout({
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+const RootLayout: FC<RootLayoutProps> = async ({
   children,
 }: Readonly<{
   children: ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="ru">
       <body
@@ -49,4 +53,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

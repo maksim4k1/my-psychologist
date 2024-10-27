@@ -6,6 +6,7 @@ import Container from "../Container";
 import ProfileImage from "../Images/ProfileImage";
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import AuthService from "@/client/api/auth";
 import LogoIcon from "@/client/assets/svg/Icons/Logo";
 import { useClickOutside } from "@/client/hooks/clickOutsideHook";
@@ -13,25 +14,22 @@ import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import {
   selectAuthIsAuth,
   selectAuthLoginState,
+  selectLogoutState,
   selectProfile,
 } from "@/client/redux/features/auth/selectors";
 import { ACCESS } from "@/shared/config/access.config";
 import { type FunctionComponent, useEffect, useRef, useState } from "react";
 
 const Header: FunctionComponent = () => {
+  const router = useRouter();
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const loginState = useAppSelector(selectAuthLoginState);
   const profile = useAppSelector(selectProfile);
+  const logoutState = useAppSelector(selectLogoutState);
   const dispatch = useAppDispatch();
   const popupRef = useRef(null);
   const buttonRef = useRef(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  useEffect(() => {
-    if (!isAuth && !loginState.isLoading) {
-      dispatch(AuthService.loginByToken());
-    }
-  }, [isAuth, loginState.isLoading, dispatch]);
 
   useClickOutside(
     popupRef,
@@ -44,6 +42,12 @@ const Header: FunctionComponent = () => {
   const togglePopup = () => {
     setIsPopupOpen((value) => !value);
   };
+
+  useEffect(() => {
+    if (logoutState.isSuccess) {
+      router.push("/auth/login");
+    }
+  }, [logoutState.isSuccess, router]);
 
   const logout = () => {
     dispatch(AuthService.logout());

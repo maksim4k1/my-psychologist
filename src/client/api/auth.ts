@@ -5,15 +5,14 @@ import {
   type RegistrationPayload,
   type SendHrSurveyPayload,
 } from "@/client/redux/features/auth/types";
-import { deleteToken, getToken } from "@/client/storage/token";
 import { instanceofHttpError } from "@/client/utils/apiUtils";
-import { customAxios } from "@/shared/config/api.config";
+import { customAxios, localAxios } from "@/shared/config/api.config";
 
 export default class AuthService {
   static login = (formData: LoginPayload) => async (dispatch: AppDispatch) => {
     dispatch(authActions.loginLoading());
     try {
-      const response = await customAxios.post("/users/auth", formData);
+      const response = await localAxios.post("/login", formData);
 
       const data = response.data;
 
@@ -30,7 +29,7 @@ export default class AuthService {
       dispatch(authActions.registrationLoading());
 
       try {
-        const response = await customAxios.post("/users/reg", {
+        const response = await localAxios.post("/registration", {
           email: formData.email,
           username: formData.name,
           password: formData.password,
@@ -47,30 +46,17 @@ export default class AuthService {
       }
     };
 
-  static loginByToken = () => async (dispatch: AppDispatch) => {
-    const token = getToken();
-    if (token) {
-      dispatch(authActions.loginLoading());
-      try {
-        const response = await customAxios.post("/users/auth_token", {
-          token: token,
-        });
+  static logout = () => async (dispatch: AppDispatch) => {
+    dispatch(authActions.logoutLoading());
+    try {
+      await localAxios.post("/logout");
 
-        const data = response.data;
-
-        dispatch(authActions.loginSuccess(data));
-      } catch (err) {
-        if (instanceofHttpError(err)) {
-          deleteToken();
-          dispatch(authActions.loginFailure(err));
-        }
+      dispatch(authActions.logoutSuccess());
+    } catch (err) {
+      if (instanceofHttpError(err)) {
+        dispatch(authActions.logoutFailure(err));
       }
     }
-  };
-
-  static logout = () => (dispatch: AppDispatch) => {
-    deleteToken();
-    dispatch(authActions.logout());
   };
 
   static sendHrSurvey =

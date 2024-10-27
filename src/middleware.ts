@@ -1,8 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getRole } from "@/client/utils/apiUtils";
 import { ACCESS, type AccessRole } from "@/shared/config/access.config";
-import { customAxios } from "@/shared/config/api.config";
-import { routes } from "@/shared/data/routes";
+import { localAxios } from "@/shared/config/api.config";
+import { routes } from "@/shared/data";
 
 const checkPath = (pathname: string, template: string): boolean => {
   const pathElements = pathname.split("/");
@@ -25,31 +25,30 @@ const checkPath = (pathname: string, template: string): boolean => {
   return true;
 };
 
-const getUserRole = async (request: NextRequest): Promise<AccessRole> => {
+const getUserData = async (request: NextRequest) => {
   try {
-    const accessToken = request.cookies.get("access_token")?.value ?? "";
-
-    const response = await customAxios.post("/users/auth_token", {
-      token: accessToken,
+    const response = await localAxios.post("/loginByToken", undefined, {
+      headers: {
+        "Cookie": request.cookies.toString(),
+      },
     });
 
     const data = response.data;
 
-    return getRole(data.role);
+    return data;
   } catch {
-    return ACCESS.unauthorized;
+    return null;
   }
 };
 
-const checkAuth = async (request: NextRequest) => {
+const checkAuth = async (request: NextRequest, role: AccessRole) => {
   const { pathname } = request.nextUrl;
-  const role = await getUserRole(request);
 
   for (const route of routes) {
     const { path, access } = route;
 
     if (checkPath(pathname, path)) {
-      if (!access || access.includes(role)) return;
+      if (!access || access.includes(role)) return NextResponse.next();
       else {
         if (access.length === 1 && access[0] === ACCESS.unauthorized) {
           return NextResponse.redirect(new URL("/profile", request.url));
@@ -68,9 +67,24 @@ const checkAuth = async (request: NextRequest) => {
 };
 
 export const middleware = async (request: NextRequest) => {
-  const { pathname } = request.nextUrl;
+  const userData = await getUserData(request);
 
-  if (!pathname.startsWith("/_next") && !pathname.startsWith("/static")) {
-    return await checkAuth(request);
+  const response = await checkAuth(request, getRole(userData?.role));
+
+  if (userData === null) {
+    response.cookies.set("access_token", "", {
+      maxAge: -1,
+      path: "/",
+    });
+    response.cookies.set("user_data", "", {
+      maxAge: -1,
+      path: "/",
+    });
   }
+
+  return response;
+};
+
+export const config = {
+  matcher: ["/((?!api|_next|static).*)"],
 };

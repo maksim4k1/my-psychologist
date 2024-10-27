@@ -34,3 +34,7 @@ export const selectAuthRegistrationState = (state: RootState): StatusState => {
 export const selectSendHrSurveyState = (state: RootState): StatusState => {
   return selectAuthModule(state).sendHrSurveyState;
 };
+
+export const selectLogoutState = (state: RootState): StatusState => {
+  return selectAuthModule(state).logoutState;
+};
