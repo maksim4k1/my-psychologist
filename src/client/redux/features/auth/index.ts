@@ -3,11 +3,11 @@ import {
   createFailureState,
   createLoadingState,
   createSuccessState,
-} from "../../../utils/stateCreators";
+} from "../../../utils";
 import { type AuthState, type UserData } from "./types";
-import { getRole } from "@/client/utils/apiUtils";
 import { ACCESS } from "@/shared/config/access.config";
 import { type HttpError } from "@/shared/config/api.config";
+import { getRole } from "@/shared/utils/api";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: AuthState = {

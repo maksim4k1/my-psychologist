@@ -23,7 +23,7 @@ import {
   selectClientsState,
 } from "@/client/redux/features/clients/selectors";
 import { type ClientData } from "@/client/redux/features/clients/types";
-import { type StatusState } from "@/client/utils/stateCreators";
+import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect } from "react";
 

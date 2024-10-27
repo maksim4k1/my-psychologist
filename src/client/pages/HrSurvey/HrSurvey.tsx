@@ -15,7 +15,7 @@ import { authActions } from "@/client/redux/features/auth";
 import { selectSendHrSurveyState } from "@/client/redux/features/auth/selectors";
 import { type SendHrSurveyPayload } from "@/client/redux/features/auth/types";
 import { PopupsService } from "@/client/redux/services/popups";
-import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { checkFormDataValidation } from "@/client/utils";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const HrSurveyPage: FC = () => {

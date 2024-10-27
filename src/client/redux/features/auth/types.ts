@@ -1,4 +1,4 @@
-import { type StatusState } from "../../../utils/stateCreators";
+import { type StatusState } from "../../../utils";
 import { type AccessRole } from "@/shared/config/access.config";
 
 export interface ProfileState {

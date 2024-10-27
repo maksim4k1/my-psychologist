@@ -14,7 +14,7 @@ import {
   useInput,
   useMaskedInput,
 } from "@/client/hooks/inputHooks";
-import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { checkFormDataValidation } from "@/client/utils";
 import { type FC, type FormEvent } from "react";
 
 export const PsychologistSurveyPage: FC = () => {

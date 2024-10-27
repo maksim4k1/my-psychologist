@@ -11,10 +11,7 @@ import {
   type ScaleData,
   type TestResultData,
 } from "@/client/redux/features/tests/types";
-import {
-  type BarChartData,
-  mapToBarChartData,
-} from "@/client/utils/chartUtils";
+import { type BarChartData, mapToBarChartData } from "@/client/utils";
 import { type FunctionComponent, useEffect, useState } from "react";
 
 interface Props {

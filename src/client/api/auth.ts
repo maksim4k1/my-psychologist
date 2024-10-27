@@ -5,8 +5,8 @@ import {
   type RegistrationPayload,
   type SendHrSurveyPayload,
 } from "@/client/redux/features/auth/types";
-import { instanceofHttpError } from "@/client/utils/apiUtils";
 import { customAxios, localAxios } from "@/shared/config/api.config";
+import { instanceofHttpError } from "@/shared/utils/api";
 
 export default class AuthService {
   static login = (formData: LoginPayload) => async (dispatch: AppDispatch) => {

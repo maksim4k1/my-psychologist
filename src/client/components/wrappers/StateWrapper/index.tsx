@@ -1,6 +1,6 @@
 import HttpErrorWrapper from "../HttpErrorWrapper";
 import LoadingWrapper from "../LoadingWrapper";
-import { type StatusState } from "@/client/utils/stateCreators";
+import { type StatusState } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
 import { type FunctionComponent, type ReactNode } from "react";
 

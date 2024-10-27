@@ -17,7 +17,7 @@ import { authActions } from "@/client/redux/features/auth";
 import { selectAuthRegistrationState } from "@/client/redux/features/auth/selectors";
 import { type RegistrationPayload } from "@/client/redux/features/auth/types";
 import { PopupsService } from "@/client/redux/services/popups";
-import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { checkFormDataValidation } from "@/client/utils";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const RegistrationPage: FC = () => {

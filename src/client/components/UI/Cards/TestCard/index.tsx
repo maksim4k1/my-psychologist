@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { type TestShortData } from "@/client/redux/features/tests/types";
-import { type QueryParams, addQueryParams } from "@/client/utils/urlUtils";
+import { type QueryParams, addQueryParams } from "@/client/utils";
 import { type FunctionComponent } from "react";
 
 interface TestProps {

@@ -15,10 +15,7 @@ import {
   type ScaleData,
   type TestResultData,
 } from "@/client/redux/features/tests/types";
-import {
-  type RadarChartItem,
-  mapToRadarChartData,
-} from "@/client/utils/chartUtils";
+import { type RadarChartItem, mapToRadarChartData } from "@/client/utils";
 import React, { type FunctionComponent, useEffect, useState } from "react";
 
 interface Props {

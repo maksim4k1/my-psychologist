@@ -1,8 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { getRole } from "@/client/utils/apiUtils";
 import { ACCESS, type AccessRole } from "@/shared/config/access.config";
 import { localAxios } from "@/shared/config/api.config";
 import { routes } from "@/shared/data";
+import { getRole } from "@/shared/utils/api";
 
 const checkPath = (pathname: string, template: string): boolean => {
   const pathElements = pathname.split("/");

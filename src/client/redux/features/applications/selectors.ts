@@ -4,7 +4,7 @@ import {
   type ApplicationsState,
 } from "./types";
 import { type RootState } from "@/client/redux/store";
-import { type StatusState } from "@/client/utils/stateCreators";
+import { type StatusState } from "@/client/utils";
 
 const selectApplicationsModule = (state: RootState): ApplicationsState => {
   return state.applicationsReducer;

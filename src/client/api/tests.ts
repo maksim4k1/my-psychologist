@@ -6,9 +6,9 @@ import {
   type TestShortData,
 } from "@/client/redux/features/tests/types";
 import { type AppDispatch } from "@/client/redux/store";
-import { instanceofHttpError } from "@/client/utils/apiUtils";
-import { mapDatetimeToText } from "@/client/utils/dataUtils";
+import { mapDatetimeToText } from "@/client/utils";
 import { customAxios } from "@/shared/config/api.config";
+import { instanceofHttpError } from "@/shared/utils/api";
 
 interface ResponseTestShortData {
   test_id: string;

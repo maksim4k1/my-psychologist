@@ -8,7 +8,7 @@ import {
   createFailureState,
   createLoadingState,
   createSuccessState,
-} from "@/client/utils/stateCreators";
+} from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 

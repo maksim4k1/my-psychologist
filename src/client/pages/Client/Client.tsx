@@ -24,7 +24,7 @@ import {
   selectGetTestsByUserIdState,
   selectTestsByUserId,
 } from "@/client/redux/features/tests/selectors";
-import { addQueryParams } from "@/client/utils/urlUtils";
+import { addQueryParams } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect } from "react";
 

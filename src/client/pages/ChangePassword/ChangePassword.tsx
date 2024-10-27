@@ -7,7 +7,7 @@ import Container from "@/client/components/UI/Container";
 import Form from "@/client/components/UI/Forms/AuthForm";
 import Input from "@/client/components/UI/Inputs/Input";
 import { useInput } from "@/client/hooks/inputHooks";
-import { checkFormDataValidation } from "@/client/utils/formUtils";
+import { checkFormDataValidation } from "@/client/utils";
 import { type FC, type FormEvent } from "react";
 
 export const ChangePasswordPage: FC = () => {
