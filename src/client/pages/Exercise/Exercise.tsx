@@ -21,6 +21,7 @@ import {
   selectTestQuestions,
 } from "@/client/redux/features/tests/selectors";
 import { PopupsService } from "@/client/redux/services/popups";
+import { pages } from "@/shared/data";
 import { type FC, useEffect, useState } from "react";
 
 export const ExercisePage: FC = () => {
@@ -42,7 +43,7 @@ export const ExercisePage: FC = () => {
 
   useEffect(() => {
     if (sendTestResultState.isSuccess) {
-      router.push(`/results/${id}`);
+      router.push(pages.result.getLink({ params: { id } }));
       dispatch(PopupsService.openSnackbarWithDelay("Тест успешно пройден!"));
     }
   }, [sendTestResultState.isSuccess, dispatch, id, router]);

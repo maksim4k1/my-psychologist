@@ -5,6 +5,7 @@ import Link from "next/link";
 import Tasks from "@/client/assets/svg/Tasks";
 import Container from "@/client/components/UI/Container";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import { pages } from "@/shared/data";
 import { type FC } from "react";
 
 const cards = [
@@ -12,7 +13,7 @@ const cards = [
     id: "testing",
     title: "Тестирование",
     description: "Познай себя",
-    link: "/exercises",
+    link: pages.exercises.path,
   },
   {
     id: "tasks",

@@ -19,6 +19,7 @@ import {
   selectTestInfo,
   selectTestResults,
 } from "@/client/redux/features/tests/selectors";
+import { pages } from "@/shared/data";
 import { type FC, useEffect } from "react";
 
 export const ResultPage: FC = () => {
@@ -78,7 +79,9 @@ export const ResultPage: FC = () => {
                         value={el.id}
                         key={el.id}
                         label={el.datetime}
-                        link={`/results/detail/${el.id}`}
+                        link={pages.detailResult.getLink({
+                          params: { id: el.id },
+                        })}
                       />
                     );
                   })}

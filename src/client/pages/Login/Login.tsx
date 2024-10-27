@@ -17,6 +17,7 @@ import { authActions } from "@/client/redux/features/auth";
 import { selectAuthLoginState } from "@/client/redux/features/auth/selectors";
 import { type LoginPayload } from "@/client/redux/features/auth/types";
 import { checkFormDataValidation } from "@/client/utils";
+import { pages } from "@/shared/data";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const LoginPage: FC = () => {
@@ -28,7 +29,7 @@ export const LoginPage: FC = () => {
 
   useEffect(() => {
     if (loginState.isSuccess) {
-      window.location.href = "/profile";
+      window.location.href = pages.profile.path;
     }
   }, [loginState.isSuccess]);
 
@@ -79,7 +80,7 @@ export const LoginPage: FC = () => {
           required
         />
         <Link
-          href="/password/reset"
+          href={pages.resetPassword.path}
           className={styles.resetPasswordLink}
         >
           Забыли пароль?
@@ -94,7 +95,7 @@ export const LoginPage: FC = () => {
           >
             Войти
           </PrimaryButton>
-          <AppLink href="/auth/registration">Зарегистрироваться</AppLink>
+          <AppLink href={pages.registration.path}>Зарегистрироваться</AppLink>
         </AuthButtons>
       </Form>
     </Container>

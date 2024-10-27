@@ -8,6 +8,7 @@ import Form from "@/client/components/UI/Forms/AuthForm";
 import Input from "@/client/components/UI/Inputs/Input";
 import { useInput } from "@/client/hooks/inputHooks";
 import { checkFormDataValidation } from "@/client/utils";
+import { pages } from "@/shared/data";
 import { type FC, type FormEvent } from "react";
 
 export const ResetPasswordPage: FC = () => {
@@ -19,7 +20,13 @@ export const ResetPasswordPage: FC = () => {
     event.preventDefault();
 
     if (checkFormDataValidation(email)) {
-      router.push("/password/change?reset-confirmation=reset-password-code");
+      router.push(
+        pages.changePassword.getLink({
+          queryParams: {
+            "reset-confirmation": "reset-password-code",
+          },
+        }),
+      );
     }
   };
 

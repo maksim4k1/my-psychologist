@@ -16,6 +16,7 @@ import { selectSendHrSurveyState } from "@/client/redux/features/auth/selectors"
 import { type SendHrSurveyPayload } from "@/client/redux/features/auth/types";
 import { PopupsService } from "@/client/redux/services/popups";
 import { checkFormDataValidation } from "@/client/utils";
+import { pages } from "@/shared/data";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const HrSurveyPage: FC = () => {
@@ -30,7 +31,7 @@ export const HrSurveyPage: FC = () => {
       dispatch(
         PopupsService.openSnackbarWithDelay("Анкета HR-менеджера сохранена!"),
       );
-      router.push("/cabinet");
+      router.push(pages.cabinet.path);
     }
   }, [sendHrSurveyState.isSuccess, dispatch, router]);
 

@@ -18,6 +18,7 @@ import { selectAuthRegistrationState } from "@/client/redux/features/auth/select
 import { type RegistrationPayload } from "@/client/redux/features/auth/types";
 import { PopupsService } from "@/client/redux/services/popups";
 import { checkFormDataValidation } from "@/client/utils";
+import { pages } from "@/shared/data";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const RegistrationPage: FC = () => {
@@ -39,7 +40,7 @@ export const RegistrationPage: FC = () => {
       dispatch(
         PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
       );
-      router.push("/auth/registration/success");
+      router.push(pages.successRegistration.path);
     }
   }, [registrationState.isSuccess, dispatch, router]);
 
@@ -125,7 +126,7 @@ export const RegistrationPage: FC = () => {
           >
             Зарегистрироваться
           </PrimaryButton>
-          <AppLink href="/auth/login">Войти</AppLink>
+          <AppLink href={pages.login.path}>Войти</AppLink>
         </AuthButtons>
       </Form>
     </Container>
