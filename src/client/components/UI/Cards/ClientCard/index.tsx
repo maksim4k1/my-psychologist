@@ -3,6 +3,7 @@ import ProfileImage from "../../Images/ProfileImage";
 import Symptom from "../../Symptom";
 import styles from "../styles.module.scss";
 import { type ClientData } from "@/client/redux/features/clients/types";
+import { pages } from "@/shared/data";
 import { type FunctionComponent } from "react";
 
 interface Props {
@@ -43,7 +44,9 @@ const ClientCard: FunctionComponent<Props> = ({ client }) => {
         })}
       </div>
       <div className={styles.buttons}>
-        <PrimaryButton href={`/cabinet/clients/${client.userId}`}>
+        <PrimaryButton
+          href={pages.client.getLink({ params: { id: client.userId } })}
+        >
           Профиль
         </PrimaryButton>
       </div>

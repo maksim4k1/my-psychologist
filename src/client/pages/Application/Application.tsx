@@ -30,6 +30,7 @@ import {
 import { PopupsService } from "@/client/redux/services/popups";
 import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
+import { pages } from "@/shared/data";
 import { type FC, useEffect } from "react";
 
 export const ApplicationPage: FC = () => {
@@ -63,7 +64,7 @@ export const ApplicationPage: FC = () => {
       dispatch(
         PopupsService.openSnackbarWithDelay("Операция успешно выполнена!"),
       );
-      router.push("/cabinet");
+      router.push(pages.cabinet.path);
     }
   }, [confirmApplicationState.isSuccess, dispatch, router]);
 

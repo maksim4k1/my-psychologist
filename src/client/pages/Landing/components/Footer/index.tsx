@@ -8,6 +8,7 @@ import VkIcon from "@/client/assets/svg/Icons/VkIcon";
 import IconButton from "@/client/components/UI/Buttons/IconButton";
 import Container from "@/client/components/UI/Container";
 import AppLink from "@/client/components/UI/Links/AppLink";
+import { pages } from "@/shared/data";
 import { type FunctionComponent } from "react";
 
 export const Footer: FunctionComponent = () => {
@@ -18,7 +19,7 @@ export const Footer: FunctionComponent = () => {
         className={styles.container}
       >
         <Link
-          href="/"
+          href={pages.landing.path}
           className={styles.logo}
         >
           <LogoIcon />

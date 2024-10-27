@@ -15,6 +15,7 @@ import {
   selectProfile,
 } from "@/client/redux/features/auth/selectors";
 import { ACCESS } from "@/shared/config/access.config";
+import { pages } from "@/shared/data";
 import { type FunctionComponent, useRef, useState } from "react";
 
 export const Header: FunctionComponent = () => {
@@ -49,7 +50,7 @@ export const Header: FunctionComponent = () => {
         className={styles.container}
       >
         <Link
-          href="/"
+          href={pages.landing.path}
           className={styles.logo}
         >
           <LogoIcon />
@@ -109,14 +110,14 @@ export const Header: FunctionComponent = () => {
                 <div className={styles.divider}></div>
                 <Button
                   className={styles.popupItem}
-                  href="/profile"
+                  href={pages.profile.path}
                 >
                   Профиль
                 </Button>
                 {(profile.role === ACCESS.hr ||
                   profile.role === ACCESS.psychologist) && (
                   <Button
-                    href="/cabinet"
+                    href={pages.cabinet.path}
                     className={styles.popupItem}
                   >
                     Кабинет {profile.role === ACCESS.hr ? "HR" : "психолога"}
@@ -142,7 +143,7 @@ export const Header: FunctionComponent = () => {
         ) : (
           <a
             className={styles.button}
-            href="/auth/login"
+            href={pages.login.path}
           >
             Войти
           </a>

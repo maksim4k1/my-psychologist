@@ -1,92 +1,71 @@
-import { ACCESS, type AccessRole } from "@/shared/config/access.config";
+import { ACCESS } from "@/shared/config/access.config";
+import { Page, type Pages, type Routes } from "@/shared/types";
 
-export interface Route {
-  path: string;
-  access?: AccessRole[];
-}
+export const pages: Pages = {
+  landing: new Page("/"),
+  login: new Page("/auth/login", [ACCESS.unauthorized]),
+  registration: new Page("/auth/registration", [ACCESS.unauthorized]),
+  successRegistration: new Page("/auth/registration/success", [ACCESS.client]),
+  cabinet: new Page("/cabinet", [ACCESS.psychologist, ACCESS.hr]),
+  application: new Page<{ id: string }>("/cabinet/applications/:id", [
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  client: new Page<{ id: string }>("/cabinet/clients/:id", [
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  exercises: new Page("/exercises", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  exercise: new Page<{ id: string }>("/exercises/:id", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  giveExercise: new Page("/exercises/give", [ACCESS.psychologist, ACCESS.hr]),
+  changePassword: new Page("/password/change", [ACCESS.unauthorized]),
+  resetPassword: new Page("/password/reset", [ACCESS.unauthorized]),
+  profile: new Page("/profile", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  psychologist: new Page("/psychologists", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  result: new Page<{ id: string }>("/results/:id", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  detailResult: new Page<{ id: string }>("/results/detail/:id", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  hrSurvey: new Page("/survey/hr", [ACCESS.client]),
+  psychologistSurvey: new Page("/survey/psychologist", [ACCESS.client]),
+  articles: new Page("/articles", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+  article: new Page<{ id: string }>("/articles/:id", [
+    ACCESS.client,
+    ACCESS.psychologist,
+    ACCESS.hr,
+  ]),
+};
 
-export const routes: Route[] = [
-  {
-    path: "/",
+export const routes: Routes = Array.from(Object.values(pages)).toSorted(
+  (a, b) => {
+    if (a.path > b.path) return -1;
+    if (a.path < b.path) return 1;
+    return 0;
   },
-  {
-    path: "/auth/login",
-    access: [ACCESS.unauthorized],
-  },
-  {
-    path: "/auth/registration",
-    access: [ACCESS.unauthorized],
-  },
-  {
-    path: "/auth/registration/success",
-    access: [ACCESS.client],
-  },
-  {
-    path: "/cabinet",
-    access: [ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/cabinet/applications/:id",
-    access: [ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/cabinet/clients/:id",
-    access: [ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/exercises",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/exercises/:id",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/exercises/give",
-    access: [ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/password/change",
-    access: [ACCESS.unauthorized],
-  },
-  {
-    path: "/password/reset",
-    access: [ACCESS.unauthorized],
-  },
-  {
-    path: "/profile",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/psychologists",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/results/:id",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/results/detail/:id",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/survey/hr",
-    access: [ACCESS.client],
-  },
-  {
-    path: "/survey/psychologist",
-    access: [ACCESS.client],
-  },
-  {
-    path: "/articles",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-  {
-    path: "/articles/:id",
-    access: [ACCESS.client, ACCESS.psychologist, ACCESS.hr],
-  },
-].toSorted((a, b) => {
-  if (a.path > b.path) return -1;
-  if (a.path < b.path) return 1;
-  return 0;
-});
+);

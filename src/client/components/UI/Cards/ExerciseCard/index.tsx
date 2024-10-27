@@ -5,6 +5,7 @@ import SecondaryButton from "../../Buttons/SecondaryButton";
 import Modal from "../../Popups/Modal";
 import styles from "./styles.module.scss";
 import { type TestShortData } from "@/client/redux/features/tests/types";
+import { pages } from "@/shared/data";
 import { type FC, useState } from "react";
 
 interface Props {
@@ -23,10 +24,14 @@ const ExerciseCard: FC<Props> = ({ exercise }) => {
       <div>
         <p className={styles.modalDescription}>{exercise.description}</p>
         <div className={styles.modalButtons}>
-          <SecondaryButton href={`/results/${exercise.id}`}>
+          <SecondaryButton
+            href={pages.result.getLink({ params: { id: exercise.id } })}
+          >
             История
           </SecondaryButton>
-          <PrimaryButton href={`/exercises/${exercise.id}`}>
+          <PrimaryButton
+            href={pages.exercise.getLink({ params: { id: exercise.id } })}
+          >
             Пройти
           </PrimaryButton>
         </div>

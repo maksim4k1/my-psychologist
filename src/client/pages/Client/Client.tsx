@@ -26,6 +26,7 @@ import {
 } from "@/client/redux/features/tests/selectors";
 import { addQueryParams } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
+import { pages } from "@/shared/data";
 import { type FC, useEffect } from "react";
 
 export const ClientPage: FC = () => {
@@ -75,7 +76,7 @@ export const ClientPage: FC = () => {
                 Общий результат
               </PrimaryButton> */}
               <PrimaryButton
-                href={addQueryParams("/exercises/give", {
+                href={addQueryParams(pages.giveExercise.path, {
                   userId: id,
                 })}
               >

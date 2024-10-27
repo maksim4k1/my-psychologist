@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { ACCESS, type AccessRole } from "@/shared/config/access.config";
 import { localAxios } from "@/shared/config/api.config";
-import { routes } from "@/shared/data";
+import { pages, routes } from "@/shared/data";
 import { getRole } from "@/shared/utils/api";
 
 const checkPath = (pathname: string, template: string): boolean => {
@@ -51,9 +51,11 @@ const checkAuth = async (request: NextRequest, role: AccessRole) => {
       if (!access || access.includes(role)) return NextResponse.next();
       else {
         if (access.length === 1 && access[0] === ACCESS.unauthorized) {
-          return NextResponse.redirect(new URL("/profile", request.url));
+          return NextResponse.redirect(
+            new URL(pages.profile.path, request.url),
+          );
         } else if (role === ACCESS.unauthorized) {
-          return NextResponse.redirect(new URL("/auth/login", request.url));
+          return NextResponse.redirect(new URL(pages.login.path, request.url));
         }
 
         return NextResponse.rewrite(

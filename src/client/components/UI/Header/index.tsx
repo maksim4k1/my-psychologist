@@ -18,6 +18,7 @@ import {
   selectProfile,
 } from "@/client/redux/features/auth/selectors";
 import { ACCESS } from "@/shared/config/access.config";
+import { pages } from "@/shared/data";
 import { type FunctionComponent, useEffect, useRef, useState } from "react";
 
 const Header: FunctionComponent = () => {
@@ -45,7 +46,7 @@ const Header: FunctionComponent = () => {
 
   useEffect(() => {
     if (logoutState.isSuccess) {
-      router.push("/auth/login");
+      router.push(pages.login.path);
     }
   }, [logoutState.isSuccess, router]);
 
@@ -57,7 +58,7 @@ const Header: FunctionComponent = () => {
     <header className={styles.header}>
       <Container className={styles.container}>
         <Link
-          href="/"
+          href={pages.landing.path}
           className={styles.logo}
         >
           <LogoIcon />
@@ -65,19 +66,19 @@ const Header: FunctionComponent = () => {
         <nav className={styles.nav}>
           <Link
             className={styles.navLink}
-            href="/profile"
+            href={pages.profile.path}
           >
             Моя программа
           </Link>
           <Link
             className={styles.navLink}
-            href="/articles"
+            href={pages.articles.path}
           >
             Теория
           </Link>
           <Link
             className={styles.navLink}
-            href="/psychologists"
+            href={pages.psychologist.path}
           >
             Психологи
           </Link>
@@ -111,14 +112,14 @@ const Header: FunctionComponent = () => {
                 <div className={styles.divider}></div>
                 <Button
                   className={styles.popupItem}
-                  href="/profile"
+                  href={pages.profile.path}
                 >
                   Профиль
                 </Button>
                 {(profile.role === ACCESS.hr ||
                   profile.role === ACCESS.psychologist) && (
                   <Button
-                    href="/cabinet"
+                    href={pages.cabinet.path}
                     className={styles.popupItem}
                   >
                     Кабинет {profile.role === ACCESS.hr ? "HR" : "психолога"}
@@ -137,7 +138,7 @@ const Header: FunctionComponent = () => {
         ) : loginState.isLoading ? (
           <PrimaryButton disabled>Загрузка...</PrimaryButton>
         ) : (
-          <PrimaryButton href="/auth/login">Войти</PrimaryButton>
+          <PrimaryButton href={pages.login.path}>Войти</PrimaryButton>
         )}
       </Container>
     </header>

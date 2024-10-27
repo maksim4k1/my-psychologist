@@ -4,6 +4,7 @@ import PrimaryButton from "../../Buttons/PrimaryButton";
 import ProfileImage from "../../Images/ProfileImage";
 import styles from "../styles.module.scss";
 import { type ApplicationData } from "@/client/redux/features/applications/types";
+import { pages } from "@/shared/data";
 import { type FunctionComponent } from "react";
 
 interface Props {
@@ -58,7 +59,9 @@ const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
       </div>
       <div className={styles.problem}>{client.problem}</div>
       <div className={styles.buttons}>
-        <PrimaryButton href={`/cabinet/applications/${client.id}`}>
+        <PrimaryButton
+          href={pages.application.getLink({ params: { id: client.id } })}
+        >
           Профиль
         </PrimaryButton>
       </div>
