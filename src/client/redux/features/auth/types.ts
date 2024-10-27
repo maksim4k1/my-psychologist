@@ -14,6 +14,7 @@ export interface AuthState {
   loginState: StatusState;
   registrationState: StatusState;
   sendHrSurveyState: StatusState;
+  logoutState: StatusState;
 }
 
 export interface LoginPayload {

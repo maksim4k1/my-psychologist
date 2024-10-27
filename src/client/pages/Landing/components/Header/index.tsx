@@ -15,7 +15,7 @@ import {
   selectProfile,
 } from "@/client/redux/features/auth/selectors";
 import { ACCESS } from "@/shared/config/access.config";
-import { type FunctionComponent, useEffect, useRef, useState } from "react";
+import { type FunctionComponent, useRef, useState } from "react";
 
 export const Header: FunctionComponent = () => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
@@ -25,12 +25,6 @@ export const Header: FunctionComponent = () => {
   const popupRef = useRef(null);
   const bittonRef = useRef(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  useEffect(() => {
-    if (!isAuth && !loginState.isLoading) {
-      dispatch(AuthService.loginByToken());
-    }
-  }, [isAuth, loginState.isLoading, dispatch]);
 
   useClickOutside(
     popupRef,

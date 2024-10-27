@@ -1,6 +1,7 @@
 @import "@/client/styles/variables";
 
 .body {
+  min-height: 100vh;
   background-color: $color-landing-white;
   font-family: var(--font-montserrat);
 }

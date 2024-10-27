@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./styles.module.scss";
+import { useRouter } from "next/navigation";
 import AuthService from "@/client/api/auth";
 import AuthButtons from "@/client/components/UI/AuthButtons";
 import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
@@ -29,6 +30,7 @@ export const RegistrationPage: FC = () => {
     confirmPassword: password.value,
   });
 
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const registrationState = useAppSelector(selectAuthRegistrationState);
 
@@ -37,8 +39,9 @@ export const RegistrationPage: FC = () => {
       dispatch(
         PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
       );
+      router.push("/auth/registration/success");
     }
-  }, [registrationState.isSuccess, dispatch]);
+  }, [registrationState.isSuccess, dispatch, router]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
