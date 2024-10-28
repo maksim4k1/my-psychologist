@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
-import AuthService from "@/client/api/auth";
+import { AuthService } from "@/client/api";
 import AuthButtons from "@/client/components/UI/AuthButtons";
 import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
 import Container from "@/client/components/UI/Container";
@@ -10,9 +10,8 @@ import Form from "@/client/components/UI/Forms/AuthForm";
 import Input from "@/client/components/UI/Inputs/Input";
 import AppLink from "@/client/components/UI/Links/AppLink";
 import FormErrorLabel from "@/client/components/statusLabels/FormErrorLabel";
-import { useInput } from "@/client/hooks/inputHooks";
+import { useInput, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
 import { authActions } from "@/client/redux/features/auth";
 import { selectAuthRegistrationState } from "@/client/redux/features/auth/selectors";
 import { type RegistrationPayload } from "@/client/redux/features/auth/types";

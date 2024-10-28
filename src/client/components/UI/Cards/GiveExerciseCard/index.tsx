@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import TestsService from "@/client/api/tests";
+import { TestsService } from "@/client/api";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import { selectGiveTestState } from "@/client/redux/features/tests/selectors";
 import { type TestShortData } from "@/client/redux/features/tests/types";

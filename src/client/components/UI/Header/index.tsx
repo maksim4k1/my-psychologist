@@ -7,9 +7,9 @@ import ProfileImage from "../Images/ProfileImage";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import AuthService from "@/client/api/auth";
+import { AuthService } from "@/client/api";
 import LogoIcon from "@/client/assets/svg/Icons/Logo";
-import { useClickOutside } from "@/client/hooks/clickOutsideHook";
+import { useClickOutside } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import {
   selectAuthIsAuth,

@@ -64,7 +64,7 @@ interface ResponseQuestionAnswerData {
   score: number;
 }
 
-export default class TestsService {
+export class TestsService {
   static getTestsByUserId =
     (userId: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.getTestsByUserIdLoading());

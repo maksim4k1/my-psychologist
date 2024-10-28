@@ -14,7 +14,7 @@ interface ResponseArticle {
   max_score: number;
 }
 
-export default class ArticlesService {
+export class ArticlesService {
   static getArticles = () => async (dispatch: AppDispatch) => {
     dispatch(articlesActions.getArticlesLoading());
 

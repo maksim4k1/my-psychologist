@@ -2,14 +2,14 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import TestsService from "@/client/api/tests";
+import { TestsService } from "@/client/api";
 import ProgressBar from "@/client/components/UI/Charts/ProgressBar";
 import Container from "@/client/components/UI/Container";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import Subtitle from "@/client/components/UI/Titles/Subtitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
 import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestInfoState,

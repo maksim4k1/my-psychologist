@@ -1,15 +1,14 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import ApplicationsService from "@/client/api/applications";
-import ClientsService from "@/client/api/clients";
+import { ApplicationsService, ClientsService } from "@/client/api";
 import ApplicationCard from "@/client/components/UI/Cards/ApplicationCard";
 import ClientCard from "@/client/components/UI/Cards/ClientCard";
 import Container from "@/client/components/UI/Container";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
 import { applicationsActions } from "@/client/redux/features/applications";
 import {
   selectApplications,
