@@ -63,26 +63,28 @@ const Header: FunctionComponent = () => {
         >
           <LogoIcon />
         </Link>
-        <nav className={styles.nav}>
-          <Link
-            className={styles.navLink}
-            href={pages.profile.path}
-          >
-            Моя программа
-          </Link>
-          <Link
-            className={styles.navLink}
-            href={pages.articles.path}
-          >
-            Теория
-          </Link>
-          <Link
-            className={styles.navLink}
-            href={pages.psychologist.path}
-          >
-            Психологи
-          </Link>
-        </nav>
+        {isAuth && (
+          <nav className={styles.nav}>
+            <Link
+              className={styles.navLink}
+              href={pages.profile.path}
+            >
+              Моя программа
+            </Link>
+            <Link
+              className={styles.navLink}
+              href={pages.articles.path}
+            >
+              Теория
+            </Link>
+            <Link
+              className={styles.navLink}
+              href={pages.psychologist.path}
+            >
+              Психологи
+            </Link>
+          </nav>
+        )}
         {isAuth ? (
           <div className={styles.profileContainer}>
             <button
