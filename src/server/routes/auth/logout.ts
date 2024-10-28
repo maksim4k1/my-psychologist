@@ -1,15 +1,8 @@
 import { NextResponse } from "next/server";
+import { deleteAuthCookies } from "@/server/utils";
 
 const logout = async () => {
-  const response = NextResponse.json({ message: "OK" });
-  response.cookies.set("access_token", "", {
-    maxAge: -1,
-    path: "/",
-  });
-  response.cookies.set("user_data", "", {
-    maxAge: -1,
-    path: "/",
-  });
+  const response = deleteAuthCookies(NextResponse.json({ message: "OK" }));
 
   return response;
 };

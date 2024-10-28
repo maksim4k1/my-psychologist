@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { type RegistrationPayload } from "@/client/redux/features/auth/types";
+import { setAuthCookies } from "@/server/utils";
 import { customAxios } from "@/shared/config/api.config";
 
 const registration = async (request: NextRequest) => {
@@ -10,10 +11,10 @@ const registration = async (request: NextRequest) => {
 
     const data = serverResponse.data;
 
-    const response = NextResponse.json(data, { status: 200 });
-
-    response.cookies.set("access_token", data.token);
-    response.cookies.set("user_data", JSON.stringify(data));
+    const response = setAuthCookies(
+      NextResponse.json(data, { status: 200 }),
+      data,
+    );
 
     return response;
   } catch {

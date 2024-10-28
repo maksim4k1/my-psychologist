@@ -1,7 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { deleteAuthCookies, setAuthCookies } from "@/server/utils";
 import { ACCESS, type AccessRole } from "@/shared/config/access.config";
-import { localAxios } from "@/shared/config/api.config";
-import { pages, routes } from "@/shared/data";
+import { customAxios } from "@/shared/config/api.config";
+import { cookies, pages, routes } from "@/shared/data";
 import { getRole } from "@/shared/utils/api";
 
 const checkPath = (pathname: string, template: string): boolean => {
@@ -25,20 +26,22 @@ const checkPath = (pathname: string, template: string): boolean => {
   return true;
 };
 
-const getUserData = async (request: NextRequest) => {
+const loginByToken = async (request: NextRequest) => {
   try {
-    const response = await localAxios.post("/loginByToken", undefined, {
-      headers: {
-        "Cookie": request.cookies.toString(),
-      },
-    });
+    const accessToken = request.cookies.get(cookies.authToken.name)?.value;
 
-    const data = response.data;
+    if (accessToken) {
+      const response = await customAxios.post("/users/auth_token", {
+        token: accessToken,
+      });
 
-    return data;
+      return response.data;
+    }
   } catch {
     return null;
   }
+
+  return null;
 };
 
 const checkAuth = async (request: NextRequest, role: AccessRole) => {
@@ -69,19 +72,14 @@ const checkAuth = async (request: NextRequest, role: AccessRole) => {
 };
 
 export const middleware = async (request: NextRequest) => {
-  const userData = await getUserData(request);
+  const userData = await loginByToken(request);
 
-  const response = await checkAuth(request, getRole(userData?.role));
+  let response = await checkAuth(request, getRole(userData?.role));
 
   if (userData === null) {
-    response.cookies.set("access_token", "", {
-      maxAge: -1,
-      path: "/",
-    });
-    response.cookies.set("user_data", "", {
-      maxAge: -1,
-      path: "/",
-    });
+    response = deleteAuthCookies(response);
+  } else {
+    response = setAuthCookies(response, userData);
   }
 
   return response;
