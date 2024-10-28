@@ -19,7 +19,7 @@ interface ApplicationResponse {
   username: string;
 }
 
-export default class ApplicationsService {
+export class ApplicationsService {
   static getApplications = () => async (dispatch: AppDispatch) => {
     dispatch(applicationsActions.getApplicationsLoading());
 

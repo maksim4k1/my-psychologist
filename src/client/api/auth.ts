@@ -8,7 +8,7 @@ import {
 import { customAxios, localAxios } from "@/shared/config/api.config";
 import { instanceofHttpError } from "@/shared/utils/api";
 
-export default class AuthService {
+export class AuthService {
   static login = (formData: LoginPayload) => async (dispatch: AppDispatch) => {
     dispatch(authActions.loginLoading());
     try {

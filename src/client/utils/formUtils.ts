@@ -3,7 +3,7 @@ import {
   type FileInputHookReturnValue,
   type InputHookReturnValue,
   type MaskedInputHookReturnValue,
-} from "../hooks/inputHooks";
+} from "../hooks";
 
 type InputHook =
   | InputHookReturnValue

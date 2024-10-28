@@ -2,15 +2,14 @@
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
-import AuthService from "@/client/api/auth";
+import { AuthService } from "@/client/api";
 import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
 import Container from "@/client/components/UI/Container";
 import Form from "@/client/components/UI/Forms/Form";
 import Input from "@/client/components/UI/Inputs/Input";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import { useInput } from "@/client/hooks/inputHooks";
+import { useInput, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
 import { authActions } from "@/client/redux/features/auth";
 import { selectSendHrSurveyState } from "@/client/redux/features/auth/selectors";
 import { type SendHrSurveyPayload } from "@/client/redux/features/auth/types";

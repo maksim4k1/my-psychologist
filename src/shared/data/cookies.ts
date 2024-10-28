@@ -12,7 +12,7 @@ interface Cookies {
 
 export const cookies: Cookies = {
   authToken: {
-    name: "auth_token",
+    name: "access_token",
     params: {
       httpOnly: true,
     },

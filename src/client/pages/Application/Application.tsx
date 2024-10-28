@@ -2,8 +2,7 @@
 
 import styles from "./styles.module.scss";
 import { useParams, useRouter } from "next/navigation";
-import ApplicationsService from "@/client/api/applications";
-import TestsService from "@/client/api/tests";
+import { ApplicationsService, TestsService } from "@/client/api";
 import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
 import SecondaryButton from "@/client/components/UI/Buttons/SecondaryButton";
 import ProfileCard from "@/client/components/UI/Cards/ProfileCard";
@@ -12,8 +11,8 @@ import Container from "@/client/components/UI/Container";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import Subtitle from "@/client/components/UI/Titles/Subtitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
 import { applicationsActions } from "@/client/redux/features/applications";
 import {
   selectApplication,

@@ -20,7 +20,7 @@ interface ClientProfileResponse extends ClientResponse {
   birth_date: string;
 }
 
-export default class ClientsService {
+export class ClientsService {
   static getClients = () => async (dispatch: AppDispatch) => {
     dispatch(clientsActions.getClientsLoading());
 

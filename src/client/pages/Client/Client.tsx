@@ -2,8 +2,7 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import ClientsService from "@/client/api/clients";
-import TestsService from "@/client/api/tests";
+import { ClientsService, TestsService } from "@/client/api";
 import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
 import ProfileCard from "@/client/components/UI/Cards/ProfileCard";
 import TestCard from "@/client/components/UI/Cards/TestCard";
@@ -11,8 +10,8 @@ import Container from "@/client/components/UI/Container";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import Subtitle from "@/client/components/UI/Titles/Subtitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
+import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { useSetDefaultState } from "@/client/hooks/setDefaultStateHook";
 import { selectRole } from "@/client/redux/features/auth/selectors";
 import { clientsActions } from "@/client/redux/features/clients";
 import {

@@ -9,11 +9,7 @@ import Input from "@/client/components/UI/Inputs/Input";
 import MaskedInput from "@/client/components/UI/Inputs/MaskedInput";
 import Textarea from "@/client/components/UI/Inputs/Textarea";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import {
-  useFileInput,
-  useInput,
-  useMaskedInput,
-} from "@/client/hooks/inputHooks";
+import { useFileInput, useInput, useMaskedInput } from "@/client/hooks";
 import { checkFormDataValidation } from "@/client/utils";
 import { type FC, type FormEvent } from "react";
 

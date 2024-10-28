@@ -6,7 +6,7 @@ import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
 import Container from "@/client/components/UI/Container";
 import Form from "@/client/components/UI/Forms/AuthForm";
 import Input from "@/client/components/UI/Inputs/Input";
-import { useInput } from "@/client/hooks/inputHooks";
+import { useInput } from "@/client/hooks";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type FC, type FormEvent } from "react";

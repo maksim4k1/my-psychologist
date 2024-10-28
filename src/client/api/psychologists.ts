@@ -17,7 +17,7 @@ interface PsychologistDataResponse {
   role_id: number;
 }
 
-export default class PsychologistsService {
+export class PsychologistsService {
   static getMyPsychologists = () => async (dispatch: AppDispatch) => {
     dispatch(psychologistsActions.getMyPsychologistsLoading());
 

@@ -2,12 +2,12 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import AuthService from "@/client/api/auth";
+import { AuthService } from "@/client/api";
 import LogoIcon from "@/client/assets/svg/Icons/Logo";
 import Button from "@/client/components/UI/Buttons/Button";
 import Container from "@/client/components/UI/Container";
 import ProfileImage from "@/client/components/UI/Images/ProfileImage";
-import { useClickOutside } from "@/client/hooks/clickOutsideHook";
+import { useClickOutside } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import {
   selectAuthIsAuth,
