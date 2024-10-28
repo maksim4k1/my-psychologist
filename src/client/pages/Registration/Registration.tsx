@@ -14,10 +14,10 @@ import { useInput, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import { authActions } from "@/client/redux/features/auth";
 import { selectAuthRegistrationState } from "@/client/redux/features/auth/selectors";
-import { type RegistrationPayload } from "@/client/redux/features/auth/types";
 import { PopupsService } from "@/client/redux/services/popups";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";
+import { type RegistrationRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const RegistrationPage: FC = () => {
@@ -47,8 +47,8 @@ export const RegistrationPage: FC = () => {
     event.preventDefault();
 
     if (checkFormDataValidation(email, password, confirmPassword)) {
-      const formData: RegistrationPayload = {
-        name: name.value,
+      const formData: RegistrationRequestData = {
+        username: name.value,
         email: email.value,
         password: password.value,
         confirmPassword: confirmPassword.value,

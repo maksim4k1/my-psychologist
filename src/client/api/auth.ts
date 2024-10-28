@@ -1,42 +1,42 @@
 import { type AppDispatch } from "./../redux/store";
 import { authActions } from "@/client/redux/features/auth/";
+import { localAxios } from "@/shared/config/api.config";
 import {
-  type LoginPayload,
-  type RegistrationPayload,
-  type SendHrSurveyPayload,
-} from "@/client/redux/features/auth/types";
-import { customAxios, localAxios } from "@/shared/config/api.config";
+  type LoginRequestData,
+  type LoginResponseData,
+  type RegistrationRequestData,
+  type RegistrationResponseData,
+  type SendHrSurveyRequestData,
+} from "@/shared/types";
 import { instanceofHttpError } from "@/shared/utils/api";
 
 export class AuthService {
-  static login = (formData: LoginPayload) => async (dispatch: AppDispatch) => {
-    dispatch(authActions.loginLoading());
-    try {
-      const response = await localAxios.post("/auth/login", formData);
+  static login =
+    (formData: LoginRequestData) => async (dispatch: AppDispatch) => {
+      dispatch(authActions.loginLoading());
+      try {
+        const { data } = await localAxios.post<LoginResponseData>(
+          "/auth/login",
+          formData,
+        );
 
-      const data = response.data;
-
-      dispatch(authActions.loginSuccess(data));
-    } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(authActions.loginFailure(err));
+        dispatch(authActions.loginSuccess(data));
+      } catch (err) {
+        if (instanceofHttpError(err)) {
+          dispatch(authActions.loginFailure(err));
+        }
       }
-    }
-  };
+    };
 
   static registration =
-    (formData: RegistrationPayload) => async (dispatch: AppDispatch) => {
+    (formData: RegistrationRequestData) => async (dispatch: AppDispatch) => {
       dispatch(authActions.registrationLoading());
 
       try {
-        const response = await localAxios.post("/auth/registration", {
-          email: formData.email,
-          username: formData.name,
-          password: formData.password,
-          confirm_password: formData.confirmPassword,
-        });
-
-        const data = response.data;
+        const { data } = await localAxios.post<RegistrationResponseData>(
+          "/auth/registration",
+          formData,
+        );
 
         dispatch(authActions.registrationSuccess(data));
       } catch (err) {
@@ -49,9 +49,9 @@ export class AuthService {
   static logout = () => async (dispatch: AppDispatch) => {
     dispatch(authActions.logoutLoading());
     try {
-      await localAxios.post("/auth/logout");
+      const { data } = await localAxios.post("/auth/logout");
 
-      dispatch(authActions.logoutSuccess());
+      dispatch(authActions.logoutSuccess(data));
     } catch (err) {
       if (instanceofHttpError(err)) {
         dispatch(authActions.logoutFailure(err));
@@ -60,21 +60,11 @@ export class AuthService {
   };
 
   static sendHrSurvey =
-    (formData: SendHrSurveyPayload) => async (dispatch: AppDispatch) => {
+    (formData: SendHrSurveyRequestData) => async (dispatch: AppDispatch) => {
       dispatch(authActions.sendHrSurveyLoading());
 
       try {
-        const response = await customAxios.post("/manager/send_manager", {
-          username: formData.fullName,
-          description: "",
-          city: "",
-          company: formData.company,
-          online: false,
-          gender: "1",
-          birth_date: "2000-01-01",
-        });
-
-        const data = response.data;
+        const { data } = await localAxios.post("/hr/survey", formData);
 
         dispatch(authActions.sendHrSurveySuccess(data));
       } catch (err) {

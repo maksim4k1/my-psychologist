@@ -15,9 +15,9 @@ import { useInput, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import { authActions } from "@/client/redux/features/auth";
 import { selectAuthLoginState } from "@/client/redux/features/auth/selectors";
-import { type LoginPayload } from "@/client/redux/features/auth/types";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";
+import { type LoginRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const LoginPage: FC = () => {
@@ -38,7 +38,7 @@ export const LoginPage: FC = () => {
     event.preventDefault();
 
     if (checkFormDataValidation(email, password)) {
-      const formData: LoginPayload = {
+      const formData: LoginRequestData = {
         email: email.value,
         password: password.value,
       };

@@ -1,15 +1,19 @@
 import { type NextResponse } from "next/server";
-import { type UserData } from "@/client/redux/features/auth/types";
 import { cookies, deleteCookieParams } from "@/shared/data";
+import {
+  type LoginResponseData,
+  type RegistrationResponseData,
+} from "@/shared/types";
 
 export const setAuthCookies = (
   response: NextResponse,
-  userData: UserData,
+  userData: LoginResponseData | RegistrationResponseData,
+  accessToken: string,
 ): NextResponse => {
   response.cookies.set(
-    cookies.authToken.name,
-    userData.token,
-    cookies.authToken.params,
+    cookies.accessToken.name,
+    accessToken,
+    cookies.accessToken.params,
   );
   response.cookies.set(
     cookies.userData.name,
@@ -21,7 +25,7 @@ export const setAuthCookies = (
 };
 
 export const deleteAuthCookies = (response: NextResponse): NextResponse => {
-  response.cookies.set(cookies.authToken.name, "", deleteCookieParams);
+  response.cookies.set(cookies.accessToken.name, "", deleteCookieParams);
   response.cookies.set(cookies.userData.name, "", deleteCookieParams);
 
   return response;
