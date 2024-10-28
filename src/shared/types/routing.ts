@@ -1,5 +1,10 @@
 import { type AccessRole } from "../config/access.config";
 
+interface GetLinkConfig<P> {
+  params?: P extends never ? undefined : P;
+  queryParams?: Record<string, string>;
+}
+
 export class Page<P extends Record<string, any> = never> {
   public readonly path: string;
   public readonly access?: AccessRole[];
@@ -9,10 +14,7 @@ export class Page<P extends Record<string, any> = never> {
     this.access = access;
   }
 
-  public getLink = (config?: {
-    params?: P extends never ? undefined : P;
-    queryParams?: Record<string, string>;
-  }): string => {
+  public getLink = (config?: GetLinkConfig<P>): string => {
     const pathDivider = "/";
     const paramStartSymbol = ":";
 
