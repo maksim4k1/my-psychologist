@@ -5,16 +5,16 @@ export interface HttpError {
   message: string;
 }
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL;
-export const BFF_URL = "http://localhost:3000/api";
+export const SEVER_API_URL = process.env.NEXT_PUBLIC_SERVER_API_URL;
+export const BFF_API_URL = process.env.NEXT_PUBLIC_BFF_API_URL;
 
 export const localAxios = axios.create({
-  baseURL: BFF_URL,
+  baseURL: BFF_API_URL,
   withCredentials: true,
 });
 
 export const customAxios = axios.create({
-  baseURL: API_URL,
+  baseURL: SEVER_API_URL,
   withCredentials: true,
 });
 
