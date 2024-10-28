@@ -4,10 +4,13 @@ import {
   createLoadingState,
   createSuccessState,
 } from "../../../utils";
-import { type AuthState, type UserData } from "./types";
+import { type AuthState } from "./types";
 import { ACCESS } from "@/shared/config/access.config";
 import { type HttpError } from "@/shared/config/api.config";
-import { getRole } from "@/shared/utils/api";
+import {
+  type LoginResponseData,
+  type RegistrationResponseData,
+} from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: AuthState = {
@@ -28,13 +31,16 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setInitialUserData: (state, { payload }: PayloadAction<UserData>) => {
+    setInitialUserData: (
+      state,
+      { payload }: PayloadAction<LoginResponseData>,
+    ) => {
       state.isAuth = true;
       state.profile = {
-        id: payload.user_id,
+        id: payload.userId,
         email: payload.email,
         username: payload.username,
-        role: getRole(payload.role),
+        role: payload.role,
       };
     },
 
@@ -42,13 +48,13 @@ const authSlice = createSlice({
     loginLoading: (state) => {
       state.loginState = createLoadingState();
     },
-    loginSuccess: (state, { payload }: PayloadAction<UserData>) => {
+    loginSuccess: (state, { payload }: PayloadAction<LoginResponseData>) => {
       state.isAuth = true;
       state.profile = {
-        id: payload.user_id,
+        id: payload.userId,
         email: payload.email,
         username: payload.username,
-        role: getRole(payload.role),
+        role: payload.role,
       };
       state.loginState = createSuccessState();
     },
@@ -63,13 +69,16 @@ const authSlice = createSlice({
     registrationLoading: (state) => {
       state.registrationState = createLoadingState();
     },
-    registrationSuccess: (state, { payload }: PayloadAction<UserData>) => {
+    registrationSuccess: (
+      state,
+      { payload }: PayloadAction<RegistrationResponseData>,
+    ) => {
       state.isAuth = true;
       state.profile = {
-        id: payload.user_id,
+        id: payload.userId,
         email: payload.email,
         username: payload.username,
-        role: getRole(payload.role),
+        role: payload.role,
       };
       state.registrationState = createSuccessState();
     },

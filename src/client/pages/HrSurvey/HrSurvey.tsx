@@ -12,10 +12,10 @@ import { useInput, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import { authActions } from "@/client/redux/features/auth";
 import { selectSendHrSurveyState } from "@/client/redux/features/auth/selectors";
-import { type SendHrSurveyPayload } from "@/client/redux/features/auth/types";
 import { PopupsService } from "@/client/redux/services/popups";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";
+import { type SendHrSurveyRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
 
 export const HrSurveyPage: FC = () => {
@@ -41,8 +41,8 @@ export const HrSurveyPage: FC = () => {
       checkFormDataValidation(fullName, company) &&
       event.target instanceof HTMLFormElement
     ) {
-      const formData: SendHrSurveyPayload = {
-        fullName: fullName.value,
+      const formData: SendHrSurveyRequestData = {
+        username: fullName.value,
         company: company.value,
       };
 

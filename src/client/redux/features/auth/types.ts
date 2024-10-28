@@ -16,28 +16,3 @@ export interface AuthState {
   sendHrSurveyState: StatusState;
   logoutState: StatusState;
 }
-
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
-
-export interface RegistrationPayload {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-export interface SendHrSurveyPayload {
-  fullName: string;
-  company: string;
-}
-
-export interface UserData {
-  token: string;
-  user_id: string;
-  role: number;
-  email: string;
-  username: string;
-}

@@ -6,12 +6,12 @@ interface Cookie {
 }
 
 interface Cookies {
-  authToken: Cookie;
+  accessToken: Cookie;
   userData: Cookie;
 }
 
 export const cookies: Cookies = {
-  authToken: {
+  accessToken: {
     name: "access_token",
     params: {
       httpOnly: true,

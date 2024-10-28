@@ -3,9 +3,9 @@ import { Page, type Pages, type Routes } from "@/shared/types";
 
 export const pages: Pages = {
   landing: new Page("/"),
-  login: new Page("/auth/login", [ACCESS.unauthorized]),
-  registration: new Page("/auth/registration", [ACCESS.unauthorized]),
-  successRegistration: new Page("/auth/registration/success", [ACCESS.client]),
+  login: new Page("/login", [ACCESS.unauthorized]),
+  registration: new Page("/registration", [ACCESS.unauthorized]),
+  successRegistration: new Page("/registration/success", [ACCESS.client]),
   cabinet: new Page("/cabinet", [ACCESS.psychologist, ACCESS.hr]),
   application: new Page<{ id: string }>("/cabinet/applications/:id", [
     ACCESS.psychologist,
