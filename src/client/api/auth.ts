@@ -12,7 +12,7 @@ export default class AuthService {
   static login = (formData: LoginPayload) => async (dispatch: AppDispatch) => {
     dispatch(authActions.loginLoading());
     try {
-      const response = await localAxios.post("/login", formData);
+      const response = await localAxios.post("/auth/login", formData);
 
       const data = response.data;
 
@@ -29,7 +29,7 @@ export default class AuthService {
       dispatch(authActions.registrationLoading());
 
       try {
-        const response = await localAxios.post("/registration", {
+        const response = await localAxios.post("/auth/registration", {
           email: formData.email,
           username: formData.name,
           password: formData.password,
@@ -49,7 +49,7 @@ export default class AuthService {
   static logout = () => async (dispatch: AppDispatch) => {
     dispatch(authActions.logoutLoading());
     try {
-      await localAxios.post("/logout");
+      await localAxios.post("/auth/logout");
 
       dispatch(authActions.logoutSuccess());
     } catch (err) {
