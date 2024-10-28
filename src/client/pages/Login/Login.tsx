@@ -2,6 +2,7 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import AuthService from "@/client/api/auth";
 import AuthButtons from "@/client/components/UI/AuthButtons";
 import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
@@ -24,14 +25,15 @@ export const LoginPage: FC = () => {
   const email = useInput("", { isEmpty: true, isEmail: true });
   const password = useInput("", { isEmpty: true });
 
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const loginState = useAppSelector(selectAuthLoginState);
 
   useEffect(() => {
     if (loginState.isSuccess) {
-      window.location.href = pages.profile.path;
+      router.push(pages.profile.path);
     }
-  }, [loginState.isSuccess]);
+  }, [loginState.isSuccess, router]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
