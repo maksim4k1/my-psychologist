@@ -54,12 +54,11 @@ const PsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {
 
       if (checkFormDataValidation(fullName, request)) {
         dispatch(
-          ApplicationsService.sendApplication(
-            psychologist.userId,
-            profile.role,
-            fullName.value,
-            request.value,
-          ),
+          ApplicationsService.sendApplication({
+            psychologistId: psychologist.userId,
+            username: fullName.value,
+            request: request.value,
+          }),
         );
       }
     };
