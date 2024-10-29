@@ -6,7 +6,7 @@ import {
   type ServerResponseValidationError,
 } from "@/shared/types";
 
-const defaultError: ResponseError = new ResponseError(
+const internalServerError: ResponseError = new ResponseError(
   httpStatuses.internalServerError.status,
   "Что-то пошло не так, попробуйте повторить позже",
 );
@@ -21,20 +21,26 @@ export const mapErrorResponse = (
     | unknown
     | AxiosError<ServerResponseValidationError | ServerResponseError>,
 ): ResponseError => {
-  if (error instanceof AxiosError) {
-    const response = error.response;
+  try {
+    if (error instanceof AxiosError) {
+      const response = error.response;
 
-    if (response) {
-      const { data, status } = response;
-      const { detail } = data;
+      if (response) {
+        const { data, status } = response;
+        const { detail } = data;
 
-      if (typeof detail === "string") {
-        return new ResponseError(status, detail);
-      } else {
-        return new ResponseError(status, detail[0].msg);
+        if (!detail) {
+          return internalServerError;
+        } else if (typeof detail === "string") {
+          return new ResponseError(status, detail);
+        } else {
+          return new ResponseError(status, detail[0].msg);
+        }
       }
-    }
 
+      return connectionError;
+    } else return internalServerError;
+  } catch {
     return connectionError;
-  } else return defaultError;
+  }
 };

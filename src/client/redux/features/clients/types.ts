@@ -1,19 +1,9 @@
 import { type StatusState } from "@/client/utils";
-import { GetClientsResponseData } from "@/shared/types";
-
-export interface ClientProfileData {
-  userId: string;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-  problems: string[];
-  age: number;
-  problem?: never;
-}
+import { GetClientResponseData, GetClientsResponseData } from "@/shared/types";
 
 export interface ClientsState {
   clients: GetClientsResponseData;
-  client: ClientProfileData | null;
+  client: GetClientResponseData | null;
   getClientsState: StatusState;
   getClientState: StatusState;
 }

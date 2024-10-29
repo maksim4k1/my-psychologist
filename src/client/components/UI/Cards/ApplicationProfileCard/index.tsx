@@ -1,15 +1,14 @@
 import ProfileImage from "../../Images/ProfileImage";
-import Symptom from "../../Symptom";
 import styles from "./styles.module.scss";
+import { type ApplicationProfileData } from "@/client/redux/features/applications/types";
 import { mapAgeToText } from "@/client/utils";
-import { GetClientResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {
-  profile: GetClientResponseData;
+  profile: ApplicationProfileData;
 }
 
-const ProfileCard: FunctionComponent<Props> = ({ profile }) => {
+const ApplicationProfileCard: FunctionComponent<Props> = ({ profile }) => {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -36,19 +35,10 @@ const ProfileCard: FunctionComponent<Props> = ({ profile }) => {
       <div className={styles.info}>
         Возраст: {profile.age === 0 ? "не указан" : mapAgeToText(profile.age)}
       </div>
-      {!!profile.problems.length && (
+      {!!profile.problem && (
         <>
           <div className={styles.info}>Запрос:</div>
-          <div className={styles.problems}>
-            {profile.problems.map((problem, index) => {
-              return (
-                <Symptom
-                  key={index}
-                  problem={problem}
-                />
-              );
-            })}
-          </div>
+          <div className={styles.problems}>{profile.problem}</div>
         </>
       )}
       {/* <PrimaryButton className={styles.cardButton}>Чат</PrimaryButton> */}
@@ -56,4 +46,4 @@ const ProfileCard: FunctionComponent<Props> = ({ profile }) => {
   );
 };
 
-export default ProfileCard;
+export default ApplicationProfileCard;

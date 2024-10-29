@@ -21,9 +21,10 @@ interface ServerFetch {
   patch: <T = any, D = any>(url: string, data?: D, config?: Cfg<D>) => Res<T>;
 }
 
-type RequestResolveCallback = (
+type RequestResolveCallback<P> = (
   request: NextRequest,
   serverFetch: ServerFetch,
+  params: P,
 ) => Promise<NextResponse>;
 
 type RequestRejectCallback = (
@@ -31,7 +32,13 @@ type RequestRejectCallback = (
   error: ResponseError,
 ) => NextResponse;
 
-type CreatedRequest = (request: NextRequest) => Promise<NextResponse>;
+interface Params<P> {
+  params: P;
+}
+type CreatedRequest<P> = (
+  request: NextRequest,
+  params: Params<P>,
+) => Promise<NextResponse>;
 
 const createServerFetch = (request: NextRequest): ServerFetch => {
   const createServerFetchMethod =
@@ -66,15 +73,15 @@ const createServerFetch = (request: NextRequest): ServerFetch => {
   };
 };
 
-export const createRequest = (
-  resolve: RequestResolveCallback,
+export const createRequest = <P extends Record<string, string> = any>(
+  resolve: RequestResolveCallback<P>,
   reject?: RequestRejectCallback,
-): CreatedRequest => {
-  return async (request: NextRequest) => {
+): CreatedRequest<P> => {
+  return async (request: NextRequest, params: Params<P>) => {
     try {
       const serverFetch = createServerFetch(request);
 
-      const response = await resolve(request, serverFetch);
+      const response = await resolve(request, serverFetch, params.params);
 
       return response;
     } catch (error) {

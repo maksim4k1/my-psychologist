@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { ApplicationsService, TestsService } from "@/client/api";
 import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
 import SecondaryButton from "@/client/components/UI/Buttons/SecondaryButton";
-import ProfileCard from "@/client/components/UI/Cards/ProfileCard";
+import ApplicationProfileCard from "@/client/components/UI/Cards/ApplicationProfileCard";
 import TestCard from "@/client/components/UI/Cards/TestCard";
 import Container from "@/client/components/UI/Container";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
@@ -85,7 +85,7 @@ export const ApplicationPage: FC = () => {
       </PageTitle>
       <div className={styles.main}>
         <StateWrapper state={[getApplicationState, testsState]}>
-          {application && <ProfileCard profile={application} />}
+          {application && <ApplicationProfileCard profile={application} />}
           <div>
             <Subtitle>
               {tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
