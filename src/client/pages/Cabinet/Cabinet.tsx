@@ -21,7 +21,6 @@ import {
   selectClients,
   selectClientsState,
 } from "@/client/redux/features/clients/selectors";
-import { type ClientData } from "@/client/redux/features/clients/types";
 import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect } from "react";
@@ -32,7 +31,7 @@ export const CabinetPage: FC = () => {
   const applicationsState: StatusState = useAppSelector(
     selectApplicationsState,
   );
-  const clients: ClientData[] = useAppSelector(selectClients);
+  const clients = useAppSelector(selectClients);
   const clientsState: StatusState = useAppSelector(selectClientsState);
   const role = useAppSelector(selectRole);
 

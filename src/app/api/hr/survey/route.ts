@@ -1,3 +1,3 @@
-import { hrSurveyRoutes } from "@/server/routes";
+import { HrSurveyRoutes } from "@/server/routes";
 
-export const { POST } = hrSurveyRoutes;
+export const { POST } = HrSurveyRoutes;

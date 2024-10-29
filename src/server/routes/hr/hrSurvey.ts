@@ -22,6 +22,6 @@ const sendHrSurvey = createRequest(async (request, serverFetch) => {
   );
 });
 
-export const hrSurveyRoutes = {
+export const HrSurveyRoutes = {
   POST: sendHrSurvey,
 };
