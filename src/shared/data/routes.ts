@@ -69,3 +69,8 @@ export const routes: Routes = Array.from(Object.values(pages)).toSorted(
     return 0;
   },
 );
+
+export const errorPages = {
+  notFound: new Page("/error/not-found"),
+  accessDenied: new Page("/error/access-denied"),
+};

@@ -9,7 +9,6 @@ import {
   ResponseError,
   type SendHrSurveyRequestData,
 } from "@/shared/types";
-import { instanceofHttpError } from "@/shared/utils/api";
 
 export class AuthService {
   static login =
@@ -23,8 +22,8 @@ export class AuthService {
 
         dispatch(authActions.loginSuccess(data));
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(authActions.loginFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(authActions.loginFailure(err.serialize()));
         }
       }
     };
@@ -50,12 +49,12 @@ export class AuthService {
   static logout = () => async (dispatch: AppDispatch) => {
     dispatch(authActions.logoutLoading());
     try {
-      const { data } = await localAxios.post("/auth/logout");
+      await localAxios.post("/auth/logout");
 
-      dispatch(authActions.logoutSuccess(data));
+      dispatch(authActions.logoutSuccess());
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(authActions.logoutFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(authActions.logoutFailure(err.serialize()));
       }
     }
   };
@@ -69,8 +68,8 @@ export class AuthService {
 
         dispatch(authActions.sendHrSurveySuccess());
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(authActions.sendHrSurveyFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(authActions.sendHrSurveyFailure(err.serialize()));
         }
       }
     };

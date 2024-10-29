@@ -9,29 +9,26 @@ import {
   type LoginResponseData,
 } from "@/shared/types";
 
-const login = createRequest<LoginApiResponseData, LoginApiRequestData>(
-  "post",
-  async (request, serverFetch) => {
-    const body: LoginRequestData = await request.json();
+const login = createRequest(async (request, serverFetch) => {
+  const body: LoginRequestData = await request.json();
 
-    const serverResponse = await serverFetch(
-      "/users/auth",
-      mapLoginRequest(body),
-    );
+  const serverResponse = await serverFetch.post<
+    LoginApiResponseData,
+    LoginApiRequestData
+  >("/users/auth", mapLoginRequest(body));
 
-    const data = serverResponse.data;
+  const data = serverResponse.data;
 
-    const responseData = mapLoginResponse(data);
+  const responseData = mapLoginResponse(data);
 
-    const response = setAuthCookies(
-      NextResponse.json<LoginResponseData>(responseData, httpStatuses.ok),
-      responseData,
-      data.token,
-    );
+  const response = setAuthCookies(
+    NextResponse.json<LoginResponseData>(responseData, httpStatuses.ok),
+    responseData,
+    data.token,
+  );
 
-    return response;
-  },
-);
+  return response;
+});
 
 export const LoginRoutes = {
   POST: login,
