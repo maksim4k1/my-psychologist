@@ -3,8 +3,8 @@ import { mapGetApplicationsResponse } from "@/server/mappers";
 import { createRequest } from "@/server/utils";
 import { httpStatuses } from "@/shared/data";
 import {
-  GetApplicationsApiResponseData,
-  GetApplicationsResponseData,
+  type GetApplicationsApiResponseData,
+  type GetApplicationsResponseData,
 } from "@/shared/types";
 
 const getApplications = createRequest(async (request, serverFetch) => {

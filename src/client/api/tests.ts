@@ -8,7 +8,7 @@ import {
 import { type AppDispatch } from "@/client/redux/store";
 import { mapDatetimeToText } from "@/client/utils";
 import { customAxios } from "@/shared/config/api.config";
-import { instanceofHttpError } from "@/shared/utils/api";
+import { instanceofHttpError } from "@/shared/utils";
 
 interface ResponseTestShortData {
   test_id: string;

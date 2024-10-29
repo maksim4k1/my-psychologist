@@ -1,7 +1,7 @@
 import { type StatusState } from "@/client/utils";
 import {
-  GetApplicationResponseData,
-  GetApplicationsResponseData,
+  type GetApplicationResponseData,
+  type GetApplicationsResponseData,
 } from "@/shared/types";
 
 export interface ApplicationsState {

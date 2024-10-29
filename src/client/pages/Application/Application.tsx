@@ -65,15 +65,19 @@ export const ApplicationPage: FC = () => {
     }
   }, [confirmApplicationState.isSuccess, dispatch, router]);
 
-  const onClickHandler = (status: boolean) => {
+  const onClickHandler = (confirm: boolean) => {
     if (application) {
       dispatch(
-        ApplicationsService.confirmApplication(application.userId, status),
+        ApplicationsService.confirmApplication({
+          userId: application.userId,
+          confirm,
+        }),
       );
     }
   };
 
   useSetDefaultState(applicationsActions.getApplicationSetDefaultState);
+  useSetDefaultState(applicationsActions.confirmApplicationSetDefaultState);
   useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
 
   return (

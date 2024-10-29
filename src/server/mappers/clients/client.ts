@@ -1,8 +1,8 @@
-import { calculateAge } from "@/client/utils";
 import {
-  GetClientApiResponseData,
-  GetClientResponseData,
+  type GetClientApiResponseData,
+  type GetClientResponseData,
 } from "@/shared/types";
+import { calculateAge } from "@/shared/utils";
 
 export const mapGetClientResponse = (
   data: GetClientApiResponseData,

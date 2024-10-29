@@ -3,7 +3,7 @@ import ProfileImage from "../../Images/ProfileImage";
 import Symptom from "../../Symptom";
 import styles from "../styles.module.scss";
 import { pages } from "@/shared/data";
-import { GetClientsResponseData } from "@/shared/types";
+import { type GetClientsResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {

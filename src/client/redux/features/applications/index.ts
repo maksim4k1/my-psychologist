@@ -7,8 +7,8 @@ import {
 } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
 import {
-  GetApplicationResponseData,
-  GetApplicationsResponseData,
+  type GetApplicationResponseData,
+  type GetApplicationsResponseData,
 } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 

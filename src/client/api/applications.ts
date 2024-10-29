@@ -3,11 +3,12 @@ import { type AppDispatch } from "@/client/redux/store";
 import { type AccessRole } from "@/shared/config/access.config";
 import { customAxios, localAxios } from "@/shared/config/api.config";
 import {
-  GetApplicationResponseData,
-  GetApplicationsResponseData,
+  type ConfirmApplicationRequestData,
+  type GetApplicationResponseData,
+  type GetApplicationsResponseData,
   ResponseError,
 } from "@/shared/types";
-import { getRoleId, instanceofHttpError } from "@/shared/utils/api";
+import { getRoleId, instanceofHttpError } from "@/shared/utils";
 
 export class ApplicationsService {
   static getApplications = () => async (dispatch: AppDispatch) => {
@@ -43,22 +44,18 @@ export class ApplicationsService {
     };
 
   static confirmApplication =
-    (userId: string, status: boolean) => async (dispatch: AppDispatch) => {
+    (data: ConfirmApplicationRequestData) => async (dispatch: AppDispatch) => {
       dispatch(applicationsActions.confirmApplicationLoading());
 
       try {
-        const response = await customAxios.post(
-          "/psychologist/confirm_application",
-          {
-            user_id: userId,
-            status,
-          },
-        );
+        await localAxios.post("/applications/confirm", data);
 
-        dispatch(applicationsActions.confirmApplicationSuccess(response.data));
+        dispatch(applicationsActions.confirmApplicationSuccess());
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(applicationsActions.confirmApplicationFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(
+            applicationsActions.confirmApplicationFailure(err.serialize()),
+          );
         }
       }
     };
