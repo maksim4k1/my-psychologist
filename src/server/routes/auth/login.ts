@@ -1,37 +1,37 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { mapLoginRequest, mapLoginResponse } from "@/server/mappers/auth";
-import { setAuthCookies } from "@/server/utils";
-import { customAxios } from "@/shared/config/api.config";
+import { createRequest, setAuthCookies } from "@/server/utils";
+import { httpStatuses } from "@/shared/data";
 import {
+  type LoginApiRequestData,
   type LoginApiResponseData,
   type LoginRequestData,
+  type LoginResponseData,
 } from "@/shared/types";
 
-const login = async (request: NextRequest) => {
-  try {
+const login = createRequest<LoginApiResponseData, LoginApiRequestData>(
+  "post",
+  async (request, serverFetch) => {
     const body: LoginRequestData = await request.json();
 
-    const serverResponse = await customAxios.post<LoginApiResponseData>(
+    const serverResponse = await serverFetch(
       "/users/auth",
       mapLoginRequest(body),
     );
 
     const data = serverResponse.data;
 
+    const responseData = mapLoginResponse(data);
+
     const response = setAuthCookies(
-      NextResponse.json(data, { status: 200 }),
-      mapLoginResponse(data),
+      NextResponse.json<LoginResponseData>(responseData, httpStatuses.ok),
+      responseData,
       data.token,
     );
 
     return response;
-  } catch {
-    return NextResponse.json(
-      { message: "Что-то пошло не так" },
-      { status: 500 },
-    );
-  }
-};
+  },
+);
 
 export const LoginRoutes = {
   POST: login,
