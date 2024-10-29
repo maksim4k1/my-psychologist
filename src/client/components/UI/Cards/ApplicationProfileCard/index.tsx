@@ -1,11 +1,11 @@
 import ProfileImage from "../../Images/ProfileImage";
 import styles from "./styles.module.scss";
-import { type ApplicationProfileData } from "@/client/redux/features/applications/types";
 import { mapAgeToText } from "@/client/utils";
+import { GetApplicationResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {
-  profile: ApplicationProfileData;
+  profile: GetApplicationResponseData;
 }
 
 const ApplicationProfileCard: FunctionComponent<Props> = ({ profile }) => {
