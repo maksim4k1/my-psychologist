@@ -5,7 +5,7 @@ export const instanceofHttpError = (object: any): object is HttpError => {
   return "status" in object && "message" in object;
 };
 
-export function getRole(roleId: number = 0): AccessRole {
+export const getRole = (roleId: number = 0): AccessRole => {
   if (roleId === 1) {
     return ACCESS.client;
   } else if (roleId === 2) {
@@ -15,9 +15,9 @@ export function getRole(roleId: number = 0): AccessRole {
   }
 
   return ACCESS.unauthorized;
-}
+};
 
-export function getRoleId(role: AccessRole): 0 | 1 | 2 | 3 {
+export const getRoleId = (role: AccessRole): 0 | 1 | 2 | 3 => {
   if (role === ACCESS.client) {
     return 1;
   } else if (role === ACCESS.psychologist) {
@@ -27,4 +27,4 @@ export function getRoleId(role: AccessRole): 0 | 1 | 2 | 3 {
   }
 
   return 0;
-}
+};

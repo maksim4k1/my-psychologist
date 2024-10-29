@@ -1,4 +1,5 @@
-import axios from "axios";
+import { ResponseError } from "../types";
+import axios, { type AxiosError } from "axios";
 
 export interface HttpError {
   status: number;
@@ -18,11 +19,26 @@ export const customAxios = axios.create({
   withCredentials: true,
 });
 
-const onFulfilledInterceptor = (response: any) => {
-  return response;
+export const serverAxios = axios.create({
+  baseURL: SEVER_API_URL,
+  withCredentials: true,
+});
+
+const localOnRejectedInterceptor = (
+  error: AxiosError<ResponseError>,
+): Promise<ResponseError> => {
+  const response = error.response;
+
+  if (response) {
+    const { status, message } = response.data;
+
+    return Promise.reject(new ResponseError(status, message));
+  }
+
+  return Promise.reject(error);
 };
 
-const onRejectedInterceptor = (error: any): Promise<HttpError> => {
+const onRejectedInterceptor = (error: any) => {
   const httpError: HttpError = {
     status: 500,
     message: "",
@@ -49,12 +65,5 @@ const onRejectedInterceptor = (error: any): Promise<HttpError> => {
   return Promise.reject(httpError);
 };
 
-customAxios.interceptors.response.use(
-  onFulfilledInterceptor,
-  onRejectedInterceptor,
-);
-
-localAxios.interceptors.response.use(
-  onFulfilledInterceptor,
-  onRejectedInterceptor,
-);
+localAxios.interceptors.response.use(undefined, localOnRejectedInterceptor);
+customAxios.interceptors.response.use(undefined, onRejectedInterceptor);

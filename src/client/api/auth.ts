@@ -6,6 +6,7 @@ import {
   type LoginResponseData,
   type RegistrationRequestData,
   type RegistrationResponseData,
+  ResponseError,
   type SendHrSurveyRequestData,
 } from "@/shared/types";
 import { instanceofHttpError } from "@/shared/utils/api";
@@ -40,8 +41,8 @@ export class AuthService {
 
         dispatch(authActions.registrationSuccess(data));
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(authActions.registrationFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(authActions.registrationFailure(err.serialize()));
         }
       }
     };
@@ -64,9 +65,9 @@ export class AuthService {
       dispatch(authActions.sendHrSurveyLoading());
 
       try {
-        const { data } = await localAxios.post("/hr/survey", formData);
+        await localAxios.post("/hr/survey", formData);
 
-        dispatch(authActions.sendHrSurveySuccess(data));
+        dispatch(authActions.sendHrSurveySuccess());
       } catch (err) {
         if (instanceofHttpError(err)) {
           dispatch(authActions.sendHrSurveyFailure(err));

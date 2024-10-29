@@ -1,40 +1,43 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import {
   mapRegistrationRequest,
   mapRegistrationResponse,
 } from "@/server/mappers/auth";
-import { setAuthCookies } from "@/server/utils";
-import { customAxios } from "@/shared/config/api.config";
+import { createRequest, setAuthCookies } from "@/server/utils";
+import { httpStatuses } from "@/shared/data";
 import {
+  type RegistrationApiRequestData,
   type RegistrationApiResponseData,
   type RegistrationRequestData,
+  type RegistrationResponseData,
 } from "@/shared/types";
 
-const registration = async (request: NextRequest) => {
-  try {
-    const body: RegistrationRequestData = await request.json();
+const registration = createRequest<
+  RegistrationApiResponseData,
+  RegistrationApiRequestData
+>("post", async (request, serverFetch) => {
+  const body: RegistrationRequestData = await request.json();
 
-    const serverResponse = await customAxios.post<RegistrationApiResponseData>(
-      "/users/reg",
-      mapRegistrationRequest(body),
-    );
+  const serverResponse = await serverFetch(
+    "/users/reg",
+    mapRegistrationRequest(body),
+  );
 
-    const data = serverResponse.data;
+  const data = serverResponse.data;
 
-    const response = setAuthCookies(
-      NextResponse.json(data, { status: 200 }),
-      mapRegistrationResponse(data),
-      data.token,
-    );
+  const responseData = mapRegistrationResponse(data);
 
-    return response;
-  } catch {
-    return NextResponse.json(
-      { message: "Что-то пошло не так" },
-      { status: 500 },
-    );
-  }
-};
+  const response = setAuthCookies(
+    NextResponse.json<RegistrationResponseData>(
+      responseData,
+      httpStatuses.created,
+    ),
+    responseData,
+    data.token,
+  );
+
+  return response;
+});
 
 export const RegistrationRoutes = {
   POST: registration,

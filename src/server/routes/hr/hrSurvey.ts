@@ -1,30 +1,26 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { mapSendHrSurveyRequest } from "@/server/mappers";
-import { customAxios } from "@/shared/config/api.config";
-import { type SendHrSurveyRequestData } from "@/shared/types";
+import { createRequest } from "@/server/utils";
+import { httpStatuses } from "@/shared/data";
+import {
+  ResponseSuccessInfo,
+  type SendHrSurveyApiRequestData,
+  type SendHrSurveyRequestData,
+} from "@/shared/types";
 
-const sendHrSurvey = async (request: NextRequest) => {
-  try {
+const sendHrSurvey = createRequest<any, SendHrSurveyApiRequestData>(
+  "post",
+  async (request, serverFetch) => {
     const body: SendHrSurveyRequestData = await request.json();
 
-    await customAxios.post(
-      "/manager/send_manager",
-      mapSendHrSurveyRequest(body),
-      {
-        headers: {
-          "Cookie": request.cookies.toString(),
-        },
-      },
-    );
+    await serverFetch("/manager/send_manager", mapSendHrSurveyRequest(body));
 
-    return NextResponse.json({ message: "Заявка создана" }, { status: 201 });
-  } catch {
     return NextResponse.json(
-      { message: "Что-то пошло не так" },
-      { status: 500 },
+      new ResponseSuccessInfo("Заявка создана"),
+      httpStatuses.created,
     );
-  }
-};
+  },
+);
 
 export const hrSurveyRoutes = {
   POST: sendHrSurvey,
