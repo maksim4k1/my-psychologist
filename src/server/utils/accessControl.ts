@@ -1,17 +1,21 @@
+import { type AxiosResponse } from "axios";
 import { type NextRequest, NextResponse } from "next/server";
 import { mapLoginResponse } from "@/server/mappers/auth";
 import { deleteAuthCookies, setAuthCookies } from "@/server/utils";
 import { ACCESS } from "@/shared/config/access.config";
-import { customAxios } from "@/shared/config/api.config";
-import { cookies, pages, routes } from "@/shared/data";
+import { serverAxios } from "@/shared/config/api.config";
+import { cookies, errorPages, pages, routes } from "@/shared/data";
 import {
   type LoginApiResponseData,
   type LoginResponseData,
 } from "@/shared/types";
 
 const checkPath = (pathname: string, template: string): boolean => {
-  const pathElements = pathname.split("/");
-  const templateElements = template.split("/");
+  const pathDivider = "/";
+  const paramIdentifier = ":";
+
+  const pathElements = pathname.split(pathDivider);
+  const templateElements = template.split(pathDivider);
 
   if (pathElements.length !== templateElements.length) return false;
 
@@ -22,7 +26,7 @@ const checkPath = (pathname: string, template: string): boolean => {
     const pathEl = pathElements[i];
     const templateEl = templateElements[i];
 
-    if (templateEl[0] === ":") {
+    if (templateEl[0] === paramIdentifier) {
       if (!pathElRegExp.test(pathEl)) return false;
     } else if (pathEl !== templateEl) return false;
   }
@@ -35,6 +39,10 @@ interface LoginByTokenResponse {
   accessToken: string;
 }
 
+interface LoginByTokenApiRequestData {
+  token: string;
+}
+
 const loginByToken = async (
   request: NextRequest,
 ): Promise<LoginByTokenResponse | null> => {
@@ -42,12 +50,15 @@ const loginByToken = async (
     const accessToken = request.cookies.get(cookies.accessToken.name)?.value;
 
     if (accessToken) {
-      const response = await customAxios.post<LoginApiResponseData>(
-        "/users/auth_token",
-        { token: accessToken },
-      );
+      const body: LoginByTokenApiRequestData = { token: accessToken };
 
-      const data = response.data;
+      const response = await serverAxios.post<
+        LoginApiResponseData,
+        AxiosResponse<LoginApiResponseData>,
+        LoginByTokenApiRequestData
+      >("/users/auth_token", body);
+
+      const { data } = response;
 
       return {
         userData: mapLoginResponse(data),
@@ -67,7 +78,7 @@ export const checkAuth = async (
   const { pathname } = request.nextUrl;
 
   let response: NextResponse = NextResponse.rewrite(
-    new URL("/error/not-found", request.url),
+    new URL(errorPages.notFound.path, request.url),
   );
 
   for (const route of routes) {
@@ -86,7 +97,7 @@ export const checkAuth = async (
           );
         } else {
           response = NextResponse.rewrite(
-            new URL("/error/access-denied", request.url),
+            new URL(errorPages.accessDenied.path, request.url),
           );
         }
       }

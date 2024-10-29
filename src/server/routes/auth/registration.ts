@@ -12,16 +12,13 @@ import {
   type RegistrationResponseData,
 } from "@/shared/types";
 
-const registration = createRequest<
-  RegistrationApiResponseData,
-  RegistrationApiRequestData
->("post", async (request, serverFetch) => {
+const registration = createRequest(async (request, serverFetch) => {
   const body: RegistrationRequestData = await request.json();
 
-  const serverResponse = await serverFetch(
-    "/users/reg",
-    mapRegistrationRequest(body),
-  );
+  const serverResponse = await serverFetch.post<
+    RegistrationApiResponseData,
+    RegistrationApiRequestData
+  >("/users/reg", mapRegistrationRequest(body));
 
   const data = serverResponse.data;
 
