@@ -5,7 +5,7 @@ import {
 } from "@/client/redux/features/articles/types";
 import { type AppDispatch } from "@/client/redux/store";
 import { customAxios } from "@/shared/config/api.config";
-import { instanceofHttpError } from "@/shared/utils/api";
+import { instanceofHttpError } from "@/shared/utils";
 
 interface ResponseArticle {
   id: string;

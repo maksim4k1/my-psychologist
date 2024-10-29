@@ -1,6 +1,6 @@
 import {
-  GetClientsApiResponseData,
-  GetClientsResponseData,
+  type GetClientsApiResponseData,
+  type GetClientsResponseData,
 } from "@/shared/types";
 
 export const mapGetClientsResponse = (

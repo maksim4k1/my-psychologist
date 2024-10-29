@@ -4,7 +4,7 @@ import {
   type LoginRequestData,
   type LoginResponseData,
 } from "@/shared/types";
-import { getRole } from "@/shared/utils/api";
+import { getRole } from "@/shared/utils";
 
 export const mapLoginRequest = (
   data: LoginRequestData,

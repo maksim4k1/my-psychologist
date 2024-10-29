@@ -2,7 +2,7 @@ import { psychologistsActions } from "@/client/redux/features/psychologists";
 import { type PsychologistData } from "@/client/redux/features/psychologists/types";
 import { type AppDispatch } from "@/client/redux/store";
 import { customAxios } from "@/shared/config/api.config";
-import { instanceofHttpError } from "@/shared/utils/api";
+import { instanceofHttpError } from "@/shared/utils";
 
 interface PsychologistDataResponse {
   id: string;

@@ -3,8 +3,8 @@ import { mapGetClientResponse } from "@/server/mappers";
 import { createRequest } from "@/server/utils";
 import { httpStatuses } from "@/shared/data";
 import {
-  GetClientApiResponseData,
-  GetClientResponseData,
+  type GetClientApiResponseData,
+  type GetClientResponseData,
 } from "@/shared/types";
 
 const getClient = createRequest<{ id: string }>(

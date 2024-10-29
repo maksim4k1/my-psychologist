@@ -6,7 +6,10 @@ import {
   createSuccessState,
 } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
-import { GetClientResponseData, GetClientsResponseData } from "@/shared/types";
+import {
+  type GetClientResponseData,
+  type GetClientsResponseData,
+} from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ClientsState = {

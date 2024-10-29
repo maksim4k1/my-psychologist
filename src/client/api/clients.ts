@@ -2,8 +2,8 @@ import { clientsActions } from "@/client/redux/features/clients";
 import { type AppDispatch } from "@/client/redux/store";
 import { localAxios } from "@/shared/config/api.config";
 import {
-  GetClientResponseData,
-  GetClientsResponseData,
+  type GetClientResponseData,
+  type GetClientsResponseData,
   ResponseError,
 } from "@/shared/types";
 

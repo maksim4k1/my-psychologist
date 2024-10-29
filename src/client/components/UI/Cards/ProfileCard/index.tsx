@@ -1,8 +1,8 @@
 import ProfileImage from "../../Images/ProfileImage";
 import Symptom from "../../Symptom";
 import styles from "./styles.module.scss";
-import { mapAgeToText } from "@/client/utils";
-import { GetClientResponseData } from "@/shared/types";
+import { type GetClientResponseData } from "@/shared/types";
+import { mapAgeToText } from "@/shared/utils";
 import { type FunctionComponent } from "react";
 
 interface Props {

@@ -1,5 +1,8 @@
 import { type StatusState } from "@/client/utils";
-import { GetClientResponseData, GetClientsResponseData } from "@/shared/types";
+import {
+  type GetClientResponseData,
+  type GetClientsResponseData,
+} from "@/shared/types";
 
 export interface ClientsState {
   clients: GetClientsResponseData;

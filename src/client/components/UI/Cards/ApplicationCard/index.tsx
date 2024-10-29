@@ -4,7 +4,7 @@ import PrimaryButton from "../../Buttons/PrimaryButton";
 import ProfileImage from "../../Images/ProfileImage";
 import styles from "../styles.module.scss";
 import { pages } from "@/shared/data";
-import { GetApplicationsResponseData } from "@/shared/types";
+import { type GetApplicationsResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {

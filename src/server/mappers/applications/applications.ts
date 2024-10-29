@@ -1,6 +1,6 @@
 import {
-  GetApplicationsApiResponseData,
-  GetApplicationsResponseData,
+  type GetApplicationsApiResponseData,
+  type GetApplicationsResponseData,
 } from "@/shared/types";
 
 export const mapGetApplicationsResponse = (

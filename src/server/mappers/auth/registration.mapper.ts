@@ -4,7 +4,7 @@ import {
   type RegistrationRequestData,
   type RegistrationResponseData,
 } from "@/shared/types";
-import { getRole } from "@/shared/utils/api";
+import { getRole } from "@/shared/utils";
 
 export const mapRegistrationRequest = (
   data: RegistrationRequestData,
