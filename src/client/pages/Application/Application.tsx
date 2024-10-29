@@ -19,7 +19,6 @@ import {
   selectApplicationState,
   selectConfirmApplicationState,
 } from "@/client/redux/features/applications/selectors";
-import { type ApplicationProfileData } from "@/client/redux/features/applications/types";
 import { selectRole } from "@/client/redux/features/auth/selectors";
 import { testsActions } from "@/client/redux/features/tests";
 import {
@@ -43,8 +42,7 @@ export const ApplicationPage: FC = () => {
   const getApplicationState: StatusState = useAppSelector(
     selectApplicationState,
   );
-  const application: ApplicationProfileData | null =
-    useAppSelector(selectApplication);
+  const application = useAppSelector(selectApplication);
   const tests = useAppSelector(selectTestsByUserId);
   const testsState = useAppSelector(selectGetTestsByUserIdState);
 

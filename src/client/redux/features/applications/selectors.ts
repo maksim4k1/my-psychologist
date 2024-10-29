@@ -1,7 +1,10 @@
-import { type ApplicationProfileData, type ApplicationsState } from "./types";
+import { type ApplicationsState } from "./types";
 import { type RootState } from "@/client/redux/store";
 import { type StatusState } from "@/client/utils";
-import { GetApplicationsResponseData } from "@/shared/types";
+import {
+  GetApplicationResponseData,
+  GetApplicationsResponseData,
+} from "@/shared/types";
 
 const selectApplicationsModule = (state: RootState): ApplicationsState => {
   return state.applicationsReducer;
@@ -29,7 +32,7 @@ export const selectApplications = (
 
 export const selectApplication = (
   state: RootState,
-): ApplicationProfileData | null => {
+): GetApplicationResponseData | null => {
   return selectApplicationsModule(state).application;
 };
 

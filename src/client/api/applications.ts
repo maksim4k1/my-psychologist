@@ -1,10 +1,12 @@
 import { applicationsActions } from "@/client/redux/features/applications";
-import { type ApplicationProfileData } from "@/client/redux/features/applications/types";
 import { type AppDispatch } from "@/client/redux/store";
-import { calculateAge } from "@/client/utils";
 import { type AccessRole } from "@/shared/config/access.config";
 import { customAxios, localAxios } from "@/shared/config/api.config";
-import { GetApplicationsResponseData, ResponseError } from "@/shared/types";
+import {
+  GetApplicationResponseData,
+  GetApplicationsResponseData,
+  ResponseError,
+} from "@/shared/types";
 import { getRoleId, instanceofHttpError } from "@/shared/utils/api";
 
 export class ApplicationsService {
@@ -28,26 +30,14 @@ export class ApplicationsService {
       dispatch(applicationsActions.getApplicationLoading());
 
       try {
-        const response = await customAxios.get(
-          `/application/watch_application/${applicationId}`,
+        const { data } = await localAxios.get<GetApplicationResponseData>(
+          `/applications/${applicationId}`,
         );
 
-        const data = response.data;
-
-        const formattedData: ApplicationProfileData = {
-          id: data.app_id,
-          userId: data.client_id,
-          profileImage: "",
-          age: calculateAge(data.birth_date),
-          username: data.username,
-          isOnline: data.online,
-          problem: data.text,
-        };
-
-        dispatch(applicationsActions.getApplicationSuccess(formattedData));
+        dispatch(applicationsActions.getApplicationSuccess(data));
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(applicationsActions.getApplicationFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(applicationsActions.getApplicationFailure(err.serialize()));
         }
       }
     };
