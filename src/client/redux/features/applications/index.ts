@@ -1,8 +1,4 @@
-import {
-  type ApplicationData,
-  type ApplicationProfileData,
-  type ApplicationsState,
-} from "./types";
+import { type ApplicationProfileData, type ApplicationsState } from "./types";
 import {
   createDefaultState,
   createFailureState,
@@ -10,6 +6,7 @@ import {
   createSuccessState,
 } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
+import { GetApplicationsResponseData } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ApplicationsState = {
@@ -31,7 +28,7 @@ const applicationsSlice = createSlice({
     },
     getApplicationsSuccess: (
       state,
-      { payload }: PayloadAction<ApplicationData[]>,
+      { payload }: PayloadAction<GetApplicationsResponseData>,
     ) => {
       state.getApplicationsState = createSuccessState();
       state.applications = payload;

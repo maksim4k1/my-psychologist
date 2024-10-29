@@ -1,50 +1,24 @@
 import { applicationsActions } from "@/client/redux/features/applications";
-import {
-  type ApplicationData,
-  type ApplicationProfileData,
-} from "@/client/redux/features/applications/types";
+import { type ApplicationProfileData } from "@/client/redux/features/applications/types";
 import { type AppDispatch } from "@/client/redux/store";
 import { calculateAge } from "@/client/utils";
 import { type AccessRole } from "@/shared/config/access.config";
-import { customAxios } from "@/shared/config/api.config";
+import { customAxios, localAxios } from "@/shared/config/api.config";
+import { GetApplicationsResponseData, ResponseError } from "@/shared/types";
 import { getRoleId, instanceofHttpError } from "@/shared/utils/api";
-
-interface ApplicationResponse {
-  app_id: string;
-  client_id: string;
-  online: boolean;
-  problem: null | string;
-  problem_id: null | string;
-  text: string;
-  username: string;
-}
 
 export class ApplicationsService {
   static getApplications = () => async (dispatch: AppDispatch) => {
     dispatch(applicationsActions.getApplicationsLoading());
 
     try {
-      const response = await customAxios.get(
-        "/application/get_list_applications",
-      );
+      const { data } =
+        await localAxios.get<GetApplicationsResponseData>("/applications");
 
-      const data = response.data;
-
-      const formattedData: ApplicationData[] = data.map(
-        (el: ApplicationResponse) => ({
-          id: el.app_id,
-          userId: el.client_id,
-          profileImage: "",
-          username: el.username,
-          isOnline: el.online,
-          problem: el.text,
-        }),
-      );
-
-      dispatch(applicationsActions.getApplicationsSuccess(formattedData));
+      dispatch(applicationsActions.getApplicationsSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(applicationsActions.getApplicationsFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(applicationsActions.getApplicationsFailure(err.serialize()));
       }
     }
   };

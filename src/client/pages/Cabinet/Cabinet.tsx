@@ -14,7 +14,6 @@ import {
   selectApplications,
   selectApplicationsState,
 } from "@/client/redux/features/applications/selectors";
-import { type ApplicationData } from "@/client/redux/features/applications/types";
 import { selectRole } from "@/client/redux/features/auth/selectors";
 import { clientsActions } from "@/client/redux/features/clients";
 import {
@@ -27,7 +26,7 @@ import { type FC, useEffect } from "react";
 
 export const CabinetPage: FC = () => {
   const dispatch = useAppDispatch();
-  const applications: ApplicationData[] = useAppSelector(selectApplications);
+  const applications = useAppSelector(selectApplications);
   const applicationsState: StatusState = useAppSelector(
     selectApplicationsState,
   );
@@ -66,7 +65,7 @@ export const CabinetPage: FC = () => {
                 return (
                   <ApplicationCard
                     key={application.userId}
-                    client={application}
+                    application={application}
                   />
                 );
               })}

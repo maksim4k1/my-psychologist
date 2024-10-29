@@ -3,31 +3,31 @@
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import ProfileImage from "../../Images/ProfileImage";
 import styles from "../styles.module.scss";
-import { type ApplicationData } from "@/client/redux/features/applications/types";
 import { pages } from "@/shared/data";
+import { GetApplicationsResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {
-  client: ApplicationData;
+  application: GetApplicationsResponseData[number];
 }
 
-const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
+const ApplicationCard: FunctionComponent<Props> = ({ application }) => {
   return (
     <div className={styles.clientCard}>
       <div className={styles.cardHeader}>
         <ProfileImage
-          src={client.profileImage}
+          src={application.profileImage}
           alt="profile"
           size={40}
         />
         <div className={styles.clientInfo}>
-          <div className={styles.username}>{client.username}</div>
+          <div className={styles.username}>{application.username}</div>
           <div
             className={`${styles.status} ${
-              client.isOnline ? styles.isOnline : ""
+              application.isOnline ? styles.isOnline : ""
             }`}
           >
-            {client.isOnline ? "Онлайн" : "Был(а) недавно"}
+            {application.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
         {/* <button
@@ -57,10 +57,10 @@ const ApplicationCard: FunctionComponent<Props> = ({ client }) => {
           </div>
         )} */}
       </div>
-      <div className={styles.problem}>{client.problem}</div>
+      <div className={styles.problem}>{application.problem}</div>
       <div className={styles.buttons}>
         <PrimaryButton
-          href={pages.application.getLink({ params: { id: client.id } })}
+          href={pages.application.getLink({ params: { id: application.id } })}
         >
           Профиль
         </PrimaryButton>
