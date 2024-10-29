@@ -1,4 +1,4 @@
-import { type ClientProfileData, type ClientsState } from "./types";
+import { type ClientsState } from "./types";
 import {
   createDefaultState,
   createFailureState,
@@ -6,7 +6,7 @@ import {
   createSuccessState,
 } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
-import { GetClientsResponseData } from "@/shared/types";
+import { GetClientResponseData, GetClientsResponseData } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ClientsState = {
@@ -45,7 +45,7 @@ const clientsSlice = createSlice({
     },
     getClientSuccess: (
       state,
-      { payload }: PayloadAction<ClientProfileData>,
+      { payload }: PayloadAction<GetClientResponseData>,
     ) => {
       state.getClientState = createSuccessState();
       state.client = payload;
