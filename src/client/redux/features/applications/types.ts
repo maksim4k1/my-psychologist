@@ -1,21 +1,18 @@
 import { type StatusState } from "@/client/utils";
+import { GetApplicationsResponseData } from "@/shared/types";
 
-export interface ApplicationData {
+export interface ApplicationProfileData {
   id: string;
   userId: string;
   profileImage: string;
   username: string;
   isOnline: boolean;
   problem: string;
-}
-
-export interface ApplicationProfileData extends ApplicationData {
   age: number;
-  problems?: never;
 }
 
 export interface ApplicationsState {
-  applications: ApplicationData[];
+  applications: GetApplicationsResponseData;
   application: ApplicationProfileData | null;
   getApplicationsState: StatusState;
   getApplicationState: StatusState;

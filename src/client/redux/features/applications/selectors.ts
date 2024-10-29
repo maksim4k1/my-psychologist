@@ -1,10 +1,7 @@
-import {
-  type ApplicationData,
-  type ApplicationProfileData,
-  type ApplicationsState,
-} from "./types";
+import { type ApplicationProfileData, type ApplicationsState } from "./types";
 import { type RootState } from "@/client/redux/store";
 import { type StatusState } from "@/client/utils";
+import { GetApplicationsResponseData } from "@/shared/types";
 
 const selectApplicationsModule = (state: RootState): ApplicationsState => {
   return state.applicationsReducer;
@@ -24,7 +21,9 @@ export const selectConfirmApplicationState = (
   return selectApplicationsModule(state).confirmApplicationState;
 };
 
-export const selectApplications = (state: RootState): ApplicationData[] => {
+export const selectApplications = (
+  state: RootState,
+): GetApplicationsResponseData => {
   return selectApplicationsModule(state).applications;
 };
 
