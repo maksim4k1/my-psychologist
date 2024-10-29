@@ -1,14 +1,13 @@
 import { applicationsActions } from "@/client/redux/features/applications";
 import { type AppDispatch } from "@/client/redux/store";
-import { type AccessRole } from "@/shared/config/access.config";
-import { customAxios, localAxios } from "@/shared/config/api.config";
+import { localAxios } from "@/shared/config/api.config";
 import {
   type ConfirmApplicationRequestData,
   type GetApplicationResponseData,
   type GetApplicationsResponseData,
   ResponseError,
+  type SendApplicationRequestData,
 } from "@/shared/types";
-import { getRoleId, instanceofHttpError } from "@/shared/utils";
 
 export class ApplicationsService {
   static getApplications = () => async (dispatch: AppDispatch) => {
@@ -61,40 +60,16 @@ export class ApplicationsService {
     };
 
   static sendApplication =
-    (
-      psychologistId: string,
-      role: AccessRole,
-      fullName: string,
-      request: string,
-    ) =>
-    async (dispatch: AppDispatch) => {
+    (formData: SendApplicationRequestData) => async (dispatch: AppDispatch) => {
       dispatch(applicationsActions.sendApplicationLoading());
 
       try {
-        const sendApplicationResponse = customAxios.post(
-          "/client/send_application",
-          {
-            user_id: psychologistId,
-            text: request,
-          },
-        );
-
-        const editFullNameResponse = customAxios.post("/users/update_user", {
-          birth_date: "2000-01-01",
-          gender: "1",
-          username: fullName,
-          request: [1],
-          city: "",
-          description: "",
-          type: getRoleId(role),
-        });
-
-        await Promise.all([sendApplicationResponse, editFullNameResponse]);
+        await localAxios.post("/applications/send", formData);
 
         dispatch(applicationsActions.sendApplicationSuccess());
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(applicationsActions.sendApplicationFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(applicationsActions.sendApplicationFailure(err.serialize()));
         }
       }
     };

@@ -43,7 +43,7 @@ interface LoginByTokenApiRequestData {
   token: string;
 }
 
-const loginByToken = async (
+export const loginByToken = async (
   request: NextRequest,
 ): Promise<LoginByTokenResponse | null> => {
   try {
