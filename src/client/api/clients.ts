@@ -1,21 +1,16 @@
-import {
-  type ClientData,
-  type ClientProfileData,
-} from "./../redux/features/clients/types";
+import { type ClientProfileData } from "./../redux/features/clients/types";
 import { clientsActions } from "@/client/redux/features/clients";
 import { type AppDispatch } from "@/client/redux/store";
 import { calculateAge } from "@/client/utils";
-import { customAxios } from "@/shared/config/api.config";
+import { customAxios, localAxios } from "@/shared/config/api.config";
+import { GetClientsResponseData, ResponseError } from "@/shared/types";
 import { instanceofHttpError } from "@/shared/utils/api";
 
-interface ClientResponse {
+interface ClientProfileResponse {
   client_id: string;
   username: string;
   is_active: boolean;
   request: string[];
-}
-
-interface ClientProfileResponse extends ClientResponse {
   gender: string;
   birth_date: string;
 }
@@ -25,23 +20,12 @@ export class ClientsService {
     dispatch(clientsActions.getClientsLoading());
 
     try {
-      const response = await customAxios.get<ClientResponse[]>(
-        "/psychologist/get_list_client",
-      );
+      const { data } = await localAxios.get<GetClientsResponseData>("/clients");
 
-      const data = response.data;
-
-      const formattedData: ClientData[] = data.map((el) => ({
-        userId: el.client_id,
-        profileImage: "",
-        username: el.username,
-        isOnline: el.is_active,
-        problems: el.request,
-      }));
-      dispatch(clientsActions.getClientsSuccess(formattedData));
+      dispatch(clientsActions.getClientsSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(clientsActions.getClientsFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(clientsActions.getClientsFailure(err.serialize()));
       }
     }
   };

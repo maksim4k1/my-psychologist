@@ -2,12 +2,12 @@ import PrimaryButton from "../../Buttons/PrimaryButton";
 import ProfileImage from "../../Images/ProfileImage";
 import Symptom from "../../Symptom";
 import styles from "../styles.module.scss";
-import { type ClientData } from "@/client/redux/features/clients/types";
 import { pages } from "@/shared/data";
+import { GetClientsResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {
-  client: ClientData;
+  client: GetClientsResponseData[number];
 }
 
 const ClientCard: FunctionComponent<Props> = ({ client }) => {

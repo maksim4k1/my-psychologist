@@ -1,16 +1,13 @@
-import {
-  type ClientData,
-  type ClientProfileData,
-  type ClientsState,
-} from "./types";
+import { type ClientProfileData, type ClientsState } from "./types";
 import { type RootState } from "@/client/redux/store";
 import { type StatusState } from "@/client/utils";
+import { GetClientsResponseData } from "@/shared/types";
 
 const selectClientsModule = (state: RootState): ClientsState => {
   return state.clientsReducer;
 };
 
-export const selectClients = (state: RootState): ClientData[] => {
+export const selectClients = (state: RootState): GetClientsResponseData => {
   return selectClientsModule(state).clients;
 };
 
