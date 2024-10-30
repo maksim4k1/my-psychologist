@@ -3,7 +3,7 @@
 import { useAppDispatch } from "../hooks/reduxHooks";
 import { getCookie } from "../utils";
 import { authActions } from "./features/auth";
-import store from "./store";
+import { store } from "./store";
 import { Provider } from "react-redux";
 import { cookies } from "@/shared/data";
 import { type FC, type ReactNode, useEffect } from "react";
@@ -27,12 +27,10 @@ const AuthProvider: FC<Props> = ({ children }) => {
   return children;
 };
 
-const StoreProvider: FC<Props> = ({ children }) => {
+export const StoreProvider: FC<Props> = ({ children }) => {
   return (
     <Provider store={store}>
       <AuthProvider>{children}</AuthProvider>
     </Provider>
   );
 };
-
-export default StoreProvider;

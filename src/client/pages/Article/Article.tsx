@@ -9,13 +9,13 @@ import Container from "@/client/components/UI/Container";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { articlesActions } from "@/client/redux/features/articles";
 import {
+  articlesActions,
   selectArticleContent,
   selectArticles,
   selectGetArticleContentState,
   selectGetArticlesState,
-} from "@/client/redux/features/articles/selectors";
+} from "@/client/redux";
 import { type FC, useEffect } from "react";
 
 export const ArticlePage: FC = () => {

@@ -1,5 +1,4 @@
-import { type AppDispatch } from "./../redux/store";
-import { authActions } from "@/client/redux/features/auth/";
+import { type AppDispatch, authActions } from "@/client/redux";
 import { localAxios } from "@/shared/config/api.config";
 import {
   type LoginRequestData,

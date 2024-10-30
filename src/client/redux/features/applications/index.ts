@@ -98,4 +98,7 @@ const applicationsSlice = createSlice({
 
 export const applicationsActions = applicationsSlice.actions;
 
-export default applicationsSlice.reducer;
+export const applicationsReducer = applicationsSlice.reducer;
+
+export * from "./selectors";
+export * from "./types";

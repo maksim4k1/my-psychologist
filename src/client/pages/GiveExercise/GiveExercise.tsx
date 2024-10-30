@@ -11,13 +11,13 @@ import HttpErrorWrapper from "@/client/components/wrappers/HttpErrorWrapper";
 import LoadingWrapper from "@/client/components/wrappers/LoadingWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { testsActions } from "@/client/redux/features/tests";
 import {
+  PopupsService,
   selectGetTestsState,
   selectGiveTestState,
   selectTests,
-} from "@/client/redux/features/tests/selectors";
-import { PopupsService } from "@/client/redux/services/popups";
+  testsActions,
+} from "@/client/redux";
 import { checkQueryParams } from "@/client/utils";
 import { type FC, useEffect } from "react";
 

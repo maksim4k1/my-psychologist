@@ -11,13 +11,13 @@ import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useCheckbox, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestInfoState,
   selectGetTestResultsState,
   selectTestInfo,
   selectTestResults,
-} from "@/client/redux/features/tests/selectors";
+  testsActions,
+} from "@/client/redux";
 import { pages } from "@/shared/data";
 import { type FC, useEffect } from "react";
 

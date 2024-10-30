@@ -65,4 +65,7 @@ const clientsSlice = createSlice({
 
 export const clientsActions = clientsSlice.actions;
 
-export default clientsSlice.reducer;
+export const clientsReducer = clientsSlice.reducer;
+
+export * from "./selectors";
+export * from "./types";

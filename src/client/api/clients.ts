@@ -1,5 +1,4 @@
-import { clientsActions } from "@/client/redux/features/clients";
-import { type AppDispatch } from "@/client/redux/store";
+import { type AppDispatch, clientsActions } from "@/client/redux";
 import { localAxios } from "@/shared/config/api.config";
 import {
   type GetClientResponseData,

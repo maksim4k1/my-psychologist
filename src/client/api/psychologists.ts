@@ -1,5 +1,4 @@
-import { psychologistsActions } from "@/client/redux/features/psychologists";
-import { type AppDispatch } from "@/client/redux/store";
+import { type AppDispatch, psychologistsActions } from "@/client/redux";
 import { localAxios } from "@/shared/config/api.config";
 import {
   type GetPsychologistsResponseData,

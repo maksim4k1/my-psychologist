@@ -3,7 +3,7 @@
 import SnackbarWithCloseAffordance from "../UI/Popups/Snackbars/SnackbarWithCloseAffordance";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@/client/hooks/reduxHooks";
-import { selectSnackbar } from "@/client/redux/features/popups/selectors";
+import { selectSnackbar } from "@/client/redux";
 import { type FunctionComponent } from "react";
 
 const SnackbarsPortal: FunctionComponent = () => {

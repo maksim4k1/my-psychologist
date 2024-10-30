@@ -182,4 +182,7 @@ const testsSlice = createSlice({
 
 export const testsActions = testsSlice.actions;
 
-export default testsSlice.reducer;
+export const testsReducer = testsSlice.reducer;
+
+export * from "./selectors";
+export * from "./types";

@@ -61,4 +61,7 @@ const articlesSlice = createSlice({
 
 export const articlesActions = articlesSlice.actions;
 
-export default articlesSlice.reducer;
+export const articlesReducer = articlesSlice.reducer;
+
+export * from "./selectors";
+export * from "./types";

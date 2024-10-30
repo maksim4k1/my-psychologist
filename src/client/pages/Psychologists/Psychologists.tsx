@@ -9,14 +9,14 @@ import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { selectSendApplicationState } from "@/client/redux/features/applications/selectors";
-import { psychologistsActions } from "@/client/redux/features/psychologists";
 import {
+  psychologistsActions,
   selectGetMyPsychologistsState,
   selectGetPsychologistsState,
   selectMyPsychologists,
   selectPsychologists,
-} from "@/client/redux/features/psychologists/selectors";
+  selectSendApplicationState,
+} from "@/client/redux";
 import { type FC, useEffect } from "react";
 
 export const PsychologistsPage: FC = () => {

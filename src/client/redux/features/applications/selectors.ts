@@ -1,5 +1,5 @@
 import { type ApplicationsState } from "./types";
-import { type RootState } from "@/client/redux/store";
+import { type RootState } from "@/client/redux";
 import { type StatusState } from "@/client/utils";
 import {
   type GetApplicationResponseData,

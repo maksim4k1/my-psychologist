@@ -10,9 +10,11 @@ import Input from "@/client/components/UI/Inputs/Input";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import { useInput, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { authActions } from "@/client/redux/features/auth";
-import { selectSendHrSurveyState } from "@/client/redux/features/auth/selectors";
-import { PopupsService } from "@/client/redux/services/popups";
+import {
+  PopupsService,
+  authActions,
+  selectSendHrSurveyState,
+} from "@/client/redux";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type SendHrSurveyRequestData } from "@/shared/types";
