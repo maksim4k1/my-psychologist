@@ -1,4 +1,4 @@
-import { type TestResultData, type TestsState } from "./types";
+import { type TestsState } from "./types";
 import {
   createDefaultState,
   createFailureState,
@@ -9,6 +9,8 @@ import { type HttpError } from "@/shared/config/api.config";
 import {
   type GetTestQuestionsResponseData,
   type GetTestResponseData,
+  type GetTestResultResponseData,
+  type GetTestResultsResponseData,
   type GetTestsResponseData,
 } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
@@ -111,7 +113,7 @@ const testsSlice = createSlice({
     },
     getTestResultsSuccess: (
       state,
-      { payload }: PayloadAction<TestResultData[]>,
+      { payload }: PayloadAction<GetTestResultsResponseData>,
     ) => {
       state.getTestResultsState = createSuccessState();
       state.testResults = payload;
@@ -130,7 +132,7 @@ const testsSlice = createSlice({
     },
     getTestResultSuccess: (
       state,
-      { payload }: PayloadAction<TestResultData>,
+      { payload }: PayloadAction<GetTestResultResponseData>,
     ) => {
       state.getTestResultState = createSuccessState();
       state.testResult = payload;

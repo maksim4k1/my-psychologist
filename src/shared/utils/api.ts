@@ -1,9 +1,4 @@
 import { ACCESS, type AccessRole } from "@/shared/config/access.config";
-import { type HttpError } from "@/shared/config/api.config";
-
-export const instanceofHttpError = (object: any): object is HttpError => {
-  return "status" in object && "message" in object;
-};
 
 export const getRole = (roleId: number = 0): AccessRole => {
   if (roleId === 1) {
