@@ -1,8 +1,4 @@
-import {
-  type Article,
-  type ArticleContentItem,
-  type ArticlesState,
-} from "./types";
+import { type ArticlesState } from "./types";
 import {
   createDefaultState,
   createFailureState,
@@ -10,13 +6,17 @@ import {
   createSuccessState,
 } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
+import {
+  type GetArticleResponseData,
+  type GetArticlesResponseData,
+} from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ArticlesState = {
   articles: [],
-  articleContent: [],
+  articleContent: null,
   getArticlesState: createDefaultState(),
-  getArticleContentState: createDefaultState(),
+  getArticleState: createDefaultState(),
 };
 
 const articlesSlice = createSlice({
@@ -26,7 +26,10 @@ const articlesSlice = createSlice({
     getArticlesLoading: (state) => {
       state.getArticlesState = createLoadingState();
     },
-    getArticlesSuccess: (state, { payload }: PayloadAction<Article[]>) => {
+    getArticlesSuccess: (
+      state,
+      { payload }: PayloadAction<GetArticlesResponseData>,
+    ) => {
       state.getArticlesState = createSuccessState();
       state.articles = payload;
     },
@@ -37,24 +40,21 @@ const articlesSlice = createSlice({
       state.getArticlesState = createDefaultState();
     },
 
-    getArticleContentLoading: (state) => {
-      state.getArticleContentState = createLoadingState();
+    getArticleLoading: (state) => {
+      state.getArticleState = createLoadingState();
     },
-    getArticleContentSuccess: (
+    getArticleSuccess: (
       state,
-      { payload }: PayloadAction<ArticleContentItem[]>,
+      { payload }: PayloadAction<GetArticleResponseData>,
     ) => {
-      state.getArticleContentState = createSuccessState();
+      state.getArticleState = createSuccessState();
       state.articleContent = payload;
     },
-    getArticleContentFailure: (
-      state,
-      { payload }: PayloadAction<HttpError>,
-    ) => {
-      state.getArticleContentState = createFailureState(payload);
+    getArticleFailure: (state, { payload }: PayloadAction<HttpError>) => {
+      state.getArticleState = createFailureState(payload);
     },
-    getArticleContentDefaultState: (state) => {
-      state.getArticleContentState = createDefaultState();
+    getArticleDefaultState: (state) => {
+      state.getArticleState = createDefaultState();
     },
   },
 });

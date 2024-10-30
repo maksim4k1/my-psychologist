@@ -22,44 +22,44 @@ export const ArticlePage: FC = () => {
   const { id } = useParams<{ id: string }>();
 
   const getArticlesState = useAppSelector(selectGetArticlesState);
-  const getArticleContentState = useAppSelector(selectGetArticleContentState);
+  const getArticleState = useAppSelector(selectGetArticleContentState);
   const articles = useAppSelector(selectArticles);
-  const articleContent = useAppSelector(selectArticleContent);
+  const article = useAppSelector(selectArticleContent);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(ArticlesService.getArticles());
-    dispatch(ArticlesService.getArticleContent(id));
+    dispatch(ArticlesService.getArticle(id));
   }, [dispatch, id]);
 
   useSetDefaultState(articlesActions.getArticlesDefaultState);
-  useSetDefaultState(articlesActions.getArticleContentDefaultState);
-
-  const currentArticle = articles.find((el) => el.id === id);
+  useSetDefaultState(articlesActions.getArticleDefaultState);
 
   const filteredArticles = articles.filter((el) => el.id !== id);
 
   return (
     <Container>
-      <StateWrapper state={[getArticlesState, getArticleContentState]}>
-        <div className={styles.main}>
-          <div
-            className={styles.image}
-            style={{ backgroundImage: `url("${PatternImage.src}")` }}
-          >
-            <h1 className={styles.title}>{currentArticle?.title}</h1>
+      <StateWrapper state={[getArticlesState, getArticleState]}>
+        {article && (
+          <div className={styles.main}>
+            <div
+              className={styles.image}
+              style={{ backgroundImage: `url("${PatternImage.src}")` }}
+            >
+              <h1 className={styles.title}>{article?.title}</h1>
+            </div>
+            <div className={styles.content}>
+              {article?.content.map((el) => (
+                <div
+                  className={styles.contentItem}
+                  key={el.id}
+                >
+                  {el.content}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className={styles.content}>
-            {articleContent.map((el) => (
-              <div
-                className={styles.contentItem}
-                key={el.id}
-              >
-                {el.text}
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </StateWrapper>
       {!!filteredArticles.length && (
         <div className={styles.recomendations}>
