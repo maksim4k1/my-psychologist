@@ -1,15 +1,15 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import PatternImage from "@/client/assets/webp/pattern.webp";
-import { type Article } from "@/client/redux/features/articles/types";
 import { pages } from "@/shared/data";
-import { type FunctionComponent } from "react";
+import { type GetArticlesResponseData } from "@/shared/types";
+import { type FC } from "react";
 
 interface ArticlesProps {
-  articles: Article;
+  articles: GetArticlesResponseData[number];
 }
 
-const ArticleCard: FunctionComponent<ArticlesProps> = ({ articles }) => {
+const ArticleCard: FC<ArticlesProps> = ({ articles }) => {
   return (
     <Link href={pages.article.getLink({ params: { id: articles.id } })}>
       <div className={styles.articlesCard}>

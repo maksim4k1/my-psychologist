@@ -1,57 +1,40 @@
 import { articlesActions } from "@/client/redux/features/articles";
-import {
-  type Article,
-  type ArticleContentItem,
-} from "@/client/redux/features/articles/types";
 import { type AppDispatch } from "@/client/redux/store";
-import { customAxios } from "@/shared/config/api.config";
-import { instanceofHttpError } from "@/shared/utils";
-
-interface ResponseArticle {
-  id: string;
-  article: string;
-  score: number;
-  max_score: number;
-}
+import { localAxios } from "@/shared/config/api.config";
+import {
+  type GetArticleResponseData,
+  type GetArticlesResponseData,
+  ResponseError,
+} from "@/shared/types";
 
 export class ArticlesService {
   static getArticles = () => async (dispatch: AppDispatch) => {
     dispatch(articlesActions.getArticlesLoading());
 
     try {
-      const response = await customAxios.get(`/education/get_all_theme`);
+      const { data } =
+        await localAxios.get<GetArticlesResponseData>(`/articles`);
 
-      const data = response.data;
-
-      const formattedData: Article[] = data.map((el: ResponseArticle) => ({
-        id: el.id,
-        title: el.article,
-        progress: el.score,
-        fullProgress: el.max_score,
-      }));
-
-      dispatch(articlesActions.getArticlesSuccess(formattedData));
+      dispatch(articlesActions.getArticlesSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
+      if (err instanceof ResponseError) {
         dispatch(articlesActions.getArticlesFailure(err));
       }
     }
   };
 
-  static getArticleContent = (id: string) => async (dispatch: AppDispatch) => {
-    dispatch(articlesActions.getArticleContentLoading());
+  static getArticle = (id: string) => async (dispatch: AppDispatch) => {
+    dispatch(articlesActions.getArticleLoading());
 
     try {
-      const response = await customAxios.get<ArticleContentItem[]>(
-        `/education/get_all_education_material/${id}`,
+      const { data } = await localAxios.get<GetArticleResponseData>(
+        `/articles/${id}`,
       );
 
-      const data = response.data;
-
-      dispatch(articlesActions.getArticleContentSuccess(data));
+      dispatch(articlesActions.getArticleSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(articlesActions.getArticleContentFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(articlesActions.getArticleFailure(err.serialize()));
       }
     }
   };
