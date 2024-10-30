@@ -1,33 +1,9 @@
 import { type StatusState } from "@/client/utils";
-
-export interface TestShortData {
-  id: string;
-  title: string;
-  description: string;
-}
-
-export interface TestData {
-  id: string;
-  title: string;
-  description: string;
-  shortDescription: string;
-  scales: ScaleData[];
-}
-
-export interface ScaleData {
-  id: string;
-  title: string;
-  min: number;
-  max: number;
-  borders: BorderData[];
-}
-
-export interface BorderData {
-  title: string;
-  leftBorder: number;
-  rightBorder: number;
-  color: string;
-}
+import {
+  type GetTestQuestionsResponseData,
+  type GetTestResponseData,
+  type GetTestsResponseData,
+} from "@/shared/types";
 
 export interface TestResultData {
   id: string;
@@ -42,31 +18,19 @@ export interface ScaleResultData {
   recomendations: string;
 }
 
-export interface TestQuestionData {
-  number: number;
-  title: string;
-  answers: QuestionAnswerData[];
-}
-
-export interface QuestionAnswerData {
-  id: string;
-  text: string;
-  score: number;
-}
-
 export interface TestsState {
-  tests: TestShortData[];
+  tests: GetTestsResponseData;
   getTestsState: StatusState;
-  testsByUserId: TestShortData[];
+  testsByUserId: GetTestsResponseData;
   getTestsByUserIdState: StatusState;
   giveTestState: StatusState;
   getTestInfoState: StatusState;
-  testInfo: null | TestData;
+  testInfo: null | GetTestResponseData;
   getTestResultsState: StatusState;
   testResults: null | TestResultData[];
   getTestResultState: StatusState;
   testResult: null | TestResultData;
   getTestQuestionsState: StatusState;
-  testQuestions: null | TestQuestionData[];
+  testQuestions: null | GetTestQuestionsResponseData;
   sendTestResultState: StatusState;
 }

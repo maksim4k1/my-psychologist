@@ -1,19 +1,16 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { type TestShortData } from "@/client/redux/features/tests/types";
 import { type QueryParams, addQueryParams } from "@/client/utils";
 import { pages } from "@/shared/data";
-import { type FunctionComponent } from "react";
+import { type GetTestsResponseData } from "@/shared/types";
+import { type FC } from "react";
 
 interface TestProps {
-  test: TestShortData;
+  test: GetTestsResponseData[number];
   params?: QueryParams;
 }
 
-const TestCard: FunctionComponent<TestProps> = ({
-  test,
-  params = undefined,
-}) => {
+const TestCard: FC<TestProps> = ({ test, params = undefined }) => {
   return (
     <div className={styles.testCard}>
       <div className={styles.testTitle}>{test.title}</div>

@@ -14,10 +14,8 @@ import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import { testsActions } from "@/client/redux/features/tests";
 import {
-  selectGetTestInfoState,
   selectGetTestQuestionsState,
   selectSendTestResultState,
-  selectTestInfo,
   selectTestQuestions,
 } from "@/client/redux/features/tests/selectors";
 import { PopupsService } from "@/client/redux/services/popups";
@@ -28,16 +26,13 @@ export const ExercisePage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const testInfo = useAppSelector(selectTestInfo);
-  const getTestInfoState = useAppSelector(selectGetTestInfoState);
-  const testQuestions = useAppSelector(selectTestQuestions);
+  const test = useAppSelector(selectTestQuestions);
   const getTestQuestionsState = useAppSelector(selectGetTestQuestionsState);
   const sendTestResultState = useAppSelector(selectSendTestResultState);
   const [currentQuestionNumber, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
 
   useEffect(() => {
-    dispatch(TestsService.getTestInfo(id));
     dispatch(TestsService.getTestQuestions(id));
   }, [dispatch, id]);
 
@@ -53,7 +48,7 @@ export const ExercisePage: FC = () => {
     newAnswers[number - 1] = score;
     setAnswers(newAnswers);
 
-    if (number >= answers.length && number !== testQuestions?.length) {
+    if (number >= answers.length && number !== test?.questions.length) {
       setTimeout(() => showQuestion(number), 500);
     }
   };
@@ -66,30 +61,27 @@ export const ExercisePage: FC = () => {
     dispatch(TestsService.sendTestResult(id, answers));
   };
 
-  useSetDefaultState(testsActions.getTestInfoSetDefaultState);
   useSetDefaultState(testsActions.getTestQuestionsSetDefaultState);
   useSetDefaultState(testsActions.sendTestResultSetDefaultState);
 
-  const currentQuestion = testQuestions && testQuestions[currentQuestionNumber];
+  const currentQuestion = test && test.questions[currentQuestionNumber];
 
   const isSendButtonDisabled = !(
     answers.reduce((acc, ans) => {
       return !!(acc && typeof ans === "number");
-    }, true) && answers.length === testQuestions?.length
+    }, true) && answers.length === test?.questions.length
   );
 
   return (
     <Container>
-      <StateWrapper
-        state={[getTestInfoState, getTestQuestionsState, sendTestResultState]}
-      >
-        {testInfo && testQuestions && currentQuestion && (
+      <StateWrapper state={[getTestQuestionsState, sendTestResultState]}>
+        {test && currentQuestion && (
           <>
-            <PageTitle className={styles.title}>{testInfo.title}</PageTitle>
+            <PageTitle className={styles.title}>{test.title}</PageTitle>
             <div className={styles.header}>
               <h4 className={styles.question}>{currentQuestion.title}</h4>
               <div className={styles.questionNumber}>
-                {currentQuestionNumber + 1}/{testQuestions.length}
+                {currentQuestionNumber + 1}/{test.questions.length}
               </div>
             </div>
             <div className={styles.radioButtons}>
@@ -127,7 +119,7 @@ export const ExercisePage: FC = () => {
               <Button
                 className={styles.button}
                 onClick={() => showQuestion(currentQuestionNumber + 1)}
-                disabled={currentQuestionNumber + 1 >= testQuestions.length}
+                disabled={currentQuestionNumber + 1 >= test.questions.length}
               >
                 Следующий вопрос
                 <ArrowIcon />

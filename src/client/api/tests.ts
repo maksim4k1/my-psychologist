@@ -1,42 +1,15 @@
 import { testsActions } from "@/client/redux/features/tests";
-import {
-  type TestData,
-  type TestQuestionData,
-  type TestResultData,
-  type TestShortData,
-} from "@/client/redux/features/tests/types";
+import { type TestResultData } from "@/client/redux/features/tests/types";
 import { type AppDispatch } from "@/client/redux/store";
-import { customAxios } from "@/shared/config/api.config";
+import { customAxios, localAxios } from "@/shared/config/api.config";
+import {
+  type GetTestQuestionsResponseData,
+  type GetTestResponseData,
+  type GetTestsResponseData,
+  type GiveTestRequestData,
+  ResponseError,
+} from "@/shared/types";
 import { instanceofHttpError, mapDatetimeToText } from "@/shared/utils";
-
-interface ResponseTestShortData {
-  test_id: string;
-  title: string;
-  description: string;
-}
-
-interface ResponseBorder {
-  left_border: number;
-  right_border: number;
-  color: string;
-  title: string;
-}
-
-interface ResponseScale {
-  scale_id: string;
-  title: string;
-  min: number;
-  max: number;
-  borders: ResponseBorder[];
-}
-
-interface ResponseTestData {
-  test_id: string;
-  title: string;
-  description: string;
-  short_desc: string;
-  scales: ResponseScale[];
-}
 
 interface ResponseTestResultData {
   test_id: string;
@@ -51,42 +24,20 @@ interface ResponseScaleResultData {
   user_recommendation: string;
 }
 
-interface ResponseTestQuesitionData {
-  number: number;
-  text: string;
-  answer_options: ResponseQuestionAnswerData[];
-}
-
-interface ResponseQuestionAnswerData {
-  id: string;
-  text: string;
-  score: number;
-}
-
 export class TestsService {
   static getTestsByUserId =
     (userId: string) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.getTestsByUserIdLoading());
 
       try {
-        const response = await customAxios.get(
-          `/test/get_passed_tests/${userId}`,
+        const { data } = await localAxios.get<GetTestsResponseData>(
+          `/tests/passed/${userId}`,
         );
 
-        const data = response.data;
-
-        const formattedData: TestShortData[] = data.map(
-          (el: ResponseTestShortData) => ({
-            id: el.test_id,
-            title: el.title,
-            description: el.description,
-          }),
-        );
-
-        dispatch(testsActions.getTestsByUserIdSuccess(formattedData));
+        dispatch(testsActions.getTestsByUserIdSuccess(data));
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(testsActions.getTestsByUserIdFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(testsActions.getTestsByUserIdFailure(err.serialize()));
         }
       }
     };
@@ -95,48 +46,27 @@ export class TestsService {
     dispatch(testsActions.getTestsLoading());
 
     try {
-      const response = await customAxios.get("/test/get_all_tests");
+      const { data } = await localAxios.get<GetTestsResponseData>("/tests");
 
-      const data = response.data;
-
-      const formattedData: TestShortData[] = data.map(
-        (el: ResponseTestShortData) => ({
-          id: el.test_id,
-          title: el.title,
-          description: el.description,
-        }),
-      );
-
-      dispatch(testsActions.getTestsSuccess(formattedData));
+      dispatch(testsActions.getTestsSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(testsActions.getTestsFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(testsActions.getTestsFailure(err.serialize()));
       }
     }
   };
 
   static giveTest =
-    (test: TestShortData, userId: string) => async (dispatch: AppDispatch) => {
+    (data: GiveTestRequestData) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.giveTestLoading());
 
       try {
-        const response = await customAxios.post("/manager/give_task", {
-          text: "Задание для выполнения",
-          user_id: userId,
-          test_title: test.title,
-          test_id: test.id,
-        });
+        await localAxios.post("/tests/give", data);
 
-        const data = response.data;
-
-        if (data === "Successfully") {
-          dispatch(testsActions.giveTestSuccess());
-        } else {
-          dispatch(testsActions.giveTestFailure(data));
-        }
+        dispatch(testsActions.giveTestSuccess());
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(testsActions.giveTestFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(testsActions.giveTestFailure(err.serialize()));
         }
       }
     };
@@ -145,37 +75,14 @@ export class TestsService {
     dispatch(testsActions.getTestInfoLoading());
 
     try {
-      const response = await customAxios.get<ResponseTestData>(
-        `/test/get_test_info/${testId}`,
+      const { data } = await localAxios.get<GetTestResponseData>(
+        `/tests/${testId}`,
       );
 
-      const data: ResponseTestData = response.data;
-
-      const formattedData: TestData = {
-        id: data.test_id,
-        title: data.title,
-        description: data.description,
-        shortDescription: data.short_desc,
-        scales: data.scales.map((el: ResponseScale) => ({
-          id: el.scale_id,
-          title: el.title,
-          min: el.min,
-          max: el.max,
-          borders: el.borders
-            .map((el: ResponseBorder) => ({
-              title: el.title,
-              leftBorder: el.left_border,
-              rightBorder: el.right_border,
-              color: el.color,
-            }))
-            .sort((a, b) => a.leftBorder - b.leftBorder),
-        })),
-      };
-
-      dispatch(testsActions.getTestInfoSuccess(formattedData));
+      dispatch(testsActions.getTestInfoSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(testsActions.getTestInfoFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(testsActions.getTestInfoFailure(err.serialize()));
       }
     }
   };
@@ -247,26 +154,14 @@ export class TestsService {
       dispatch(testsActions.getTestQuestionsLoading());
 
       try {
-        const response = await customAxios.get<ResponseTestQuesitionData[]>(
-          `/test/get_test_questions/${testId}`,
+        const { data } = await localAxios.get<GetTestQuestionsResponseData>(
+          `/tests/${testId}/questions`,
         );
 
-        const data: ResponseTestQuesitionData[] = response.data;
-
-        const formattedData: TestQuestionData[] = data.map((question) => ({
-          number: question.number,
-          title: question.text,
-          answers: question.answer_options.map((answer) => ({
-            id: answer.id,
-            text: answer.text,
-            score: answer.score,
-          })),
-        }));
-
-        dispatch(testsActions.getTestQuestionsSuccess(formattedData));
+        dispatch(testsActions.getTestQuestionsSuccess(data));
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(testsActions.getTestQuestionsFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(testsActions.getTestQuestionsFailure(err.serialize()));
         }
       }
     };

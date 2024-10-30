@@ -7,16 +7,14 @@ import {
   Tooltip,
   XAxis,
 } from "recharts";
-import {
-  type ScaleData,
-  type TestResultData,
-} from "@/client/redux/features/tests/types";
+import { type TestResultData } from "@/client/redux/features/tests/types";
 import { type BarChartData, mapToBarChartData } from "@/client/utils";
+import { type GetTestResponseData } from "@/shared/types";
 import { type FunctionComponent, useEffect, useState } from "react";
 
 interface Props {
   results: TestResultData[];
-  scales: ScaleData[];
+  scales: GetTestResponseData["scales"];
   values: string[];
   className?: string;
 }

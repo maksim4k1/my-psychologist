@@ -4,12 +4,12 @@ import PrimaryButton from "../../Buttons/PrimaryButton";
 import SecondaryButton from "../../Buttons/SecondaryButton";
 import Modal from "../../Popups/Modal";
 import styles from "./styles.module.scss";
-import { type TestShortData } from "@/client/redux/features/tests/types";
 import { pages } from "@/shared/data";
+import { type GetTestsResponseData } from "@/shared/types";
 import { type FC, useState } from "react";
 
 interface Props {
-  exercise: TestShortData;
+  exercise: GetTestsResponseData[number];
 }
 
 const ExerciseCard: FC<Props> = ({ exercise }) => {
