@@ -52,12 +52,14 @@ export const PsychologistsPage: FC = () => {
             ? "Мои психологи"
             : "У вас пока нет психологов"}
         </h2>
-        {myPsychologists.map((psychologist) => (
-          <MyPsychologistCard
-            key={psychologist.userId}
-            psychologist={psychologist}
-          />
-        ))}
+        <div className={styles.psychologistList}>
+          {myPsychologists.map((psychologist) => (
+            <MyPsychologistCard
+              key={psychologist.userId}
+              psychologist={psychologist}
+            />
+          ))}
+        </div>
         <h2 className={styles.subtitle}>
           {filteredPsychologists.length ? "Все психологи" : ""}
         </h2>
