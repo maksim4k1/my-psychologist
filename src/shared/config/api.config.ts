@@ -14,17 +14,12 @@ export const localAxios = axios.create({
   withCredentials: true,
 });
 
-export const customAxios = axios.create({
-  baseURL: SEVER_API_URL,
-  withCredentials: true,
-});
-
 export const serverAxios = axios.create({
   baseURL: SEVER_API_URL,
   withCredentials: true,
 });
 
-const localOnRejectedInterceptor = (
+const onRejectedInterceptor = (
   error: AxiosError<ResponseError>,
 ): Promise<ResponseError> => {
   const response = error.response;
@@ -38,32 +33,4 @@ const localOnRejectedInterceptor = (
   return Promise.reject(error);
 };
 
-const onRejectedInterceptor = (error: any) => {
-  const httpError: HttpError = {
-    status: 500,
-    message: "",
-  };
-
-  if (error?.response?.data?.detail) {
-    if (typeof error.response.data.detail === "string") {
-      httpError.message = error.response.data.detail;
-    } else {
-      httpError.message = error.response.data.detail[0].msg;
-    }
-  } else if (error?.response?.data?.message) {
-    httpError.message = error.response.data.message;
-  } else if (error instanceof Error) {
-    httpError.message = error.message;
-  } else {
-    httpError.message = String(error);
-  }
-
-  if (error?.response?.status) {
-    httpError.status = error.response.status;
-  }
-
-  return Promise.reject(httpError);
-};
-
-localAxios.interceptors.response.use(undefined, localOnRejectedInterceptor);
-customAxios.interceptors.response.use(undefined, onRejectedInterceptor);
+localAxios.interceptors.response.use(undefined, onRejectedInterceptor);

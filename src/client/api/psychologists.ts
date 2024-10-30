@@ -5,7 +5,6 @@ import {
   type GetPsychologistsResponseData,
   ResponseError,
 } from "@/shared/types";
-import { instanceofHttpError } from "@/shared/utils";
 
 export class PsychologistsService {
   static getMyPsychologists = () => async (dispatch: AppDispatch) => {
@@ -17,8 +16,10 @@ export class PsychologistsService {
 
       dispatch(psychologistsActions.getMyPsychologistsSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(psychologistsActions.getMyPsychologistsFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(
+          psychologistsActions.getMyPsychologistsFailure(err.serialize()),
+        );
       }
     }
   };

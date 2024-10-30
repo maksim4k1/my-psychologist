@@ -1,4 +1,4 @@
-import { type TestResultData, type TestsState } from "./types";
+import { type TestsState } from "./types";
 import { type RootState } from "@/client/redux/store";
 import { type StatusState } from "@/client/utils";
 import { type GetTestsResponseData } from "@/shared/types";
@@ -35,9 +35,7 @@ export const selectGetTestInfoState = (state: RootState): StatusState => {
   return selectTestsModule(state).getTestInfoState;
 };
 
-export const selectTestResults = (
-  state: RootState,
-): TestResultData[] | null => {
+export const selectTestResults = (state: RootState) => {
   return selectTestsModule(state).testResults;
 };
 
@@ -45,7 +43,7 @@ export const selectGetTestResultsState = (state: RootState): StatusState => {
   return selectTestsModule(state).getTestResultsState;
 };
 
-export const selectTestResult = (state: RootState): TestResultData | null => {
+export const selectTestResult = (state: RootState) => {
   return selectTestsModule(state).testResult;
 };
 

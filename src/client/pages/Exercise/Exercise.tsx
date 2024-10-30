@@ -58,7 +58,12 @@ export const ExercisePage: FC = () => {
   };
 
   const sendTestResult = () => {
-    dispatch(TestsService.sendTestResult(id, answers));
+    dispatch(
+      TestsService.sendTestResult({
+        testId: id,
+        answers,
+      }),
+    );
   };
 
   useSetDefaultState(testsActions.getTestQuestionsSetDefaultState);

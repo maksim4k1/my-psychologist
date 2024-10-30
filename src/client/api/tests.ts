@@ -1,28 +1,16 @@
 import { testsActions } from "@/client/redux/features/tests";
-import { type TestResultData } from "@/client/redux/features/tests/types";
 import { type AppDispatch } from "@/client/redux/store";
-import { customAxios, localAxios } from "@/shared/config/api.config";
+import { localAxios } from "@/shared/config/api.config";
 import {
   type GetTestQuestionsResponseData,
   type GetTestResponseData,
+  type GetTestResultResponseData,
+  type GetTestResultsResponseData,
   type GetTestsResponseData,
   type GiveTestRequestData,
   ResponseError,
+  type SendTestResultRequestData,
 } from "@/shared/types";
-import { instanceofHttpError, mapDatetimeToText } from "@/shared/utils";
-
-interface ResponseTestResultData {
-  test_id: string;
-  test_result_id: string;
-  datetime: string;
-  scale_results: ResponseScaleResultData[];
-}
-
-interface ResponseScaleResultData {
-  scale_id: string;
-  score: number;
-  user_recommendation: string;
-}
 
 export class TestsService {
   static getTestsByUserId =
@@ -92,29 +80,14 @@ export class TestsService {
       dispatch(testsActions.getTestResultsLoading());
 
       try {
-        const response = await customAxios.get<ResponseTestResultData[]>(
-          `/test/get_test_results/${testId}${
-            userId ? `?user_id=${userId}` : ""
-          }`,
+        const { data } = await localAxios.get<GetTestResultsResponseData>(
+          `/tests/${testId}/results${userId ? `?user_id=${userId}` : ""}`,
         );
 
-        const data: ResponseTestResultData[] = response.data;
-
-        const formattedData: TestResultData[] = data.map((el) => ({
-          id: el.test_result_id,
-          testId: el.test_id,
-          datetime: mapDatetimeToText(el.datetime),
-          scaleResults: el.scale_results.map((scalse) => ({
-            id: scalse.scale_id,
-            score: scalse.score,
-            recomendations: scalse.user_recommendation,
-          })),
-        }));
-
-        dispatch(testsActions.getTestResultsSuccess(formattedData));
+        dispatch(testsActions.getTestResultsSuccess(data));
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(testsActions.getTestResultsFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(testsActions.getTestResultsFailure(err.serialize()));
         }
       }
     };
@@ -124,27 +97,14 @@ export class TestsService {
       dispatch(testsActions.getTestResultLoading());
 
       try {
-        const response = await customAxios.get<ResponseTestResultData>(
-          `/test/get_test_result/${testResultId}`,
+        const { data } = await localAxios.get<GetTestResultResponseData>(
+          `/tests/results/${testResultId}`,
         );
 
-        const data: ResponseTestResultData = response.data;
-
-        const formattedData: TestResultData = {
-          id: data.test_result_id,
-          testId: data.test_id,
-          datetime: mapDatetimeToText(data.datetime),
-          scaleResults: data.scale_results.map((scalse) => ({
-            id: scalse.scale_id,
-            score: scalse.score,
-            recomendations: scalse.user_recommendation,
-          })),
-        };
-
-        dispatch(testsActions.getTestResultSuccess(formattedData));
+        dispatch(testsActions.getTestResultSuccess(data));
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(testsActions.getTestResultFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(testsActions.getTestResultFailure(err.serialize()));
         }
       }
     };
@@ -167,29 +127,16 @@ export class TestsService {
     };
 
   static sendTestResult =
-    (testId: string, answers: number[]) => async (dispatch: AppDispatch) => {
+    (data: SendTestResultRequestData) => async (dispatch: AppDispatch) => {
       dispatch(testsActions.sendTestResultLoading());
 
       try {
-        const response = await customAxios.post(`/test/save_test_result`, {
-          test_id: testId,
-          date: new Date().toJSON(),
-          results: answers,
-        });
+        await localAxios.post(`/tests/results/send`, data);
 
-        if (response.status === 200) {
-          dispatch(testsActions.sendTestResultSuccess());
-        } else {
-          dispatch(
-            testsActions.sendTestResultFailure({
-              status: response.status,
-              message: "Ошибка сервера",
-            }),
-          );
-        }
+        dispatch(testsActions.sendTestResultSuccess());
       } catch (err) {
-        if (instanceofHttpError(err)) {
-          dispatch(testsActions.sendTestResultFailure(err));
+        if (err instanceof ResponseError) {
+          dispatch(testsActions.sendTestResultFailure(err.serialize()));
         }
       }
     };

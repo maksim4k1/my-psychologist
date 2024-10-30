@@ -2,21 +2,10 @@ import { type StatusState } from "@/client/utils";
 import {
   type GetTestQuestionsResponseData,
   type GetTestResponseData,
+  type GetTestResultResponseData,
+  type GetTestResultsResponseData,
   type GetTestsResponseData,
 } from "@/shared/types";
-
-export interface TestResultData {
-  id: string;
-  testId: string;
-  datetime: string;
-  scaleResults: ScaleResultData[];
-}
-
-export interface ScaleResultData {
-  id: string;
-  score: number;
-  recomendations: string;
-}
 
 export interface TestsState {
   tests: GetTestsResponseData;
@@ -27,9 +16,9 @@ export interface TestsState {
   getTestInfoState: StatusState;
   testInfo: null | GetTestResponseData;
   getTestResultsState: StatusState;
-  testResults: null | TestResultData[];
+  testResults: null | GetTestResultsResponseData;
   getTestResultState: StatusState;
-  testResult: null | TestResultData;
+  testResult: null | GetTestResultResponseData;
   getTestQuestionsState: StatusState;
   testQuestions: null | GetTestQuestionsResponseData;
   sendTestResultState: StatusState;

@@ -1,7 +1,7 @@
-import { type StatusState } from "../../../utils";
+import { type StatusState } from "@/client/utils";
 import { type AccessRole } from "@/shared/config/access.config";
 
-export interface ProfileState {
+interface ProfileState {
   id: string;
   role: AccessRole;
   email: string;
