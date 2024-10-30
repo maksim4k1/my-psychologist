@@ -1,41 +1,21 @@
 import { psychologistsActions } from "@/client/redux/features/psychologists";
-import { type PsychologistData } from "@/client/redux/features/psychologists/types";
 import { type AppDispatch } from "@/client/redux/store";
-import { customAxios } from "@/shared/config/api.config";
+import { localAxios } from "@/shared/config/api.config";
+import {
+  type GetPsychologistsResponseData,
+  ResponseError,
+} from "@/shared/types";
 import { instanceofHttpError } from "@/shared/utils";
-
-interface PsychologistDataResponse {
-  id: string;
-  username: string;
-  online: boolean;
-  company: string;
-  face_to_face: false;
-  gender: string;
-  email: string;
-  birth_date: string;
-  description: string;
-  role_id: number;
-}
 
 export class PsychologistsService {
   static getMyPsychologists = () => async (dispatch: AppDispatch) => {
     dispatch(psychologistsActions.getMyPsychologistsLoading());
 
     try {
-      const response = await customAxios.get<PsychologistDataResponse[]>(
-        "/client/get_your_psychologist",
-      );
+      const { data } =
+        await localAxios.get<GetPsychologistsResponseData>("/psychologists/my");
 
-      const data = response.data;
-
-      const formattedData: PsychologistData[] = data.map((el) => ({
-        userId: el.id,
-        username: el.username,
-        profileImage: "",
-        isOnline: el.online,
-      }));
-
-      dispatch(psychologistsActions.getMyPsychologistsSuccess(formattedData));
+      dispatch(psychologistsActions.getMyPsychologistsSuccess(data));
     } catch (err) {
       if (instanceofHttpError(err)) {
         dispatch(psychologistsActions.getMyPsychologistsFailure(err));
@@ -47,23 +27,13 @@ export class PsychologistsService {
     dispatch(psychologistsActions.getPsychologistsLoading());
 
     try {
-      const response = await customAxios.get<PsychologistDataResponse[]>(
-        "/manager/get_all_manager",
-      );
+      const { data } =
+        await localAxios.get<GetPsychologistsResponseData>("/psychologists");
 
-      const data = response.data;
-
-      const formattedData: PsychologistData[] = data.map((el) => ({
-        userId: el.id,
-        username: el.username,
-        profileImage: "",
-        isOnline: el.online,
-      }));
-
-      dispatch(psychologistsActions.getPsychologistsSuccess(formattedData));
+      dispatch(psychologistsActions.getPsychologistsSuccess(data));
     } catch (err) {
-      if (instanceofHttpError(err)) {
-        dispatch(psychologistsActions.getPsychologistsFailure(err));
+      if (err instanceof ResponseError) {
+        dispatch(psychologistsActions.getPsychologistsFailure(err.serialize()));
       }
     }
   };

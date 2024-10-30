@@ -10,7 +10,6 @@ import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import { selectSendApplicationState } from "@/client/redux/features/applications/selectors";
-import { selectProfile } from "@/client/redux/features/auth/selectors";
 import { psychologistsActions } from "@/client/redux/features/psychologists";
 import {
   selectGetMyPsychologistsState,
@@ -27,18 +26,11 @@ export const PsychologistsPage: FC = () => {
   const getPsychologistsState = useAppSelector(selectGetPsychologistsState);
   const getMyPsychologistsState = useAppSelector(selectGetMyPsychologistsState);
   const sendApplicationState = useAppSelector(selectSendApplicationState);
-  const profile = useAppSelector(selectProfile);
 
   useEffect(() => {
     dispatch(PsychologistsService.getMyPsychologists());
     dispatch(PsychologistsService.getPsychologists());
   }, [dispatch, sendApplicationState.isSuccess]);
-
-  const filteredPsychologists = psychologists.filter(
-    (el) =>
-      myPsychologists.findIndex((val) => el.userId === val.userId) === -1 &&
-      el.userId !== profile.id,
-  );
 
   useSetDefaultState(psychologistsActions.getPsychologistsSetDefaultState);
   useSetDefaultState(psychologistsActions.getMyPsychologistsSetDefaultState);
@@ -61,10 +53,10 @@ export const PsychologistsPage: FC = () => {
           ))}
         </div>
         <h2 className={styles.subtitle}>
-          {filteredPsychologists.length ? "Все психологи" : ""}
+          {psychologists.length ? "Все психологи" : ""}
         </h2>
         <div className={styles.psychologistList}>
-          {filteredPsychologists.map((psychologist) => (
+          {psychologists.map((psychologist) => (
             <PsychologistCard
               key={psychologist.userId}
               psychologist={psychologist}

@@ -1,11 +1,11 @@
 import PrimaryButton from "../../Buttons/PrimaryButton";
 import ProfileImage from "../../Images/ProfileImage";
 import styles from "../styles.module.scss";
-import { type PsychologistData } from "@/client/redux/features/psychologists/types";
+import { type GetPsychologistsResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {
-  psychologist: PsychologistData;
+  psychologist: GetPsychologistsResponseData[number];
 }
 
 const MyPsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {
