@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import PrimarySwiper from "@/client/components/UI/PrimarySwiper";
+import { PrimarySwiper } from "@/client/components";
 import { partners } from "@/shared/data";
 import { type FC } from "react";
 

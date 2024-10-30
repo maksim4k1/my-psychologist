@@ -3,7 +3,7 @@
 import styles from "./styles.module.scss";
 import { type FC } from "react";
 
-const ModalsPortal: FC = () => {
+export const ModalsPortal: FC = () => {
   return (
     <div
       id="modals"
@@ -11,5 +11,3 @@ const ModalsPortal: FC = () => {
     ></div>
   );
 };
-
-export default ModalsPortal;

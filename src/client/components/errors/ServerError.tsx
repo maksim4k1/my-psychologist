@@ -1,13 +1,12 @@
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import { type FunctionComponent } from "react";
+import { Container, PageTitle } from "@/client/components";
+import { type FC } from "react";
 
 interface Props {
   status?: number;
   message?: string;
 }
 
-const ServerError: FunctionComponent<Props> = ({
+export const ServerError: FC<Props> = ({
   status = 500,
   message = "ошибка сервера",
 }) => {
@@ -19,5 +18,3 @@ const ServerError: FunctionComponent<Props> = ({
     </Container>
   );
 };
-
-export default ServerError;

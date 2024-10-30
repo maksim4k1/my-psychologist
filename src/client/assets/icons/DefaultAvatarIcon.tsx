@@ -1,4 +1,4 @@
-export default function DefaultAvatar() {
+export const DefaultAvatar = () => {
   return (
     <svg
       width="40"
@@ -25,4 +25,4 @@ export default function DefaultAvatar() {
       />
     </svg>
   );
-}
+};

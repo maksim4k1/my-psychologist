@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -8,11 +8,7 @@ interface Props {
   className?: string;
 }
 
-const AppLink: FunctionComponent<Props> = ({
-  children,
-  href,
-  className = "",
-}) => {
+export const AppLink: FC<Props> = ({ children, href, className = "" }) => {
   return (
     <Link
       href={href}
@@ -22,5 +18,3 @@ const AppLink: FunctionComponent<Props> = ({
     </Link>
   );
 };
-
-export default AppLink;

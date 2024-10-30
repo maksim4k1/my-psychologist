@@ -4,11 +4,12 @@ import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
 import { ArticlesService } from "@/client/api";
 import PatternImage from "@/client/assets/webp/pattern.webp";
-import ArticleCard from "@/client/components/UI/Cards/ArticleCard";
-import Container from "@/client/components/UI/Container";
-import StateWrapper from "@/client/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { ArticleCard, Container, StateWrapper } from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useSetDefaultState,
+} from "@/client/hooks";
 import {
   articlesActions,
   selectArticleContent,

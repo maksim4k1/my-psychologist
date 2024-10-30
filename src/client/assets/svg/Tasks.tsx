@@ -1,4 +1,4 @@
-export default function Tasks() {
+export const Tasks = () => {
   return (
     <svg
       width="420"
@@ -73,4 +73,4 @@ export default function Tasks() {
       />
     </svg>
   );
-}
+};

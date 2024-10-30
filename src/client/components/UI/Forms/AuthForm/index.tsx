@@ -1,8 +1,8 @@
-import PageTitle from "../../Titles/PageTitle";
-import Form from "../Form";
+import { PageTitle } from "../../Titles";
+import { Form } from "../Form";
 import styles from "./styles.module.scss";
-import Meditation from "@/client/assets/svg/Meditation";
-import { type FunctionComponent, type ReactNode } from "react";
+import { Meditation } from "@/client/assets/svg";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface Props {
   [key: string]: any;
 }
 
-const AuthForm: FunctionComponent<Props> = ({
+export const AuthForm: FC<Props> = ({
   children,
   title,
   className = "",
@@ -32,5 +32,3 @@ const AuthForm: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default AuthForm;

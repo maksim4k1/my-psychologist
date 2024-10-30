@@ -2,13 +2,18 @@
 
 import styles from "./styles.module.scss";
 import { PsychologistsService } from "@/client/api";
-import MyPsychologistCard from "@/client/components/UI/Cards/MyPsychologistCard";
-import PsychologistCard from "@/client/components/UI/Cards/PsychologistCard";
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import StateWrapper from "@/client/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import {
+  Container,
+  MyPsychologistCard,
+  PageTitle,
+  PsychologistCard,
+  StateWrapper,
+} from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useSetDefaultState,
+} from "@/client/hooks";
 import {
   psychologistsActions,
   selectGetMyPsychologistsState,

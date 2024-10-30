@@ -2,17 +2,17 @@
 
 import styles from "./styles.module.scss";
 import { TestsService } from "@/client/api";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/client/hooks";
 import { selectGiveTestState } from "@/client/redux";
 import { type GetTestsResponseData } from "@/shared/types";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   exercise: GetTestsResponseData[number];
   userId: string;
 }
 
-const GiveExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
+export const GiveExerciseCard: FC<Props> = ({ exercise, userId }) => {
   const dispatch = useAppDispatch();
   const giveTestState = useAppSelector(selectGiveTestState);
 
@@ -39,5 +39,3 @@ const GiveExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
     </div>
   );
 };
-
-export default GiveExerciseCard;

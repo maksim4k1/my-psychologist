@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.scss";
 import { createPortal } from "react-dom";
-import CloseIcon from "@/client/assets/svg/Icons/CloseIcon";
+import { CloseIcon } from "@/client/assets/icons";
 import { type FC, type MouseEvent, type ReactNode, useEffect } from "react";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   content: ReactNode;
 }
 
-const Modal: FC<Props> = ({ isOpen, title, onClose, content }) => {
+export const Modal: FC<Props> = ({ isOpen, title, onClose, content }) => {
   const modalsPortal = document.getElementById("modals");
 
   useEffect(() => {
@@ -57,5 +57,3 @@ const Modal: FC<Props> = ({ isOpen, title, onClose, content }) => {
 
   return modalsPortal && createPortal(renderModal(), modalsPortal);
 };
-
-export default Modal;

@@ -8,7 +8,7 @@ import {
   Team,
 } from "./components";
 import styles from "./styles.module.scss";
-import Container from "@/client/components/UI/Container";
+import { Container } from "@/client/components";
 import { type FC } from "react";
 
 export const LandingPage: FC = () => {

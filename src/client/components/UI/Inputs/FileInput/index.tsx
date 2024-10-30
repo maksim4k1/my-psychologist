@@ -5,8 +5,8 @@ import localStyles from "./styles.module.scss";
 import {
   type ChangeEvent,
   type DragEventHandler,
+  type FC,
   type FocusEvent,
-  type FunctionComponent,
   useRef,
   useState,
 } from "react";
@@ -23,7 +23,7 @@ interface Props {
   [key: string]: any;
 }
 
-const FileInput: FunctionComponent<Props> = ({
+export const FileInput: FC<Props> = ({
   labelText,
   exampleText,
   errorText,
@@ -162,5 +162,3 @@ const FileInput: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default FileInput;

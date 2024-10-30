@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Button: FunctionComponent<Props> = ({
+export const Button: FC<Props> = ({
   children,
   className = "",
   href = null,
@@ -34,5 +34,3 @@ const Button: FunctionComponent<Props> = ({
     </Link>
   );
 };
-
-export default Button;

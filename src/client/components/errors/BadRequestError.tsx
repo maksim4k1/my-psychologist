@@ -1,12 +1,11 @@
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import { type FunctionComponent } from "react";
+import { Container, PageTitle } from "@/client/components";
+import { type FC } from "react";
 
 interface Props {
   message?: string;
 }
 
-const BadRequestError: FunctionComponent<Props> = ({ message }) => {
+export const BadRequestError: FC<Props> = ({ message }) => {
   return (
     <Container>
       <PageTitle>
@@ -15,5 +14,3 @@ const BadRequestError: FunctionComponent<Props> = ({ message }) => {
     </Container>
   );
 };
-
-export default BadRequestError;

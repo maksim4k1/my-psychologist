@@ -2,13 +2,18 @@
 
 import styles from "./styles.module.scss";
 import { TestsService } from "@/client/api";
-import ExerciseCard from "@/client/components/UI/Cards/ExerciseCard";
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import Subtitle from "@/client/components/UI/Titles/Subtitle";
-import LoadingWrapper from "@/client/components/wrappers/LoadingWrapper";
-import { useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import {
+  Container,
+  ExerciseCard,
+  LoadingWrapper,
+  PageTitle,
+  Subtitle,
+} from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useSetDefaultState,
+} from "@/client/hooks";
 import { selectGetTestsState, selectTests, testsActions } from "@/client/redux";
 import { type FC, useEffect } from "react";
 

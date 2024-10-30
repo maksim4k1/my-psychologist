@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./styles.module.scss";
 import {
   Bar,
@@ -12,7 +14,7 @@ import {
   type GetTestResponseData,
   type GetTestResultsResponseData,
 } from "@/shared/types";
-import { type FunctionComponent, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 
 interface Props {
   results: GetTestResultsResponseData;
@@ -21,7 +23,7 @@ interface Props {
   className?: string;
 }
 
-const SimpleBarChart: FunctionComponent<Props> = ({
+export const SimpleBarChart: FC<Props> = ({
   results,
   scales,
   values,
@@ -67,5 +69,3 @@ const SimpleBarChart: FunctionComponent<Props> = ({
     </ResponsiveContainer>
   );
 };
-
-export default SimpleBarChart;

@@ -3,12 +3,13 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { AuthService } from "@/client/api";
-import LogoIcon from "@/client/assets/svg/Icons/Logo";
-import Button from "@/client/components/UI/Buttons/Button";
-import Container from "@/client/components/UI/Container";
-import ProfileImage from "@/client/components/UI/Images/ProfileImage";
-import { useClickOutside } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { LogoIcon } from "@/client/assets/icons";
+import { Button, Container, ProfileImage } from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useClickOutside,
+} from "@/client/hooks";
 import {
   selectAuthIsAuth,
   selectAuthLoginState,
@@ -16,9 +17,9 @@ import {
 } from "@/client/redux";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
-import { type FunctionComponent, useRef, useState } from "react";
+import { type FC, useRef, useState } from "react";
 
-export const Header: FunctionComponent = () => {
+export const Header: FC = () => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const loginState = useAppSelector(selectAuthLoginState);
   const profile = useAppSelector(selectProfile);

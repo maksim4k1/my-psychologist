@@ -1,4 +1,4 @@
-export default function MoreVerticalIcon() {
+export const MoreVerticalIcon = () => {
   return (
     <svg
       width="24"
@@ -15,4 +15,4 @@ export default function MoreVerticalIcon() {
       />
     </svg>
   );
-}
+};

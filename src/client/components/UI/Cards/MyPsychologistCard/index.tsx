@@ -1,14 +1,14 @@
-import PrimaryButton from "../../Buttons/PrimaryButton";
-import ProfileImage from "../../Images/ProfileImage";
+import { PrimaryButton } from "../../Buttons";
+import { ProfileImage } from "../../Images";
 import styles from "../styles.module.scss";
 import { type GetPsychologistsResponseData } from "@/shared/types";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   psychologist: GetPsychologistsResponseData[number];
 }
 
-const MyPsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {
+export const MyPsychologistCard: FC<Props> = ({ psychologist }) => {
   return (
     <div className={styles.clientCard}>
       <div className={styles.cardHeader}>
@@ -35,5 +35,3 @@ const MyPsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {
     </div>
   );
 };
-
-export default MyPsychologistCard;

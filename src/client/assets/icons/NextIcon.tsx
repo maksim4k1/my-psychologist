@@ -1,4 +1,4 @@
-export default function NextIcon() {
+export const NextIcon = () => {
   return (
     <svg
       width="24"
@@ -13,4 +13,4 @@ export default function NextIcon() {
       />
     </svg>
   );
-}
+};

@@ -1,16 +1,16 @@
-import PrimaryButton from "../../Buttons/PrimaryButton";
-import ProfileImage from "../../Images/ProfileImage";
-import Symptom from "../../Symptom";
+import { PrimaryButton } from "../../Buttons";
+import { ProfileImage } from "../../Images";
+import { Symptom } from "../../Symptom";
 import styles from "../styles.module.scss";
 import { pages } from "@/shared/data";
 import { type GetClientsResponseData } from "@/shared/types";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   client: GetClientsResponseData[number];
 }
 
-const ClientCard: FunctionComponent<Props> = ({ client }) => {
+export const ClientCard: FC<Props> = ({ client }) => {
   return (
     <div className={styles.clientCard}>
       <div className={styles.cardHeader}>
@@ -53,5 +53,3 @@ const ClientCard: FunctionComponent<Props> = ({ client }) => {
     </div>
   );
 };
-
-export default ClientCard;

@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   href: string;
@@ -9,12 +9,7 @@ interface Props {
   count?: number;
 }
 
-const IconTextLink: FunctionComponent<Props> = ({
-  href,
-  icon,
-  content,
-  count = 0,
-}) => {
+export const IconTextLink: FC<Props> = ({ href, icon, content, count = 0 }) => {
   return (
     <Link
       href={href}
@@ -30,5 +25,3 @@ const IconTextLink: FunctionComponent<Props> = ({
     </Link>
   );
 };
-
-export default IconTextLink;

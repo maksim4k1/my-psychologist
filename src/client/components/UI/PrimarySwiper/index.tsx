@@ -3,8 +3,8 @@
 import styles from "./styles.module.scss";
 import { Navigation } from "swiper/modules";
 import "swiper/scss";
-import NextIcon from "@/client/assets/svg/Icons/NextIcon";
-import { type FunctionComponent, type ReactNode } from "react";
+import { NextIcon } from "@/client/assets/icons";
+import { type FC, type ReactNode } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   className?: string;
 }
 
-const PrimarySwiper: FunctionComponent<Props> = ({
+export const PrimarySwiper: FC<Props> = ({
   children,
   className = "",
   gap,
@@ -60,5 +60,3 @@ const PrimarySwiper: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default PrimarySwiper;

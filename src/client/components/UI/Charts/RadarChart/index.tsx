@@ -16,7 +16,7 @@ import {
   type GetTestResponseData,
   type GetTestResultsResponseData,
 } from "@/shared/types";
-import React, { type FunctionComponent, useEffect, useState } from "react";
+import React, { type FC, useEffect, useState } from "react";
 
 interface Props {
   results: GetTestResultsResponseData;
@@ -49,7 +49,7 @@ const TextPolarAngleAxis = ({ payload, x, y, cx, cy, ...rest }: TextProps) => {
   );
 };
 
-const RadarChart: FunctionComponent<Props> = ({
+export const RadarChart: FC<Props> = ({
   results,
   scales,
   values,
@@ -139,5 +139,3 @@ const RadarChart: FunctionComponent<Props> = ({
     </ResponsiveContainer>
   );
 };
-
-export default RadarChart;

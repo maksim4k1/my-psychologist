@@ -1,14 +1,15 @@
-import PrimaryButton from "../../Buttons/PrimaryButton";
-import Form from "../../Forms/Form";
-import ProfileImage from "../../Images/ProfileImage";
-import Input from "../../Inputs/Input";
-import Modal from "../../Popups/Modal";
+"use client";
+
+import { PrimaryButton } from "../../Buttons";
+import { Form } from "../../Forms";
+import { ProfileImage } from "../../Images";
+import { Input } from "../../Inputs";
+import { Modal } from "../../Popups";
 import styles from "../styles.module.scss";
 import { useSelector } from "react-redux";
 import { ApplicationsService } from "@/client/api";
-import FormErrorLabel from "@/client/components/statusLabels/FormErrorLabel";
-import { useInput } from "@/client/hooks";
-import { useAppDispatch } from "@/client/hooks/reduxHooks";
+import { FormErrorLabel } from "@/client/components";
+import { useAppDispatch, useInput } from "@/client/hooks";
 import {
   PopupsService,
   selectProfile,
@@ -16,18 +17,13 @@ import {
 } from "@/client/redux";
 import { checkFormDataValidation } from "@/client/utils";
 import { type GetPsychologistsResponseData } from "@/shared/types";
-import {
-  type FormEvent,
-  type FunctionComponent,
-  useEffect,
-  useState,
-} from "react";
+import { type FC, type FormEvent, useEffect, useState } from "react";
 
 interface Props {
   psychologist: GetPsychologistsResponseData[number];
 }
 
-const PsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {
+export const PsychologistCard: FC<Props> = ({ psychologist }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   const sendApplicationState = useSelector(selectSendApplicationState);
@@ -133,5 +129,3 @@ const PsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {
     </div>
   );
 };
-
-export default PsychologistCard;

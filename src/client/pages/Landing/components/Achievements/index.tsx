@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import PrimarySwiper from "@/client/components/UI/PrimarySwiper";
+import { PrimarySwiper } from "@/client/components";
 import { achievements } from "@/shared/data";
 import { type FC } from "react";
 

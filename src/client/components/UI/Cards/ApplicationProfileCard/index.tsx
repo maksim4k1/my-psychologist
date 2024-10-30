@@ -1,14 +1,14 @@
-import ProfileImage from "../../Images/ProfileImage";
+import { ProfileImage } from "../../Images";
 import styles from "./styles.module.scss";
 import { type GetApplicationResponseData } from "@/shared/types";
 import { mapAgeToText } from "@/shared/utils";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   profile: GetApplicationResponseData;
 }
 
-const ApplicationProfileCard: FunctionComponent<Props> = ({ profile }) => {
+export const ApplicationProfileCard: FC<Props> = ({ profile }) => {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>
@@ -22,9 +22,6 @@ const ApplicationProfileCard: FunctionComponent<Props> = ({ profile }) => {
             {profile.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
-        {/* <button className={styles.moreButton}>
-          <MoreVerticalIcon />
-        </button> */}
       </div>
       <ProfileImage
         className={styles.profileImage}
@@ -41,9 +38,6 @@ const ApplicationProfileCard: FunctionComponent<Props> = ({ profile }) => {
           <div className={styles.problems}>{profile.problem}</div>
         </>
       )}
-      {/* <PrimaryButton className={styles.cardButton}>Чат</PrimaryButton> */}
     </div>
   );
 };
-
-export default ApplicationProfileCard;

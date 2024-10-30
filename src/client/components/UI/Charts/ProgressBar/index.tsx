@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import { type GetTestResponseData } from "@/shared/types";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   value: number;
@@ -10,7 +10,7 @@ interface Props {
   className?: string;
 }
 
-const ProgressBar: FunctionComponent<Props> = ({
+export const ProgressBar: FC<Props> = ({
   value,
   min,
   max,
@@ -71,5 +71,3 @@ const ProgressBar: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default ProgressBar;

@@ -1,6 +1,6 @@
-import Button from "../Button";
+import { Button } from "../Button";
 import styles from "./styles.module.scss";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -8,7 +8,7 @@ interface Props {
   [key: string]: any;
 }
 
-const IconButton: FunctionComponent<Props> = ({
+export const IconButton: FC<Props> = ({
   children,
   className = "",
   ...props
@@ -22,5 +22,3 @@ const IconButton: FunctionComponent<Props> = ({
     </Button>
   );
 };
-
-export default IconButton;

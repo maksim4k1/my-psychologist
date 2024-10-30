@@ -4,15 +4,21 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthService } from "@/client/api";
-import AuthButtons from "@/client/components/UI/AuthButtons";
-import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
-import Container from "@/client/components/UI/Container";
-import Form from "@/client/components/UI/Forms/AuthForm";
-import Input from "@/client/components/UI/Inputs/Input";
-import AppLink from "@/client/components/UI/Links/AppLink";
-import FormErrorLabel from "@/client/components/statusLabels/FormErrorLabel";
-import { useInput, useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import {
+  AppLink,
+  AuthButtons,
+  Container,
+  Form,
+  FormErrorLabel,
+  Input,
+  PrimaryButton,
+} from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useInput,
+  useSetDefaultState,
+} from "@/client/hooks";
 import { authActions, selectAuthLoginState } from "@/client/redux";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";

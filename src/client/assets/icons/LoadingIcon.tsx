@@ -1,4 +1,4 @@
-export default function LoadingIcon() {
+export const LoadingIcon = () => {
   return (
     <svg
       width="48"
@@ -21,4 +21,4 @@ export default function LoadingIcon() {
       />
     </svg>
   );
-}
+};

@@ -1,9 +1,11 @@
-import AccessDeniedError from "@/client/components/errors/AccessDeniedError";
-import BadRequestError from "@/client/components/errors/BadRequestError";
-import NotFoundError from "@/client/components/errors/NotFoundError";
-import ServerError from "@/client/components/errors/ServerError";
+import {
+  AccessDeniedError,
+  BadRequestError,
+  NotFoundError,
+  ServerError,
+} from "@/client/components";
 import { type HttpError } from "@/shared/config/api.config";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   status: boolean[] | boolean;
@@ -11,11 +13,7 @@ interface Props {
   children: ReactNode;
 }
 
-const HttpErrorWrapper: FunctionComponent<Props> = ({
-  status,
-  error,
-  children,
-}) => {
+export const HttpErrorWrapper: FC<Props> = ({ status, error, children }) => {
   if (!Array.isArray(status)) status = [status];
   if (!Array.isArray(error)) error = [error];
 
@@ -54,5 +52,3 @@ const HttpErrorWrapper: FunctionComponent<Props> = ({
 
   return children;
 };
-
-export default HttpErrorWrapper;

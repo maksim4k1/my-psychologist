@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-const CloseIcon: FC<any> = (props) => {
+export const CloseIcon: FC<any> = (props) => {
   return (
     <svg
       width="24"
@@ -17,5 +17,3 @@ const CloseIcon: FC<any> = (props) => {
     </svg>
   );
 };
-
-export default CloseIcon;

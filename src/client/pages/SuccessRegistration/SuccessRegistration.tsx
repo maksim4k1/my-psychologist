@@ -1,10 +1,8 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import Completed from "@/client/assets/svg/Completed";
-import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import { Completed } from "@/client/assets/svg";
+import { Container, PageTitle, PrimaryButton } from "@/client/components";
 import { pages } from "@/shared/data";
 import { type FC } from "react";
 

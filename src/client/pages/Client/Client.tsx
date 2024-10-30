@@ -3,15 +3,20 @@
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
 import { ClientsService, TestsService } from "@/client/api";
-import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
-import ProfileCard from "@/client/components/UI/Cards/ProfileCard";
-import TestCard from "@/client/components/UI/Cards/TestCard";
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import Subtitle from "@/client/components/UI/Titles/Subtitle";
-import StateWrapper from "@/client/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import {
+  Container,
+  PageTitle,
+  PrimaryButton,
+  ProfileCard,
+  StateWrapper,
+  Subtitle,
+  TestCard,
+} from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useSetDefaultState,
+} from "@/client/hooks";
 import {
   clientsActions,
   selectClient,

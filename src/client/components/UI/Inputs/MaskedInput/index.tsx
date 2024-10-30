@@ -2,7 +2,7 @@
 
 import styles from "../styles.module.scss";
 import { IMaskInput } from "react-imask";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   labelText?: string;
@@ -15,7 +15,7 @@ interface Props {
   [key: string]: any;
 }
 
-const MaskedInput: FunctionComponent<Props> = ({
+export const MaskedInput: FC<Props> = ({
   labelText,
   exampleText,
   errorText,
@@ -54,5 +54,3 @@ const MaskedInput: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default MaskedInput;

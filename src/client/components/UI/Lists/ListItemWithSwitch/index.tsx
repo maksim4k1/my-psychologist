@@ -1,7 +1,7 @@
-import Switch from "../../Inputs/Switch";
+import { Switch } from "../../Inputs";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   label: string;
@@ -10,7 +10,7 @@ interface Props {
   [key: string]: any;
 }
 
-const ListItemWithSwitch: FunctionComponent<Props> = ({
+export const ListItemWithSwitch: FC<Props> = ({
   label,
   link,
   className = "",
@@ -32,5 +32,3 @@ const ListItemWithSwitch: FunctionComponent<Props> = ({
     </li>
   );
 };
-
-export default ListItemWithSwitch;

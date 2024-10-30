@@ -9,7 +9,7 @@ interface ArticlesProps {
   articles: GetArticlesResponseData[number];
 }
 
-const ArticleCard: FC<ArticlesProps> = ({ articles }) => {
+export const ArticleCard: FC<ArticlesProps> = ({ articles }) => {
   return (
     <Link href={pages.article.getLink({ params: { id: articles.id } })}>
       <div className={styles.articlesCard}>
@@ -28,5 +28,3 @@ const ArticleCard: FC<ArticlesProps> = ({ articles }) => {
     </Link>
   );
 };
-
-export default ArticleCard;

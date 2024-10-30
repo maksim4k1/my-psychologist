@@ -1,16 +1,18 @@
 "use client";
 
-import Button from "../Buttons/Button";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import Container from "../Container";
-import ProfileImage from "../Images/ProfileImage";
+import { Button, PrimaryButton } from "../Buttons";
+import { Container } from "../Container";
+import { ProfileImage } from "../Images";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthService } from "@/client/api";
-import LogoIcon from "@/client/assets/svg/Icons/Logo";
-import { useClickOutside } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { LogoIcon } from "@/client/assets/icons";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useClickOutside,
+} from "@/client/hooks";
 import {
   selectAuthIsAuth,
   selectAuthLoginState,
@@ -19,9 +21,9 @@ import {
 } from "@/client/redux";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
-import { type FunctionComponent, useEffect, useRef, useState } from "react";
+import { type FC, useEffect, useRef, useState } from "react";
 
-const Header: FunctionComponent = () => {
+export const Header: FC = () => {
   const router = useRouter();
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const loginState = useAppSelector(selectAuthLoginState);
@@ -146,5 +148,3 @@ const Header: FunctionComponent = () => {
     </header>
   );
 };
-
-export default Header;

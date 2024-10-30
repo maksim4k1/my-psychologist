@@ -1,4 +1,4 @@
-export default function LogoIcon() {
+export const LogoIcon = () => {
   return (
     <svg
       viewBox="0 0 120 26"
@@ -39,4 +39,4 @@ export default function LogoIcon() {
       />
     </svg>
   );
-}
+};

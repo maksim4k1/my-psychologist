@@ -1,8 +1,8 @@
 import styles from "./styles.module.scss";
-import LoadingIcon from "@/client/assets/svg/Icons/LoadingIcon";
-import { type FunctionComponent } from "react";
+import { LoadingIcon } from "@/client/assets/icons";
+import { type FC } from "react";
 
-const LoadingLoop: FunctionComponent = () => {
+export const LoadingLoop: FC = () => {
   return (
     <div className={styles.loading}>
       <div className={styles.loadingIcon}>
@@ -11,5 +11,3 @@ const LoadingLoop: FunctionComponent = () => {
     </div>
   );
 };
-
-export default LoadingLoop;

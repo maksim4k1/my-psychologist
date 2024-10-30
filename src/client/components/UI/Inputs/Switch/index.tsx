@@ -1,12 +1,12 @@
 import styles from "./styles.module.scss";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   className?: string;
   [key: string]: any;
 }
 
-const Switch: FunctionComponent<Props> = ({ className = "", ...props }) => {
+export const Switch: FC<Props> = ({ className = "", ...props }) => {
   return (
     <label className={`${styles.label} ${className}`}>
       <input
@@ -20,5 +20,3 @@ const Switch: FunctionComponent<Props> = ({ className = "", ...props }) => {
     </label>
   );
 };
-
-export default Switch;

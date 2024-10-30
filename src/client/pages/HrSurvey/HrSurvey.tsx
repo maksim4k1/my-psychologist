@@ -3,13 +3,19 @@
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
 import { AuthService } from "@/client/api";
-import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
-import Container from "@/client/components/UI/Container";
-import Form from "@/client/components/UI/Forms/Form";
-import Input from "@/client/components/UI/Inputs/Input";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import { useInput, useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import {
+  Container,
+  Form,
+  Input,
+  PageTitle,
+  PrimaryButton,
+} from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useInput,
+  useSetDefaultState,
+} from "@/client/hooks";
 import {
   PopupsService,
   authActions,
