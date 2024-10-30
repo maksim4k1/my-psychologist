@@ -1,6 +1,6 @@
 import { type AxiosRequestConfig, type AxiosResponse } from "axios";
 import { type NextRequest, NextResponse } from "next/server";
-import { mapErrorResponse } from "@/server/mappers/errors.mapper";
+import { mapErrorResponse } from "@/server/mappers";
 import { serverAxios } from "@/shared/config/api.config";
 import { type ResponseError } from "@/shared/types";
 

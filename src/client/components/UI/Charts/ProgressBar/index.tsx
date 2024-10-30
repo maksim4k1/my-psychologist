@@ -1,12 +1,12 @@
 import styles from "./styles.module.scss";
-import { type BorderData } from "@/client/redux/features/tests/types";
+import { type GetTestResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {
   value: number;
   min: number;
   max: number;
-  borders: BorderData[];
+  borders: GetTestResponseData["scales"][number]["borders"];
   className?: string;
 }
 

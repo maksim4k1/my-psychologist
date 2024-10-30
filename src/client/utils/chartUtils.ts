@@ -1,8 +1,8 @@
 import {
-  type ScaleData,
   type ScaleResultData,
   type TestResultData,
 } from "@/client/redux/features/tests/types";
+import { type GetTestResponseData } from "@/shared/types";
 
 export interface RadarChartItem {
   subject: string;
@@ -12,7 +12,7 @@ export interface RadarChartItem {
 
 export function mapToRadarChartData(
   testResults: TestResultData[],
-  scales: ScaleData[],
+  scales: GetTestResponseData["scales"],
   values: string[],
 ): RadarChartItem[] {
   const newData: RadarChartItem[] = [];
@@ -79,7 +79,7 @@ interface BarChartDataItem {
 
 export function mapToBarChartData(
   testResults: TestResultData[],
-  scales: ScaleData[],
+  scales: GetTestResponseData["scales"],
   values: string[],
 ): BarChartData {
   const barChartData: BarChartData = {

@@ -1,10 +1,4 @@
-import {
-  type TestData,
-  type TestQuestionData,
-  type TestResultData,
-  type TestShortData,
-  type TestsState,
-} from "./types";
+import { type TestResultData, type TestsState } from "./types";
 import {
   createDefaultState,
   createFailureState,
@@ -12,6 +6,11 @@ import {
   createSuccessState,
 } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
+import {
+  type GetTestQuestionsResponseData,
+  type GetTestResponseData,
+  type GetTestsResponseData,
+} from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: TestsState = {
@@ -41,7 +40,7 @@ const testsSlice = createSlice({
     },
     getTestsByUserIdSuccess: (
       state,
-      { payload }: PayloadAction<TestShortData[]>,
+      { payload }: PayloadAction<GetTestsResponseData>,
     ) => {
       state.getTestsByUserIdState = createSuccessState();
       state.testsByUserId = payload;
@@ -58,7 +57,10 @@ const testsSlice = createSlice({
     getTestsLoading: (state) => {
       state.getTestsState = createLoadingState();
     },
-    getTestsSuccess: (state, { payload }: PayloadAction<TestShortData[]>) => {
+    getTestsSuccess: (
+      state,
+      { payload }: PayloadAction<GetTestsResponseData>,
+    ) => {
       state.getTestsState = createSuccessState();
       state.tests = payload;
     },
@@ -88,7 +90,10 @@ const testsSlice = createSlice({
     getTestInfoLoading: (state) => {
       state.getTestInfoState = createLoadingState();
     },
-    getTestInfoSuccess: (state, { payload }: PayloadAction<TestData>) => {
+    getTestInfoSuccess: (
+      state,
+      { payload }: PayloadAction<GetTestResponseData>,
+    ) => {
       state.getTestInfoState = createSuccessState();
       state.testInfo = payload;
     },
@@ -144,7 +149,7 @@ const testsSlice = createSlice({
     },
     getTestQuestionsSuccess: (
       state,
-      { payload }: PayloadAction<TestQuestionData[]>,
+      { payload }: PayloadAction<GetTestQuestionsResponseData>,
     ) => {
       state.getTestQuestionsState = createSuccessState();
       state.testQuestions = payload;

@@ -4,11 +4,11 @@ import styles from "./styles.module.scss";
 import { TestsService } from "@/client/api";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
 import { selectGiveTestState } from "@/client/redux/features/tests/selectors";
-import { type TestShortData } from "@/client/redux/features/tests/types";
+import { type GetTestsResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 
 interface Props {
-  exercise: TestShortData;
+  exercise: GetTestsResponseData[number];
   userId: string;
 }
 
@@ -17,7 +17,12 @@ const GiveExerciseCard: FunctionComponent<Props> = ({ exercise, userId }) => {
   const giveTestState = useAppSelector(selectGiveTestState);
 
   const onClickHandler = () => {
-    dispatch(TestsService.giveTest(exercise, userId));
+    dispatch(
+      TestsService.giveTest({
+        userId,
+        testId: exercise.id,
+      }),
+    );
   };
 
   return (

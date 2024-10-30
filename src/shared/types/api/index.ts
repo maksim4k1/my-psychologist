@@ -6,3 +6,4 @@ export * from "./applications";
 export * from "./users";
 export * from "./psychologists";
 export * from "./articles";
+export * from "./tests";
