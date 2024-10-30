@@ -1,4 +1,4 @@
-import { type PsychologistData, type PsychologistsState } from "./types";
+import { type PsychologistsState } from "./types";
 import {
   createDefaultState,
   createFailureState,
@@ -6,6 +6,7 @@ import {
   createSuccessState,
 } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
+import { type GetPsychologistsResponseData } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: PsychologistsState = {
@@ -25,7 +26,7 @@ const psychologistsSlice = createSlice({
     },
     getPsychologistsSuccess: (
       state,
-      { payload }: PayloadAction<PsychologistData[]>,
+      { payload }: PayloadAction<GetPsychologistsResponseData>,
     ) => {
       state.psychologists = payload;
       state.getPsychologistsState = createSuccessState();
@@ -44,7 +45,7 @@ const psychologistsSlice = createSlice({
     },
     getMyPsychologistsSuccess: (
       state,
-      { payload }: PayloadAction<PsychologistData[]>,
+      { payload }: PayloadAction<GetPsychologistsResponseData>,
     ) => {
       state.myPsychologists = payload;
       state.getPsychologistState = createSuccessState();

@@ -1,15 +1,9 @@
 import { type StatusState } from "@/client/utils";
-
-export interface PsychologistData {
-  userId: string;
-  profileImage: string;
-  username: string;
-  isOnline: boolean;
-}
+import { type GetPsychologistsResponseData } from "@/shared/types";
 
 export interface PsychologistsState {
-  psychologists: PsychologistData[];
-  myPsychologists: PsychologistData[];
+  psychologists: GetPsychologistsResponseData;
+  myPsychologists: GetPsychologistsResponseData;
   getPsychologistsState: StatusState;
   getPsychologistState: StatusState;
 }

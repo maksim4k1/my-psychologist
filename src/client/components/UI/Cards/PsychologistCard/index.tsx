@@ -11,9 +11,9 @@ import { useInput } from "@/client/hooks";
 import { useAppDispatch } from "@/client/hooks/reduxHooks";
 import { selectSendApplicationState } from "@/client/redux/features/applications/selectors";
 import { selectProfile } from "@/client/redux/features/auth/selectors";
-import { type PsychologistData } from "@/client/redux/features/psychologists/types";
 import { PopupsService } from "@/client/redux/services/popups";
 import { checkFormDataValidation } from "@/client/utils";
+import { type GetPsychologistsResponseData } from "@/shared/types";
 import {
   type FormEvent,
   type FunctionComponent,
@@ -22,7 +22,7 @@ import {
 } from "react";
 
 interface Props {
-  psychologist: PsychologistData;
+  psychologist: GetPsychologistsResponseData[number];
 }
 
 const PsychologistCard: FunctionComponent<Props> = ({ psychologist }) => {

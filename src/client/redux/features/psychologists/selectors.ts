@@ -1,12 +1,15 @@
-import { type PsychologistData, type PsychologistsState } from "./types";
+import { type PsychologistsState } from "./types";
 import { type RootState } from "@/client/redux/store";
 import { type StatusState } from "@/client/utils";
+import { type GetPsychologistsResponseData } from "@/shared/types";
 
 const selectPsychologistsModule = (state: RootState): PsychologistsState => {
   return state.psychologistsReducer;
 };
 
-export const selectPsychologists = (state: RootState): PsychologistData[] => {
+export const selectPsychologists = (
+  state: RootState,
+): GetPsychologistsResponseData => {
   return selectPsychologistsModule(state).psychologists;
 };
 
@@ -14,7 +17,9 @@ export const selectGetPsychologistsState = (state: RootState): StatusState => {
   return selectPsychologistsModule(state).getPsychologistsState;
 };
 
-export const selectMyPsychologists = (state: RootState): PsychologistData[] => {
+export const selectMyPsychologists = (
+  state: RootState,
+): GetPsychologistsResponseData => {
   return selectPsychologistsModule(state).myPsychologists;
 };
 
