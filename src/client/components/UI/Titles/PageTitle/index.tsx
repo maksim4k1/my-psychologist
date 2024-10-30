@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -7,7 +7,7 @@ interface Props {
   [key: string]: any;
 }
 
-const PageTitle: FunctionComponent<Props> = ({
+export const PageTitle: FC<Props> = ({
   children,
   className = "",
   ...props
@@ -21,5 +21,3 @@ const PageTitle: FunctionComponent<Props> = ({
     </h1>
   );
 };
-
-export default PageTitle;

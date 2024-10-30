@@ -1,15 +1,15 @@
-import HttpErrorWrapper from "../HttpErrorWrapper";
-import LoadingWrapper from "../LoadingWrapper";
+import { HttpErrorWrapper } from "../HttpErrorWrapper";
+import { LoadingWrapper } from "../LoadingWrapper";
 import { type StatusState } from "@/client/utils";
 import { type HttpError } from "@/shared/config/api.config";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   state: StatusState[] | StatusState;
   children: ReactNode;
 }
 
-const StateWrapper: FunctionComponent<Props> = ({ state, children }) => {
+export const StateWrapper: FC<Props> = ({ state, children }) => {
   if (!Array.isArray(state)) state = [state];
 
   const isLoadingStatus: boolean[] = state.map((el) => el.isLoading);
@@ -27,5 +27,3 @@ const StateWrapper: FunctionComponent<Props> = ({ state, children }) => {
     </LoadingWrapper>
   );
 };
-
-export default StateWrapper;

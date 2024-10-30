@@ -1,21 +1,18 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import CloseIcon from "@/client/assets/svg/Icons/CloseIcon";
-import Container from "@/client/components/UI/Container";
-import { useAppDispatch } from "@/client/hooks/reduxHooks";
+import { CloseIcon } from "@/client/assets/icons";
+import { Container } from "@/client/components";
+import { useAppDispatch } from "@/client/hooks";
 import { PopupsService } from "@/client/redux";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   isOpen: boolean;
   label: string;
 }
 
-const SnackbarWithCloseAffordance: FunctionComponent<Props> = ({
-  isOpen,
-  label,
-}) => {
+export const SnackbarWithCloseAffordance: FC<Props> = ({ isOpen, label }) => {
   const dispatch = useAppDispatch();
 
   const onClickHandler = () => {
@@ -38,5 +35,3 @@ const SnackbarWithCloseAffordance: FunctionComponent<Props> = ({
     </Container>
   );
 };
-
-export default SnackbarWithCloseAffordance;

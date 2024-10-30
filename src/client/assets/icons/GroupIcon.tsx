@@ -1,4 +1,4 @@
-export default function GroupIcon() {
+export const GroupIcon = () => {
   return (
     <svg
       width="24"
@@ -13,4 +13,4 @@ export default function GroupIcon() {
       />
     </svg>
   );
-}
+};

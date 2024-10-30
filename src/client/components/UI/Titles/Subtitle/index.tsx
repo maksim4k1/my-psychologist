@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   children: string;
@@ -7,11 +7,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Subtitle: FunctionComponent<Props> = ({
-  children,
-  className = "",
-  ...props
-}) => {
+export const Subtitle: FC<Props> = ({ children, className = "", ...props }) => {
   return (
     <h2
       className={`${styles.title} ${className}`}
@@ -21,5 +17,3 @@ const Subtitle: FunctionComponent<Props> = ({
     </h2>
   );
 };
-
-export default Subtitle;

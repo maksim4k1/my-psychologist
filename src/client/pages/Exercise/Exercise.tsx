@@ -3,15 +3,20 @@
 import styles from "./styles.module.scss";
 import { useParams, useRouter } from "next/navigation";
 import { TestsService } from "@/client/api";
-import ArrowIcon from "@/client/assets/svg/Icons/ArrowIcon";
-import Button from "@/client/components/UI/Buttons/Button";
-import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
-import Container from "@/client/components/UI/Container";
-import Radio from "@/client/components/UI/Inputs/Radio";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import StateWrapper from "@/client/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import { ArrowIcon } from "@/client/assets/icons";
+import {
+  Button,
+  Container,
+  PageTitle,
+  PrimaryButton,
+  Radio,
+  StateWrapper,
+} from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useSetDefaultState,
+} from "@/client/hooks";
 import {
   PopupsService,
   selectGetTestQuestionsState,

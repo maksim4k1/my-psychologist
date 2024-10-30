@@ -1,6 +1,6 @@
 import { type FC } from "react";
 
-const TelegramIcon: FC<any> = () => {
+export const TelegramIcon: FC<any> = () => {
   return (
     <svg
       width="24"
@@ -45,5 +45,3 @@ const TelegramIcon: FC<any> = () => {
     </svg>
   );
 };
-
-export default TelegramIcon;

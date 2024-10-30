@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import Header from "@/client/components/UI/Header";
+import { Header } from "@/client/components";
 import { type ReactNode } from "react";
 
 export default function LandingLayout({

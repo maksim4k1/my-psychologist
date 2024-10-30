@@ -2,9 +2,8 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import Tasks from "@/client/assets/svg/Tasks";
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import { Tasks } from "@/client/assets/svg";
+import { Container, PageTitle } from "@/client/components";
 import { pages } from "@/shared/data";
 import { type FC } from "react";
 

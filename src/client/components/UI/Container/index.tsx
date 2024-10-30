@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -8,7 +8,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Container: FunctionComponent<Props> = ({
+export const Container: FC<Props> = ({
   children,
   className = "",
   isLarge = false,
@@ -25,5 +25,3 @@ const Container: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default Container;

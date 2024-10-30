@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
-import DefaultAvatar from "@/client/assets/svg/Icons/DefaultAvatarIcon";
-import { type FunctionComponent } from "react";
+import { DefaultAvatar } from "@/client/assets/icons";
+import { type FC } from "react";
 
 interface Props {
   src: string;
@@ -11,7 +11,7 @@ interface Props {
   [key: string]: any;
 }
 
-const ProfileImage: FunctionComponent<Props> = ({
+export const ProfileImage: FC<Props> = ({
   src,
   alt,
   size,
@@ -44,5 +44,3 @@ const ProfileImage: FunctionComponent<Props> = ({
     </>
   );
 };
-
-export default ProfileImage;

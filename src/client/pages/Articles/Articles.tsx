@@ -2,13 +2,18 @@
 
 import styles from "./styles.module.scss";
 import { ArticlesService } from "@/client/api";
-import ArticleCard from "@/client/components/UI/Cards/ArticleCard";
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import Subtitle from "@/client/components/UI/Titles/Subtitle";
-import StateWrapper from "@/client/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
+import {
+  ArticleCard,
+  Container,
+  PageTitle,
+  StateWrapper,
+  Subtitle,
+} from "@/client/components";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useSetDefaultState,
+} from "@/client/hooks";
 import {
   articlesActions,
   selectArticles,

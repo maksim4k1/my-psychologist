@@ -1,8 +1,8 @@
 "use client";
 
-import AppButton from "../AppButton";
+import { AppButton } from "../AppButton";
 import styles from "./styles.module.scss";
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -10,7 +10,7 @@ interface Props {
   [key: string]: any;
 }
 
-const PrimaryButton: FunctionComponent<Props> = ({
+export const PrimaryButton: FC<Props> = ({
   children,
   className = "",
   ...props
@@ -24,5 +24,3 @@ const PrimaryButton: FunctionComponent<Props> = ({
     </AppButton>
   );
 };
-
-export default PrimaryButton;

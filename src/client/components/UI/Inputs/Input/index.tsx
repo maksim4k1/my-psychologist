@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "../styles.module.scss";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   labelText?: string;
@@ -12,7 +12,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Input: FunctionComponent<Props> = ({
+export const Input: FC<Props> = ({
   labelText,
   exampleText,
   errorText,
@@ -47,5 +47,3 @@ const Input: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default Input;

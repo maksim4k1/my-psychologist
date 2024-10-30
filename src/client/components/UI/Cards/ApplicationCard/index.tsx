@@ -1,17 +1,17 @@
 "use client";
 
-import PrimaryButton from "../../Buttons/PrimaryButton";
-import ProfileImage from "../../Images/ProfileImage";
+import { PrimaryButton } from "../../Buttons";
+import { ProfileImage } from "../../Images";
 import styles from "../styles.module.scss";
 import { pages } from "@/shared/data";
 import { type GetApplicationsResponseData } from "@/shared/types";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   application: GetApplicationsResponseData[number];
 }
 
-const ApplicationCard: FunctionComponent<Props> = ({ application }) => {
+export const ApplicationCard: FC<Props> = ({ application }) => {
   return (
     <div className={styles.clientCard}>
       <div className={styles.cardHeader}>
@@ -30,32 +30,6 @@ const ApplicationCard: FunctionComponent<Props> = ({ application }) => {
             {application.isOnline ? "Онлайн" : "Был(а) недавно"}
           </div>
         </div>
-        {/* <button
-          className={styles.moreButton}
-          ref={moreButton}
-          onClick={() => setMoreIsOpen((val) => !val)}
-        >
-          <MoreVerticalIcon />
-        </button>
-        {moreIsOpen && (
-          <div
-            ref={more}
-            className={styles.more}
-          >
-            <button
-              className={styles.moreButtonAction}
-              onClick={() => onClickHandler(true)}
-            >
-              Принять
-            </button>
-            <button
-              className={styles.moreButtonAction}
-              onClick={() => onClickHandler(false)}
-            >
-              Отклонить
-            </button>
-          </div>
-        )} */}
       </div>
       <div className={styles.problem}>{application.problem}</div>
       <div className={styles.buttons}>
@@ -68,5 +42,3 @@ const ApplicationCard: FunctionComponent<Props> = ({ application }) => {
     </div>
   );
 };
-
-export default ApplicationCard;

@@ -1,17 +1,14 @@
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
-import { type FunctionComponent } from "react";
+import { Container, PageTitle } from "@/client/components";
+import { type FC } from "react";
 
 interface Props {
   message: string;
 }
 
-const NotFoundError: FunctionComponent<Props> = ({ message }) => {
+export const NotFoundError: FC<Props> = ({ message }) => {
   return (
     <Container>
       <PageTitle>404 - {message}</PageTitle>
     </Container>
   );
 };
-
-export default NotFoundError;

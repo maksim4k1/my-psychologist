@@ -1,8 +1,7 @@
 "use client";
 
-import PrimaryButton from "../../Buttons/PrimaryButton";
-import SecondaryButton from "../../Buttons/SecondaryButton";
-import Modal from "../../Popups/Modal";
+import { PrimaryButton, SecondaryButton } from "../../Buttons";
+import { Modal } from "../../Popups";
 import styles from "./styles.module.scss";
 import { pages } from "@/shared/data";
 import { type GetTestsResponseData } from "@/shared/types";
@@ -12,7 +11,7 @@ interface Props {
   exercise: GetTestsResponseData[number];
 }
 
-const ExerciseCard: FC<Props> = ({ exercise }) => {
+export const ExerciseCard: FC<Props> = ({ exercise }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClickHandler = () => {
@@ -58,5 +57,3 @@ const ExerciseCard: FC<Props> = ({ exercise }) => {
     </div>
   );
 };
-
-export default ExerciseCard;

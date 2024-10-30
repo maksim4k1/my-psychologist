@@ -10,7 +10,7 @@ interface TestProps {
   params?: QueryParams;
 }
 
-const TestCard: FC<TestProps> = ({ test, params = undefined }) => {
+export const TestCard: FC<TestProps> = ({ test, params = undefined }) => {
   return (
     <div className={styles.testCard}>
       <div className={styles.testTitle}>{test.title}</div>
@@ -26,5 +26,3 @@ const TestCard: FC<TestProps> = ({ test, params = undefined }) => {
     </div>
   );
 };
-
-export default TestCard;

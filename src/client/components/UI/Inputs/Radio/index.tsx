@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   labelText: string;
@@ -9,7 +9,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Radio: FunctionComponent<Props> = ({
+export const Radio: FC<Props> = ({
   labelText = "",
   className = "",
   ...props
@@ -25,5 +25,3 @@ const Radio: FunctionComponent<Props> = ({
     </label>
   );
 };
-
-export default Radio;

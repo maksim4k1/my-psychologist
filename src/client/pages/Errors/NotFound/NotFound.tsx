@@ -1,5 +1,4 @@
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import { Container, PageTitle } from "@/client/components";
 import { type FC } from "react";
 
 export const NotFoundPage: FC = () => {

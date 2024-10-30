@@ -2,16 +2,12 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import LogoIcon from "@/client/assets/svg/Icons/Logo";
-import TelegramIcon from "@/client/assets/svg/Icons/TelegramIcon";
-import VkIcon from "@/client/assets/svg/Icons/VkIcon";
-import IconButton from "@/client/components/UI/Buttons/IconButton";
-import Container from "@/client/components/UI/Container";
-import AppLink from "@/client/components/UI/Links/AppLink";
+import { LogoIcon, TelegramIcon, VkIcon } from "@/client/assets/icons";
+import { AppLink, Container, IconButton } from "@/client/components";
 import { pages } from "@/shared/data";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
-export const Footer: FunctionComponent = () => {
+export const Footer: FC = () => {
   return (
     <footer className={styles.footer}>
       <Container

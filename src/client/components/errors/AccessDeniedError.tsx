@@ -1,12 +1,10 @@
-import Container from "@/client/components/UI/Container";
-import PageTitle from "@/client/components/UI/Titles/PageTitle";
+import { Container, PageTitle } from "@/client/components";
+import { type FC } from "react";
 
-function AccessDeniedError() {
+export const AccessDeniedError: FC = () => {
   return (
     <Container>
       <PageTitle>403 - отказано в доступе</PageTitle>
     </Container>
   );
-}
-
-export default AccessDeniedError;
+};

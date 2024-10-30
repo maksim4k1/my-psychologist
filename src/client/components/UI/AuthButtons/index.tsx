@@ -1,8 +1,7 @@
-import IconButton from "../Buttons/IconButton";
+import { IconButton } from "../Buttons";
 import styles from "./styles.module.scss";
-import VkIcon from "@/client/assets/svg/Icons/VkIcon";
-import YandexIcon from "@/client/assets/svg/Icons/YandexIcon";
-import { type FunctionComponent, type ReactNode } from "react";
+import { VkIcon, YandexIcon } from "@/client/assets/icons";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -10,7 +9,7 @@ interface Props {
   [key: string]: any;
 }
 
-const AuthButtons: FunctionComponent<Props> = ({
+export const AuthButtons: FC<Props> = ({
   children,
   className = "",
   ...props
@@ -33,5 +32,3 @@ const AuthButtons: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default AuthButtons;

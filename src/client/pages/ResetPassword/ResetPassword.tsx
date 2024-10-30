@@ -2,10 +2,7 @@
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
-import PrimaryButton from "@/client/components/UI/Buttons/PrimaryButton";
-import Container from "@/client/components/UI/Container";
-import Form from "@/client/components/UI/Forms/AuthForm";
-import Input from "@/client/components/UI/Inputs/Input";
+import { Container, Form, Input, PrimaryButton } from "@/client/components";
 import { useInput } from "@/client/hooks";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";

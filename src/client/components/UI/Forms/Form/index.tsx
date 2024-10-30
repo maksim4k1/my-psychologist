@@ -1,4 +1,4 @@
-import { type FunctionComponent, type ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -6,11 +6,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Form: FunctionComponent<Props> = ({
-  children,
-  className = "",
-  ...props
-}) => {
+export const Form: FC<Props> = ({ children, className = "", ...props }) => {
   return (
     <form
       noValidate
@@ -21,5 +17,3 @@ const Form: FunctionComponent<Props> = ({
     </form>
   );
 };
-
-export default Form;

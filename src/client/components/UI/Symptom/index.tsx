@@ -1,12 +1,10 @@
 import styles from "./styles.module.scss";
-import { type FunctionComponent } from "react";
+import { type FC } from "react";
 
 interface Props {
   problem: string;
 }
 
-const Symptom: FunctionComponent<Props> = ({ problem }) => {
+export const Symptom: FC<Props> = ({ problem }) => {
   return <span className={styles.problem}>{problem}</span>;
 };
-
-export default Symptom;

@@ -1,4 +1,4 @@
-export default function MeditationIcon() {
+export const Completed = () => {
   return (
     <svg
       width="440"
@@ -61,4 +61,4 @@ export default function MeditationIcon() {
       />
     </svg>
   );
-}
+};

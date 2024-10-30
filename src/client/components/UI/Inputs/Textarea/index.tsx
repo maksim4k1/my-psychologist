@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "../styles.module.scss";
-import { type ChangeEvent, type FunctionComponent } from "react";
+import { type ChangeEvent, type FC } from "react";
 
 interface Props {
   labelText?: string;
@@ -14,7 +14,7 @@ interface Props {
   [key: string]: any;
 }
 
-const Textarea: FunctionComponent<Props> = ({
+export const Textarea: FC<Props> = ({
   labelText,
   exampleText,
   errorText,
@@ -61,5 +61,3 @@ const Textarea: FunctionComponent<Props> = ({
     </div>
   );
 };
-
-export default Textarea;

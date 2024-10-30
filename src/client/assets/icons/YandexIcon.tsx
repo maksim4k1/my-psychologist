@@ -1,4 +1,4 @@
-export default function YandexIcon() {
+export const YandexIcon = () => {
   return (
     <svg
       width="24"
@@ -21,4 +21,4 @@ export default function YandexIcon() {
       />
     </svg>
   );
-}
+};

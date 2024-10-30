@@ -1,4 +1,4 @@
-export default function VkIcon() {
+export const VkIcon = () => {
   return (
     <svg
       width="24"
@@ -19,4 +19,4 @@ export default function VkIcon() {
       />
     </svg>
   );
-}
+};
