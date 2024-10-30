@@ -1,5 +1,4 @@
-import { applicationsActions } from "@/client/redux/features/applications";
-import { type AppDispatch } from "@/client/redux/store";
+import { type AppDispatch, applicationsActions } from "@/client/redux";
 import { localAxios } from "@/shared/config/api.config";
 import {
   type ConfirmApplicationRequestData,

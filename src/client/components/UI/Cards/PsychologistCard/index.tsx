@@ -9,9 +9,11 @@ import { ApplicationsService } from "@/client/api";
 import FormErrorLabel from "@/client/components/statusLabels/FormErrorLabel";
 import { useInput } from "@/client/hooks";
 import { useAppDispatch } from "@/client/hooks/reduxHooks";
-import { selectSendApplicationState } from "@/client/redux/features/applications/selectors";
-import { selectProfile } from "@/client/redux/features/auth/selectors";
-import { PopupsService } from "@/client/redux/services/popups";
+import {
+  PopupsService,
+  selectProfile,
+  selectSendApplicationState,
+} from "@/client/redux";
 import { checkFormDataValidation } from "@/client/utils";
 import { type GetPsychologistsResponseData } from "@/shared/types";
 import {

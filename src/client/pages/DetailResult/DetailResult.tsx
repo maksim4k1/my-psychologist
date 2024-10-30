@@ -10,13 +10,13 @@ import Subtitle from "@/client/components/UI/Titles/Subtitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { testsActions } from "@/client/redux/features/tests";
 import {
   selectGetTestInfoState,
   selectGetTestResultState,
   selectTestInfo,
   selectTestResult,
-} from "@/client/redux/features/tests/selectors";
+  testsActions,
+} from "@/client/redux";
 import { type FC, useEffect } from "react";
 
 export const DetailResultPage: FC = () => {

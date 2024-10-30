@@ -3,7 +3,7 @@
 import styles from "./styles.module.scss";
 import { TestsService } from "@/client/api";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { selectGiveTestState } from "@/client/redux/features/tests/selectors";
+import { selectGiveTestState } from "@/client/redux";
 import { type GetTestsResponseData } from "@/shared/types";
 import { type FunctionComponent } from "react";
 

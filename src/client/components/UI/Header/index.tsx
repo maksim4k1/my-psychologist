@@ -16,7 +16,7 @@ import {
   selectAuthLoginState,
   selectLogoutState,
   selectProfile,
-} from "@/client/redux/features/auth/selectors";
+} from "@/client/redux";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
 import { type FunctionComponent, useEffect, useRef, useState } from "react";

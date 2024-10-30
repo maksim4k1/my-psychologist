@@ -1,5 +1,5 @@
 import { type PopupsState, type SnackbarState } from "./types";
-import { type RootState } from "@/client/redux/store";
+import { type RootState } from "@/client/redux";
 
 const selectPopupsModule = (state: RootState): PopupsState => {
   return state.popupsReducer;

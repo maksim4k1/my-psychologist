@@ -7,19 +7,20 @@ import ClientCard from "@/client/components/UI/Cards/ClientCard";
 import Container from "@/client/components/UI/Container";
 import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
-import { useSetDefaultState } from "@/client/hooks";
-import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { applicationsActions } from "@/client/redux/features/applications";
 import {
+  useAppDispatch,
+  useAppSelector,
+  useSetDefaultState,
+} from "@/client/hooks";
+import {
+  applicationsActions,
+  clientsActions,
   selectApplications,
   selectApplicationsState,
-} from "@/client/redux/features/applications/selectors";
-import { selectRole } from "@/client/redux/features/auth/selectors";
-import { clientsActions } from "@/client/redux/features/clients";
-import {
   selectClients,
   selectClientsState,
-} from "@/client/redux/features/clients/selectors";
+  selectRole,
+} from "@/client/redux";
 import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { type FC, useEffect } from "react";

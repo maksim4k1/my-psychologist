@@ -9,11 +9,7 @@ import Subtitle from "@/client/components/UI/Titles/Subtitle";
 import LoadingWrapper from "@/client/components/wrappers/LoadingWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { testsActions } from "@/client/redux/features/tests";
-import {
-  selectGetTestsState,
-  selectTests,
-} from "@/client/redux/features/tests/selectors";
+import { selectGetTestsState, selectTests, testsActions } from "@/client/redux";
 import { type FC, useEffect } from "react";
 
 export const ExercisesPage: FC = () => {

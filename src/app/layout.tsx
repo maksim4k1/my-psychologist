@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
 import ModalsPortal from "@/client/components/portals/ModalsPortal";
 import SnackbarsPortal from "@/client/components/portals/SnackbarsPortal";
-import StoreProvider from "@/client/redux/StoreProvider";
+import { StoreProvider } from "@/client/redux";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
 import { type FC, type ReactNode } from "react";

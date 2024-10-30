@@ -1,5 +1,4 @@
-import { articlesActions } from "@/client/redux/features/articles";
-import { type AppDispatch } from "@/client/redux/store";
+import { type AppDispatch, articlesActions } from "@/client/redux";
 import { localAxios } from "@/shared/config/api.config";
 import {
   type GetArticleResponseData,

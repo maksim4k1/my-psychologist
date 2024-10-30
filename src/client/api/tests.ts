@@ -1,5 +1,4 @@
-import { testsActions } from "@/client/redux/features/tests";
-import { type AppDispatch } from "@/client/redux/store";
+import { type AppDispatch, testsActions } from "@/client/redux";
 import { localAxios } from "@/shared/config/api.config";
 import {
   type GetTestQuestionsResponseData,

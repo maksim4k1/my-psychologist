@@ -65,4 +65,7 @@ const psychologistsSlice = createSlice({
 
 export const psychologistsActions = psychologistsSlice.actions;
 
-export default psychologistsSlice.reducer;
+export const psychologistsReducer = psychologistsSlice.reducer;
+
+export * from "./selectors";
+export * from "./types";

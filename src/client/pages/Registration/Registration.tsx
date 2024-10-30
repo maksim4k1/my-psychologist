@@ -12,9 +12,11 @@ import AppLink from "@/client/components/UI/Links/AppLink";
 import FormErrorLabel from "@/client/components/statusLabels/FormErrorLabel";
 import { useInput, useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { authActions } from "@/client/redux/features/auth";
-import { selectAuthRegistrationState } from "@/client/redux/features/auth/selectors";
-import { PopupsService } from "@/client/redux/services/popups";
+import {
+  PopupsService,
+  authActions,
+  selectAuthRegistrationState,
+} from "@/client/redux";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type RegistrationRequestData } from "@/shared/types";

@@ -13,19 +13,17 @@ import Subtitle from "@/client/components/UI/Titles/Subtitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { applicationsActions } from "@/client/redux/features/applications";
 import {
+  PopupsService,
+  applicationsActions,
   selectApplication,
   selectApplicationState,
   selectConfirmApplicationState,
-} from "@/client/redux/features/applications/selectors";
-import { selectRole } from "@/client/redux/features/auth/selectors";
-import { testsActions } from "@/client/redux/features/tests";
-import {
   selectGetTestsByUserIdState,
+  selectRole,
   selectTestsByUserId,
-} from "@/client/redux/features/tests/selectors";
-import { PopupsService } from "@/client/redux/services/popups";
+  testsActions,
+} from "@/client/redux";
 import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";

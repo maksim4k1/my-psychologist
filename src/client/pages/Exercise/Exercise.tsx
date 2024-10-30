@@ -12,13 +12,13 @@ import PageTitle from "@/client/components/UI/Titles/PageTitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { testsActions } from "@/client/redux/features/tests";
 import {
+  PopupsService,
   selectGetTestQuestionsState,
   selectSendTestResultState,
   selectTestQuestions,
-} from "@/client/redux/features/tests/selectors";
-import { PopupsService } from "@/client/redux/services/popups";
+  testsActions,
+} from "@/client/redux";
 import { pages } from "@/shared/data";
 import { type FC, useEffect, useState } from "react";
 

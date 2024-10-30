@@ -12,17 +12,15 @@ import Subtitle from "@/client/components/UI/Titles/Subtitle";
 import StateWrapper from "@/client/components/wrappers/StateWrapper";
 import { useSetDefaultState } from "@/client/hooks";
 import { useAppDispatch, useAppSelector } from "@/client/hooks/reduxHooks";
-import { selectRole } from "@/client/redux/features/auth/selectors";
-import { clientsActions } from "@/client/redux/features/clients";
 import {
+  clientsActions,
   selectClient,
   selectClientState,
-} from "@/client/redux/features/clients/selectors";
-import { testsActions } from "@/client/redux/features/tests";
-import {
   selectGetTestsByUserIdState,
+  selectRole,
   selectTestsByUserId,
-} from "@/client/redux/features/tests/selectors";
+  testsActions,
+} from "@/client/redux";
 import { addQueryParams } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
