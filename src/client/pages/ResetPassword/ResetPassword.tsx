@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
-import { Container, Form, Input, PrimaryButton } from "@/client/components";
+import { AuthForm, Container, Input, PrimaryButton } from "@/client/components";
 import { useInput } from "@/client/hooks";
 import { checkFormDataValidation } from "@/client/utils";
 import { pages } from "@/shared/data";
@@ -29,7 +29,7 @@ export const ResetPasswordPage: FC = () => {
 
   return (
     <Container>
-      <Form
+      <AuthForm
         title="Восстановить пароль"
         onSubmit={onSubmitHandler}
       >
@@ -50,7 +50,7 @@ export const ResetPasswordPage: FC = () => {
         >
           Сбросить пароль
         </PrimaryButton>
-      </Form>
+      </AuthForm>
     </Container>
   );
 };
