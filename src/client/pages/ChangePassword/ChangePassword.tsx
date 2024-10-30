@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.scss";
 import { useSearchParams } from "next/navigation";
-import { Button, Container, Form, Input } from "@/client/components";
+import { AuthForm, Container, Input, PrimaryButton } from "@/client/components";
 import { useInput } from "@/client/hooks";
 import { checkFormDataValidation } from "@/client/utils";
 import { type FC, type FormEvent } from "react";
@@ -41,7 +41,7 @@ export const ChangePasswordPage: FC = () => {
 
   return (
     <Container>
-      <Form
+      <AuthForm
         onSubmit={onSubmitHandler}
         title={resetConfirmationCode ? "Восстановить пароль" : "Сменить пароль"}
       >
@@ -77,13 +77,13 @@ export const ChangePasswordPage: FC = () => {
           errorText={confirmPassword.error}
           required
         />
-        <Button
+        <PrimaryButton
           type="submit"
           className={styles.button}
         >
           Сохранить пароль
-        </Button>
-      </Form>
+        </PrimaryButton>
+      </AuthForm>
     </Container>
   );
 };

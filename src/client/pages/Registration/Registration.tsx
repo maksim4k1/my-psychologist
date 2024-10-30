@@ -6,8 +6,8 @@ import { AuthService } from "@/client/api";
 import {
   AppLink,
   AuthButtons,
+  AuthForm,
   Container,
-  Form,
   FormErrorLabel,
   Input,
   PrimaryButton,
@@ -75,7 +75,7 @@ export const RegistrationPage: FC = () => {
 
   return (
     <Container>
-      <Form
+      <AuthForm
         onSubmit={onSubmitHandler}
         title="Регистрация"
       >
@@ -135,7 +135,7 @@ export const RegistrationPage: FC = () => {
           </PrimaryButton>
           <AppLink href={pages.login.path}>Войти</AppLink>
         </AuthButtons>
-      </Form>
+      </AuthForm>
     </Container>
   );
 };
