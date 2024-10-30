@@ -1,0 +1,63 @@
+@import "@/client/styles/variables";
+
+.title {
+  font-family: var(--font-victor-mono);
+  font-weight: 700;
+}
+
+h3.title {
+  font-size: 40px;
+  line-height: 44px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.achievements {
+  display: flex;
+  gap: 15px;
+}
+
+.achievementCard {
+  min-width: 322px;
+  height: 200px;
+  padding: 40px 23px 50px 30px;
+  background-color: $color-landing-white;
+  border-radius: 40px;
+  box-shadow: $shadow-landing-primary;
+  background-repeat: no-repeat;
+}
+
+.achievementCard1 {
+  background-image: url("/static/landing/freedom.webp");
+  background-position-x: calc(100% - 35px);
+  background-position-y: calc(100% - 7px);
+}
+
+.achievementCard2 {
+  background-image: url("/static/landing/comments.webp");
+  background-position-x: 50%;
+  background-position-y: calc(100% - 11px);
+}
+
+.achievementCard3 {
+  background-image: url("/static/landing/wave-2.webp");
+  background-position-x: 50%;
+  background-position-y: 100%;
+}
+
+.achievementCard4 {
+  background-image: url("/static/landing/sunshine.webp");
+  background-position-x: calc(100% - 31px);
+  background-position-y: calc(100% - 18px);
+}
+
+.achievementCard5 {
+  background-image: url("/static/landing/wave.webp");
+  background-position-x: 50%;
+  background-position-y: 100%;
+}
+
+.achievementTitle {
+  font-size: 20px;
+  line-height: 22px;
+}

@@ -1,0 +1,8 @@
+@import "@/client/styles/variables.scss";
+@import "@/client/styles/textStyles.scss";
+
+.errorLabel {
+  color: $color-error;
+  @include labelLarge;
+  text-align: center;
+}

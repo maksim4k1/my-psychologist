@@ -1,0 +1,25 @@
+@import "@/client/styles/variables";
+@import "@/client/styles/textStyles";
+@import "@/client/styles/mixins";
+
+.main {
+  display: flex;
+  gap: 120px;
+}
+
+.title {
+  margin-bottom: 40px;
+}
+
+.tests {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,15 @@
+@import "@/client/styles/textStyles";
+
+.subtitle {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  @include titleLarge;
+}
+
+.psychologistList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  justify-content: space-between;
+  row-gap: 40px;
+  column-gap: 20px;
+}

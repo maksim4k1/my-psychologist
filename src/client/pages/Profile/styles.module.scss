@@ -1,0 +1,45 @@
+@import "@/client/styles/variables";
+@import "@/client/styles/textStyles";
+
+.title {
+  margin-bottom: 40px;
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cards {
+  display: flex;
+  flex-flow: column;
+  gap: 40px;
+}
+
+.card {
+  width: 360px;
+  padding: 12px 16px;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+  background-color: $color-surface-container-highest;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $color-secondary-container;
+  }
+}
+
+.cardTitle {
+  @include titleSmall;
+}
+
+.cardDescription {
+  @include bodyMedium;
+}
+
+.icon {
+  margin-right: 40px;
+}

@@ -1,0 +1,56 @@
+@import "@/client/styles/variables";
+@import "@/client/styles/textStyles";
+
+.title {
+  margin-bottom: 40px;
+}
+
+.header {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: flex-start;
+  @include titleLarge;
+}
+
+.questionNumber {
+  color: $color-primary;
+}
+
+.radioButtons {
+  display: flex;
+  flex-flow: column;
+  gap: 28px;
+}
+
+.buttons {
+  margin-top: 62px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  color: $color-primary;
+  @include labelLarge;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+
+  & path {
+    stroke: $color-primary;
+  }
+
+  &:disabled {
+    color: $color-primary-fixed-dim;
+
+    & path {
+      stroke: $color-primary-fixed-dim;
+    }
+  }
+}
+
+.backIcon {
+  transform: rotate(180deg);
+}

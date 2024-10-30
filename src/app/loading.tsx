@@ -1,4 +1,4 @@
-import LoadingLoop from "@/components/statusLabels/LoadingLoop";
+import { LoadingLoop } from "@/client/components";
 
 function Loading() {
   return <LoadingLoop />;

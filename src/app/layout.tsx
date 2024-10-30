@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
-import ModalsPortal from "@/components/portals/ModalsPortal";
-import SnackbarsPortal from "@/components/portals/SnackbarsPortal";
-import StoreProvider from "@/redux/StoreProvider";
-import "@/styles/global.scss";
-import "@/styles/reset.scss";
-import { type ReactNode } from "react";
+import { ModalsPortal, SnackbarsPortal } from "@/client/components";
+import { StoreProvider } from "@/client/redux";
+import "@/client/styles/global.scss";
+import "@/client/styles/reset.scss";
+import { type FC, type ReactNode } from "react";
 
 export const fontRoboto = Roboto({
   weight: ["400", "500"],
@@ -31,11 +30,15 @@ export const metadata: Metadata = {
     "Программная система для сопровождения психотерапии и самостоятельной проработки психологических проблем",
 };
 
-export default function RootLayout({
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+const RootLayout: FC<RootLayoutProps> = async ({
   children,
 }: Readonly<{
   children: ReactNode;
-}>) {
+}>) => {
   return (
     <html lang="ru">
       <body
@@ -49,4 +52,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

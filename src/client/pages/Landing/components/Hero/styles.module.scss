@@ -1,0 +1,50 @@
+@import "@/client/styles/variables";
+
+.strong {
+  color: $color-landing-primary;
+}
+
+.title {
+  font-family: var(--font-victor-mono);
+  font-weight: 700;
+}
+
+h1.title {
+  max-width: 960px;
+  font-size: 56px;
+  line-height: 62px;
+}
+
+h2.title {
+  font-size: 32px;
+  line-height: 36px;
+}
+
+h3.title {
+  font-size: 40px;
+  line-height: 44px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.container {
+  display: flex;
+  flex-flow: column;
+  gap: 140px;
+  font-size: 20px;
+}
+
+.mainSection {
+  height: 520px;
+  display: flex;
+  align-items: center;
+
+  background-image: url("/static/landing/meditation.webp");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.mainSectionImage {
+  padding-right: 39px;
+}

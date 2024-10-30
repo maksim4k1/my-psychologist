@@ -1,9 +1,0 @@
-export const getCookie = (cookie: string): string | null => {
-  const cookies: string[] = document.cookie.split("; ");
-
-  const findedCookie: string | undefined = cookies.find(
-    (el) => el.split("=")[0] === cookie,
-  );
-
-  return findedCookie ? findedCookie.split("=")[1] : null;
-};
