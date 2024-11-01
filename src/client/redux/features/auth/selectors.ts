@@ -23,10 +23,6 @@ export const selectRole = (state: RootState): AccessRole => {
   return selectAuthModule(state).profile.role;
 };
 
-export const selectAuthLoginState = (state: RootState): StatusState => {
-  return selectAuthModule(state).loginState;
-};
-
 export const selectAuthRegistrationState = (state: RootState): StatusState => {
   return selectAuthModule(state).registrationState;
 };

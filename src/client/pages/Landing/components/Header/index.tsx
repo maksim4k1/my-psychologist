@@ -10,18 +10,13 @@ import {
   useAppSelector,
   useClickOutside,
 } from "@/client/hooks";
-import {
-  selectAuthIsAuth,
-  selectAuthLoginState,
-  selectProfile,
-} from "@/client/redux";
+import { selectAuthIsAuth, selectProfile } from "@/client/redux";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
 import { type FC, useRef, useState } from "react";
 
 export const Header: FC = () => {
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
-  const loginState = useAppSelector(selectAuthLoginState);
   const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
   const popupRef = useRef(null);
@@ -134,13 +129,6 @@ export const Header: FC = () => {
               </div>
             )}
           </div>
-        ) : loginState.isLoading ? (
-          <button
-            disabled
-            className={styles.button}
-          >
-            Загрузка...
-          </button>
         ) : (
           <a
             className={styles.button}

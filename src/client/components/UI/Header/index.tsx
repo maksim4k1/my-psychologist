@@ -15,7 +15,6 @@ import {
 } from "@/client/hooks";
 import {
   selectAuthIsAuth,
-  selectAuthLoginState,
   selectLogoutState,
   selectProfile,
 } from "@/client/redux";
@@ -26,7 +25,6 @@ import { type FC, useEffect, useRef, useState } from "react";
 export const Header: FC = () => {
   const router = useRouter();
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
-  const loginState = useAppSelector(selectAuthLoginState);
   const profile = useAppSelector(selectProfile);
   const logoutState = useAppSelector(selectLogoutState);
   const dispatch = useAppDispatch();
@@ -139,8 +137,6 @@ export const Header: FC = () => {
               </div>
             )}
           </div>
-        ) : loginState.isLoading ? (
-          <PrimaryButton disabled>Загрузка...</PrimaryButton>
         ) : (
           <PrimaryButton href={pages.login.path}>Войти</PrimaryButton>
         )}

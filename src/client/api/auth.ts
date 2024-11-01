@@ -1,8 +1,6 @@
 import { type AppDispatch, authActions } from "@/client/redux";
 import { localAxios } from "@/shared/config/api.config";
 import {
-  type LoginRequestData,
-  type LoginResponseData,
   type RegistrationRequestData,
   type RegistrationResponseData,
   ResponseError,
@@ -10,23 +8,6 @@ import {
 } from "@/shared/types";
 
 export class AuthService {
-  static login =
-    (formData: LoginRequestData) => async (dispatch: AppDispatch) => {
-      dispatch(authActions.loginLoading());
-      try {
-        const { data } = await localAxios.post<LoginResponseData>(
-          "/auth/login",
-          formData,
-        );
-
-        dispatch(authActions.loginSuccess(data));
-      } catch (err) {
-        if (err instanceof ResponseError) {
-          dispatch(authActions.loginFailure(err.serialize()));
-        }
-      }
-    };
-
   static registration =
     (formData: RegistrationRequestData) => async (dispatch: AppDispatch) => {
       dispatch(authActions.registrationLoading());

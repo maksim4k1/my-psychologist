@@ -7,6 +7,7 @@ import {
   psychologistsReducer,
   testsReducer,
 } from "./features";
+import { authApi } from "./features/auth/api";
 import {
   type Store,
   type ThunkDispatch,
@@ -17,6 +18,7 @@ import {
 
 const rootReducer = combineReducers({
   [articlesApi.reducerPath]: articlesApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
   authReducer,
   applicationsReducer,
   clientsReducer,
@@ -28,7 +30,7 @@ const rootReducer = combineReducers({
 export const store: Store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(articlesApi.middleware),
+    getDefaultMiddleware().concat([articlesApi.middleware, authApi.middleware]),
   devTools: true,
 });
 

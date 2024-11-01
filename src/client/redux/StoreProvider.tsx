@@ -14,15 +14,14 @@ interface Props {
 
 const AuthProvider: FC<Props> = ({ children }) => {
   const dispatch = useAppDispatch();
+  const userDataJSON = getCookie(cookies.userData.name);
 
   useEffect(() => {
-    const userDataJSON = getCookie(cookies.userData.name);
-
     if (userDataJSON) {
       const userData = JSON.parse(decodeURIComponent(userDataJSON));
-      dispatch(authActions.setInitialUserData(userData));
+      dispatch(authActions.setUserData(userData));
     }
-  }, [dispatch]);
+  }, [dispatch, userDataJSON]);
 
   return children;
 };
