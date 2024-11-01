@@ -26,3 +26,14 @@ export interface GetTestResultResponseData {
 
 export type GetTestResultsApiResponseData = GetTestResultApiResponseData[];
 export type GetTestResultsResponseData = GetTestResultResponseData[];
+
+export interface SendTestResultRequestData {
+  testId: string;
+  answers: number[];
+}
+
+export interface SendTestResultApiRequestData {
+  test_id: string;
+  date: string;
+  results: number[];
+}

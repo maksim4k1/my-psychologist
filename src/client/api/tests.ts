@@ -130,7 +130,7 @@ export class TestsService {
       dispatch(testsActions.sendTestResultLoading());
 
       try {
-        await localAxios.post(`/tests/results/send`, data);
+        await localAxios.post(`/tests/results`, data);
 
         dispatch(testsActions.sendTestResultSuccess());
       } catch (err) {
