@@ -3,6 +3,8 @@ import {
   type GetTestResultResponseData,
   type GetTestResultsApiResponseData,
   type GetTestResultsResponseData,
+  type SendTestResultApiRequestData,
+  type SendTestResultRequestData,
 } from "@/shared/types";
 import { mapDatetimeToText } from "@/shared/utils";
 
@@ -29,4 +31,15 @@ export const mapGetTestResultsResponse = (
   data: GetTestResultsApiResponseData,
 ): GetTestResultsResponseData => {
   return data.map(mapGetTestResultResponse);
+};
+
+export const mapSendTestResultRequest = (
+  data: SendTestResultRequestData,
+): SendTestResultApiRequestData => {
+  const { testId, answers } = data;
+  return {
+    test_id: testId,
+    date: new Date().toJSON(),
+    results: answers,
+  };
 };
