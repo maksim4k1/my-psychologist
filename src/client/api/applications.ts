@@ -63,7 +63,7 @@ export class ApplicationsService {
       dispatch(applicationsActions.sendApplicationLoading());
 
       try {
-        await localAxios.post("/applications/send", formData);
+        await localAxios.post("/applications", formData);
 
         dispatch(applicationsActions.sendApplicationSuccess());
       } catch (err) {

@@ -15,6 +15,7 @@ import {
   useSetDefaultState,
 } from "@/client/hooks";
 import {
+  applicationsActions,
   psychologistsActions,
   selectGetMyPsychologistsState,
   selectGetPsychologistsState,
@@ -39,6 +40,7 @@ export const PsychologistsPage: FC = () => {
 
   useSetDefaultState(psychologistsActions.getPsychologistsSetDefaultState);
   useSetDefaultState(psychologistsActions.getMyPsychologistsSetDefaultState);
+  useSetDefaultState(applicationsActions.sendApplicationSetDefaultState);
 
   return (
     <Container>

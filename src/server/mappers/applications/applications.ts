@@ -1,6 +1,8 @@
 import {
   type GetApplicationsApiResponseData,
   type GetApplicationsResponseData,
+  type SendApplicationApiRequestData,
+  type SendApplicationRequestData,
 } from "@/shared/types";
 
 export const mapGetApplicationsResponse = (
@@ -18,4 +20,15 @@ export const mapGetApplicationsResponse = (
       profileImage: "",
     };
   });
+};
+
+export const mapSendApplicationRequest = (
+  data: SendApplicationRequestData,
+): SendApplicationApiRequestData => {
+  const { psychologistId, request } = data;
+
+  return {
+    user_id: psychologistId,
+    text: request,
+  };
 };
