@@ -1,6 +1,6 @@
 import {
   applicationsReducer,
-  articlesReducer,
+  articlesApi,
   authReducer,
   clientsReducer,
   popupsReducer,
@@ -16,17 +16,19 @@ import {
 } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
+  [articlesApi.reducerPath]: articlesApi.reducer,
   authReducer,
   applicationsReducer,
   clientsReducer,
   testsReducer,
   popupsReducer,
   psychologistsReducer,
-  articlesReducer,
 });
 
 export const store: Store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(articlesApi.middleware),
   devTools: true,
 });
 
