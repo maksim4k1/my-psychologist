@@ -12,6 +12,7 @@ export const articlesApi = createApi({
     getArticles: builder.query<GetArticlesResponseData, void>({
       query: () => "/articles",
     }),
+
     getArticleById: builder.query<GetArticleResponseData, string>({
       query: (articleId: string) => `/articles/${articleId}`,
     }),

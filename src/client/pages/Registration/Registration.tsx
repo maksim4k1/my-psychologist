@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
-import { AuthService } from "@/client/api";
 import {
   AppLink,
   AuthButtons,
@@ -12,18 +11,13 @@ import {
   Input,
   PrimaryButton,
 } from "@/client/components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useInput,
-  useSetDefaultState,
-} from "@/client/hooks";
+import { useAppDispatch, useInput } from "@/client/hooks";
 import {
   PopupsService,
   authActions,
-  selectAuthRegistrationState,
+  useRegistrationMutation,
 } from "@/client/redux";
-import { checkFormDataValidation } from "@/client/utils";
+import { checkFormDataValidation, getQueryErrorMessage } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type RegistrationRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
@@ -40,16 +34,18 @@ export const RegistrationPage: FC = () => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const registrationState = useAppSelector(selectAuthRegistrationState);
+  const [registration, { data, isLoading, isSuccess, isError, error }] =
+    useRegistrationMutation();
 
   useEffect(() => {
-    if (registrationState.isSuccess) {
+    if (isSuccess) {
       dispatch(
         PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
       );
+      dispatch(authActions.setUserData(data));
       router.push(pages.successRegistration.path);
     }
-  }, [registrationState.isSuccess, dispatch, router]);
+  }, [isSuccess, dispatch, data, router]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -62,16 +58,9 @@ export const RegistrationPage: FC = () => {
         confirmPassword: confirmPassword.value,
       };
 
-      dispatch(AuthService.registration(formData));
+      registration(formData);
     }
   };
-
-  useSetDefaultState(authActions.registrationSetDefaultState, [
-    name.value,
-    email.value,
-    password.value,
-    confirmPassword.value,
-  ]);
 
   return (
     <Container>
@@ -88,7 +77,7 @@ export const RegistrationPage: FC = () => {
           onBlur={name.onBlur}
           errorText={name.error}
           required
-          disabled={registrationState.isLoading}
+          disabled={isLoading}
         />
         <Input
           name="email"
@@ -99,7 +88,7 @@ export const RegistrationPage: FC = () => {
           onBlur={email.onBlur}
           errorText={email.error}
           required
-          disabled={registrationState.isLoading}
+          disabled={isLoading}
         />
         <Input
           name="password"
@@ -110,7 +99,7 @@ export const RegistrationPage: FC = () => {
           onBlur={password.onBlur}
           errorText={password.error}
           required
-          disabled={registrationState.isLoading}
+          disabled={isLoading}
         />
         <Input
           name="confirmPassword"
@@ -121,15 +110,15 @@ export const RegistrationPage: FC = () => {
           onBlur={confirmPassword.onBlur}
           errorText={confirmPassword.error}
           required
-          disabled={registrationState.isLoading}
+          disabled={isLoading}
         />
-        {registrationState.isFailure && registrationState.error && (
-          <FormErrorLabel>{registrationState.error.message}</FormErrorLabel>
+        {isError && error && (
+          <FormErrorLabel>{getQueryErrorMessage(error)}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"
-            disabled={registrationState.isLoading}
+            disabled={isLoading}
           >
             Зарегистрироваться
           </PrimaryButton>

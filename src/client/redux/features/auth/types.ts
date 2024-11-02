@@ -11,7 +11,5 @@ interface ProfileState {
 export interface AuthState {
   isAuth: boolean;
   profile: ProfileState;
-  registrationState: StatusState;
   sendHrSurveyState: StatusState;
-  logoutState: StatusState;
 }

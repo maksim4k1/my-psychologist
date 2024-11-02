@@ -7,10 +7,7 @@ import {
 import { type AuthState } from "./types";
 import { ACCESS } from "@/shared/config/access.config";
 import { type HttpError } from "@/shared/config/api.config";
-import {
-  type LoginResponseData,
-  type RegistrationResponseData,
-} from "@/shared/types";
+import { type LoginResponseData } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: AuthState = {
@@ -21,9 +18,7 @@ const initialState: AuthState = {
     username: "",
     role: ACCESS.unauthorized,
   },
-  registrationState: createDefaultState(),
   sendHrSurveyState: createDefaultState(),
-  logoutState: createDefaultState(),
 };
 
 const authSlice = createSlice({
@@ -40,28 +35,9 @@ const authSlice = createSlice({
       };
     },
 
-    // registration actions
-    registrationLoading: (state) => {
-      state.registrationState = createLoadingState();
-    },
-    registrationSuccess: (
-      state,
-      { payload }: PayloadAction<RegistrationResponseData>,
-    ) => {
-      state.isAuth = true;
-      state.profile = {
-        id: payload.userId,
-        email: payload.email,
-        username: payload.username,
-        role: payload.role,
-      };
-      state.registrationState = createSuccessState();
-    },
-    registrationFailure: (state, { payload }: PayloadAction<HttpError>) => {
-      state.registrationState = createFailureState(payload);
-    },
-    registrationSetDefaultState: (state) => {
-      state.registrationState = createDefaultState();
+    setInitialUserData: (state) => {
+      state.isAuth = false;
+      state.profile = initialState.profile;
     },
 
     // send hr survey actions
@@ -77,22 +53,6 @@ const authSlice = createSlice({
     },
     sendHrSurveySetDefaultState: (state) => {
       state.sendHrSurveyState = createDefaultState();
-    },
-
-    // logout actions
-    logoutLoading: (state) => {
-      state.logoutState = createLoadingState();
-    },
-    logoutSuccess: (state) => {
-      state.logoutState = createSuccessState();
-      state.isAuth = false;
-      state.profile = initialState.profile;
-    },
-    logoutFailure: (state, { payload }: PayloadAction<HttpError>) => {
-      state.logoutState = createFailureState(payload);
-    },
-    logoutSetDefaultState: (state) => {
-      state.logoutState = createDefaultState();
     },
   },
 });

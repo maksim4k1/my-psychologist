@@ -2,7 +2,7 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { AuthService } from "@/client/api";
+import { useRouter } from "next/navigation";
 import { LogoIcon } from "@/client/assets/icons";
 import { Button, Container, ProfileImage } from "@/client/components";
 import {
@@ -10,15 +10,22 @@ import {
   useAppSelector,
   useClickOutside,
 } from "@/client/hooks";
-import { selectAuthIsAuth, selectProfile } from "@/client/redux";
+import {
+  authActions,
+  selectAuthIsAuth,
+  selectProfile,
+  useLogoutMutation,
+} from "@/client/redux";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
-import { type FC, useRef, useState } from "react";
+import { type FC, useEffect, useRef, useState } from "react";
 
 export const Header: FC = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const profile = useAppSelector(selectProfile);
-  const dispatch = useAppDispatch();
+  const [logout, { isSuccess }] = useLogoutMutation();
   const popupRef = useRef(null);
   const bittonRef = useRef(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -31,12 +38,19 @@ export const Header: FC = () => {
     bittonRef,
   );
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(authActions.setInitialUserData());
+      router.push(pages.login.path);
+    }
+  }, [isSuccess, dispatch, router]);
+
   const togglePopup = () => {
     setIsPopupOpen((value) => !value);
   };
 
-  const logout = () => {
-    dispatch(AuthService.logout());
+  const logoutHandler = () => {
+    logout();
   };
 
   return (
@@ -122,7 +136,7 @@ export const Header: FC = () => {
                 <div className={styles.divider}></div>
                 <Button
                   className={styles.popupItem}
-                  onClick={logout}
+                  onClick={logoutHandler}
                 >
                   Выйти из аккаунта
                 </Button>
