@@ -6,7 +6,6 @@ import { ProfileImage } from "../Images";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AuthService } from "@/client/api";
 import { LogoIcon } from "@/client/assets/icons";
 import {
   useAppDispatch,
@@ -14,9 +13,10 @@ import {
   useClickOutside,
 } from "@/client/hooks";
 import {
+  authActions,
   selectAuthIsAuth,
-  selectLogoutState,
   selectProfile,
+  useLogoutMutation,
 } from "@/client/redux";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
@@ -26,7 +26,7 @@ export const Header: FC = () => {
   const router = useRouter();
   const isAuth: boolean = useAppSelector(selectAuthIsAuth);
   const profile = useAppSelector(selectProfile);
-  const logoutState = useAppSelector(selectLogoutState);
+  const [logout, { isSuccess }] = useLogoutMutation();
   const dispatch = useAppDispatch();
   const popupRef = useRef(null);
   const buttonRef = useRef(null);
@@ -45,13 +45,14 @@ export const Header: FC = () => {
   };
 
   useEffect(() => {
-    if (logoutState.isSuccess) {
+    if (isSuccess) {
+      dispatch(authActions.setInitialUserData());
       router.push(pages.login.path);
     }
-  }, [logoutState.isSuccess, router]);
+  }, [isSuccess, dispatch, router]);
 
-  const logout = () => {
-    dispatch(AuthService.logout());
+  const logoutHandler = () => {
+    logout();
   };
 
   return (
@@ -130,7 +131,7 @@ export const Header: FC = () => {
                 <div className={styles.divider}></div>
                 <Button
                   className={styles.popupItem}
-                  onClick={logout}
+                  onClick={logoutHandler}
                 >
                   Выйти из аккаунта
                 </Button>
