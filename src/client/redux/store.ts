@@ -1,10 +1,5 @@
 import { api } from "./api";
-import {
-  authReducer,
-  popupsReducer,
-  psychologistsReducer,
-  testsReducer,
-} from "./features";
+import { authReducer, popupsReducer, testsReducer } from "./features";
 import {
   type Store,
   type ThunkDispatch,
@@ -18,7 +13,6 @@ const rootReducer = combineReducers({
   authReducer,
   testsReducer,
   popupsReducer,
-  psychologistsReducer,
 });
 
 export const store: Store = configureStore({

@@ -1,72 +1,62 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { PsychologistsService } from "@/client/api";
 import {
   Container,
+  DefaultError,
+  LoadingLoop,
   MyPsychologistCard,
   PageTitle,
   PsychologistCard,
-  StateWrapper,
 } from "@/client/components";
 import {
-  useAppDispatch,
-  useAppSelector,
-  useSetDefaultState,
-} from "@/client/hooks";
-import {
-  psychologistsActions,
-  selectGetMyPsychologistsState,
-  selectGetPsychologistsState,
-  selectMyPsychologists,
-  selectPsychologists,
+  useGetMyPsychologistsQuery,
+  useGetPsychologistsQuery,
 } from "@/client/redux";
-import { type FC, useEffect } from "react";
+import { type FC } from "react";
 
 export const PsychologistsPage: FC = () => {
-  const dispatch = useAppDispatch();
-  const psychologists = useAppSelector(selectPsychologists);
-  const myPsychologists = useAppSelector(selectMyPsychologists);
-  const getPsychologistsState = useAppSelector(selectGetPsychologistsState);
-  const getMyPsychologistsState = useAppSelector(selectGetMyPsychologistsState);
+  const { data: psychologists, ...getPsychologistsState } =
+    useGetPsychologistsQuery();
+  const { data: myPsychologists, ...getMyPsychologistsState } =
+    useGetMyPsychologistsQuery();
 
-  useEffect(() => {
-    dispatch(PsychologistsService.getMyPsychologists());
-    dispatch(PsychologistsService.getPsychologists());
-  }, [dispatch]);
-
-  useSetDefaultState(psychologistsActions.getPsychologistsSetDefaultState);
-  useSetDefaultState(psychologistsActions.getMyPsychologistsSetDefaultState);
+  if (getPsychologistsState.isLoading || getMyPsychologistsState.isLoading)
+    return <LoadingLoop />;
+  if (getPsychologistsState.isError)
+    return <DefaultError error={getPsychologistsState.error} />;
+  if (getMyPsychologistsState.isError)
+    return <DefaultError error={getMyPsychologistsState.error} />;
 
   return (
     <Container>
       <PageTitle>Психологи</PageTitle>
-      <StateWrapper state={[getPsychologistsState, getMyPsychologistsState]}>
-        <h2 className={styles.subtitle}>
-          {myPsychologists.length
-            ? "Мои психологи"
-            : "У вас пока нет психологов"}
-        </h2>
-        <div className={styles.psychologistList}>
-          {myPsychologists.map((psychologist) => (
+      <h2 className={styles.subtitle}>
+        {myPsychologists && myPsychologists.length
+          ? "Мои психологи"
+          : "У вас пока нет психологов"}
+      </h2>
+      <div className={styles.psychologistList}>
+        {myPsychologists &&
+          myPsychologists.map((psychologist) => (
             <MyPsychologistCard
               key={psychologist.userId}
               psychologist={psychologist}
             />
           ))}
-        </div>
-        <h2 className={styles.subtitle}>
-          {psychologists.length ? "Все психологи" : ""}
-        </h2>
-        <div className={styles.psychologistList}>
-          {psychologists.map((psychologist) => (
+      </div>
+      <h2 className={styles.subtitle}>
+        {psychologists && psychologists.length ? "Все психологи" : ""}
+      </h2>
+      <div className={styles.psychologistList}>
+        {psychologists &&
+          psychologists.map((psychologist) => (
             <PsychologistCard
               key={psychologist.userId}
               psychologist={psychologist}
             />
           ))}
-        </div>
-      </StateWrapper>
+      </div>
     </Container>
   );
 };
