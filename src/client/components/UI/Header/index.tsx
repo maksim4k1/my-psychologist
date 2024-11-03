@@ -14,7 +14,7 @@ import {
 } from "@/client/hooks";
 import {
   authActions,
-  selectAuthIsAuth,
+  selecIsAuth,
   selectProfile,
   useLogoutMutation,
 } from "@/client/redux";
@@ -24,7 +24,7 @@ import { type FC, useEffect, useRef, useState } from "react";
 
 export const Header: FC = () => {
   const router = useRouter();
-  const isAuth: boolean = useAppSelector(selectAuthIsAuth);
+  const isAuth: boolean = useAppSelector(selecIsAuth);
   const profile = useAppSelector(selectProfile);
   const [logout, { isSuccess }] = useLogoutMutation();
   const dispatch = useAppDispatch();

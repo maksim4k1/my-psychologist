@@ -1,5 +1,4 @@
 import { type RootState } from "../../store";
-import { type StatusState } from "./../../../utils";
 import { type AuthState } from "./types";
 import { type AccessRole } from "@/shared/config/access.config";
 
@@ -11,7 +10,7 @@ export const selectAuth = (state: RootState): AuthState => {
   return selectAuthModule(state);
 };
 
-export const selectAuthIsAuth = (state: RootState): boolean => {
+export const selecIsAuth = (state: RootState): boolean => {
   return selectAuthModule(state).isAuth;
 };
 
@@ -21,8 +20,4 @@ export const selectProfile = (state: RootState) => {
 
 export const selectRole = (state: RootState): AccessRole => {
   return selectAuthModule(state).profile.role;
-};
-
-export const selectSendHrSurveyState = (state: RootState): StatusState => {
-  return selectAuthModule(state).sendHrSurveyState;
 };

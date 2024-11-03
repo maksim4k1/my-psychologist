@@ -2,26 +2,17 @@
 
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
-import { AuthService } from "@/client/api";
 import {
   Container,
   Form,
+  FormErrorLabel,
   Input,
   PageTitle,
   PrimaryButton,
 } from "@/client/components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useInput,
-  useSetDefaultState,
-} from "@/client/hooks";
-import {
-  PopupsService,
-  authActions,
-  selectSendHrSurveyState,
-} from "@/client/redux";
-import { checkFormDataValidation } from "@/client/utils";
+import { useAppDispatch, useInput } from "@/client/hooks";
+import { PopupsService, useSendHrSurveyMutation } from "@/client/redux";
+import { checkFormDataValidation, getQueryErrorMessage } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type SendHrSurveyRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
@@ -30,17 +21,19 @@ export const HrSurveyPage: FC = () => {
   const fullName = useInput("", { isEmpty: true });
   const company = useInput("", { isEmpty: true });
   const dispatch = useAppDispatch();
-  const sendHrSurveyState = useAppSelector(selectSendHrSurveyState);
   const router = useRouter();
 
+  const [sendHrSurvey, { isLoading, isSuccess, isError, error }] =
+    useSendHrSurveyMutation();
+
   useEffect(() => {
-    if (sendHrSurveyState.isSuccess) {
+    if (isSuccess) {
       dispatch(
         PopupsService.openSnackbarWithDelay("Анкета HR-менеджера сохранена!"),
       );
       router.push(pages.cabinet.path);
     }
-  }, [sendHrSurveyState.isSuccess, dispatch, router]);
+  }, [isSuccess, dispatch, router]);
 
   function onSubmitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,11 +47,9 @@ export const HrSurveyPage: FC = () => {
         company: company.value,
       };
 
-      dispatch(AuthService.sendHrSurvey(formData));
+      sendHrSurvey(formData);
     }
   }
-
-  useSetDefaultState(authActions.sendHrSurveySetDefaultState);
 
   return (
     <Container>
@@ -76,7 +67,7 @@ export const HrSurveyPage: FC = () => {
           onBlur={fullName.onBlur}
           labelText="Ваши Фамилия Имя Отчество"
           errorText={fullName.error}
-          disabled={sendHrSurveyState.isLoading}
+          disabled={isLoading}
           required
         />
         <Input
@@ -88,14 +79,17 @@ export const HrSurveyPage: FC = () => {
           value={company.value}
           onChange={company.onChange}
           onBlur={company.onBlur}
-          disabled={sendHrSurveyState.isLoading}
+          disabled={isLoading}
           required
         />
+        {isError && (
+          <FormErrorLabel>{getQueryErrorMessage(error)}</FormErrorLabel>
+        )}
         <PrimaryButton
           type="submit"
           className={styles.button}
           isMedium={true}
-          disabled={sendHrSurveyState.isLoading}
+          disabled={isLoading}
         >
           Сохранить
         </PrimaryButton>

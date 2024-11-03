@@ -3,6 +3,7 @@ import {
   articlesApi,
   authReducer,
   clientsReducer,
+  hrApi,
   popupsReducer,
   psychologistsReducer,
   testsReducer,
@@ -19,6 +20,7 @@ import {
 const rootReducer = combineReducers({
   [articlesApi.reducerPath]: articlesApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
+  [hrApi.reducerPath]: hrApi.reducer,
   authReducer,
   applicationsReducer,
   clientsReducer,
@@ -30,7 +32,11 @@ const rootReducer = combineReducers({
 export const store: Store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([articlesApi.middleware, authApi.middleware]),
+    getDefaultMiddleware().concat([
+      articlesApi.middleware,
+      authApi.middleware,
+      hrApi.middleware,
+    ]),
   devTools: true,
 });
 
