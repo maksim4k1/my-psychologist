@@ -1,21 +1,24 @@
 import {
+  type GetUserApiResponseData,
   type SendHrSurveyApiRequestData,
   type SendHrSurveyRequestData,
 } from "@/shared/types";
 
 export const mapSendHrSurveyRequest = (
-  data: SendHrSurveyRequestData,
+  userData: GetUserApiResponseData,
+  hrSurveyData: SendHrSurveyRequestData,
 ): SendHrSurveyApiRequestData => {
-  const { username, company } = data;
+  const { username, company } = hrSurveyData;
+  const { description, city, gender, birth_date } = userData;
 
   return {
     username,
-    description: "",
-    city: "",
+    description,
+    city,
     company,
     online: false,
-    gender: "1",
-    birth_date: "2000-01-01",
+    gender,
+    birth_date: new Date(birth_date).toJSON(),
   };
 };
 
