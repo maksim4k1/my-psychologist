@@ -1,11 +1,11 @@
-interface TestBorderApiData {
+export interface TestBorderApiData {
   left_border: number;
   right_border: number;
   color: string;
   title: string;
 }
 
-interface TestScaleApiData {
+export interface TestScaleApiData {
   scale_id: string;
   title: string;
   min: number;
@@ -21,14 +21,14 @@ export interface GetTestApiResponseData {
   scales: TestScaleApiData[];
 }
 
-interface TestBorderData {
+export interface TestBorderData {
   title: string;
   leftBorder: number;
   rightBorder: number;
   color: string;
 }
 
-interface TestScaleData {
+export interface TestScaleData {
   id: string;
   title: string;
   min: number;

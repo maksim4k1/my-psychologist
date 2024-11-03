@@ -1,11 +1,10 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { TestsService } from "@/client/api";
-import { useAppDispatch, useAppSelector } from "@/client/hooks";
-import { selectGiveTestState } from "@/client/redux";
+import { useAppDispatch } from "@/client/hooks";
+import { PopupsService, useGiveTestMutation } from "@/client/redux";
 import { type GetTestsResponseData } from "@/shared/types";
-import { type FC } from "react";
+import { type FC, useEffect } from "react";
 
 interface Props {
   exercise: GetTestsResponseData[number];
@@ -14,15 +13,21 @@ interface Props {
 
 export const GiveExerciseCard: FC<Props> = ({ exercise, userId }) => {
   const dispatch = useAppDispatch();
-  const giveTestState = useAppSelector(selectGiveTestState);
+  const [giveTest, { isLoading, isSuccess }] = useGiveTestMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay("Задание успешно назначено!"),
+      );
+    }
+  }, [isSuccess, dispatch]);
 
   const onClickHandler = () => {
-    dispatch(
-      TestsService.giveTest({
-        userId,
-        testId: exercise.id,
-      }),
-    );
+    giveTest({
+      userId,
+      testId: exercise.id,
+    });
   };
 
   return (
@@ -32,7 +37,7 @@ export const GiveExerciseCard: FC<Props> = ({ exercise, userId }) => {
       <button
         className={styles.button}
         onClick={onClickHandler}
-        disabled={giveTestState.isLoading}
+        disabled={isLoading}
       >
         Назначить задание
       </button>

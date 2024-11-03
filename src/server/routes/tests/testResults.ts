@@ -6,6 +6,7 @@ import {
 import { createRequest } from "@/server/utils";
 import { httpStatuses } from "@/shared/data";
 import {
+  type GetTestApiResponseData,
   type GetTestResultsApiResponseData,
   type GetTestResultsResponseData,
   ResponseSuccessInfo,
@@ -16,12 +17,22 @@ import {
 const getTestResults = createRequest<{ id: string }>(
   async (request, serverFetch, { id }) => {
     const userId = request.nextUrl.searchParams.get("user_id");
-    const response = await serverFetch.get<GetTestResultsApiResponseData>(
+    const getTestResultPromise = serverFetch.get<GetTestResultsApiResponseData>(
       `/test/get_test_results/${id}${userId ? `?user_id=${userId}` : ""}`,
     );
 
+    const getTestPromise = serverFetch.get<GetTestApiResponseData>(
+      `/test/get_test_info/${id}`,
+    );
+
+    const [getTestResultResponse, getTestResponse] = await Promise.all([
+      getTestResultPromise,
+      getTestPromise,
+    ]);
+
     const data: GetTestResultsResponseData = mapGetTestResultsResponse(
-      response.data,
+      getTestResponse.data,
+      getTestResultResponse.data,
     );
 
     return NextResponse.json(data, httpStatuses.ok);

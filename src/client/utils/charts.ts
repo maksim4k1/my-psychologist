@@ -1,7 +1,7 @@
 import {
   type GetTestResponseData,
   type GetTestResultResponseData,
-  type GetTestResultsResponseData,
+  type TestResultData,
 } from "@/shared/types";
 
 export interface RadarChartItem {
@@ -11,7 +11,7 @@ export interface RadarChartItem {
 }
 
 export function mapToRadarChartData(
-  testResults: GetTestResultsResponseData,
+  testResults: TestResultData[],
   scales: GetTestResponseData["scales"],
   values: string[],
 ): RadarChartItem[] {
@@ -78,7 +78,7 @@ interface BarChartDataItem {
 }
 
 export function mapToBarChartData(
-  testResults: GetTestResultsResponseData,
+  testResults: TestResultData[],
   scales: GetTestResponseData["scales"],
   values: string[],
 ): BarChartData {

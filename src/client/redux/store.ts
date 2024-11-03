@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { authReducer, popupsReducer, testsReducer } from "./features";
+import { authReducer, popupsReducer } from "./features";
 import {
   type Store,
   type ThunkDispatch,
@@ -11,7 +11,6 @@ import {
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   authReducer,
-  testsReducer,
   popupsReducer,
 });
 

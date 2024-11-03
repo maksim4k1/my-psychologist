@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import { TestsService } from "@/client/api";
 import {
   Container,
   DefaultError,
@@ -10,44 +9,34 @@ import {
   PageTitle,
   PrimaryButton,
   ProfileCard,
-  StateWrapper,
   Subtitle,
   TestCard,
 } from "@/client/components";
+import { useAppSelector } from "@/client/hooks";
 import {
-  useAppDispatch,
-  useAppSelector,
-  useSetDefaultState,
-} from "@/client/hooks";
-import {
-  selectGetTestsByUserIdState,
   selectRole,
-  selectTestsByUserId,
-  testsActions,
   useGetClientQuery,
+  useGetUserPassedTestsQuery,
 } from "@/client/redux";
 import { addQueryParams } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
-import { type FC, useEffect } from "react";
+import { type FC } from "react";
 
 export const ClientPage: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const dispatch = useAppDispatch();
-  const tests = useAppSelector(selectTestsByUserId);
-  const testsState = useAppSelector(selectGetTestsByUserIdState);
   const role = useAppSelector(selectRole);
 
-  const clientQuery = useGetClientQuery(id);
+  const { data: client, ...getClientState } = useGetClientQuery(id);
+  const { data: passedTests, ...getUserPassedTestsState } =
+    useGetUserPassedTestsQuery(id);
 
-  useEffect(() => {
-    dispatch(TestsService.getTestsByUserId(id));
-  }, [dispatch, id]);
-
-  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
-
-  if (clientQuery.isLoading) return <LoadingLoop />;
-  if (clientQuery.isError) return <DefaultError error={clientQuery.error} />;
+  if (getClientState.isLoading || getUserPassedTestsState.isLoading)
+    return <LoadingLoop />;
+  if (getClientState.isError)
+    return <DefaultError error={getClientState.error} />;
+  if (getUserPassedTestsState.isError)
+    return <DefaultError error={getUserPassedTestsState.error} />;
 
   return (
     <Container>
@@ -55,36 +44,36 @@ export const ClientPage: FC = () => {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <StateWrapper state={[testsState]}>
-          {clientQuery.data && <ProfileCard profile={clientQuery.data} />}
-          <div>
-            <Subtitle>
-              {tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
-            </Subtitle>
-            {!!tests.length && (
-              <div className={styles.tests}>
-                {tests.map((el) => {
-                  return (
-                    <TestCard
-                      key={el.id}
-                      test={el}
-                      params={{ userId: id }}
-                    />
-                  );
-                })}
-              </div>
-            )}
-            <div className={styles.buttons}>
-              <PrimaryButton
-                href={addQueryParams(pages.giveExercise.path, {
-                  userId: id,
-                })}
-              >
-                Назначить задание
-              </PrimaryButton>
+        {client && <ProfileCard profile={client} />}
+        <div>
+          <Subtitle>
+            {!!passedTests && !!passedTests.length
+              ? "Пройденные тесты"
+              : "Нет пройденных тестов"}
+          </Subtitle>
+          {!!passedTests && !!passedTests.length && (
+            <div className={styles.tests}>
+              {passedTests.map((el) => {
+                return (
+                  <TestCard
+                    key={el.id}
+                    test={el}
+                    params={{ userId: id }}
+                  />
+                );
+              })}
             </div>
+          )}
+          <div className={styles.buttons}>
+            <PrimaryButton
+              href={addQueryParams(pages.giveExercise.path, {
+                userId: id,
+              })}
+            >
+              Назначить задание
+            </PrimaryButton>
           </div>
-        </StateWrapper>
+        </div>
       </div>
     </Container>
   );

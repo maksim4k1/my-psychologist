@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.scss";
 import { useParams, useRouter } from "next/navigation";
-import { TestsService } from "@/client/api";
 import {
   ApplicationProfileCard,
   Container,
@@ -11,23 +10,16 @@ import {
   PageTitle,
   PrimaryButton,
   SecondaryButton,
-  StateWrapper,
   Subtitle,
   TestCard,
 } from "@/client/components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useSetDefaultState,
-} from "@/client/hooks";
+import { useAppDispatch, useAppSelector } from "@/client/hooks";
 import {
   PopupsService,
-  selectGetTestsByUserIdState,
   selectRole,
-  selectTestsByUserId,
-  testsActions,
   useConfirmApplicationMutation,
   useGetApplicationQuery,
+  useGetUserPassedTestsQuery,
 } from "@/client/redux";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
@@ -38,42 +30,38 @@ export const ApplicationPage: FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const role = useAppSelector(selectRole);
-  const tests = useAppSelector(selectTestsByUserId);
-  const testsState = useAppSelector(selectGetTestsByUserIdState);
 
-  const applicationQuery = useGetApplicationQuery(id);
-  const [confirmApplication, confirmApplicationMutation] =
+  const { data: application, ...getApplicationState } =
+    useGetApplicationQuery(id);
+  const { data: passedTests, ...getUserPassedTestsState } =
+    useGetUserPassedTestsQuery(id);
+  const [confirmApplication, confirmApplicationState] =
     useConfirmApplicationMutation();
 
   useEffect(() => {
-    if (applicationQuery.data) {
-      dispatch(TestsService.getTestsByUserId(applicationQuery.data.userId));
-    }
-  }, [dispatch, applicationQuery.data]);
-
-  useEffect(() => {
-    if (confirmApplicationMutation.isSuccess) {
+    if (confirmApplicationState.isSuccess) {
       dispatch(
         PopupsService.openSnackbarWithDelay("Операция успешно выполнена!"),
       );
       router.push(pages.cabinet.path);
     }
-  }, [confirmApplicationMutation.isSuccess, dispatch, router]);
+  }, [confirmApplicationState.isSuccess, dispatch, router]);
 
   const onClickHandler = (confirmed: boolean) => {
-    if (applicationQuery.data) {
+    if (application) {
       confirmApplication({
-        userId: applicationQuery.data.userId,
+        userId: application.userId,
         confirmed,
       });
     }
   };
 
-  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
-
-  if (applicationQuery.isLoading) return <LoadingLoop />;
-  if (applicationQuery.isError)
-    return <DefaultError error={applicationQuery.error} />;
+  if (getApplicationState.isLoading || getUserPassedTestsState.isLoading)
+    return <LoadingLoop />;
+  if (getApplicationState.isError)
+    return <DefaultError error={getApplicationState.error} />;
+  if (getUserPassedTestsState.isError)
+    return <DefaultError error={getUserPassedTestsState.error} />;
 
   return (
     <Container>
@@ -81,39 +69,37 @@ export const ApplicationPage: FC = () => {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <StateWrapper state={[testsState]}>
-          {applicationQuery.data && (
-            <ApplicationProfileCard profile={applicationQuery.data} />
+        {application && <ApplicationProfileCard profile={application} />}
+        <div>
+          <Subtitle>
+            {!!passedTests && !!passedTests.length
+              ? "Пройденные тесты"
+              : "Нет пройденных тестов"}
+          </Subtitle>
+          {!!passedTests && !!passedTests.length && !!application && (
+            <div className={styles.tests}>
+              {passedTests.map((el) => {
+                return (
+                  <TestCard
+                    key={el.id}
+                    test={el}
+                    params={{ userId: application?.userId }}
+                  />
+                );
+              })}
+            </div>
           )}
-          <div>
-            <Subtitle>
-              {tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
-            </Subtitle>
-            {!!tests.length && !!applicationQuery.data && (
-              <div className={styles.tests}>
-                {tests.map((el) => {
-                  return (
-                    <TestCard
-                      key={el.id}
-                      test={el}
-                      params={{ userId: applicationQuery.data?.userId }}
-                    />
-                  );
-                })}
-              </div>
-            )}
-            {!!applicationQuery.data && (
-              <div className={styles.buttons}>
-                <PrimaryButton onClick={() => onClickHandler(true)}>
-                  Принять заявку
-                </PrimaryButton>
-                <SecondaryButton onClick={() => onClickHandler(false)}>
-                  Отклонить
-                </SecondaryButton>
-              </div>
-            )}
-          </div>
-        </StateWrapper>
+          {!!application && (
+            <div className={styles.buttons}>
+              <PrimaryButton onClick={() => onClickHandler(true)}>
+                Принять заявку
+              </PrimaryButton>
+              <SecondaryButton onClick={() => onClickHandler(false)}>
+                Отклонить
+              </SecondaryButton>
+            </div>
+          )}
+        </div>
       </div>
     </Container>
   );

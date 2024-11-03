@@ -2,112 +2,87 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import { TestsService } from "@/client/api";
 import {
   Container,
+  DefaultError,
+  LoadingLoop,
   PageTitle,
   ProgressBar,
-  StateWrapper,
   Subtitle,
 } from "@/client/components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useSetDefaultState,
-} from "@/client/hooks";
-import {
-  selectGetTestInfoState,
-  selectGetTestResultState,
-  selectTestInfo,
-  selectTestResult,
-  testsActions,
-} from "@/client/redux";
-import { type FC, useEffect } from "react";
+import { useGetTestResultQuery } from "@/client/redux";
+import { type FC } from "react";
 
 export const DetailResultPage: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const dispatch = useAppDispatch();
-  const getTestInfoState = useAppSelector(selectGetTestInfoState);
-  const testInfo = useAppSelector(selectTestInfo);
-  const getTestResultState = useAppSelector(selectGetTestResultState);
-  const testResult = useAppSelector(selectTestResult);
 
-  useEffect(() => {
-    dispatch(TestsService.getTestResult(id));
-  }, [dispatch, id]);
+  const { data: testResult, ...getTestResultState } = useGetTestResultQuery(id);
 
-  useEffect(() => {
-    if (getTestResultState.isSuccess && testResult) {
-      dispatch(TestsService.getTestInfo(testResult.testId));
-    }
-  }, [getTestResultState.isSuccess, dispatch, testResult]);
-
-  useSetDefaultState(testsActions.getTestInfoSetDefaultState);
-  useSetDefaultState(testsActions.getTestResultSetDefaultState);
+  if (getTestResultState.isLoading) return <LoadingLoop />;
+  if (getTestResultState.isError)
+    return <DefaultError error={getTestResultState.error} />;
 
   return (
-    <StateWrapper state={[getTestResultState, getTestInfoState]}>
-      <Container>
-        <PageTitle className={styles.title}>Результаты теста</PageTitle>
-        {testInfo && testResult && (
-          <>
-            <Subtitle className={styles.subtitle}>{testInfo.title}</Subtitle>
-            <div className={styles.results}>
-              {testInfo.scales.map((el) => {
-                return (
-                  <div
-                    className={styles.result}
-                    key={el.id}
-                  >
-                    <h4 className={styles.resultTitle}>{el.title}</h4>
-                    <ProgressBar
-                      className={styles.scale}
-                      value={
-                        testResult.scaleResults.find((res) => res.id === el.id)
-                          ?.score ?? 0
-                      }
-                      max={el.max}
-                      min={el.min}
-                      borders={el.borders}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-            <div className={styles.descriptionTestContainer}>
-              {testInfo.scales.map((el) => {
-                const scale = testResult.scaleResults.find(
-                  (res) => res.id === el.id,
-                );
-                const score = scale?.score ?? 0;
+    <Container>
+      <PageTitle className={styles.title}>Результаты теста</PageTitle>
+      {testResult && (
+        <>
+          <Subtitle className={styles.subtitle}>{testResult.title}</Subtitle>
+          <div className={styles.results}>
+            {testResult.scales.map((el) => {
+              return (
+                <div
+                  className={styles.result}
+                  key={el.id}
+                >
+                  <h4 className={styles.resultTitle}>{el.title}</h4>
+                  <ProgressBar
+                    className={styles.scale}
+                    value={
+                      testResult.scaleResults.find((res) => res.id === el.id)
+                        ?.score ?? 0
+                    }
+                    max={el.max}
+                    min={el.min}
+                    borders={el.borders}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          <div className={styles.descriptionTestContainer}>
+            {testResult.scales.map((el) => {
+              const scale = testResult.scaleResults.find(
+                (res) => res.id === el.id,
+              );
+              const score = scale?.score ?? 0;
 
-                const border = el.borders.find(
-                  (el) => score >= el.leftBorder && score <= el.rightBorder,
-                );
+              const border = el.borders.find(
+                (el) => score >= el.leftBorder && score <= el.rightBorder,
+              );
 
-                return (
-                  <div
-                    className={styles.descriptionTextContainer}
-                    key={el.id}
-                  >
-                    <h3 className={styles.descriptionTitle}>
-                      {el.title} —{" "}
-                      {border && (
-                        <span style={{ color: border.color }}>
-                          {score} ({border.title})
-                        </span>
-                      )}
-                    </h3>
-                    <p className={styles.descriptionText}>
-                      {scale?.recomendations}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
-      </Container>
-    </StateWrapper>
+              return (
+                <div
+                  className={styles.descriptionTextContainer}
+                  key={el.id}
+                >
+                  <h3 className={styles.descriptionTitle}>
+                    {el.title} —{" "}
+                    {border && (
+                      <span style={{ color: border.color }}>
+                        {score} ({border.title})
+                      </span>
+                    )}
+                  </h3>
+                  <p className={styles.descriptionText}>
+                    {scale?.recomendations}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </Container>
   );
 };
