@@ -1,52 +1,41 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { TestsService } from "@/client/api";
 import {
   Container,
+  DefaultError,
   ExerciseCard,
-  LoadingWrapper,
+  LoadingLoop,
   PageTitle,
   Subtitle,
 } from "@/client/components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useSetDefaultState,
-} from "@/client/hooks";
-import { selectGetTestsState, selectTests, testsActions } from "@/client/redux";
-import { type FC, useEffect } from "react";
+import { useGetTestsQuery } from "@/client/redux";
+import { type FC } from "react";
 
 export const ExercisesPage: FC = () => {
-  const dispatch = useAppDispatch();
-  const tests = useAppSelector(selectTests);
-  const testsState = useAppSelector(selectGetTestsState);
+  const { data: tests, ...getTestsState } = useGetTestsQuery();
 
-  useEffect(() => {
-    dispatch(TestsService.getTests());
-  }, [dispatch]);
-
-  useSetDefaultState(testsActions.getTestsSetDefaultState);
+  if (getTestsState.isLoading) return <LoadingLoop />;
+  if (getTestsState.isError)
+    return <DefaultError error={getTestsState.error} />;
 
   return (
     <Container>
       <PageTitle className={styles.title}>Психологические тесты</PageTitle>
       <div className={styles.section}>
-        <LoadingWrapper status={testsState.isLoading}>
-          {!tests.length && <Subtitle>Нет доступных тестов</Subtitle>}
-          {!!tests.length && (
-            <div className={styles.list}>
-              {tests.map((test) => {
-                return (
-                  <ExerciseCard
-                    key={test.id}
-                    exercise={test}
-                  />
-                );
-              })}
-            </div>
-          )}
-        </LoadingWrapper>
+        {(!tests || !tests.length) && <Subtitle>Нет доступных тестов</Subtitle>}
+        {!!tests && !!tests.length && (
+          <div className={styles.list}>
+            {tests.map((test) => {
+              return (
+                <ExerciseCard
+                  key={test.id}
+                  exercise={test}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </Container>
   );

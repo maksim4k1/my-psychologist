@@ -3,7 +3,6 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AuthService } from "@/client/api";
 import {
   AppLink,
   AuthButtons,
@@ -13,14 +12,9 @@ import {
   Input,
   PrimaryButton,
 } from "@/client/components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useInput,
-  useSetDefaultState,
-} from "@/client/hooks";
-import { authActions, selectAuthLoginState } from "@/client/redux";
-import { checkFormDataValidation } from "@/client/utils";
+import { useAppDispatch, useInput } from "@/client/hooks";
+import { authActions, useLoginMutation } from "@/client/redux";
+import { checkFormDataValidation, mapApiErrorMessage } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type LoginRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
@@ -31,13 +25,15 @@ export const LoginPage: FC = () => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const loginState = useAppSelector(selectAuthLoginState);
+  const [login, { data, isLoading, isSuccess, isError, error }] =
+    useLoginMutation();
 
   useEffect(() => {
-    if (loginState.isSuccess) {
+    if (isSuccess && data) {
+      dispatch(authActions.setUserData(data));
       router.push(pages.profile.path);
     }
-  }, [loginState.isSuccess, router]);
+  }, [isSuccess, data, dispatch, router]);
 
   const onSubmitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -48,14 +44,9 @@ export const LoginPage: FC = () => {
         password: password.value,
       };
 
-      dispatch(AuthService.login(formData));
+      login(formData);
     }
   };
-
-  useSetDefaultState(authActions.loginSetDefaultState, [
-    email.value,
-    password.value,
-  ]);
 
   return (
     <Container>
@@ -71,7 +62,7 @@ export const LoginPage: FC = () => {
           onChange={email.onChange}
           onBlur={email.onBlur}
           errorText={email.error}
-          disabled={loginState.isLoading}
+          disabled={isLoading}
           required
         />
         <Input
@@ -82,7 +73,7 @@ export const LoginPage: FC = () => {
           onChange={password.onChange}
           onBlur={password.onBlur}
           errorText={password.error}
-          disabled={loginState.isLoading}
+          disabled={isLoading}
           required
         />
         <Link
@@ -91,13 +82,13 @@ export const LoginPage: FC = () => {
         >
           Забыли пароль?
         </Link>
-        {loginState.isFailure && !!loginState.error && (
-          <FormErrorLabel>{loginState.error.message}</FormErrorLabel>
+        {isError && !!error && (
+          <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton
             type="submit"
-            disabled={loginState.isLoading}
+            disabled={isLoading}
           >
             Войти
           </PrimaryButton>

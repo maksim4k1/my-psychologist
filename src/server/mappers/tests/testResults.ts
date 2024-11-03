@@ -1,16 +1,19 @@
+import { mapGetTestScalesResponse } from "./test";
 import {
+  type GetTestApiResponseData,
   type GetTestResultApiResponseData,
   type GetTestResultResponseData,
   type GetTestResultsApiResponseData,
   type GetTestResultsResponseData,
   type SendTestResultApiRequestData,
   type SendTestResultRequestData,
+  type TestResultData,
 } from "@/shared/types";
 import { mapDatetimeToText } from "@/shared/utils";
 
-export const mapGetTestResultResponse = (
+export const mapTestResultResponse = (
   data: GetTestResultApiResponseData,
-): GetTestResultResponseData => {
+): TestResultData => {
   const { test_result_id, test_id, datetime, scale_results } = data;
 
   return {
@@ -27,16 +30,37 @@ export const mapGetTestResultResponse = (
   };
 };
 
+export const mapGetTestResultResponse = (
+  testData: GetTestApiResponseData,
+  testResultData: GetTestResultApiResponseData,
+): GetTestResultResponseData => {
+  const { title, scales } = testData;
+
+  return {
+    title,
+    scales: mapGetTestScalesResponse(scales),
+    ...mapTestResultResponse(testResultData),
+  };
+};
+
 export const mapGetTestResultsResponse = (
-  data: GetTestResultsApiResponseData,
+  testData: GetTestApiResponseData,
+  testResultsData: GetTestResultsApiResponseData,
 ): GetTestResultsResponseData => {
-  return data.map(mapGetTestResultResponse);
+  const { title, scales } = testData;
+
+  return {
+    title: title,
+    scales: mapGetTestScalesResponse(scales),
+    results: testResultsData.map(mapTestResultResponse),
+  };
 };
 
 export const mapSendTestResultRequest = (
   data: SendTestResultRequestData,
 ): SendTestResultApiRequestData => {
   const { testId, answers } = data;
+
   return {
     test_id: testId,
     date: new Date().toJSON(),

@@ -13,7 +13,7 @@ export * from "./ChangePassword";
 export * from "./ResetPassword";
 export * from "./Profile";
 export * from "./Psychologists";
-export * from "./Result";
+export * from "./Results";
 export * from "./DetailResult";
 export * from "./Articles";
 export * from "./Article";

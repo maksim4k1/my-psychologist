@@ -1,4 +1,3 @@
-import { type StatusState } from "@/client/utils";
 import { type AccessRole } from "@/shared/config/access.config";
 
 interface ProfileState {
@@ -11,8 +10,4 @@ interface ProfileState {
 export interface AuthState {
   isAuth: boolean;
   profile: ProfileState;
-  loginState: StatusState;
-  registrationState: StatusState;
-  sendHrSurveyState: StatusState;
-  logoutState: StatusState;
 }

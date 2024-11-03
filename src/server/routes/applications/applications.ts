@@ -48,7 +48,7 @@ const sendApplication = createRequest(async (request, serverFetch) => {
     SendApplicationApiRequestData
   >("/client/send_application", mapSendApplicationRequest(body));
 
-  const updateUserResponse = serverFetch.post<any, UpdateUserApiRequestData>(
+  const updateUserResponse = serverFetch.patch<any, UpdateUserApiRequestData>(
     "/users/update_user",
     mapUpdateUserRequest({
       username: body.username,

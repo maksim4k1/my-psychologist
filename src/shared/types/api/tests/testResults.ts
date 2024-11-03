@@ -1,3 +1,5 @@
+import { type TestScaleData } from "./test";
+
 interface TestScaleResultApiData {
   scale_id: string;
   score: number;
@@ -17,15 +19,24 @@ interface TestScaleResultData {
   recomendations: string;
 }
 
-export interface GetTestResultResponseData {
+export interface TestResultData {
   id: string;
   testId: string;
   datetime: string;
   scaleResults: TestScaleResultData[];
 }
 
+export interface GetTestResultResponseData extends TestResultData {
+  title: string;
+  scales: TestScaleData[];
+}
+
 export type GetTestResultsApiResponseData = GetTestResultApiResponseData[];
-export type GetTestResultsResponseData = GetTestResultResponseData[];
+export type GetTestResultsResponseData = {
+  title: string;
+  scales: TestScaleData[];
+  results: TestResultData[];
+};
 
 export interface SendTestResultRequestData {
   testId: string;

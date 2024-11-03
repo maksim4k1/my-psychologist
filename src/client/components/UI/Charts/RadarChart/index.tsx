@@ -12,14 +12,11 @@ import {
   Tooltip,
 } from "recharts";
 import { type RadarChartItem, mapToRadarChartData } from "@/client/utils";
-import {
-  type GetTestResponseData,
-  type GetTestResultsResponseData,
-} from "@/shared/types";
+import { type GetTestResponseData, type TestResultData } from "@/shared/types";
 import React, { type FC, useEffect, useState } from "react";
 
 interface Props {
-  results: GetTestResultsResponseData;
+  results: TestResultData[];
   scales: GetTestResponseData["scales"];
   values: string[];
   className?: string;

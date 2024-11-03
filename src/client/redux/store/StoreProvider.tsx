@@ -1,10 +1,10 @@
 "use client";
 
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { getCookie } from "../utils";
-import { authActions } from "./features/auth";
-import { store } from "./store";
+import { store } from ".";
+import { authActions } from "../features/auth";
 import { Provider } from "react-redux";
+import { useAppDispatch } from "@/client/hooks/reduxHooks";
+import { getCookie } from "@/client/utils";
 import { cookies } from "@/shared/data";
 import { type FC, type ReactNode, useEffect } from "react";
 
@@ -14,15 +14,14 @@ interface Props {
 
 const AuthProvider: FC<Props> = ({ children }) => {
   const dispatch = useAppDispatch();
+  const userDataJSON = getCookie(cookies.userData.name);
 
   useEffect(() => {
-    const userDataJSON = getCookie(cookies.userData.name);
-
     if (userDataJSON) {
       const userData = JSON.parse(decodeURIComponent(userDataJSON));
-      dispatch(authActions.setInitialUserData(userData));
+      dispatch(authActions.setUserData(userData));
     }
-  }, [dispatch]);
+  }, [dispatch, userDataJSON]);
 
   return children;
 };

@@ -2,34 +2,25 @@
 
 import styles from "./styles.module.scss";
 import { useParams, useRouter } from "next/navigation";
-import { ApplicationsService, TestsService } from "@/client/api";
 import {
   ApplicationProfileCard,
   Container,
+  DefaultError,
+  LoadingLoop,
   PageTitle,
   PrimaryButton,
   SecondaryButton,
-  StateWrapper,
   Subtitle,
   TestCard,
 } from "@/client/components";
-import {
-  useAppDispatch,
-  useAppSelector,
-  useSetDefaultState,
-} from "@/client/hooks";
+import { useAppDispatch, useAppSelector } from "@/client/hooks";
 import {
   PopupsService,
-  applicationsActions,
-  selectApplication,
-  selectApplicationState,
-  selectConfirmApplicationState,
-  selectGetTestsByUserIdState,
   selectRole,
-  selectTestsByUserId,
-  testsActions,
+  useConfirmApplicationMutation,
+  useGetApplicationQuery,
+  useGetUserPassedTestsQuery,
 } from "@/client/redux";
-import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
 import { type FC, useEffect } from "react";
@@ -39,25 +30,13 @@ export const ApplicationPage: FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const role = useAppSelector(selectRole);
-  const confirmApplicationState: StatusState = useAppSelector(
-    selectConfirmApplicationState,
-  );
-  const getApplicationState: StatusState = useAppSelector(
-    selectApplicationState,
-  );
-  const application = useAppSelector(selectApplication);
-  const tests = useAppSelector(selectTestsByUserId);
-  const testsState = useAppSelector(selectGetTestsByUserIdState);
 
-  useEffect(() => {
-    dispatch(ApplicationsService.getApplication(id));
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    if (application) {
-      dispatch(TestsService.getTestsByUserId(application.userId));
-    }
-  }, [dispatch, application]);
+  const { data: application, ...getApplicationState } =
+    useGetApplicationQuery(id);
+  const { data: passedTests, ...getUserPassedTestsState } =
+    useGetUserPassedTestsQuery(id);
+  const [confirmApplication, confirmApplicationState] =
+    useConfirmApplicationMutation();
 
   useEffect(() => {
     if (confirmApplicationState.isSuccess) {
@@ -68,20 +47,21 @@ export const ApplicationPage: FC = () => {
     }
   }, [confirmApplicationState.isSuccess, dispatch, router]);
 
-  const onClickHandler = (confirm: boolean) => {
+  const onClickHandler = (confirmed: boolean) => {
     if (application) {
-      dispatch(
-        ApplicationsService.confirmApplication({
-          userId: application.userId,
-          confirm,
-        }),
-      );
+      confirmApplication({
+        userId: application.userId,
+        confirmed,
+      });
     }
   };
 
-  useSetDefaultState(applicationsActions.getApplicationSetDefaultState);
-  useSetDefaultState(applicationsActions.confirmApplicationSetDefaultState);
-  useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
+  if (getApplicationState.isLoading || getUserPassedTestsState.isLoading)
+    return <LoadingLoop />;
+  if (getApplicationState.isError)
+    return <DefaultError error={getApplicationState.error} />;
+  if (getUserPassedTestsState.isError)
+    return <DefaultError error={getUserPassedTestsState.error} />;
 
   return (
     <Container>
@@ -89,37 +69,37 @@ export const ApplicationPage: FC = () => {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <StateWrapper state={[getApplicationState, testsState]}>
-          {application && <ApplicationProfileCard profile={application} />}
-          <div>
-            <Subtitle>
-              {tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
-            </Subtitle>
-            {!!tests.length && application && (
-              <div className={styles.tests}>
-                {tests.map((el) => {
-                  return (
-                    <TestCard
-                      key={el.id}
-                      test={el}
-                      params={{ userId: application.userId }}
-                    />
-                  );
-                })}
-              </div>
-            )}
-            {application && (
-              <div className={styles.buttons}>
-                <PrimaryButton onClick={() => onClickHandler(true)}>
-                  Принять заявку
-                </PrimaryButton>
-                <SecondaryButton onClick={() => onClickHandler(false)}>
-                  Отклонить
-                </SecondaryButton>
-              </div>
-            )}
-          </div>
-        </StateWrapper>
+        {application && <ApplicationProfileCard profile={application} />}
+        <div>
+          <Subtitle>
+            {!!passedTests && !!passedTests.length
+              ? "Пройденные тесты"
+              : "Нет пройденных тестов"}
+          </Subtitle>
+          {!!passedTests && !!passedTests.length && !!application && (
+            <div className={styles.tests}>
+              {passedTests.map((el) => {
+                return (
+                  <TestCard
+                    key={el.id}
+                    test={el}
+                    params={{ userId: application?.userId }}
+                  />
+                );
+              })}
+            </div>
+          )}
+          {!!application && (
+            <div className={styles.buttons}>
+              <PrimaryButton onClick={() => onClickHandler(true)}>
+                Принять заявку
+              </PrimaryButton>
+              <SecondaryButton onClick={() => onClickHandler(false)}>
+                Отклонить
+              </SecondaryButton>
+            </div>
+          )}
+        </div>
       </div>
     </Container>
   );

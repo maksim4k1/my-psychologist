@@ -7,15 +7,14 @@ import { Input } from "../../Inputs";
 import { Modal } from "../../Popups";
 import styles from "../styles.module.scss";
 import { useSelector } from "react-redux";
-import { ApplicationsService } from "@/client/api";
 import { FormErrorLabel } from "@/client/components";
 import { useAppDispatch, useInput } from "@/client/hooks";
 import {
   PopupsService,
   selectProfile,
-  selectSendApplicationState,
+  useSendApplicationMutation,
 } from "@/client/redux";
-import { checkFormDataValidation } from "@/client/utils";
+import { checkFormDataValidation, mapApiErrorMessage } from "@/client/utils";
 import { type GetPsychologistsResponseData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect, useState } from "react";
 
@@ -26,10 +25,12 @@ interface Props {
 export const PsychologistCard: FC<Props> = ({ psychologist }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const sendApplicationState = useSelector(selectSendApplicationState);
   const profile = useSelector(selectProfile);
   const fullName = useInput(profile.username, { isEmpty: true });
   const request = useInput("");
+
+  const [sendApplication, { isLoading, isSuccess, isError, error }] =
+    useSendApplicationMutation();
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -40,24 +41,22 @@ export const PsychologistCard: FC<Props> = ({ psychologist }) => {
   };
 
   useEffect(() => {
-    if (sendApplicationState.isSuccess) {
+    if (isSuccess) {
       closeModal();
       dispatch(PopupsService.openSnackbarWithDelay("Заявка отправлена!"));
     }
-  }, [sendApplicationState.isSuccess, dispatch]);
+  }, [isSuccess, dispatch]);
 
   const renderModalContent = () => {
     const submitFormHandler = (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       if (checkFormDataValidation(fullName, request)) {
-        dispatch(
-          ApplicationsService.sendApplication({
-            psychologistId: psychologist.userId,
-            username: fullName.value,
-            request: request.value,
-          }),
-        );
+        sendApplication({
+          psychologistId: psychologist.userId,
+          username: fullName.value,
+          request: request.value,
+        });
       }
     };
 
@@ -74,7 +73,7 @@ export const PsychologistCard: FC<Props> = ({ psychologist }) => {
           onBlur={fullName.onBlur}
           labelText="Ваши Фамилия Имя"
           errorText={fullName.error}
-          disabled={sendApplicationState.isLoading}
+          disabled={isLoading}
           required
         />
         <Input
@@ -85,10 +84,10 @@ export const PsychologistCard: FC<Props> = ({ psychologist }) => {
           onBlur={request.onBlur}
           labelText="Ваше обращение"
           errorText={request.error}
-          disabled={sendApplicationState.isLoading}
+          disabled={isLoading}
         />
-        {sendApplicationState.isFailure && !!sendApplicationState.error && (
-          <FormErrorLabel>{sendApplicationState.error.message}</FormErrorLabel>
+        {isError && !!error && (
+          <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
         )}
         <PrimaryButton className={styles.modalFormButton}>
           Отправить
