@@ -12,5 +12,6 @@ export interface UpdateUserApiRequestData {
   request: number[];
   city: string;
   description: string;
+  department: string;
   type: number;
 }

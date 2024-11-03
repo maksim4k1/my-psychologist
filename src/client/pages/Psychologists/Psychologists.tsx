@@ -15,13 +15,11 @@ import {
   useSetDefaultState,
 } from "@/client/hooks";
 import {
-  applicationsActions,
   psychologistsActions,
   selectGetMyPsychologistsState,
   selectGetPsychologistsState,
   selectMyPsychologists,
   selectPsychologists,
-  selectSendApplicationState,
 } from "@/client/redux";
 import { type FC, useEffect } from "react";
 
@@ -31,16 +29,14 @@ export const PsychologistsPage: FC = () => {
   const myPsychologists = useAppSelector(selectMyPsychologists);
   const getPsychologistsState = useAppSelector(selectGetPsychologistsState);
   const getMyPsychologistsState = useAppSelector(selectGetMyPsychologistsState);
-  const sendApplicationState = useAppSelector(selectSendApplicationState);
 
   useEffect(() => {
     dispatch(PsychologistsService.getMyPsychologists());
     dispatch(PsychologistsService.getPsychologists());
-  }, [dispatch, sendApplicationState.isSuccess]);
+  }, [dispatch]);
 
   useSetDefaultState(psychologistsActions.getPsychologistsSetDefaultState);
   useSetDefaultState(psychologistsActions.getMyPsychologistsSetDefaultState);
-  useSetDefaultState(applicationsActions.sendApplicationSetDefaultState);
 
   return (
     <Container>

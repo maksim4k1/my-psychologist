@@ -1,6 +1,6 @@
 export interface ConfirmApplicationRequestData {
   userId: string;
-  confirm: boolean;
+  confirmed: boolean;
 }
 
 export interface ConfirmApplicationApiRequestData {

@@ -1,13 +1,10 @@
-import { BFF_API_URL } from "@/shared/config/api.config";
+import { api } from "../../api";
 import {
   type GetArticleResponseData,
   type GetArticlesResponseData,
 } from "@/shared/types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const articlesApi = createApi({
-  reducerPath: "articlesApi",
-  baseQuery: fetchBaseQuery({ baseUrl: BFF_API_URL }),
+export const articlesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getArticles: builder.query<GetArticlesResponseData, void>({
       query: () => "/articles",

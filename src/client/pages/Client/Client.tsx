@@ -2,9 +2,11 @@
 
 import styles from "./styles.module.scss";
 import { useParams } from "next/navigation";
-import { ClientsService, TestsService } from "@/client/api";
+import { TestsService } from "@/client/api";
 import {
   Container,
+  DefaultError,
+  LoadingLoop,
   PageTitle,
   PrimaryButton,
   ProfileCard,
@@ -18,13 +20,11 @@ import {
   useSetDefaultState,
 } from "@/client/hooks";
 import {
-  clientsActions,
-  selectClient,
-  selectClientState,
   selectGetTestsByUserIdState,
   selectRole,
   selectTestsByUserId,
   testsActions,
+  useGetClientQuery,
 } from "@/client/redux";
 import { addQueryParams } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
@@ -34,19 +34,20 @@ import { type FC, useEffect } from "react";
 export const ClientPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const client = useAppSelector(selectClient);
-  const clientState = useAppSelector(selectClientState);
   const tests = useAppSelector(selectTestsByUserId);
   const testsState = useAppSelector(selectGetTestsByUserIdState);
   const role = useAppSelector(selectRole);
 
+  const clientQuery = useGetClientQuery(id);
+
   useEffect(() => {
-    dispatch(ClientsService.getClient(id));
     dispatch(TestsService.getTestsByUserId(id));
   }, [dispatch, id]);
 
-  useSetDefaultState(clientsActions.getClientSetDefaultState);
   useSetDefaultState(testsActions.getTestsByUserIdSetDefaultState);
+
+  if (clientQuery.isLoading) return <LoadingLoop />;
+  if (clientQuery.isError) return <DefaultError error={clientQuery.error} />;
 
   return (
     <Container>
@@ -54,8 +55,8 @@ export const ClientPage: FC = () => {
         Профиль {role === ACCESS.psychologist ? "клиента" : "сотрудника"}
       </PageTitle>
       <div className={styles.main}>
-        <StateWrapper state={[clientState, testsState]}>
-          {client && <ProfileCard profile={client} />}
+        <StateWrapper state={[testsState]}>
+          {clientQuery.data && <ProfileCard profile={clientQuery.data} />}
           <div>
             <Subtitle>
               {tests.length ? "Пройденные тесты" : "Нет пройденных тестов"}
@@ -74,9 +75,6 @@ export const ClientPage: FC = () => {
               </div>
             )}
             <div className={styles.buttons}>
-              {/* <PrimaryButton href="./result/overall">
-                Общий результат
-              </PrimaryButton> */}
               <PrimaryButton
                 href={addQueryParams(pages.giveExercise.path, {
                   userId: id,

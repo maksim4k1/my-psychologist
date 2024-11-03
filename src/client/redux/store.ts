@@ -1,14 +1,10 @@
+import { api } from "./api";
 import {
-  applicationsReducer,
-  articlesApi,
   authReducer,
-  clientsReducer,
-  hrApi,
   popupsReducer,
   psychologistsReducer,
   testsReducer,
 } from "./features";
-import { authApi } from "./features/auth/api";
 import {
   type Store,
   type ThunkDispatch,
@@ -18,12 +14,8 @@ import {
 } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
-  [articlesApi.reducerPath]: articlesApi.reducer,
-  [authApi.reducerPath]: authApi.reducer,
-  [hrApi.reducerPath]: hrApi.reducer,
+  [api.reducerPath]: api.reducer,
   authReducer,
-  applicationsReducer,
-  clientsReducer,
   testsReducer,
   popupsReducer,
   psychologistsReducer,
@@ -32,11 +24,7 @@ const rootReducer = combineReducers({
 export const store: Store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([
-      articlesApi.middleware,
-      authApi.middleware,
-      hrApi.middleware,
-    ]),
+    getDefaultMiddleware().concat(api.middleware),
   devTools: true,
 });
 

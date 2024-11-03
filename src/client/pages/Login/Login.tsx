@@ -8,7 +8,6 @@ import {
   AuthButtons,
   AuthForm,
   Container,
-  DefaultError,
   FormErrorLabel,
   Input,
   PrimaryButton,
@@ -48,8 +47,6 @@ export const LoginPage: FC = () => {
       login(formData);
     }
   };
-
-  if (isError) return <DefaultError error={error} />;
 
   return (
     <Container>

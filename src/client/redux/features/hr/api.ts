@@ -1,13 +1,10 @@
-import { BFF_API_URL } from "@/shared/config/api.config";
+import { api } from "../../api";
 import {
   type ResponseSuccessInfo,
   type SendHrSurveyRequestData,
 } from "@/shared/types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const hrApi = createApi({
-  reducerPath: "hrApi",
-  baseQuery: fetchBaseQuery({ baseUrl: BFF_API_URL }),
+export const hrApi = api.injectEndpoints({
   endpoints: (builder) => ({
     sendHrSurvey: builder.mutation<
       ResponseSuccessInfo,
@@ -18,6 +15,7 @@ export const hrApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Auth"],
     }),
   }),
 });

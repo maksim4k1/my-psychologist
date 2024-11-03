@@ -1,4 +1,4 @@
-import { BFF_API_URL } from "@/shared/config/api.config";
+import { api } from "../../api";
 import {
   type LoginRequestData,
   type LoginResponseData,
@@ -6,11 +6,8 @@ import {
   type RegistrationResponseData,
   type ResponseSuccessInfo,
 } from "@/shared/types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const authApi = createApi({
-  reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: BFF_API_URL }),
+export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponseData, LoginRequestData>({
       query: (body) => ({
@@ -18,6 +15,7 @@ export const authApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Auth"],
     }),
 
     registration: builder.mutation<
@@ -29,6 +27,7 @@ export const authApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Auth"],
     }),
 
     logout: builder.mutation<ResponseSuccessInfo, void>({
@@ -36,6 +35,7 @@ export const authApi = createApi({
         url: "/auth/logout",
         method: "POST",
       }),
+      invalidatesTags: ["Auth"],
     }),
   }),
 });

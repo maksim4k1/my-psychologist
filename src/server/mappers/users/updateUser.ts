@@ -16,6 +16,7 @@ export const mapUpdateUserRequest = (
     request: [1],
     city: "",
     description: "",
+    department: "",
     type: getRoleId(role),
   };
 };

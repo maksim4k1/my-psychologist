@@ -1,90 +1,63 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { ApplicationsService, ClientsService } from "@/client/api";
 import {
   ApplicationCard,
   ClientCard,
   Container,
+  DefaultError,
+  LoadingLoop,
   PageTitle,
-  StateWrapper,
 } from "@/client/components";
+import { useAppSelector } from "@/client/hooks";
 import {
-  useAppDispatch,
-  useAppSelector,
-  useSetDefaultState,
-} from "@/client/hooks";
-import {
-  applicationsActions,
-  clientsActions,
-  selectApplications,
-  selectApplicationsState,
-  selectClients,
-  selectClientsState,
   selectRole,
+  useGetApplicationsQuery,
+  useGetClientsQuery,
 } from "@/client/redux";
-import { type StatusState } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
-import { type FC, useEffect } from "react";
+import { type FC } from "react";
 
 export const CabinetPage: FC = () => {
-  const dispatch = useAppDispatch();
-  const applications = useAppSelector(selectApplications);
-  const applicationsState: StatusState = useAppSelector(
-    selectApplicationsState,
-  );
-  const clients = useAppSelector(selectClients);
-  const clientsState: StatusState = useAppSelector(selectClientsState);
   const role = useAppSelector(selectRole);
 
-  useEffect(() => {
-    dispatch(ApplicationsService.getApplications());
-    dispatch(ClientsService.getClients());
-  }, [dispatch]);
+  const clientsQuery = useGetClientsQuery();
+  const applicationsQuery = useGetApplicationsQuery();
 
-  useSetDefaultState(applicationsActions.getApplicationsSetDefaultState);
-  useSetDefaultState(clientsActions.getClientsSetDefaultState);
+  if (clientsQuery.isLoading) return <LoadingLoop />;
+  if (clientsQuery.isError) return <DefaultError error={clientsQuery.error} />;
 
   return (
     <Container>
       <PageTitle className={styles.title}>
         Кабинет {role === ACCESS.psychologist ? "психолога" : "HR-менеджера"}
       </PageTitle>
-      {/* <nav className={styles.navigation}>
-        <IconTextLink
-          href=""
-          icon={<MessageIcon />}
-          content="Сообщения"
-          count={3}
-        />
-      </nav> */}
-
-      <StateWrapper state={[applicationsState, clientsState]}>
-        {!!applications.length && (
-          <div>
-            <h2 className={styles.subtitle}>Заявки</h2>
-            <div className={styles.list}>
-              {applications.map((application) => {
-                return (
-                  <ApplicationCard
-                    key={application.userId}
-                    application={application}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        )}
+      {!!applicationsQuery.data && !!applicationsQuery.data.length && (
         <div>
-          <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
-            {clients.length
-              ? `Мои ${role === ACCESS.psychologist ? "клиенты" : "сотрудники"}`
-              : `У вас нет ${
-                  role === ACCESS.psychologist ? "клиентов" : "сотрудников"
-                }`}
-          </h2>
+          <h2 className={styles.subtitle}>Заявки</h2>
           <div className={styles.list}>
-            {clients.map((client) => {
+            {applicationsQuery.data.map((application) => {
+              return (
+                <ApplicationCard
+                  key={application.userId}
+                  application={application}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
+      <div>
+        <h2 className={`${styles.subtitle} ${styles.clientsSubtitle}`}>
+          {!!clientsQuery.data && clientsQuery.data.length
+            ? `Мои ${role === ACCESS.psychologist ? "клиенты" : "сотрудники"}`
+            : `У вас нет ${
+                role === ACCESS.psychologist ? "клиентов" : "сотрудников"
+              }`}
+        </h2>
+        <div className={styles.list}>
+          {clientsQuery.data &&
+            clientsQuery.data.map((client) => {
               return (
                 <ClientCard
                   key={client.userId}
@@ -92,9 +65,8 @@ export const CabinetPage: FC = () => {
                 />
               );
             })}
-          </div>
         </div>
-      </StateWrapper>
+      </div>
     </Container>
   );
 };
