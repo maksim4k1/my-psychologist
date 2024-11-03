@@ -12,7 +12,7 @@ import {
 } from "@/client/components";
 import { useAppDispatch, useInput } from "@/client/hooks";
 import { PopupsService, useSendHrSurveyMutation } from "@/client/redux";
-import { checkFormDataValidation, getQueryErrorMessage } from "@/client/utils";
+import { checkFormDataValidation, mapApiErrorMessage } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type SendHrSurveyRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
@@ -83,7 +83,7 @@ export const HrSurveyPage: FC = () => {
           required
         />
         {isError && (
-          <FormErrorLabel>{getQueryErrorMessage(error)}</FormErrorLabel>
+          <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
         )}
         <PrimaryButton
           type="submit"

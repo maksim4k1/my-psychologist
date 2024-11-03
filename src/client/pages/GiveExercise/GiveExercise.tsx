@@ -6,13 +6,11 @@ import {
   Container,
   DefaultError,
   GiveExerciseCard,
-  HttpErrorWrapper,
   LoadingLoop,
   PageTitle,
   Subtitle,
 } from "@/client/components";
 import { useGetTestsQuery } from "@/client/redux";
-import { checkQueryParams } from "@/client/utils";
 import { type FC } from "react";
 
 export const GiveExercisePage: FC = () => {
@@ -25,31 +23,26 @@ export const GiveExercisePage: FC = () => {
     return <DefaultError error={getTestsState.error} />;
 
   return (
-    <HttpErrorWrapper
-      status={checkQueryParams(searchParams, true, "userId")}
-      error={{ status: 400, message: "" }}
-    >
-      <Container>
-        <PageTitle>Задания для клиента</PageTitle>
-        <div className={styles.section}>
-          <Subtitle>
-            {!!tests && !!tests.length ? "Тесты" : "Нет доступных тестов"}
-          </Subtitle>
-          {!!tests && !!tests.length && (
-            <div className={styles.list}>
-              {tests.map((test) => {
-                return (
-                  <GiveExerciseCard
-                    key={test.id}
-                    exercise={test}
-                    userId={searchParams.get("userId") ?? ""}
-                  />
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </Container>
-    </HttpErrorWrapper>
+    <Container>
+      <PageTitle>Задания для клиента</PageTitle>
+      <div className={styles.section}>
+        <Subtitle>
+          {!!tests && !!tests.length ? "Тесты" : "Нет доступных тестов"}
+        </Subtitle>
+        {!!tests && !!tests.length && (
+          <div className={styles.list}>
+            {tests.map((test) => {
+              return (
+                <GiveExerciseCard
+                  key={test.id}
+                  exercise={test}
+                  userId={searchParams.get("userId") ?? ""}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </Container>
   );
 };

@@ -14,7 +14,7 @@ import {
   selectProfile,
   useSendApplicationMutation,
 } from "@/client/redux";
-import { checkFormDataValidation, getQueryErrorMessage } from "@/client/utils";
+import { checkFormDataValidation, mapApiErrorMessage } from "@/client/utils";
 import { type GetPsychologistsResponseData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect, useState } from "react";
 
@@ -87,7 +87,7 @@ export const PsychologistCard: FC<Props> = ({ psychologist }) => {
           disabled={isLoading}
         />
         {isError && !!error && (
-          <FormErrorLabel>{getQueryErrorMessage(error)}</FormErrorLabel>
+          <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
         )}
         <PrimaryButton className={styles.modalFormButton}>
           Отправить

@@ -1,5 +1,5 @@
-import { api } from "./api";
-import { authReducer, popupsReducer } from "./features";
+import { api } from "../api";
+import { authReducer, popupsReducer } from "../features";
 import {
   type Store,
   type ThunkDispatch,

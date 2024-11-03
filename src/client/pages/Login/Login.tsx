@@ -14,7 +14,7 @@ import {
 } from "@/client/components";
 import { useAppDispatch, useInput } from "@/client/hooks";
 import { authActions, useLoginMutation } from "@/client/redux";
-import { checkFormDataValidation, getQueryErrorMessage } from "@/client/utils";
+import { checkFormDataValidation, mapApiErrorMessage } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type LoginRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
@@ -83,7 +83,7 @@ export const LoginPage: FC = () => {
           Забыли пароль?
         </Link>
         {isError && !!error && (
-          <FormErrorLabel>{getQueryErrorMessage(error)}</FormErrorLabel>
+          <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton

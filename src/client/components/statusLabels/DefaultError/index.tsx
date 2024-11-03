@@ -1,4 +1,4 @@
-import { getQueryErrorMessage } from "../utils";
+import { mapApiErrorMessage } from "@/client/utils";
 import { type SerializedError } from "@reduxjs/toolkit";
 import { type FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { type FC } from "react";
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const DefaultError: FC<Props> = ({ error }) => {
-  const errorMessage = getQueryErrorMessage(error);
+  const errorMessage = mapApiErrorMessage(error);
 
   return <div>{errorMessage}</div>;
 };

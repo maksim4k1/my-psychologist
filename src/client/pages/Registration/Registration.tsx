@@ -17,7 +17,7 @@ import {
   authActions,
   useRegistrationMutation,
 } from "@/client/redux";
-import { checkFormDataValidation, getQueryErrorMessage } from "@/client/utils";
+import { checkFormDataValidation, mapApiErrorMessage } from "@/client/utils";
 import { pages } from "@/shared/data";
 import { type RegistrationRequestData } from "@/shared/types";
 import { type FC, type FormEvent, useEffect } from "react";
@@ -113,7 +113,7 @@ export const RegistrationPage: FC = () => {
           disabled={isLoading}
         />
         {isError && error && (
-          <FormErrorLabel>{getQueryErrorMessage(error)}</FormErrorLabel>
+          <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
         )}
         <AuthButtons className={styles.authButtons}>
           <PrimaryButton

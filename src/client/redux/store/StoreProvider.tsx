@@ -1,10 +1,10 @@
 "use client";
 
-import { useAppDispatch } from "../hooks/reduxHooks";
-import { getCookie } from "../utils";
-import { authActions } from "./features/auth";
-import { store } from "./store";
+import { store } from ".";
+import { authActions } from "../features/auth";
 import { Provider } from "react-redux";
+import { useAppDispatch } from "@/client/hooks/reduxHooks";
+import { getCookie } from "@/client/utils";
 import { cookies } from "@/shared/data";
 import { type FC, type ReactNode, useEffect } from "react";
 
