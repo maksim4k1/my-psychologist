@@ -1,21 +1,24 @@
-@import "@/client/styles/variables.scss";
-@import "@/client/styles/textStyles.scss";
-
-.authButtons {
-  margin-top: 0;
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 96px;
+  margin-right: 96px;
 }
 
-.resetPasswordLink {
-  margin-top: -24px;
-  margin-bottom: -4px;
-  margin-left: auto;
-  color: $color-outline-variant;
-  text-decoration: underline;
-  @include labelMedium;
-  transition: text-decoration-color 0.2s;
+.formWrapper {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  gap: 40px;
+}
 
-  &:hover {
-    text-decoration: underline;
-    text-decoration-color: transparent;
-  }
+.title {
+  width: 360px;
+  text-align: center;
+}
+
+.svgContainer {
+  width: 430px;
+  height: 430px;
 }
