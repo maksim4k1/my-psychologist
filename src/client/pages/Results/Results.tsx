@@ -11,15 +11,27 @@ import {
   RadarChart,
   SimpleBarChart,
 } from "@/client/components";
-import { useCheckbox } from "@/client/hooks";
 import { useGetTestResultsQuery } from "@/client/redux";
 import { pages } from "@/shared/data";
-import { type FC } from "react";
+import { type ChangeEvent, type FC, useState } from "react";
 
 export const ResultsPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const searchParams = useSearchParams();
-  const datesCheckboxes = useCheckbox();
+  const [datesCheckboxes, setDatesCheckboxes] = useState<string[]>([]);
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue: string = event.target.value;
+    const set: Set<string> = new Set(datesCheckboxes);
+
+    if (set.has(inputValue)) {
+      set.delete(inputValue);
+    } else {
+      set.add(inputValue);
+    }
+
+    setDatesCheckboxes(Array.from(set.values()));
+  };
 
   const { data: test, ...getTestResultsState } = useGetTestResultsQuery({
     testId: id,
@@ -43,14 +55,14 @@ export const ResultsPage: FC = () => {
                 <RadarChart
                   results={test.results}
                   scales={test.scales}
-                  values={datesCheckboxes.value}
+                  values={datesCheckboxes}
                   className={styles.radarChart}
                 />
               ) : (
                 <SimpleBarChart
                   results={test.results}
                   scales={test.scales}
-                  values={datesCheckboxes.value}
+                  values={datesCheckboxes}
                   className={styles.barChart}
                 />
               )}
@@ -58,7 +70,7 @@ export const ResultsPage: FC = () => {
                 {test.results.map((el) => {
                   return (
                     <ListItemWithSwitch
-                      onChange={datesCheckboxes.onChange}
+                      onChange={onChange}
                       className={styles.listItem}
                       value={el.id}
                       key={el.id}

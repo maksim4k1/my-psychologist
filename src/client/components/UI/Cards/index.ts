@@ -4,7 +4,6 @@ export * from "./ArticleCard";
 export * from "./ClientCard";
 export * from "./ExerciseCard";
 export * from "./GiveExerciseCard";
-export * from "./MyPsychologistCard";
 export * from "./ProfileCard";
-export * from "./PsychologistCard";
 export * from "./TestCard";
+export * from "./UserCard";

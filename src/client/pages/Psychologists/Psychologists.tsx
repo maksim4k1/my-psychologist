@@ -1,13 +1,12 @@
 "use client";
 
+import { MyPsychologistCard, PsychologistCard } from "./components";
 import styles from "./styles.module.scss";
 import {
   Container,
   DefaultError,
   LoadingLoop,
-  MyPsychologistCard,
   PageTitle,
-  PsychologistCard,
 } from "@/client/components";
 import {
   useGetMyPsychologistsQuery,

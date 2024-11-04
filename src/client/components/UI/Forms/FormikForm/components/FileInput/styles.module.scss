@@ -1,0 +1,147 @@
+@import "@/client/styles/variables.scss";
+@import "@/client/styles/textStyles.scss";
+
+.label {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.labelText {
+  white-space: pre-wrap;
+  @include titleMedium;
+
+  &.required::after {
+    content: " *";
+    color: $color-error;
+  }
+}
+
+.exampleText {
+  display: block;
+  color: $color-secondary;
+  white-space: pre-wrap;
+  @include bodySmall;
+}
+
+.input {
+  min-height: 56px;
+  min-width: 100%;
+  max-width: 100%;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  @include bodyLarge;
+  outline: 1px solid $color-outline;
+  border-radius: 4px;
+  transition:
+    opacity 0.2s,
+    outline-color 0.2s;
+  caret-color: $color-on-surface;
+
+  &::placeholder {
+    @include bodyLarge;
+    color: $color-on-surface-variant;
+  }
+
+  &:hover {
+    outline-color: $color-on-surface;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+    outline: 2px solid $color-primary;
+    outline-offset: -2px;
+  }
+
+  &:disabled {
+    border-color: $color-on-surface;
+    opacity: 0.12;
+
+    &::placeholder {
+      color: $color-on-surface;
+    }
+  }
+
+  &.error {
+    border-color: $color-error;
+    outline: 2px solid $color-error;
+    outline-offset: -2px;
+  }
+}
+
+.labelEl {
+  position: relative;
+  min-height: 120px;
+  padding: 34px;
+  flex-flow: column;
+  justify-content: center;
+  gap: 4px;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+
+  &.active {
+    background-color: $color-primary-container;
+    border-color: $color-on-surface;
+  }
+
+  &.focus {
+    border-color: transparent;
+    outline: 2px solid $color-primary;
+    outline-offset: -2px;
+  }
+}
+
+.inputEl {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.fileNames {
+  max-width: 90%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.fileName {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.primaryPlaceholder {
+  min-width: 168px;
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  color: $color-on-surface-variant;
+  @include bodyMedium;
+  border: 1px solid $color-outline;
+  border-radius: 4px;
+}
+
+.secondaryPlaceholder {
+  color: $color-outline;
+  @include bodySmall;
+  pointer-events: none;
+}
+
+.errorText {
+  position: absolute;
+  bottom: -20px;
+  padding: 0 16px;
+  color: $color-error;
+  @include bodySmall;
+}

@@ -1,0 +1,87 @@
+@import "@/client/styles/variables.scss";
+@import "@/client/styles/textStyles.scss";
+
+.label {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.labelText {
+  white-space: pre-wrap;
+  @include titleMedium;
+
+  &.required::after {
+    content: " *";
+    color: $color-error;
+  }
+}
+
+.exampleText {
+  display: block;
+  color: $color-secondary;
+  white-space: pre-wrap;
+  @include bodySmall;
+}
+
+.textarea {
+  resize: none;
+  height: 56px;
+  max-height: 176px;
+}
+
+.input {
+  min-height: 56px;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  @include bodyLarge;
+  outline: 1px solid $color-outline;
+  border-radius: 4px;
+  transition:
+    opacity 0.2s,
+    outline-color 0.2s;
+  caret-color: $color-on-surface;
+
+  &::placeholder {
+    @include bodyLarge;
+    color: $color-on-surface-variant;
+  }
+
+  &:hover {
+    outline-color: $color-on-surface;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+    outline: 2px solid $color-primary;
+    outline-offset: -2px;
+  }
+
+  &:disabled {
+    border-color: $color-on-surface;
+    opacity: 0.12;
+
+    &::placeholder {
+      color: $color-on-surface;
+    }
+  }
+
+  &.error {
+    border-color: $color-error;
+    outline: 2px solid $color-error;
+    outline-offset: -2px;
+  }
+}
+
+.errorText {
+  position: absolute;
+  bottom: -20px;
+  padding: 0 16px;
+  color: $color-error;
+  @include bodySmall;
+}

@@ -24,7 +24,7 @@ import { type FC, useEffect, useRef, useState } from "react";
 
 export const Header: FC = () => {
   const router = useRouter();
-  const isAuth: boolean = useAppSelector(selecIsAuth);
+  const isAuth = useAppSelector(selecIsAuth);
   const profile = useAppSelector(selectProfile);
   const [logout, { isSuccess }] = useLogoutMutation();
   const dispatch = useAppDispatch();
