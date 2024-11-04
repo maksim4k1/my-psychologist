@@ -16,7 +16,10 @@ export const FormikForm = <Values extends FormikValues = FormikValues>({
 }: Props<Values>): React.JSX.Element => {
   return (
     <Formik<Values> {...props}>
-      <Form className={`${styles.form} ${props.className ?? ""}`}>
+      <Form
+        className={`${styles.form} ${props.className ?? ""}`}
+        noValidate
+      >
         {children}
       </Form>
     </Formik>
