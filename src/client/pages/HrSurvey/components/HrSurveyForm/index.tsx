@@ -16,7 +16,7 @@ const initialValues: SendHrSurveyRequestData = {
   company: "",
 };
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.object().shape({
   username: Yup.string().required("Данное поле обязательно"),
   company: Yup.string().required("Данное поле обязательно"),
 });

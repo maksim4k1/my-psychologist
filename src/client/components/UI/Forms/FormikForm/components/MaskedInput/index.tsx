@@ -1,29 +1,23 @@
 "use client";
 
-import styles from "../styles.module.scss";
-import { IMaskInput } from "react-imask";
+import styles from "./styles.module.scss";
+import { type FieldConfig, useField } from "formik";
+import InputMask, { type Props as InputMaskProps } from "react-input-mask";
 import { type FC } from "react";
 
-interface Props {
-  labelText?: string;
-  exampleText?: string;
-  errorText?: string;
-  className?: string;
-  type?: string;
-  mask?: any;
-  required?: boolean;
-  [key: string]: any;
-}
+type Props = FieldConfig &
+  InputMaskProps & {
+    labelText?: string;
+    exampleText?: string;
+  };
 
 export const MaskedInput: FC<Props> = ({
   labelText,
   exampleText,
-  errorText,
-  className = "",
-  type = "string",
-  mask = "",
   ...props
 }) => {
+  const [field, meta] = useField(props.name);
+
   return (
     <div className={styles.label}>
       {(!!labelText || !!exampleText) && (
@@ -42,15 +36,16 @@ export const MaskedInput: FC<Props> = ({
           )}
         </div>
       )}
-      <IMaskInput
-        className={`${styles.input} ${styles.textInput} ${
-          errorText ? styles.error : ""
-        } ${className}`}
-        type={type}
-        mask={type === "tel" ? "+0(000)000-00-00" : mask}
+      <InputMask
+        {...field}
         {...props}
+        className={`${styles.input} ${styles.textInput} ${
+          meta.error && meta.touched ? styles.error : ""
+        } ${props.className ?? ""}`}
       />
-      {!!errorText && <div className={styles.errorText}>{errorText}</div>}
+      {meta.error && meta.touched && (
+        <div className={styles.errorText}>{meta.error}</div>
+      )}
     </div>
   );
 };

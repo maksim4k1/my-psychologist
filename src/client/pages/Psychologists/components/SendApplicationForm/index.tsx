@@ -21,7 +21,7 @@ interface SendApplicationFormFields {
   request: string;
 }
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.object().shape({
   username: Yup.string().required("Данное поле обязательно"),
   request: Yup.string(),
 });

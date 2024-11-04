@@ -28,7 +28,7 @@ const initialValues: RegistrationRequestData = {
   confirmPassword: "",
 };
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.object().shape({
   username: Yup.string(),
   email: Yup.string()
     .required("Данное поле обязательно")

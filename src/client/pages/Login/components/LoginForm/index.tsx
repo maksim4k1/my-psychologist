@@ -23,7 +23,7 @@ const initialValues: LoginRequestData = {
   password: "",
 };
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.object().shape({
   email: Yup.string()
     .required("Данное поле обязательно")
     .email("Введите корректный email"),

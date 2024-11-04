@@ -15,7 +15,7 @@ const initialValues: ChangePasswordFields = {
   confirmPassword: "",
 };
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.object().shape({
   newPassword: Yup.string().required("Данное поле обязательно"),
   confirmPassword: Yup.string()
     .required("Данное поле обязательно")

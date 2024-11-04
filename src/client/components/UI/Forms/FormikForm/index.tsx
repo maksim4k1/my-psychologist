@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "./components";
+import { FileInput, Input, MaskedInput, Textarea } from "./components";
 import styles from "./styles.module.scss";
 import { Form, Formik, type FormikConfig, type FormikValues } from "formik";
 import React, { type ReactNode } from "react";
@@ -12,12 +12,13 @@ interface Props<Values> extends FormikConfig<Values> {
 
 export const FormikForm = <Values extends FormikValues = FormikValues>({
   children,
+  className = "",
   ...props
-}: Props<Values>): React.JSX.Element => {
+}: Props<Values>) => {
   return (
     <Formik<Values> {...props}>
       <Form
-        className={`${styles.form} ${props.className ?? ""}`}
+        className={`${styles.form} ${className}`}
         noValidate
       >
         {children}
@@ -27,3 +28,6 @@ export const FormikForm = <Values extends FormikValues = FormikValues>({
 };
 
 FormikForm.Input = Input;
+FormikForm.Textarea = Textarea;
+FormikForm.MaskedInput = MaskedInput;
+FormikForm.FileInput = FileInput;
