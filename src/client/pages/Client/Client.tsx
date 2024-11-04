@@ -18,7 +18,6 @@ import {
   useGetClientQuery,
   useGetUserPassedTestsQuery,
 } from "@/client/redux";
-import { addQueryParams } from "@/client/utils";
 import { ACCESS } from "@/shared/config/access.config";
 import { pages } from "@/shared/data";
 import { type FC } from "react";
@@ -66,8 +65,10 @@ export const ClientPage: FC = () => {
           )}
           <div className={styles.buttons}>
             <PrimaryButton
-              href={addQueryParams(pages.giveExercise.path, {
-                userId: id,
+              href={pages.giveExercise.getLink({
+                queryParams: {
+                  userId: id,
+                },
               })}
             >
               Назначить задание
