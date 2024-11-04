@@ -1,5 +1,3 @@
-"use client";
-
 import { LoginForm } from "./components";
 import styles from "./styles.module.scss";
 import { Meditation } from "@/client/assets/svg";

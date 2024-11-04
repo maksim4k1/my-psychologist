@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./styles.module.scss";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";

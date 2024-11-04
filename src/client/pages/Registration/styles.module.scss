@@ -1,3 +1,24 @@
-.authButtons {
-  margin-top: 8px;
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 96px;
+  margin-right: 96px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  gap: 40px;
+}
+
+.title {
+  width: 360px;
+  text-align: center;
+}
+
+.svgContainer {
+  width: 430px;
+  height: 430px;
 }

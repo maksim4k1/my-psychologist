@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import {
@@ -12,39 +11,52 @@ import {
   PrimaryButton,
 } from "@/client/components";
 import { useAppDispatch } from "@/client/hooks";
-import { authActions, useLoginMutation } from "@/client/redux";
+import {
+  PopupsService,
+  authActions,
+  useRegistrationMutation,
+} from "@/client/redux";
 import { mapApiErrorMessage } from "@/client/utils";
 import { pages } from "@/shared/data";
-import { type LoginRequestData } from "@/shared/types";
+import { type RegistrationRequestData } from "@/shared/types";
 import { type FC, useEffect } from "react";
 
-const initialValues: LoginRequestData = {
+const initialValues: RegistrationRequestData = {
+  username: "",
   email: "",
   password: "",
+  confirmPassword: "",
 };
 
 const validationSchema = Yup.object({
+  username: Yup.string(),
   email: Yup.string()
     .required("Данное поле обязательно")
     .email("Введите корректный email"),
   password: Yup.string().required("Данное поле обязательно"),
+  confirmPassword: Yup.string()
+    .required("Данное поле обязательно")
+    .oneOf([Yup.ref("password")], "Пароли не совпадают"),
 });
 
-export const LoginForm: FC = () => {
+export const RegistrationForm: FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [login, { data, isLoading, isSuccess, isError, error }] =
-    useLoginMutation();
+  const [registration, { data, isLoading, isSuccess, isError, error }] =
+    useRegistrationMutation();
 
   useEffect(() => {
     if (isSuccess) {
+      dispatch(
+        PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
+      );
       dispatch(authActions.setUserData(data));
-      router.push(pages.profile.path);
+      router.push(pages.successRegistration.path);
     }
-  }, [isSuccess, data, dispatch, router]);
+  }, [isSuccess, dispatch, data, router]);
 
-  const onSubmit = (values: LoginRequestData) => {
-    login(values);
+  const onSubmit = (values: RegistrationRequestData) => {
+    registration(values);
   };
 
   return (
@@ -54,6 +66,12 @@ export const LoginForm: FC = () => {
       onSubmit={onSubmit}
     >
       <FormikForm.Input
+        name="name"
+        type="text"
+        placeholder="Введите имя"
+        disabled={isLoading}
+      />
+      <FormikForm.Input
         name="email"
         type="email"
         placeholder="Введите адрес почты"
@@ -62,16 +80,16 @@ export const LoginForm: FC = () => {
       <FormikForm.Input
         name="password"
         type="password"
-        placeholder="Введите пароль"
+        placeholder="Создайте пароль"
         disabled={isLoading}
       />
-      <Link
-        href={pages.resetPassword.path}
-        className={styles.resetPasswordLink}
-      >
-        Забыли пароль?
-      </Link>
-      {isError && !!error && (
+      <FormikForm.Input
+        name="confirmPassword"
+        type="password"
+        placeholder="Повторите пароль"
+        disabled={isLoading}
+      />
+      {isError && error && (
         <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
       )}
       <AuthButtons className={styles.authButtons}>
@@ -79,9 +97,9 @@ export const LoginForm: FC = () => {
           type="submit"
           disabled={isLoading}
         >
-          Войти
+          Зарегистрироваться
         </PrimaryButton>
-        <AppLink href={pages.registration.path}>Зарегистрироваться</AppLink>
+        <AppLink href={pages.login.path}>Войти</AppLink>
       </AuthButtons>
     </FormikForm>
   );
