@@ -17,13 +17,7 @@ export const ResetPasswordPage: FC = () => {
     event.preventDefault();
 
     if (checkFormDataValidation(email)) {
-      router.push(
-        pages.changePassword.getLink({
-          queryParams: {
-            "reset-confirmation": "reset-password-code",
-          },
-        }),
-      );
+      router.push(pages.changePassword.path);
     }
   };
 
