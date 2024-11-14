@@ -1,4 +1,4 @@
-import { type AccessRole } from "../config/access.config";
+import { type AccessRole } from "../config/access";
 
 interface GetLinkConfig<P> {
   params?: P extends never ? undefined : P;
@@ -77,6 +77,9 @@ export interface Pages {
   psychologistSurvey: Page;
   articles: Page;
   article: Page<{ id: string }>;
+  usersAcitivity: Page;
+  usersFeedbacks: Page;
+  usersResults: Page;
 }
 
 interface Route {

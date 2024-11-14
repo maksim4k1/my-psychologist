@@ -2,8 +2,8 @@ import { type AxiosResponse } from "axios";
 import { type NextRequest, NextResponse } from "next/server";
 import { mapLoginResponse } from "@/server/mappers/auth";
 import { deleteAuthCookies, setAuthCookies } from "@/server/utils";
-import { ACCESS } from "@/shared/config/access.config";
-import { serverAxios } from "@/shared/config/api.config";
+import { ACCESS } from "@/shared/config/access";
+import { serverAxios } from "@/shared/config/api";
 import { cookies, errorPages, pages, routes } from "@/shared/data";
 import {
   type LoginApiResponseData,

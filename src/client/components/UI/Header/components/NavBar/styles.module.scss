@@ -1,0 +1,12 @@
+@import "@/client/styles/textStyles.scss";
+@import "@/client/styles/variables.scss";
+
+.nav {
+  display: flex;
+  gap: 40px;
+}
+
+.navLink {
+  color: $color-secondary;
+  @include titleMedium;
+}

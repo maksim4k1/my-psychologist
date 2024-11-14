@@ -12,18 +12,18 @@ import {
 } from "@/client/hooks";
 import {
   authActions,
-  selecIsAuth,
+  selectIsAuth,
   selectProfile,
   useLogoutMutation,
 } from "@/client/redux";
-import { ACCESS } from "@/shared/config/access.config";
+import { ACCESS } from "@/shared/config/access";
 import { pages } from "@/shared/data";
 import { type FC, useEffect, useRef, useState } from "react";
 
 export const Header: FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const isAuth: boolean = useAppSelector(selecIsAuth);
+  const isAuth: boolean = useAppSelector(selectIsAuth);
   const profile = useAppSelector(selectProfile);
   const [logout, { isSuccess }] = useLogoutMutation();
   const popupRef = useRef(null);

@@ -1,5 +1,6 @@
 import { api } from "../api";
 import { authReducer, popupsReducer } from "../features";
+import { type InitialState } from "@/shared/types";
 import {
   type Store,
   type ThunkDispatch,
@@ -14,12 +15,15 @@ const rootReducer = combineReducers({
   popupsReducer,
 });
 
-export const store: Store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
-  devTools: true,
-});
+export const createStore = (initialState: InitialState): Store => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState: initialState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(api.middleware),
+    devTools: true,
+  });
+};
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = ThunkDispatch<RootState, any, UnknownAction>;

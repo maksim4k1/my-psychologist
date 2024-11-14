@@ -1,20 +1,11 @@
-import { type AuthState } from "./types";
-import { ACCESS } from "@/shared/config/access.config";
-import { type LoginResponseData } from "@/shared/types";
+import { initialState as globalInitialState, reducers } from "@/shared/data";
+import { type AuthState, type LoginResponseData } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: AuthState = {
-  isAuth: false,
-  profile: {
-    id: "",
-    email: "",
-    username: "",
-    role: ACCESS.unauthorized,
-  },
-};
+const initialState: AuthState = globalInitialState.authReducer;
 
 const authSlice = createSlice({
-  name: "auth",
+  name: reducers.authReducer,
   initialState,
   reducers: {
     setUserData: (state, { payload }: PayloadAction<LoginResponseData>) => {

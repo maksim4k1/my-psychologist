@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import { ModalsPortal, SnackbarsPortal } from "@/client/components";
 import { StoreProvider } from "@/client/redux";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
+import { getInitialState } from "@/shared/utils";
 import { type FC, type ReactNode } from "react";
 
 export const fontRoboto = Roboto({
@@ -39,12 +41,16 @@ const RootLayout: FC<RootLayoutProps> = async ({
 }: Readonly<{
   children: ReactNode;
 }>) => {
+  const cookieStore = await cookies();
+
+  const initialState = getInitialState(cookieStore);
+
   return (
     <html lang="ru">
       <body
         className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable}`}
       >
-        <StoreProvider>
+        <StoreProvider initialState={initialState}>
           {children}
           <SnackbarsPortal />
           <ModalsPortal />

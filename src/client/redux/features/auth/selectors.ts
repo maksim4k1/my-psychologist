@@ -1,16 +1,15 @@
 import { type RootState } from "../../store";
-import { type AuthState } from "./types";
-import { type AccessRole } from "@/shared/config/access.config";
+import { type AccessRole } from "@/shared/config/access";
 
-const selectAuthModule = (state: RootState): AuthState => {
+const selectAuthModule = (state: RootState) => {
   return state.authReducer;
 };
 
-export const selectAuth = (state: RootState): AuthState => {
+export const selectAuth = (state: RootState) => {
   return selectAuthModule(state);
 };
 
-export const selecIsAuth = (state: RootState): boolean => {
+export const selectIsAuth = (state: RootState): boolean => {
   return selectAuthModule(state).isAuth;
 };
 
