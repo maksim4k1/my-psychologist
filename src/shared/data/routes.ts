@@ -60,6 +60,9 @@ export const pages: Pages = {
     ACCESS.psychologist,
     ACCESS.hr,
   ]),
+  usersAcitivity: new Page("/admin/users/activity", [ACCESS.admin]),
+  usersFeedbacks: new Page("/admin/users/feedbacks", [ACCESS.admin]),
+  usersResults: new Page("/admin/users/results", [ACCESS.admin]),
 };
 
 export const routes: Routes = Array.from(Object.values(pages)).toSorted(
