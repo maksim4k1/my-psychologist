@@ -1,4 +1,4 @@
-import { ACCESS, type AccessRole } from "@/shared/config/access.config";
+import { ACCESS, type AccessRole } from "@/shared/config/access";
 
 export const getRole = (roleId: number = -1): AccessRole => {
   if (roleId === 1) {

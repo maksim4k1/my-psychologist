@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 import { useAppSelector } from "@/client/hooks";
 import { selectProfile } from "@/client/redux";
-import { type ACCESS } from "@/shared/config/access.config";
+import { type ACCESS } from "@/shared/config/access";
 import { pages } from "@/shared/data";
 import { type FC } from "react";
 

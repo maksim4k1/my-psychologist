@@ -1,5 +1,5 @@
 import { type RootState } from "../../store";
-import { type AccessRole } from "@/shared/config/access.config";
+import { type AccessRole } from "@/shared/config/access";
 
 const selectAuthModule = (state: RootState) => {
   return state.authReducer;

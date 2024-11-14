@@ -1,7 +1,7 @@
 import { type AxiosRequestConfig, type AxiosResponse } from "axios";
 import { type NextRequest, NextResponse } from "next/server";
 import { mapErrorResponse } from "@/server/mappers";
-import { serverAxios } from "@/shared/config/api.config";
+import { serverAxios } from "@/shared/config/api";
 import { type ResponseError } from "@/shared/types";
 
 type Method = "get" | "delete" | "head" | "options" | "post" | "put" | "patch";

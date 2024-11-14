@@ -1,4 +1,4 @@
-import { ACCESS } from "@/shared/config/access.config";
+import { ACCESS } from "@/shared/config/access";
 import { Page, type Pages, type Routes } from "@/shared/types";
 
 export const pages: Pages = {

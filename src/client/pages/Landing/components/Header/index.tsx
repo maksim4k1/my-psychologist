@@ -16,7 +16,7 @@ import {
   selectProfile,
   useLogoutMutation,
 } from "@/client/redux";
-import { ACCESS } from "@/shared/config/access.config";
+import { ACCESS } from "@/shared/config/access";
 import { pages } from "@/shared/data";
 import { type FC, useEffect, useRef, useState } from "react";
 

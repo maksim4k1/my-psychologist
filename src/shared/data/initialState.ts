@@ -1,4 +1,4 @@
-import { ACCESS } from "../config/access.config";
+import { ACCESS } from "../config/access";
 import { type InitialState, type ReducersNames } from "../types";
 
 export const reducers: ReducersNames = {

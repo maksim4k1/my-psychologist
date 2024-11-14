@@ -1,4 +1,4 @@
-import { type AccessRole } from "@/shared/config/access.config";
+import { type AccessRole } from "@/shared/config/access";
 
 export interface LoginRequestData {
   email: string;

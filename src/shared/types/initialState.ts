@@ -1,4 +1,4 @@
-import { type AccessRole } from "../config/access.config";
+import { type AccessRole } from "../config/access";
 
 interface SnackbarState {
   isOpen: boolean;
