@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import { ModalsPortal, SnackbarsPortal } from "@/client/components";
+import { AuthLayout } from "@/client/components/AuthLayout";
 import { StoreProvider } from "@/client/redux";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
+import { cookies as cookiesData } from "@/shared/data";
 import { getInitialState } from "@/shared/utils";
 import { type FC, type ReactNode } from "react";
 
@@ -42,8 +44,9 @@ const RootLayout: FC<RootLayoutProps> = async ({
   children: ReactNode;
 }>) => {
   const cookieStore = await cookies();
+  const accessToken = cookieStore.get(cookiesData.accessToken.name)?.value;
 
-  const initialState = getInitialState(cookieStore);
+  const initialState = await getInitialState(accessToken);
 
   return (
     <html lang="ru">
@@ -51,9 +54,11 @@ const RootLayout: FC<RootLayoutProps> = async ({
         className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable}`}
       >
         <StoreProvider initialState={initialState}>
-          {children}
-          <SnackbarsPortal />
-          <ModalsPortal />
+          <AuthLayout>
+            {children}
+            <SnackbarsPortal />
+            <ModalsPortal />
+          </AuthLayout>
         </StoreProvider>
       </body>
     </html>

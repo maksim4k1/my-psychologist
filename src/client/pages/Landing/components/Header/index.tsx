@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { LogoIcon } from "@/client/assets/icons";
 import { Button, Container, ProfileImage } from "@/client/components";
 import {
@@ -21,7 +20,6 @@ import { pages } from "@/shared/data";
 import { type FC, useEffect, useRef, useState } from "react";
 
 export const Header: FC = () => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const isAuth: boolean = useAppSelector(selectIsAuth);
   const profile = useAppSelector(selectProfile);
@@ -41,9 +39,8 @@ export const Header: FC = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(authActions.setInitialUserData());
-      router.push(pages.login.path);
     }
-  }, [isSuccess, dispatch, router]);
+  }, [isSuccess, dispatch]);
 
   const togglePopup = () => {
     setIsPopupOpen((value) => !value);

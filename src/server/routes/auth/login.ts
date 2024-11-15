@@ -23,7 +23,6 @@ const login = createRequest(async (request, serverFetch) => {
 
   const response = setAuthCookies(
     NextResponse.json<LoginResponseData>(responseData, httpStatuses.ok),
-    responseData,
     data.token,
   );
 

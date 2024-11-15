@@ -1,37 +1,33 @@
-import {
-  cookies as cookiesData,
-  initialState as globalInitialState,
-} from "@/shared/data";
-import {
-  type AuthState,
-  type InitialState,
-  type LoginResponseData,
-} from "@/shared/types";
+import { loginByToken } from "@/server/utils";
+import { initialState } from "@/shared/data";
+import { type AuthState, type InitialState } from "@/shared/types";
 
-export const getInitialState = (cookieStore: any): InitialState => {
-  const userDataJSON = cookieStore.get(cookiesData.userData.name)?.value;
-  const userData: LoginResponseData | null = userDataJSON
-    ? JSON.parse(decodeURIComponent(userDataJSON))
-    : null;
+export const getInitialState = async (
+  accessToken?: string,
+): Promise<InitialState> => {
+  const loginResponse = await loginByToken(accessToken);
 
-  const authReducer: AuthState | null = userData
-    ? {
-        isAuth: true,
-        profile: {
-          id: userData.userId,
-          email: userData.email,
-          username: userData.username,
-          role: userData.role,
-        },
-      }
-    : null;
+  if (loginResponse) {
+    const { userData } = loginResponse;
+    const authReducer: AuthState = {
+      isAuth: true,
+      profile: {
+        id: userData.userId,
+        email: userData.email,
+        username: userData.username,
+        role: userData.role,
+      },
+    };
 
-  const initialState: InitialState = authReducer
-    ? {
-        ...globalInitialState,
-        authReducer,
-      }
-    : globalInitialState;
+    const newInitialState: InitialState = authReducer
+      ? {
+          ...initialState,
+          authReducer,
+        }
+      : initialState;
+
+    return newInitialState;
+  }
 
   return initialState;
 };

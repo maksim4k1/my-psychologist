@@ -7,7 +7,6 @@ interface Cookie {
 
 interface Cookies {
   accessToken: Cookie;
-  userData: Cookie;
 }
 
 export const cookies: Cookies = {
@@ -16,9 +15,6 @@ export const cookies: Cookies = {
     params: {
       httpOnly: true,
     },
-  },
-  userData: {
-    name: "user_data",
   },
 };
 

@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { mapGetPsychologistsResponse } from "@/server/mappers";
-import { createRequest, loginByToken } from "@/server/utils";
+import {
+  createRequest,
+  getRequestAccessToken,
+  loginByToken,
+} from "@/server/utils";
 import { httpStatuses } from "@/shared/data";
 import {
   type GetPsychologistsApiResponseData,
@@ -9,7 +13,8 @@ import {
 } from "@/shared/types";
 
 const getPsychologists = createRequest(async (request, serverFetch) => {
-  const loginByTokenResponse = await loginByToken(request);
+  const accessToken = getRequestAccessToken(request);
+  const loginByTokenResponse = await loginByToken(accessToken);
 
   if (!loginByTokenResponse) {
     return NextResponse.json(

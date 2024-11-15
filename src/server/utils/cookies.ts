@@ -1,13 +1,8 @@
-import { type NextResponse } from "next/server";
+import { type NextRequest, type NextResponse } from "next/server";
 import { cookies, deleteCookieParams } from "@/shared/data";
-import {
-  type LoginResponseData,
-  type RegistrationResponseData,
-} from "@/shared/types";
 
 export const setAuthCookies = (
   response: NextResponse,
-  userData: LoginResponseData | RegistrationResponseData,
   accessToken: string,
 ): NextResponse => {
   response.cookies.set(
@@ -15,18 +10,20 @@ export const setAuthCookies = (
     accessToken,
     cookies.accessToken.params,
   );
-  response.cookies.set(
-    cookies.userData.name,
-    JSON.stringify(userData),
-    cookies.userData.params,
-  );
 
   return response;
 };
 
 export const deleteAuthCookies = (response: NextResponse): NextResponse => {
   response.cookies.set(cookies.accessToken.name, "", deleteCookieParams);
-  response.cookies.set(cookies.userData.name, "", deleteCookieParams);
 
   return response;
+};
+
+export const getRequestAccessToken = (
+  request: NextRequest,
+): string | undefined => {
+  const accessToken = request.cookies.get(cookies.accessToken.name)?.value;
+
+  return accessToken;
 };
