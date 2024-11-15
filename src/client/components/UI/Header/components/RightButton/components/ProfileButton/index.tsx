@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { useRouter } from "next/navigation";
 import { Button } from "@/client/components/UI/Buttons";
 import { ProfileImage } from "@/client/components/UI/Images";
 import {
@@ -15,7 +14,6 @@ import { pages } from "@/shared/data";
 import { type FC, useEffect, useRef, useState } from "react";
 
 export const ProfileButton: FC = () => {
-  const router = useRouter();
   const profile = useAppSelector(selectProfile);
   const [logout, { isSuccess }] = useLogoutMutation();
   const dispatch = useAppDispatch();
@@ -38,9 +36,8 @@ export const ProfileButton: FC = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(authActions.setInitialUserData());
-      router.push(pages.login.path);
     }
-  }, [isSuccess, dispatch, router]);
+  }, [isSuccess, dispatch]);
 
   const logoutHandler = () => {
     logout();

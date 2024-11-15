@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import { ModalsPortal, SnackbarsPortal } from "@/client/components";
+import { AuthLayout } from "@/client/components/AuthLayout";
 import { StoreProvider } from "@/client/redux";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
@@ -51,9 +52,11 @@ const RootLayout: FC<RootLayoutProps> = async ({
         className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable}`}
       >
         <StoreProvider initialState={initialState}>
-          {children}
-          <SnackbarsPortal />
-          <ModalsPortal />
+          <AuthLayout>
+            {children}
+            <SnackbarsPortal />
+            <ModalsPortal />
+          </AuthLayout>
         </StoreProvider>
       </body>
     </html>

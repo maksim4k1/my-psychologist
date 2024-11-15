@@ -2,7 +2,6 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import {
   AppLink,
@@ -31,7 +30,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export const LoginForm: FC = () => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const [login, { data, isLoading, isSuccess, isError, error }] =
     useLoginMutation();
@@ -39,9 +37,8 @@ export const LoginForm: FC = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(authActions.setUserData(data));
-      router.push(pages.profile.path);
     }
-  }, [isSuccess, data, dispatch, router]);
+  }, [isSuccess, data, dispatch]);
 
   const onSubmit = (values: LoginRequestData) => {
     login(values);

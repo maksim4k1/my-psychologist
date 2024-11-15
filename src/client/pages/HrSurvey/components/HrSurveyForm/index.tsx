@@ -1,13 +1,11 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { FormErrorLabel, FormikForm, PrimaryButton } from "@/client/components";
 import { useAppDispatch } from "@/client/hooks";
 import { PopupsService, useSendHrSurveyMutation } from "@/client/redux";
 import { mapApiErrorMessage } from "@/client/utils";
-import { pages } from "@/shared/data";
 import { type SendHrSurveyRequestData } from "@/shared/types";
 import { type FC, useEffect } from "react";
 
@@ -23,7 +21,6 @@ const validationSchema = Yup.object().shape({
 
 export const HrSurveyForm: FC = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   const [sendHrSurvey, { isLoading, isSuccess, isError, error }] =
     useSendHrSurveyMutation();
@@ -33,9 +30,8 @@ export const HrSurveyForm: FC = () => {
       dispatch(
         PopupsService.openSnackbarWithDelay("Анкета HR-менеджера сохранена!"),
       );
-      router.push(pages.cabinet.path);
     }
-  }, [isSuccess, dispatch, router]);
+  }, [isSuccess, dispatch]);
 
   const onSubmit = (values: SendHrSurveyRequestData) => {
     sendHrSurvey(values);

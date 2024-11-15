@@ -4,35 +4,12 @@ import { mapLoginResponse } from "@/server/mappers/auth";
 import { deleteAuthCookies, setAuthCookies } from "@/server/utils";
 import { ACCESS } from "@/shared/config/access";
 import { serverAxios } from "@/shared/config/api";
-import { cookies, errorPages, pages, routes } from "@/shared/data";
+import { cookies } from "@/shared/data";
 import {
   type LoginApiResponseData,
   type LoginResponseData,
 } from "@/shared/types";
-
-const checkPath = (pathname: string, template: string): boolean => {
-  const pathDivider = "/";
-  const paramIdentifier = ":";
-
-  const pathElements = pathname.split(pathDivider);
-  const templateElements = template.split(pathDivider);
-
-  if (pathElements.length !== templateElements.length) return false;
-
-  const pathElRegExp = /[A-Za-z0-9-_.~%]/i;
-  const n = pathElements.length;
-
-  for (let i = 0; i < n; i++) {
-    const pathEl = pathElements[i];
-    const templateEl = templateElements[i];
-
-    if (templateEl[0] === paramIdentifier) {
-      if (!pathElRegExp.test(pathEl)) return false;
-    } else if (pathEl !== templateEl) return false;
-  }
-
-  return true;
-};
+import { checkAccess } from "@/shared/utils";
 
 interface LoginByTokenResponse {
   userData: LoginResponseData;
@@ -77,30 +54,21 @@ export const checkAuth = async (
   const userRole = loginResponse?.userData.role ?? ACCESS.unauthorized;
   const { pathname } = request.nextUrl;
 
-  let response: NextResponse = NextResponse.rewrite(
-    new URL(errorPages.notFound.path, request.url),
-  );
+  let response: NextResponse;
 
-  for (const route of routes) {
-    const { path, access } = route;
+  const { path, operationType } = checkAccess(pathname, userRole);
 
-    if (checkPath(pathname, path)) {
-      if (!access || access.includes(userRole)) response = NextResponse.next();
-      else {
-        if (access.length === 1 && access[0] === ACCESS.unauthorized) {
-          response = NextResponse.redirect(
-            new URL(pages.profile.path, request.url),
-          );
-        } else if (userRole === ACCESS.unauthorized) {
-          response = NextResponse.redirect(
-            new URL(pages.login.path, request.url),
-          );
-        } else {
-          response = NextResponse.rewrite(
-            new URL(errorPages.accessDenied.path, request.url),
-          );
-        }
-      }
+  switch (operationType) {
+    case "next": {
+      response = NextResponse.next();
+      break;
+    }
+    case "redirect": {
+      response = NextResponse.redirect(new URL(path, request.url));
+      break;
+    }
+    case "rewrite": {
+      response = NextResponse.rewrite(new URL(path, request.url));
       break;
     }
   }

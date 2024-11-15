@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import {
   AppLink,
@@ -40,7 +39,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export const RegistrationForm: FC = () => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const [registration, { data, isLoading, isSuccess, isError, error }] =
     useRegistrationMutation();
@@ -51,9 +49,8 @@ export const RegistrationForm: FC = () => {
         PopupsService.openSnackbarWithDelay("Регистрация прошла успешно!"),
       );
       dispatch(authActions.setUserData(data));
-      router.push(pages.successRegistration.path);
     }
-  }, [isSuccess, dispatch, data, router]);
+  }, [isSuccess, dispatch, data]);
 
   const onSubmit = (values: RegistrationRequestData) => {
     registration(values);
