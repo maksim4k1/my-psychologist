@@ -6,6 +6,7 @@ import { AuthLayout } from "@/client/components/AuthLayout";
 import { StoreProvider } from "@/client/redux";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
+import { cookies as cookiesData } from "@/shared/data";
 import { getInitialState } from "@/shared/utils";
 import { type FC, type ReactNode } from "react";
 
@@ -43,8 +44,9 @@ const RootLayout: FC<RootLayoutProps> = async ({
   children: ReactNode;
 }>) => {
   const cookieStore = await cookies();
+  const accessToken = cookieStore.get(cookiesData.accessToken.name)?.value;
 
-  const initialState = getInitialState(cookieStore);
+  const initialState = await getInitialState(accessToken);
 
   return (
     <html lang="ru">

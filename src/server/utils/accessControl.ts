@@ -1,10 +1,13 @@
 import { type AxiosResponse } from "axios";
 import { type NextRequest, NextResponse } from "next/server";
 import { mapLoginResponse } from "@/server/mappers/auth";
-import { deleteAuthCookies, setAuthCookies } from "@/server/utils";
+import {
+  deleteAuthCookies,
+  getRequestAccessToken,
+  setAuthCookies,
+} from "@/server/utils";
 import { ACCESS } from "@/shared/config/access";
 import { serverAxios } from "@/shared/config/api";
-import { cookies } from "@/shared/data";
 import {
   type LoginApiResponseData,
   type LoginResponseData,
@@ -21,21 +24,17 @@ interface LoginByTokenApiRequestData {
 }
 
 export const loginByToken = async (
-  request: NextRequest,
+  accessToken?: string,
 ): Promise<LoginByTokenResponse | null> => {
   try {
-    const accessToken = request.cookies.get(cookies.accessToken.name)?.value;
-
     if (accessToken) {
       const body: LoginByTokenApiRequestData = { token: accessToken };
 
-      const response = await serverAxios.post<
+      const { data } = await serverAxios.post<
         LoginApiResponseData,
         AxiosResponse<LoginApiResponseData>,
         LoginByTokenApiRequestData
       >("/users/auth_token", body);
-
-      const { data } = response;
 
       return {
         userData: mapLoginResponse(data),
@@ -50,7 +49,9 @@ export const loginByToken = async (
 export const checkAuth = async (
   request: NextRequest,
 ): Promise<NextResponse> => {
-  const loginResponse = await loginByToken(request);
+  const accessToken = getRequestAccessToken(request);
+  const loginResponse = await loginByToken(accessToken);
+
   const userRole = loginResponse?.userData.role ?? ACCESS.unauthorized;
   const { pathname } = request.nextUrl;
 
@@ -74,8 +75,8 @@ export const checkAuth = async (
   }
 
   if (loginResponse) {
-    const { userData, accessToken } = loginResponse;
-    response = setAuthCookies(response, userData, accessToken);
+    const { accessToken } = loginResponse;
+    response = setAuthCookies(response, accessToken);
   } else {
     response = deleteAuthCookies(response);
   }

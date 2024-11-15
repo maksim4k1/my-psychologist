@@ -29,7 +29,6 @@ const registration = createRequest(async (request, serverFetch) => {
       responseData,
       httpStatuses.created,
     ),
-    responseData,
     data.token,
   );
 

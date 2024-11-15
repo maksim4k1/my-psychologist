@@ -4,7 +4,11 @@ import {
   mapSendApplicationRequest,
   mapUpdateUserRequest,
 } from "@/server/mappers";
-import { createRequest, loginByToken } from "@/server/utils";
+import {
+  createRequest,
+  getRequestAccessToken,
+  loginByToken,
+} from "@/server/utils";
 import { httpStatuses } from "@/shared/data";
 import {
   type GetApplicationsApiResponseData,
@@ -30,8 +34,9 @@ const getApplications = createRequest(async (request, serverFetch) => {
 
 const sendApplication = createRequest(async (request, serverFetch) => {
   const body: SendApplicationRequestData = await request.json();
+  const accessToken = getRequestAccessToken(request);
 
-  const loginByTokenResponse = await loginByToken(request);
+  const loginByTokenResponse = await loginByToken(accessToken);
 
   if (!loginByTokenResponse) {
     return NextResponse.json(
