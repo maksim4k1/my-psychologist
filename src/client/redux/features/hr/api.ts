@@ -4,7 +4,7 @@ import {
   type SendHrSurveyRequestData,
 } from "@/shared/types";
 
-export const hrApi = api.injectEndpoints({
+const hrApi = api.injectEndpoints({
   endpoints: (builder) => ({
     sendHrSurvey: builder.mutation<
       ResponseSuccessInfo,

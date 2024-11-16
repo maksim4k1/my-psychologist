@@ -7,7 +7,7 @@ import {
   type ResponseSuccessInfo,
 } from "@/shared/types";
 
-export const authApi = api.injectEndpoints({
+const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponseData, LoginRequestData>({
       query: (body) => ({

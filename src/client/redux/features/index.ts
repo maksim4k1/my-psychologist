@@ -6,3 +6,4 @@ export * from "./popups";
 export * from "./psychologists";
 export * from "./tests";
 export * from "./hr";
+export * from "./feedbacks";
