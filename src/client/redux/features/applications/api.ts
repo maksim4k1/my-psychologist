@@ -7,7 +7,7 @@ import {
   type SendApplicationRequestData,
 } from "@/shared/types";
 
-export const applicationsApi = api.injectEndpoints({
+const applicationsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getApplications: builder.query<GetApplicationsResponseData, void>({
       query: () => "/applications",

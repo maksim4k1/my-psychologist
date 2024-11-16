@@ -4,7 +4,7 @@ import {
   type GetArticlesResponseData,
 } from "@/shared/types";
 
-export const articlesApi = api.injectEndpoints({
+const articlesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getArticles: builder.query<GetArticlesResponseData, void>({
       query: () => "/articles",

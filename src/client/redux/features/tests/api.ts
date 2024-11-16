@@ -10,7 +10,7 @@ import {
   type SendTestResultRequestData,
 } from "@/shared/types";
 
-export const testsApi = api.injectEndpoints({
+const testsApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getUserPassedTests: builder.query<GetTestsResponseData, string>({
       query: (userId) => `/tests/passed/${userId}`,

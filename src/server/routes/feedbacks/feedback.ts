@@ -3,7 +3,7 @@ import { createRequest } from "@/server/utils";
 import { httpStatuses } from "@/shared/data";
 import { ResponseSuccessInfo } from "@/shared/types";
 
-const maskFeedbackAsReaded = createRequest<{ id: string }>(
+const markFeedbackAsReaded = createRequest<{ id: string }>(
   async (request, serverFetch, { id }) => {
     await serverFetch.patch(`/review/read/${id}`);
 
@@ -26,6 +26,6 @@ const deleteFeedback = createRequest<{ id: string }>(
 );
 
 export const FeedbackRoutes = {
-  PATCH: maskFeedbackAsReaded,
+  PATCH: markFeedbackAsReaded,
   DELETE: deleteFeedback,
 };
