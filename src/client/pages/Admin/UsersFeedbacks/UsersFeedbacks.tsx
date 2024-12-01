@@ -35,7 +35,7 @@ export const UsersFeedbacksPage: FC = () => {
     deleteFeedback(id);
   };
 
-  // Создала массив отзывов для удобства
+  // Создала массив отзывов для удобства отображения
   /*if (!getFeedbacksStatus.isLoading && !getFeedbacksStatus.isError){
     feedbacks = [{id: "1",
       feedback: "Отличный сервис, очень помог!",
