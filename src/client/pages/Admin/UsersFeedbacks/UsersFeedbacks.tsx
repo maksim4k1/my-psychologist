@@ -1,23 +1,30 @@
 "use client";
 
+import styles from "./styles.module.scss"; 
 import {
   useDeleteFeedbackMutation,
   useGetFeedbacksQuery,
   useMarkFeedbackAsReadedMutation,
 } from "@/client/redux";
+import {
+  Container,
+  PrimaryButton,
+  SecondaryButton,
+  Subtitle,
+  DefaultError,
+  LoadingLoop,
+  PageTitle,
+} from "@/client/components";
 import { type FC } from "react";
 
 export const UsersFeedbacksPage: FC = () => {
-  const { data: feedbacks, ...getFeedbacksStatus } = useGetFeedbacksQuery();
-  const [markFeedbackAsReaded, markFeedbackAsReadedStatus] =
-    useMarkFeedbackAsReadedMutation();
-  const [deleteFeedback, deleteFeedbackStatus] = useDeleteFeedbackMutation();
+  var { data: feedbacks, ...getFeedbacksStatus } = useGetFeedbacksQuery();
+  const [markFeedbackAsReaded] = useMarkFeedbackAsReadedMutation();
+  const [deleteFeedback] = useDeleteFeedbackMutation();
 
   console.log(
     feedbacks,
-    getFeedbacksStatus,
-    markFeedbackAsReadedStatus,
-    deleteFeedbackStatus,
+    getFeedbacksStatus
   );
 
   const markAsReadedHandler = (id: string) => {
@@ -28,24 +35,47 @@ export const UsersFeedbacksPage: FC = () => {
     deleteFeedback(id);
   };
 
+  // Создала массив отзывов для удобства
+  /*if (!getFeedbacksStatus.isLoading && !getFeedbacksStatus.isError){
+    feedbacks = [{id: "1",
+      feedback: "Отличный сервис, очень помог!",
+      email: "user1@example.com",
+      isReaded: false,
+      createdAt: "string",},
+      {id: "string",
+        feedback: "string",
+        email: "string",
+        isReaded: true,
+        createdAt: "string",}];
+  }*/
+
+  if (getFeedbacksStatus.isLoading)
+    return <LoadingLoop />;
+  if (getFeedbacksStatus.isError)
+    return <DefaultError error={getFeedbacksStatus.error} />;
+
   return (
-    <div>
-      feedbacks:
-      {feedbacks &&
-        feedbacks.map(({ id, email, feedback, isReaded }) => (
-          <div key={id}>
-            <h3>{email}</h3>
-            <h3>{feedback}</h3>
-            <h3>isReaded: {isReaded ? "true" : "false"}</h3>
-            <button onClick={() => markAsReadedHandler(id)}>
-              mark as readed
-            </button>
-            <br />
-            <button onClick={() => deleteHandler(id)}>delete</button>
-            <br />
-            <br />
-          </div>
-        ))}
-    </div>
+    <Container>
+      <PageTitle className={styles.title}>Список отзывов</PageTitle >
+      {feedbacks && feedbacks.length === 0 && <Subtitle>Нет отзывов.</Subtitle>}
+      {feedbacks && feedbacks.length > 0 && (
+        <div className={styles.feedbackList}>
+          {feedbacks.map(({ id, email, feedback, isReaded }) => (
+            <div key={id} className={styles.feedbackItem}>
+              <h3 className={styles.emailText}>{email}</h3>
+              <p className={styles.feedbackText}>{feedback}</p>
+              <div className={styles.buttons}>
+              <PrimaryButton onClick={() => markAsReadedHandler(id)} disabled={isReaded}>
+                Отметить как прочитанное
+              </PrimaryButton>
+              <SecondaryButton onClick={() => deleteHandler(id)} className={styles.deleteButton}>
+                Удалить
+              </SecondaryButton>
+              </div>
+            </div>
+          ))}
+        </div>
+      )} 
+    </Container>
   );
 };
