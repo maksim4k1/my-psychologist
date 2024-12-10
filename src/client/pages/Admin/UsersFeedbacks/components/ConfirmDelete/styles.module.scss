@@ -1,0 +1,12 @@
+.modalButtons button {
+    margin-right: 40px;
+}
+
+.modalButtons {
+    display: flex; 
+    justify-content: center; 
+}
+
+.modalButtons button:last-child {
+    margin-right: 0;
+}
