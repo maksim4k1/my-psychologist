@@ -1,6 +1,6 @@
-@import "@/client/styles/variables.scss";
-@import "@/client/styles/textStyles.scss";
-@import "@/client/styles/mixins";
+@use "@/client/styles/variables" as *;
+@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/mixins" as *;
 
 .title {
   margin-bottom: 40px;

@@ -1,4 +1,4 @@
-@import "@/client/styles/variables.scss";
+@use "@/client/styles/variables" as *;
 
 .footer {
   padding: 20px 0;

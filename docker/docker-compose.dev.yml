@@ -1,5 +1,7 @@
 version: "3.8"
 
+name: my-psychologist-front
+
 services:
   nextjs-dev:
     container_name: nextjs-dev

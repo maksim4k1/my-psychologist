@@ -1,4 +1,4 @@
-@import "@/client/styles/variables";
+@use "@/client/styles/variables" as *;
 
 .container {
   position: relative;
@@ -10,28 +10,28 @@
     position: absolute;
     top: -25px;
     height: calc(100% + 50px);
-    width: 400px;
+    width: 50vw;
     background: $color-landing-white;
     z-index: 10;
   }
 
   &::before {
-    left: calc(-400px + 25px);
+    left: calc(-50vw + 25px);
     background: linear-gradient(
       90deg,
-      rgba($color-landing-white, 1) 40%,
-      rgba($color-landing-white, 0.8128501400560224) 70%,
-      rgba($color-landing-white, 0) 100%
+      rgba($color-landing-white, 1) calc(50vw - 300px),
+      rgba($color-landing-white, 0.8) calc(50vw - 150px),
+      rgba($color-landing-white, 0) 50vw
     );
   }
 
   &::after {
-    right: calc(-400px + 25px);
+    right: calc(-50vw + 25px);
     background: linear-gradient(
       90deg,
-      rgba($color-landing-white, 0) 0%,
-      rgba($color-landing-white, 0.81) 30%,
-      rgba($color-landing-white, 1) 60%
+      rgba($color-landing-white, 0) 0,
+      rgba($color-landing-white, 0.8) 150px,
+      rgba($color-landing-white, 1) 300px
     );
   }
 }
@@ -39,7 +39,10 @@
   margin: 0;
   width: 100%;
   padding: 0 32px;
-  overflow: visible;
+
+  &.swiper {
+    overflow: visible;
+  }
 }
 .slide {
   height: 100%;

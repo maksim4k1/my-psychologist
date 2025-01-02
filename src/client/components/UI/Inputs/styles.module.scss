@@ -1,5 +1,5 @@
-@import "@/client/styles/variables.scss";
-@import "../../../styles/textStyles.scss";
+@use "@/client/styles/variables" as *;
+@use "../../../styles/textStyles" as *;
 
 .label {
   position: relative;

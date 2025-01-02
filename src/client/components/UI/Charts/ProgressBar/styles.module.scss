@@ -1,5 +1,5 @@
-@import "@/client/styles/variables";
-@import "@/client/styles/textStyles";
+@use "@/client/styles/variables" as *;
+@use "@/client/styles/textStyles" as *;
 
 .contatiner {
   width: 100%;

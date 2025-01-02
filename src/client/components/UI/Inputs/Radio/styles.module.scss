@@ -1,5 +1,5 @@
-@import "@/client/styles/variables.scss";
-@import "@/client/styles/textStyles.scss";
+@use "@/client/styles/variables" as *;
+@use "@/client/styles/textStyles" as *;
 
 .radio {
   width: 24px;

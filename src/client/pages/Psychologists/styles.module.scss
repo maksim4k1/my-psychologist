@@ -1,4 +1,4 @@
-@import "@/client/styles/textStyles";
+@use "@/client/styles/textStyles" as *;
 
 .subtitle {
   margin-top: 40px;

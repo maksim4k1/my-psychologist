@@ -1,3 +1,5 @@
+@use "@/client/styles/variables" as *;
+
 @mixin card {
   background-color: $color-surface;
   border: 1px solid $color-outline-variant;

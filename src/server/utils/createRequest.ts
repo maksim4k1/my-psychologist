@@ -6,8 +6,6 @@ import { type ResponseError } from "@/shared/types";
 
 type Method = "get" | "delete" | "head" | "options" | "post" | "put" | "patch";
 
-// type HttpMethodWithBody = "post" | "put" | "patch";
-
 type Cfg<D> = AxiosRequestConfig<D>;
 type Res<T> = Promise<AxiosResponse<T>>;
 
@@ -32,12 +30,12 @@ type RequestRejectCallback = (
   error: ResponseError,
 ) => NextResponse;
 
-interface Params<P> {
-  params: P;
+interface SegmentData<P> {
+  params: Promise<P>;
 }
 type CreatedRequest<P> = (
   request: NextRequest,
-  params: Params<P>,
+  params: SegmentData<P>,
 ) => Promise<NextResponse>;
 
 const createServerFetch = (request: NextRequest): ServerFetch => {
@@ -77,11 +75,13 @@ export const createRequest = <P extends Record<string, string> = any>(
   resolve: RequestResolveCallback<P>,
   reject?: RequestRejectCallback,
 ): CreatedRequest<P> => {
-  return async (request: NextRequest, params: Params<P>) => {
+  return async (request: NextRequest, segmentData: SegmentData<P>) => {
     try {
       const serverFetch = createServerFetch(request);
 
-      const response = await resolve(request, serverFetch, params.params);
+      const params = await segmentData.params;
+
+      const response = await resolve(request, serverFetch, params);
 
       return response;
     } catch (error) {
