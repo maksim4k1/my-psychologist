@@ -1,5 +1,5 @@
-@import "@/client/styles/textStyles.scss";
-@import "@/client/styles/variables.scss";
+@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/variables" as *;
 
 .nav {
   display: flex;

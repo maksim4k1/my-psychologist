@@ -5,10 +5,15 @@ type TestQuestionAnswersApiData = {
 }[];
 
 export type GetTestQuestionsApiResponseData = {
-  number: number;
-  text: string;
-  answer_options: TestQuestionAnswersApiData;
-}[];
+  title: string;
+  description: string;
+  short_desc: string;
+  questions: {
+    number: number;
+    text: string;
+    answer_options: TestQuestionAnswersApiData;
+  }[];
+};
 
 type TestQuestionAnswersData = {
   id: string;

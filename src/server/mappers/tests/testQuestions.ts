@@ -6,9 +6,11 @@ import {
 
 export const mapGetTestQuestionsResponse = (
   currentTest: GetTestApiResponseData,
-  questions: GetTestQuestionsApiResponseData,
+  testqQuestions: GetTestQuestionsApiResponseData,
 ): GetTestQuestionsResponseData => {
   const { test_id, title } = currentTest;
+  const { questions } = testqQuestions;
+
   return {
     id: test_id,
     title: title,

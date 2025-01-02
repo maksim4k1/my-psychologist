@@ -1,5 +1,5 @@
-@import "@/client/styles/textStyles";
-@import "@/client/styles/variables";
+@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/variables" as *;
 
 .main {
   margin-top: -70px;

@@ -1,4 +1,4 @@
-@import "@/client/styles/variables";
+@use "@/client/styles/variables" as *;
 
 .title {
   font-family: var(--font-victor-mono);

@@ -1,4 +1,4 @@
-@import "@/client/styles/variables.scss";
+@use "@/client/styles/variables" as *;
 
 .header {
   position: relative;

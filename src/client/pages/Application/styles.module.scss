@@ -1,6 +1,6 @@
-@import "@/client/styles/variables";
-@import "@/client/styles/textStyles";
-@import "@/client/styles/mixins";
+@use "@/client/styles/variables" as *;
+@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/mixins" as *;
 
 .main {
   display: flex;

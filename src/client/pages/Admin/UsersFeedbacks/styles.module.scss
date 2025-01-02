@@ -1,34 +1,34 @@
-@import "@/client/styles/textStyles.scss";
-@import "@/client/styles/variables.scss";
+@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/variables" as *;
 
 .feedbackItem {
-    border: 1px solid $color-outline-variant;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 10px;
-    word-wrap: break-word; 
+  border: 1px solid $color-outline-variant;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 .emailText {
-    @include titleLarge;
-    color: $color-landing-primary-text;
-    margin-bottom: 20px;
+  @include titleLarge;
+  color: $color-landing-primary-text;
+  margin-bottom: 20px;
 }
 
 .feedbackText {
-    margin-bottom: 10px;
-    @include bodyLarge;
-    color: $color-landing-black;
+  margin-bottom: 10px;
+  @include bodyLarge;
+  color: $color-landing-black;
 }
 
 .feedbackList {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .title {
-    @include headlineLarge;
-    margin-bottom: 40px;
-  }
+  @include headlineLarge;
+  margin-bottom: 40px;
+}
 
 .buttons {
   margin-top: 20px;
@@ -37,9 +37,6 @@
 }
 
 .deleteButton {
-    cursor: pointer;
-    margin-left: 10px;
+  cursor: pointer;
+  margin-left: 10px;
 }
-
-
-

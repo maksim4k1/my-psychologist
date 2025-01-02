@@ -1,4 +1,4 @@
-@import "@/client/styles/textStyles.scss";
+@use "@/client/styles/textStyles" as *;
 
 .title {
   width: 100%;
