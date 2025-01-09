@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
-import { cookies } from "next/headers";
 import { ModalsPortal, SnackbarsPortal } from "@/client/components";
-import { AuthLayout } from "@/client/components/AuthLayout";
-import { StoreProvider } from "@/client/redux";
+import { AuthLayer, I18nLayer, StoreLayer } from "@/client/components/layers";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
-import { cookies as cookiesData } from "@/shared/data";
-import { getInitialState } from "@/shared/utils";
 import { type FC, type ReactNode } from "react";
 
 export const fontRoboto = Roboto({
@@ -43,23 +40,22 @@ const RootLayout: FC<RootLayoutProps> = async ({
 }: Readonly<{
   children: ReactNode;
 }>) => {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get(cookiesData.accessToken.name)?.value;
-
-  const initialState = await getInitialState(accessToken);
+  const locale = await getLocale();
 
   return (
-    <html lang="ru">
+    <html lang={locale}>
       <body
         className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable}`}
       >
-        <StoreProvider initialState={initialState}>
-          <AuthLayout>
-            {children}
-            <SnackbarsPortal />
-            <ModalsPortal />
-          </AuthLayout>
-        </StoreProvider>
+        <I18nLayer>
+          <StoreLayer>
+            <AuthLayer>
+              {children}
+              <SnackbarsPortal />
+              <ModalsPortal />
+            </AuthLayer>
+          </StoreLayer>
+        </I18nLayer>
       </body>
     </html>
   );

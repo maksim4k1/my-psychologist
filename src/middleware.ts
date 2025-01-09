@@ -1,4 +1,4 @@
-import { type NextRequest } from "next/server";
+import { type MiddlewareConfig, type NextRequest } from "next/server";
 import { checkAuth } from "@/server/utils";
 
 export const middleware = async (request: NextRequest) => {
@@ -7,6 +7,6 @@ export const middleware = async (request: NextRequest) => {
   return response;
 };
 
-export const config = {
-  matcher: ["/((?!api|_next|static).*)"],
+export const config: MiddlewareConfig = {
+  matcher: ["/((?!api|_next|static|image|favicon.ico).*)"],
 };

@@ -10,7 +10,7 @@ interface AuthLayoutProps {
   children: ReactNode;
 }
 
-export const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
+export const AuthLayer: FC<AuthLayoutProps> = ({ children }) => {
   const userRole = useAppSelector(selectRole);
   const router = useRouter();
   const pathname = usePathname();
