@@ -1,6 +1,5 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { StoreProvider } from "@/client/redux";
-import { cookies as cookiesData } from "@/shared/data/cookies";
 import { getInitialState } from "@/shared/utils";
 import { type FC, type ReactNode } from "react";
 
@@ -9,10 +8,8 @@ interface StoreLayoutProps {
 }
 
 export const StoreLayer: FC<StoreLayoutProps> = async ({ children }) => {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get(cookiesData.accessToken.name)?.value;
-
-  const initialState = await getInitialState(accessToken);
+  const [headersList, cookiesStore] = await Promise.all([headers(), cookies()]);
+  const initialState = await getInitialState(headersList, cookiesStore);
 
   return <StoreProvider initialState={initialState}>{children}</StoreProvider>;
 };

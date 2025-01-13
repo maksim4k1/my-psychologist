@@ -15,6 +15,12 @@ export const initialState: InitialState = {
       username: "",
       role: ACCESS.unauthorized,
     },
+    ua: {
+      ua: "",
+      browser: {},
+      device: {},
+      os: {},
+    },
   },
   popupsReducer: {
     snackbar: {
