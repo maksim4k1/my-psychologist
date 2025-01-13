@@ -1,8 +1,8 @@
-import { initialState as globalInitialState, reducers } from "@/shared/data";
+import { defaultInitialState, reducers } from "@/shared/data";
 import { type AuthState, type LoginResponseData } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: AuthState = globalInitialState.authReducer;
+const initialState: AuthState = defaultInitialState.authReducer;
 
 const authSlice = createSlice({
   name: reducers.authReducer,

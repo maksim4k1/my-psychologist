@@ -2,7 +2,7 @@ import { type ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapte
 import { type ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { userAgent } from "next/server";
 import { loginByToken } from "@/server/utils";
-import { cookies as cookiesData, initialState } from "@/shared/data";
+import { cookies as cookiesData, defaultInitialState } from "@/shared/data";
 import { type InitialState } from "@/shared/types";
 
 export const getAuthReducer = async (
@@ -31,7 +31,7 @@ export const getAuthReducer = async (
   }
 
   return {
-    ...initialState["authReducer"],
+    ...defaultInitialState["authReducer"],
     ua,
   };
 };
