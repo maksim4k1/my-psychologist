@@ -1,18 +1,16 @@
 import {
   type GetArticleApiResponseData,
   type GetArticleResponseData,
-  type GetArticlesApiResponseData,
 } from "@/shared/types";
 
 export const mapGetArticleResponse = (
-  currentArticle: GetArticlesApiResponseData[number],
   articleContent: GetArticleApiResponseData,
 ): GetArticleResponseData => {
-  const { id, theme } = currentArticle;
+  const { materials, theme } = articleContent;
+
   return {
-    id,
     title: theme,
-    content: articleContent.map((el) => {
+    content: materials.map((el) => {
       const { id, text } = el;
 
       return {

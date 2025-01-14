@@ -1,5 +1,4 @@
 export interface GetArticleResponseData {
-  id: string;
   title: string;
   content: {
     id: string;
@@ -8,6 +7,10 @@ export interface GetArticleResponseData {
 }
 
 export type GetArticleApiResponseData = {
-  id: string;
-  text: string;
-}[];
+  theme: string;
+  max_score: number;
+  materials: {
+    id: string;
+    text: string;
+  }[];
+};
