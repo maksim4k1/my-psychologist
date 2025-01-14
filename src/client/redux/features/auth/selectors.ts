@@ -20,3 +20,13 @@ export const selectProfile = (state: RootState) => {
 export const selectRole = (state: RootState): AccessRole => {
   return selectAuthModule(state).profile.role;
 };
+
+export const selectIsMobile = (state: RootState): boolean => {
+  const MOBILE = "mobile";
+  const TABLET = "tablet";
+  const deviceType = selectAuthModule(state).ua.device.type;
+
+  const isMobile = deviceType === MOBILE || deviceType === TABLET;
+
+  return isMobile;
+};

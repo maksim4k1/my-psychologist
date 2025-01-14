@@ -6,7 +6,7 @@ export const reducers: ReducersNames = {
   popupsReducer: "popups",
 };
 
-export const initialState: InitialState = {
+export const defaultInitialState: InitialState = {
   authReducer: {
     isAuth: false,
     profile: {
@@ -14,6 +14,12 @@ export const initialState: InitialState = {
       email: "",
       username: "",
       role: ACCESS.unauthorized,
+    },
+    ua: {
+      ua: "",
+      browser: {},
+      device: {},
+      os: {},
     },
   },
   popupsReducer: {

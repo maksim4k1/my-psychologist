@@ -4,4 +4,4 @@ export * from "./achievements";
 export * from "./routes";
 export * from "./cookies";
 export * from "./httpStatuses";
-export * from "./initialState";
+export * from "./defaultInitialState";

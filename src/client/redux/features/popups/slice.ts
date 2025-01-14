@@ -1,8 +1,8 @@
-import { initialState as globalInitialState, reducers } from "@/shared/data";
+import { defaultInitialState, reducers } from "@/shared/data";
 import { type PopupsState } from "@/shared/types";
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: PopupsState = globalInitialState.popupsReducer;
+const initialState: PopupsState = defaultInitialState.popupsReducer;
 
 const popupsSlice = createSlice({
   name: reducers.popupsReducer,
