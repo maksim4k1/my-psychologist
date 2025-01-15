@@ -1,8 +1,7 @@
 "use client";
 
-import { PrimaryButton, SecondaryButton } from "../../Buttons";
-import { Modal } from "../../Popups";
 import styles from "./styles.module.scss";
+import { Modal, PrimaryButton, SecondaryButton } from "@/client/components";
 import { pages } from "@/shared/data";
 import { type GetTestsResponseData } from "@/shared/types";
 import { type FC, useState } from "react";
@@ -39,15 +38,16 @@ export const ExerciseCard: FC<Props> = ({ exercise }) => {
   };
 
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onClick={onClickHandler}
+    >
+      <img
+        src={exercise.image}
+        alt={exercise.title}
+        className={styles.image}
+      />
       <h5 className={styles.title}>{exercise.title}</h5>
-      <p className={styles.description}>{exercise.description}</p>
-      <button
-        className={styles.button}
-        onClick={onClickHandler}
-      >
-        Подробнее
-      </button>
       <Modal
         isOpen={isOpen}
         title={exercise.title}

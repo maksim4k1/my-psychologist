@@ -2,7 +2,6 @@ export * from "./ApplicationCard";
 export * from "./ApplicationProfileCard";
 export * from "./ArticleCard";
 export * from "./ClientCard";
-export * from "./ExerciseCard";
 export * from "./GiveExerciseCard";
 export * from "./ProfileCard";
 export * from "./TestCard";
