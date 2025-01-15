@@ -1,42 +1,11 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
-import { Inter, Montserrat, Roboto, Victor_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { fontVariablesClass } from "@/client/assets/fonts";
 import { ModalsPortal, SnackbarsPortal } from "@/client/components";
 import { AuthLayer, I18nLayer, StoreLayer } from "@/client/components/layers";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
 import { type FC, type ReactNode } from "react";
-
-export const fontCygre = localFont({
-  src: "../client/assets/fonts/Cygre-SemiBold.ttf",
-  display: "swap",
-  variable: "--font-cygre",
-});
-
-export const fontInter = Inter({
-  weight: ["500", "700"],
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
-});
-
-export const fontRoboto = Roboto({
-  weight: ["400", "500"],
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-roboto",
-});
-
-export const fontVictorMono = Victor_Mono({
-  weight: ["700"],
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-victor-mono",
-});
-
-export const fontMontserrat = Montserrat({
-  weight: ["400", "600"],
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-montserrat",
-});
 
 export const metadata: Metadata = {
   title: "Одеяло",
@@ -44,22 +13,16 @@ export const metadata: Metadata = {
     "Программная система для сопровождения психотерапии и самостоятельной проработки психологических проблем",
 };
 
-interface RootLayoutProps {
+type RootLayoutProps = Readonly<{
   children: ReactNode;
-}
+}>;
 
-const RootLayout: FC<RootLayoutProps> = async ({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) => {
+const RootLayout: FC<RootLayoutProps> = async ({ children }) => {
   const locale = await getLocale();
 
   return (
     <html lang={locale}>
-      <body
-        className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable} ${fontInter.variable} ${fontCygre.variable}`}
-      >
+      <body className={fontVariablesClass}>
         <I18nLayer>
           <StoreLayer>
             <AuthLayer>
