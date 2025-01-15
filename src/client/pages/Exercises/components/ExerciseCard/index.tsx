@@ -13,8 +13,12 @@ interface Props {
 export const ExerciseCard: FC<Props> = ({ exercise }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const onClickHandler = () => {
+  const handleOpen = () => {
     setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
   };
 
   const renderModalContent = () => {
@@ -38,22 +42,24 @@ export const ExerciseCard: FC<Props> = ({ exercise }) => {
   };
 
   return (
-    <div
-      className={styles.card}
-      onClick={onClickHandler}
-    >
-      <img
-        src={exercise.image}
-        alt={exercise.title}
-        className={styles.image}
-      />
-      <h5 className={styles.title}>{exercise.title}</h5>
+    <>
+      <div
+        className={styles.card}
+        onClick={handleOpen}
+      >
+        <img
+          src={exercise.image}
+          alt={exercise.title}
+          className={styles.image}
+        />
+        <h5 className={styles.title}>{exercise.title}</h5>
+      </div>
       <Modal
         isOpen={isOpen}
         title={exercise.title}
-        onClose={() => setIsOpen(false)}
+        onClose={handleClose}
         content={renderModalContent()}
       />
-    </div>
+    </>
   );
 };

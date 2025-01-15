@@ -1,7 +1,7 @@
 "use client";
 
+import { SecondaryButton } from "../../../Buttons";
 import styles from "./styles.module.scss";
-import Link from "next/link";
 import { useAppSelector } from "@/client/hooks";
 import { selectProfile } from "@/client/redux";
 import { type ACCESS } from "@/shared/config/access";
@@ -50,13 +50,13 @@ export const NavBar: FC = () => {
   return (
     <nav className={styles.nav}>
       {navList.map((el) => (
-        <Link
+        <SecondaryButton
           key={el.title}
           className={styles.navLink}
           href={el.href}
         >
           {el.title}
-        </Link>
+        </SecondaryButton>
       ))}
     </nav>
   );

@@ -3,7 +3,13 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import { LogoIcon } from "@/client/assets/icons";
-import { Button, Container, ProfileImage } from "@/client/components";
+import {
+  Button,
+  Container,
+  PrimaryButton,
+  ProfileImage,
+  SecondaryButton,
+} from "@/client/components";
 import {
   useAppDispatch,
   useAppSelector,
@@ -63,30 +69,30 @@ export const Header: FC = () => {
           <LogoIcon />
         </Link>
         <nav className={styles.nav}>
-          <Link
+          <SecondaryButton
             className={styles.navLink}
             href="/#landing-advantages"
           >
             Преимущества
-          </Link>
-          <Link
+          </SecondaryButton>
+          <SecondaryButton
             className={styles.navLink}
             href="/#landing-team"
           >
             Команда
-          </Link>
-          <Link
+          </SecondaryButton>
+          <SecondaryButton
             className={styles.navLink}
             href="/#landing-achievements"
           >
             Достижения
-          </Link>
-          <Link
+          </SecondaryButton>
+          <SecondaryButton
             className={styles.navLink}
             href="/#landing-partners"
           >
             Партнёры
-          </Link>
+          </SecondaryButton>
         </nav>
         {isAuth ? (
           <div className={styles.profileContainer}>
@@ -131,12 +137,12 @@ export const Header: FC = () => {
             )}
           </div>
         ) : (
-          <a
+          <PrimaryButton
             className={styles.button}
             href={pages.login.path}
           >
             Войти
-          </a>
+          </PrimaryButton>
         )}
       </Container>
     </header>

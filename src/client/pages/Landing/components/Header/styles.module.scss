@@ -34,31 +34,10 @@
 
 .navLink {
   min-width: 112px;
-  height: 36px;
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include bodyS;
-  background-color: $color-white70;
-  border-radius: 7px;
 }
 
 .button {
-  height: 36px;
   margin-left: 40px;
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $color-white100;
-  @include bodyS;
-  background-color: $color-blue80;
-  border-radius: 7px;
-
-  &:disabled {
-    background-color: $color-blue60;
-  }
 }
 
 .profileContainer {

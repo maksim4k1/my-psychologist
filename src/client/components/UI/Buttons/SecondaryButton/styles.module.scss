@@ -1,30 +1,27 @@
-@use "@/client/styles/variables" as *;
-@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/colors" as *;
+@use "@/client/styles/fontStyles" as *;
 
 .button {
-  color: $color-primary;
-  background-color: transparent;
-  border: 1px solid $color-outline;
-  transition:
-    border-color 0.2s,
-    background-color 0.2s;
+  color: $color-black100;
+  @include bodyS;
+  background-color: $color-white70;
+  transition: opacity 0.2s;
 
   &:hover {
-    background-color: rgba($color: $color-primary, $alpha: 0.12);
+    opacity: 0.92;
   }
 
   &:focus {
-    border-color: $color-primary;
-    background-color: rgba($color: $color-primary, $alpha: 0.12);
+    opacity: 0.88;
   }
 
   &:active {
-    background-color: rgba($color: $color-primary, $alpha: 0.12);
+    opacity: 0.88;
   }
 
   &:disabled {
-    border-color: rgba($color: $color-on-surface, $alpha: 0.12);
-    color: rgba($color: $color-on-surface, $alpha: 0.38);
+    background-color: $color-white70;
+    color: $color-black100;
     pointer-events: none;
   }
 }

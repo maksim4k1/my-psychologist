@@ -9,12 +9,4 @@
 
 .navLink {
   min-width: 112px;
-  height: 36px;
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include bodyS;
-  background-color: $color-white70;
-  border-radius: 7px;
 }
