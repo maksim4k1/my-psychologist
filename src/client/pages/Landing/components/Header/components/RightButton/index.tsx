@@ -1,6 +1,7 @@
 "use client";
 
 import { ProfileButton } from "./components";
+import styles from "./styles.module.scss";
 import { PrimaryButton } from "@/client/components";
 import { useAppSelector } from "@/client/hooks";
 import { selectIsAuth } from "@/client/redux";
@@ -15,7 +16,12 @@ export const RightButton: FC = () => {
       {isAuth ? (
         <ProfileButton />
       ) : (
-        <PrimaryButton href={pages.login.path}>Войти</PrimaryButton>
+        <PrimaryButton
+          className={styles.button}
+          href={pages.login.path}
+        >
+          Войти
+        </PrimaryButton>
       )}
     </>
   );
