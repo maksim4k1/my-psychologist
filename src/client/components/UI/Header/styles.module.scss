@@ -1,23 +1,21 @@
-@use "@/client/styles/variables" as *;
 @use "@/client/styles/colors" as *;
 
 .header {
-  position: relative;
+  height: 86px;
   width: 100%;
-  height: 88px;
-  background-color: $color-white100;
-  margin-bottom: 70px;
-  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 100px;
 }
 
 .container {
   height: 100%;
+  padding: 0 25px 0 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid $color-surface-container;
-}
-
-.logo {
-  width: 120px;
+  justify-content: flex-end;
+  background-color: $color-white100;
+  border-radius: 32px;
 }

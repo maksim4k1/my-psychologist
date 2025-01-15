@@ -1,5 +1,5 @@
-@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/fontStyles" as *;
 
 .title {
-  @include displayMedium;
+  @include titleCygre;
 }

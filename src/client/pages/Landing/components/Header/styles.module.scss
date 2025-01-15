@@ -8,10 +8,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 30px;
-  margin-bottom: 50px;
-  padding: 0 25px 0 20px;
-  background-color: $color-white100;
-  border-radius: 32px;
+  margin-bottom: 100px;
 }
 
 .logo {
@@ -20,9 +17,13 @@
 }
 
 .container {
+  height: 100%;
+  padding: 0 25px 0 20px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  background-color: $color-white100;
+  border-radius: 32px;
 }
 
 .nav {

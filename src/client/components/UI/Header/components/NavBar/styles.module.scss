@@ -1,12 +1,20 @@
-@use "@/client/styles/textStyles" as *;
-@use "@/client/styles/variables" as *;
+@use "@/client/styles/fontStyles" as *;
+@use "@/client/styles/colors" as *;
 
 .nav {
   display: flex;
-  gap: 40px;
+  gap: 20px;
+  align-items: center;
 }
 
 .navLink {
-  color: $color-secondary;
-  @include titleMedium;
+  min-width: 112px;
+  height: 36px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include bodyS;
+  background-color: $color-white70;
+  border-radius: 7px;
 }

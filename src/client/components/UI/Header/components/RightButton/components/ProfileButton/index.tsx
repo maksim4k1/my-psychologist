@@ -53,7 +53,7 @@ export const ProfileButton: FC = () => {
         <ProfileImage
           src=""
           alt="profile"
-          size={54}
+          size={36}
         />
       </button>
       {isPopupOpen && (
@@ -61,20 +61,11 @@ export const ProfileButton: FC = () => {
           className={styles.popup}
           ref={popupRef}
         >
-          <div className={styles.profileInfo}>
-            <div className={styles.name}>
-              {profile.username || profile.email}
-            </div>
-            {profile.username && (
-              <div className={styles.email}>{profile.email}</div>
-            )}
-          </div>
-          <div className={styles.divider}></div>
           <Button
             className={styles.popupItem}
             href={pages.profile.path}
           >
-            Профиль
+            Перейти в профиль
           </Button>
           {(profile.role === ACCESS.hr ||
             profile.role === ACCESS.psychologist) && (
@@ -85,12 +76,11 @@ export const ProfileButton: FC = () => {
               Кабинет {profile.role === ACCESS.hr ? "HR" : "психолога"}
             </Button>
           )}
-          <div className={styles.divider}></div>
           <Button
             className={styles.popupItem}
             onClick={logoutHandler}
           >
-            Выйти из аккаунта
+            Выйти
           </Button>
         </div>
       )}

@@ -25,7 +25,7 @@ export const Header: FC = () => {
   const profile = useAppSelector(selectProfile);
   const [logout, { isSuccess }] = useLogoutMutation();
   const popupRef = useRef(null);
-  const bittonRef = useRef(null);
+  const buttonRef = useRef(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useClickOutside(
@@ -33,7 +33,7 @@ export const Header: FC = () => {
     () => {
       setIsPopupOpen(false);
     },
-    bittonRef,
+    buttonRef,
   );
 
   useEffect(() => {
@@ -92,7 +92,7 @@ export const Header: FC = () => {
           <div className={styles.profileContainer}>
             <button
               onClick={togglePopup}
-              ref={bittonRef}
+              ref={buttonRef}
               className={styles.profileButton}
             >
               <ProfileImage
