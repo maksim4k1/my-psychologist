@@ -1,7 +1,7 @@
-@use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .strong {
-  color: $color-landing-primary;
+  color: $color-blue80;
 }
 
 .title {

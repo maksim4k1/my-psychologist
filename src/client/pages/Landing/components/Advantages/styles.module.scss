@@ -1,4 +1,3 @@
-@use "@/client/styles/variables" as *;
 @use "@/client/styles/colors" as *;
 
 .title {
@@ -22,7 +21,6 @@ h2.title {
 .info {
   padding: 60px;
   background-color: $color-white100;
-  // box-shadow: $shadow-landing-primary;
   border-radius: 70px;
   background-repeat: no-repeat;
 }
