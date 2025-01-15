@@ -1,11 +1,24 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
-import { Montserrat, Roboto, Victor_Mono } from "next/font/google";
+import { Inter, Montserrat, Roboto, Victor_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { ModalsPortal, SnackbarsPortal } from "@/client/components";
 import { AuthLayer, I18nLayer, StoreLayer } from "@/client/components/layers";
 import "@/client/styles/global.scss";
 import "@/client/styles/reset.scss";
 import { type FC, type ReactNode } from "react";
+
+export const fontCygre = localFont({
+  src: "../client/assets/fonts/Cygre-SemiBold.ttf",
+  display: "swap",
+  variable: "--font-cygre",
+});
+
+export const fontInter = Inter({
+  weight: ["500", "700"],
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-inter",
+});
 
 export const fontRoboto = Roboto({
   weight: ["400", "500"],
@@ -26,7 +39,7 @@ export const fontMontserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Обсудим?",
+  title: "Одеяло",
   description:
     "Программная система для сопровождения психотерапии и самостоятельной проработки психологических проблем",
 };
@@ -45,7 +58,7 @@ const RootLayout: FC<RootLayoutProps> = async ({
   return (
     <html lang={locale}>
       <body
-        className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable}`}
+        className={`${fontRoboto.variable} ${fontVictorMono.variable} ${fontMontserrat.variable} ${fontInter.variable} ${fontCygre.variable}`}
       >
         <I18nLayer>
           <StoreLayer>
