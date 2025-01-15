@@ -1,17 +1,14 @@
-@use "@/client/styles/variables" as *;
-@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/colors" as *;
+@use "@/client/styles/fontStyles" as *;
 
 .button {
-  color: $color-on-primary;
-  background-color: $color-primary;
-  transition:
-    box-shadow 0.2s,
-    opacity 0.2s;
+  color: $color-white100;
+  @include bodyS;
+  background-color: $color-blue80;
+  transition: opacity 0.2s;
 
   &:hover {
     opacity: 0.92;
-    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
   }
 
   &:focus {
@@ -23,8 +20,8 @@
   }
 
   &:disabled {
-    background-color: rgba($color: $color-on-surface, $alpha: 0.12);
-    color: rgba($color: $color-on-surface, $alpha: 0.38);
+    background-color: $color-blue60;
+    color: $color-white70;
     pointer-events: none;
   }
 }

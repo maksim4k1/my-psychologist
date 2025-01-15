@@ -1,7 +1,5 @@
 version: "3.8"
 
-name: my-psychologist-front
-
 services:
   nextjs-dev:
     container_name: nextjs-dev
@@ -15,7 +13,7 @@ services:
     expose:
       - "3000"
     networks:
-      - my-psychologist
+      - odeyalo
 
   nginx-dev:
     container_name: nginx-dev
@@ -30,10 +28,10 @@ services:
     expose:
       - "80"
     networks:
-      - my-psychologist
+      - odeyalo
     depends_on:
       - nextjs-dev
 
 networks:
-  my-psychologist:
+  odeyalo:
     driver: bridge

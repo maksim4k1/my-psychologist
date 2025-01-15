@@ -1,0 +1,69 @@
+@mixin titleCygre {
+  font-family: var(--font-cygre);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+}
+
+@mixin titleXL {
+  font-family: var(--font-inter);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 34px;
+}
+
+@mixin bodyXLBold {
+  font-family: var(--font-inter);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+@mixin bodyXL {
+  font-family: var(--font-inter);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+@mixin bodyLBold {
+  font-family: var(--font-inter);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+@mixin bodyL {
+  font-family: var(--font-inter);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@mixin bodyMBold {
+  font-family: var(--font-inter);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+@mixin bodyM {
+  font-family: var(--font-inter);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+@mixin bodySBold {
+  font-family: var(--font-inter);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+@mixin bodyS {
+  font-family: var(--font-inter);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+}

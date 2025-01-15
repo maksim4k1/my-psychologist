@@ -1,7 +1,5 @@
 version: "3"
 
-name: my-psychologist-front
-
 services:
   nextjs-prod:
     container_name: nextjs-prod

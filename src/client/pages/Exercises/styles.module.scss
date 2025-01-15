@@ -1,5 +1,13 @@
+@use "@/client/styles/colors" as *;
+
+.container {
+  padding: 20px;
+  background-color: $color-white100;
+  border-radius: 32px;
+}
+
 .title {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .section {
@@ -12,6 +20,6 @@
 .list {
   display: grid;
   grid-template-columns: repeat(4, minmax(220px, 1fr));
-  column-gap: 20px;
+  column-gap: 16px;
   row-gap: 20px;
 }

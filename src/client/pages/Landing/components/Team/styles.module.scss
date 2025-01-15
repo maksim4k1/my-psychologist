@@ -1,7 +1,7 @@
-@use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .title {
-  font-family: var(--font-victor-mono);
+  font-family: var(--font-cygre);
   font-weight: 700;
 }
 
@@ -46,5 +46,5 @@ h3.title {
 }
 
 .teamMemberRole {
-  color: $color-landing-secondary-text;
+  color: $color-blue60;
 }

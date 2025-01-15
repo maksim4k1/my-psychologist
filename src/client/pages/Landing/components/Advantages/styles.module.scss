@@ -1,7 +1,7 @@
-@use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .title {
-  font-family: var(--font-victor-mono);
+  font-family: var(--font-cygre);
   font-weight: 700;
 }
 
@@ -20,8 +20,7 @@ h2.title {
 
 .info {
   padding: 60px;
-  background-color: $color-landing-white;
-  box-shadow: $shadow-landing-primary;
+  background-color: $color-white100;
   border-radius: 70px;
   background-repeat: no-repeat;
 }

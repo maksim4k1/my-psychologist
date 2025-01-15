@@ -1,9 +1,7 @@
-@use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .body {
   min-height: 100vh;
-  background-color: $color-landing-white;
-  font-family: var(--font-montserrat);
 }
 
 .main {

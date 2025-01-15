@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
+import { SecondaryButton } from "@/client/components";
 import { useAppSelector } from "@/client/hooks";
 import { selectProfile } from "@/client/redux";
 import { type ACCESS } from "@/shared/config/access";
@@ -22,18 +22,21 @@ const rolesNav: Nav = {
     { href: pages.usersResults.path, title: "Результаты тестов" },
   ],
   client: [
-    { href: pages.profile.path, title: "Моя программа" },
+    { href: pages.profile.path, title: "План" },
     { href: pages.articles.path, title: "Теория" },
+    { href: pages.exercises.path, title: "Тесты" },
     { href: pages.psychologist.path, title: "Психологи" },
   ],
   hr: [
-    { href: pages.profile.path, title: "Моя программа" },
+    { href: pages.profile.path, title: "План" },
     { href: pages.articles.path, title: "Теория" },
+    { href: pages.exercises.path, title: "Тесты" },
     { href: pages.psychologist.path, title: "Психологи" },
   ],
   psychologist: [
-    { href: pages.profile.path, title: "Моя программа" },
+    { href: pages.profile.path, title: "План" },
     { href: pages.articles.path, title: "Теория" },
+    { href: pages.exercises.path, title: "Тесты" },
     { href: pages.psychologist.path, title: "Психологи" },
   ],
   unauthorized: [],
@@ -47,13 +50,13 @@ export const NavBar: FC = () => {
   return (
     <nav className={styles.nav}>
       {navList.map((el) => (
-        <Link
+        <SecondaryButton
           key={el.title}
           className={styles.navLink}
           href={el.href}
         >
           {el.title}
-        </Link>
+        </SecondaryButton>
       ))}
     </nav>
   );

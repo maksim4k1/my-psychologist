@@ -1,10 +1,10 @@
 "use client";
 
+import { ExerciseCard } from "./components";
 import styles from "./styles.module.scss";
 import {
   Container,
   DefaultError,
-  ExerciseCard,
   LoadingLoop,
   PageTitle,
   Subtitle,
@@ -20,7 +20,7 @@ export const ExercisesPage: FC = () => {
     return <DefaultError error={getTestsState.error} />;
 
   return (
-    <Container>
+    <Container className={styles.container}>
       <PageTitle className={styles.title}>Психологические тесты</PageTitle>
       <div className={styles.section}>
         {(!tests || !tests.length) && <Subtitle>Нет доступных тестов</Subtitle>}

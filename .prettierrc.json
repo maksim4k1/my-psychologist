@@ -17,7 +17,6 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "useTabs": false,
-  "vueIndentScriptAndStyle": false,
   "importOrder": ["(^@.*|<THIRD_PARTY_MODULES>)", "react$", "^src($|/.+)"],
   "importOrderSeparation": false,
   "importOrderSortSpecifiers": true,

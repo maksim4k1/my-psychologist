@@ -1,11 +1,11 @@
-@use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .strong {
-  color: $color-landing-primary;
+  color: $color-blue80;
 }
 
 .title {
-  font-family: var(--font-victor-mono);
+  font-family: var(--font-cygre);
   font-weight: 700;
 }
 

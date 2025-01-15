@@ -1,13 +1,14 @@
-@use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .footer {
+  margin-top: 70px;
   padding: 20px 0;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 50px;
-  font-family: var(--font-montserrat);
+  font-family: var(--font-inter);
 }
 
 .logo {
@@ -33,6 +34,5 @@
 }
 
 .iconButton {
-  background-color: $color-landing-white;
-  box-shadow: $shadow-landing-primary;
+  background-color: $color-white100;
 }

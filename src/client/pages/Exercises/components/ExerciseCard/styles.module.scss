@@ -1,0 +1,35 @@
+@use "@/client/styles/fontStyles" as *;
+@use "@/client/styles/colors" as *;
+
+.card {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  cursor: pointer;
+
+  &:hover > .title {
+    color: $color-blue80;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 165px;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.title {
+  @include bodyS;
+}
+
+.modalDescription {
+  margin-bottom: 40px;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
