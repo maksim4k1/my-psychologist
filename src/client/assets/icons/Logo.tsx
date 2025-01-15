@@ -1,8 +1,6 @@
 export const LogoIcon = () => {
   return (
     <svg
-      width="194"
-      height="56"
       viewBox="0 0 194 56"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

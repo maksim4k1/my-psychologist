@@ -1,4 +1,5 @@
 @use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .container {
   position: relative;
@@ -11,7 +12,7 @@
     top: -25px;
     height: calc(100% + 50px);
     width: 50vw;
-    background: $color-landing-white;
+    background: $color-white70;
     z-index: 10;
   }
 
@@ -19,9 +20,9 @@
     left: calc(-50vw + 25px);
     background: linear-gradient(
       90deg,
-      rgba($color-landing-white, 1) calc(50vw - 300px),
-      rgba($color-landing-white, 0.8) calc(50vw - 150px),
-      rgba($color-landing-white, 0) 50vw
+      rgba($color-white70, 1) calc(50vw - 300px),
+      rgba($color-white70, 0.8) calc(50vw - 150px),
+      rgba($color-white70, 0) 50vw
     );
   }
 
@@ -29,9 +30,9 @@
     right: calc(-50vw + 25px);
     background: linear-gradient(
       90deg,
-      rgba($color-landing-white, 0) 0,
-      rgba($color-landing-white, 0.8) 150px,
-      rgba($color-landing-white, 1) 300px
+      rgba($color-white70, 0) 0,
+      rgba($color-white70, 0.8) 150px,
+      rgba($color-white70, 1) 300px
     );
   }
 }
@@ -56,12 +57,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $color-white;
+  background-color: $color-blue80;
   border-radius: 50%;
   transition:
     opacity 0.2s,
     visibility 0.2s;
   z-index: 15;
+
+  & path {
+    fill: $color-white100;
+  }
 }
 
 .prevButton {

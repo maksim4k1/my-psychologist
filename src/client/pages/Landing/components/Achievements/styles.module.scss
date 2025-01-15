@@ -1,7 +1,8 @@
 @use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 .title {
-  font-family: var(--font-victor-mono);
+  font-family: var(--font-cygre);
   font-weight: 700;
 }
 
@@ -21,9 +22,9 @@ h3.title {
   min-width: 322px;
   height: 200px;
   padding: 40px 23px 50px 30px;
-  background-color: $color-landing-white;
   border-radius: 40px;
-  box-shadow: $shadow-landing-primary;
+  background-color: $color-white100;
+  // box-shadow: $shadow-landing-primary;
   background-repeat: no-repeat;
 }
 

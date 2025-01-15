@@ -1,10 +1,12 @@
 @use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 
 body {
   font-size: 16px;
-  background-color: $color-on-primary;
-  color: $color-on-surface;
+  background-color: $color-white70;
+  color: $color-black100;
   overflow-x: hidden;
+  font-family: var(--font-inter);
 }
 
 #snackbars {

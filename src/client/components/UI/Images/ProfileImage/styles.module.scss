@@ -1,4 +1,8 @@
+@use "@/client/styles/colors" as *;
+
 .svgContainer {
+  background-color: $color-blue40;
+
   & > svg {
     width: 100%;
     height: 100%;
