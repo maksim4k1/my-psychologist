@@ -1,5 +1,5 @@
 dev:
-	docker-compose -f ./docker/docker-compose.dev.yml -p odeyalo-dev up --build
+	docker-compose -f ./docker/docker-compose.dev.yml up --build
 
 prod:
 	docker-compose -f ./docker/docker-compose.prod.yml up -d --build

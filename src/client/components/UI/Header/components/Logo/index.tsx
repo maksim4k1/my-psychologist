@@ -7,7 +7,7 @@ import { type FC } from "react";
 export const Logo: FC = () => {
   return (
     <Link
-      href={pages.profile.path}
+      href={pages.landing.path}
       className={styles.logo}
     >
       <LogoIcon />
