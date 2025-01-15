@@ -1,4 +1,3 @@
-@use "@/client/styles/fontStyles" as *;
 @use "@/client/styles/colors" as *;
 
 .header {
@@ -11,11 +10,6 @@
   margin-bottom: 100px;
 }
 
-.logo {
-  width: 174px;
-  margin-right: auto;
-}
-
 .container {
   height: 100%;
   padding: 0 25px 0 20px;
@@ -24,55 +18,4 @@
   justify-content: flex-end;
   background-color: $color-white100;
   border-radius: 32px;
-}
-
-.nav {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.navLink {
-  min-width: 112px;
-}
-
-.button {
-  margin-left: 40px;
-}
-
-.profileContainer {
-  height: 36px;
-  position: relative;
-  margin-left: 40px;
-}
-
-.profileButton {
-  border-radius: 7px;
-  overflow: hidden;
-}
-
-.popup {
-  position: absolute;
-  top: 46px;
-  right: 0;
-  padding: 16px;
-  display: flex;
-  flex-flow: column;
-  gap: 16px;
-  background-color: $color-black80;
-  border-radius: 22px;
-  border-top-right-radius: 4px;
-}
-
-.popupItem {
-  height: 36px;
-  padding: 8px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $color-white100;
-  white-space: nowrap;
-  @include bodyS;
-  background-color: $color-black60;
-  border-radius: 12px;
 }

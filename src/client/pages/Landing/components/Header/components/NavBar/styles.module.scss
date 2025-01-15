@@ -1,0 +1,12 @@
+@use "@/client/styles/fontStyles" as *;
+@use "@/client/styles/colors" as *;
+
+.nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navLink {
+  min-width: 112px;
+}

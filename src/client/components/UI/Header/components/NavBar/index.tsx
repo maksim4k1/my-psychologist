@@ -1,7 +1,7 @@
 "use client";
 
-import { SecondaryButton } from "../../../Buttons";
 import styles from "./styles.module.scss";
+import { SecondaryButton } from "@/client/components";
 import { useAppSelector } from "@/client/hooks";
 import { selectProfile } from "@/client/redux";
 import { type ACCESS } from "@/shared/config/access";
