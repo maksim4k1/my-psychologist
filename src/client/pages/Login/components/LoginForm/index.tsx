@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
 import * as Yup from "yup";
 import {
   FormErrorLabel,
@@ -61,12 +60,12 @@ export const LoginForm: FC = () => {
         placeholder="Введите пароль"
         disabled={isLoading}
       />
-      <Link
+      {/* <Link
         href={pages.resetPassword.path}
         className={styles.resetPasswordLink}
       >
         Восстановить пароль
-      </Link>
+      </Link> */}
       {isError && !!error && (
         <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
       )}
