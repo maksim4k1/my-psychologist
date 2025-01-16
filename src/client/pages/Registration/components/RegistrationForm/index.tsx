@@ -3,11 +3,10 @@
 import styles from "./styles.module.scss";
 import * as Yup from "yup";
 import {
-  AppLink,
-  AuthButtons,
   FormErrorLabel,
   FormikForm,
   PrimaryButton,
+  SecondaryButton,
 } from "@/client/components";
 import { useAppDispatch } from "@/client/hooks";
 import {
@@ -89,15 +88,21 @@ export const RegistrationForm: FC = () => {
       {isError && error && (
         <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
       )}
-      <AuthButtons className={styles.authButtons}>
+      <div className={styles.buttons}>
         <PrimaryButton
           type="submit"
           disabled={isLoading}
+          className={styles.button}
         >
           Зарегистрироваться
         </PrimaryButton>
-        <AppLink href={pages.login.path}>Войти</AppLink>
-      </AuthButtons>
+        <SecondaryButton
+          className={styles.button}
+          href={pages.login.path}
+        >
+          Войти
+        </SecondaryButton>
+      </div>
     </FormikForm>
   );
 };

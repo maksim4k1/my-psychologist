@@ -1,3 +1,12 @@
-.authButtons {
-  margin-top: 8px;
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+}
+
+.button {
+  width: 100%;
+  height: 46px !important;
+  font-weight: 700 !important;
 }
