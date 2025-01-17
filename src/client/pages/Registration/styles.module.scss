@@ -1,24 +1,22 @@
+@use "@/client/styles/colors" as *;
+
 .container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 96px;
-  margin-right: 96px;
+  justify-content: center;
 }
 
-.formWrapper {
+.formContainer {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  gap: 40px;
+  align-items: flex-start;
+  gap: 30px;
+  background-color: $color-white100;
+  border-radius: 32px;
 }
 
 .title {
-  width: 360px;
-  text-align: center;
-}
-
-.svgContainer {
-  width: 430px;
-  height: 430px;
+  width: 100%;
 }

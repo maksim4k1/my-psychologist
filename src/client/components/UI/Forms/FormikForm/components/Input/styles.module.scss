@@ -1,5 +1,7 @@
 @use "@/client/styles/variables" as *;
+@use "@/client/styles/colors" as *;
 @use "@/client/styles/textStyles" as *;
+@use "@/client/styles/fontStyles" as *;
 
 .label {
   position: relative;
@@ -31,23 +33,22 @@
 }
 
 .input {
-  min-height: 56px;
+  min-height: 52px;
   width: 100%;
   padding: 16px;
   display: flex;
   align-items: center;
-  background-color: transparent;
-  @include bodyLarge;
-  outline: 1px solid $color-outline;
-  border-radius: 4px;
+  color: $color-black100;
+  @include bodyS;
   transition:
     opacity 0.2s,
     outline-color 0.2s;
-  caret-color: $color-on-surface;
+  background-color: $color-white70;
+  border-radius: 12px;
 
   &::placeholder {
-    @include bodyLarge;
-    color: $color-on-surface-variant;
+    @include bodyS;
+    color: $color-black60;
   }
 
   &:hover {

@@ -1,14 +1,12 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
 import * as Yup from "yup";
 import {
-  AppLink,
-  AuthButtons,
   FormErrorLabel,
   FormikForm,
   PrimaryButton,
+  SecondaryButton,
 } from "@/client/components";
 import { useAppDispatch } from "@/client/hooks";
 import { authActions, useLoginMutation } from "@/client/redux";
@@ -62,24 +60,30 @@ export const LoginForm: FC = () => {
         placeholder="Введите пароль"
         disabled={isLoading}
       />
-      <Link
+      {/* <Link
         href={pages.resetPassword.path}
         className={styles.resetPasswordLink}
       >
-        Забыли пароль?
-      </Link>
+        Восстановить пароль
+      </Link> */}
       {isError && !!error && (
         <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
       )}
-      <AuthButtons className={styles.authButtons}>
+      <div className={styles.buttons}>
         <PrimaryButton
           type="submit"
           disabled={isLoading}
+          className={styles.button}
         >
           Войти
         </PrimaryButton>
-        <AppLink href={pages.registration.path}>Зарегистрироваться</AppLink>
-      </AuthButtons>
+        <SecondaryButton
+          className={styles.button}
+          href={pages.registration.path}
+        >
+          Зарегистрироваться
+        </SecondaryButton>
+      </div>
     </FormikForm>
   );
 };
