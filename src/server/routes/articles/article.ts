@@ -25,13 +25,10 @@ const getArticle = createRequest<{ id: string }>(
 
 const readArticle = createRequest<{ id: string }>(
   async (request, serverFetch, { id }) => {
-    console.log(id);
-    const response = await serverFetch.post<any, ReadArticleApiRequestData>(
+    await serverFetch.post<any, ReadArticleApiRequestData>(
       `/education/complete_education_material`,
       mapReadArticleRequest(id),
     );
-
-    console.log(id, response);
 
     return NextResponse.json(
       new ResponseSuccessInfo("Article successful readed"),
