@@ -13,6 +13,16 @@ const monthes = [
   "декабря",
 ];
 
+const days = [
+  "воскресенье",
+  "понедельник",
+  "вторник",
+  "среда",
+  "четверг",
+  "пятница",
+  "суббота",
+];
+
 export const calculateAge = (date: string): number => {
   if (isNaN(Date.parse(date))) {
     return 0;
@@ -67,5 +77,15 @@ export const mapDatetimeToText = (datetime: string): string => {
   const result = `${date.getDate()} ${
     monthes[date.getMonth()]
   } ${date.getFullYear()}, ${hours}:${minutes}`;
+  return result;
+};
+
+export const getCurrentDay = (): string => {
+  const date = new Date();
+
+  const day = days[date.getDay()];
+  const mappedDay = day.charAt(0).toUpperCase() + day.slice(1);
+
+  const result = `${mappedDay}, ${date.getDate()} ${monthes[date.getMonth()]}`;
   return result;
 };

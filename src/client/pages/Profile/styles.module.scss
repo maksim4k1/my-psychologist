@@ -1,43 +1,55 @@
-@use "@/client/styles/variables" as *;
-@use "@/client/styles/textStyles" as *;
+@use "@/client/styles/colors" as *;
+@use "@/client/styles/fontStyles" as *;
 
-.title {
-  margin-bottom: 40px;
+.dailyTaskContainer {
+  max-width: 420px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 32px;
+  background-color: $color-white100;
 }
 
-.main {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+.title {
+  margin-bottom: 10px;
+}
+
+.date {
+  margin: 10px 0 30px;
+  @include bodyLBold;
 }
 
 .cards {
   display: flex;
   flex-flow: column;
-  gap: 40px;
+  gap: 16px;
 }
 
 .card {
-  width: 360px;
-  padding: 12px 16px;
+  width: 100%;
+  padding: 16px;
   display: flex;
   flex-flow: column;
-  gap: 8px;
-  background-color: $color-surface-container-highest;
+  gap: 4px;
+  background-color: $color-white70;
   border-radius: 12px;
-  transition: background-color 0.2s;
 
-  &:hover {
-    background-color: $color-secondary-container;
+  &.completed {
+    color: $color-blue60;
+    background-color: $color-blue30;
+  }
+
+  &.active {
+    color: $color-white100;
+    background-color: $color-blue80;
   }
 }
 
 .cardTitle {
-  @include titleSmall;
+  @include bodySBold;
 }
 
 .cardDescription {
-  @include bodyMedium;
+  @include bodyS;
 }
 
 .icon {

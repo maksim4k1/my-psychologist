@@ -6,3 +6,4 @@ export * from "./psychologists";
 export * from "./articles";
 export * from "./tests";
 export * from "./feedbacks";
+export * from "./dailyTasks";

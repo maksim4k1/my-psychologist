@@ -2,59 +2,58 @@
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { Tasks } from "@/client/assets/svg";
-import { Container, PageTitle } from "@/client/components";
+import {
+  Container,
+  DefaultError,
+  LoadingLoop,
+  PageTitle,
+} from "@/client/components";
+import { useGetDailyTasksQuery } from "@/client/redux";
 import { pages } from "@/shared/data";
-import { type FC } from "react";
-
-const cards = [
-  {
-    id: "testing",
-    title: "Тестирование",
-    description: "Познай себя",
-    link: pages.exercises.path,
-  },
-  {
-    id: "tasks",
-    title: "Задания",
-    description: "Нужно выполнить",
-    link: "#",
-  },
-  {
-    id: "tracker",
-    title: "Трекер настроения",
-    description: "Отметь, как ты чувствуешь себя прямо сейчас",
-    link: "#",
-  },
-  {
-    id: "diary",
-    title: "Дневник",
-    description: "Расскажи, как прошёл день или выплесни эмоции",
-    link: "#",
-  },
-];
+import { getCurrentDay } from "@/shared/utils";
+import { type FC, useEffect, useState } from "react";
 
 export const ProfilePage: FC = () => {
+  const [activeTaskId, setActiveIdTask] = useState<string | null>(null);
+  const {
+    data: dailyTasks,
+    isLoading,
+    isError,
+    error,
+  } = useGetDailyTasksQuery();
+
+  useEffect(() => {
+    if (dailyTasks) {
+      const firstUncomplitedTask = dailyTasks.find(
+        ({ completed }) => !completed,
+      );
+
+      if (firstUncomplitedTask) setActiveIdTask(firstUncomplitedTask.id);
+    }
+  }, [dailyTasks]);
+
+  if (isLoading) return <LoadingLoop />;
+  if (isError) return <DefaultError error={error} />;
+
   return (
     <Container>
-      <PageTitle className={styles.title}>Моя программа</PageTitle>
-      <div className={styles.main}>
+      <div className={styles.dailyTaskContainer}>
+        <PageTitle className={styles.title}>Сегодня</PageTitle>
+        <div className={styles.date}>{getCurrentDay()}</div>
         <div className={styles.cards}>
-          {cards.map((card) => {
-            return (
-              <Link
-                href={card.link}
-                className={styles.card}
-                key={card.id}
-              >
-                <h4 className={styles.cardTitle}>{card.title}</h4>
-                <p className={styles.cardDescription}>{card.description}</p>
-              </Link>
-            );
-          })}
-        </div>
-        <div className={styles.icon}>
-          <Tasks />
+          {dailyTasks &&
+            dailyTasks.map(({ id, title, description, taskId, completed }) => {
+              return (
+                <Link
+                  href={pages.article.getLink({ params: { id: taskId } })}
+                  className={`${styles.card} ${completed ? styles.completed : ""} ${activeTaskId === id ? styles.active : ""}`}
+                  key={id}
+                >
+                  <h4 className={styles.cardTitle}>{title}</h4>
+                  <p className={styles.cardDescription}>{description}</p>
+                </Link>
+              );
+            })}
         </div>
       </div>
     </Container>
