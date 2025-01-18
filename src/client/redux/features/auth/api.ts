@@ -1,9 +1,11 @@
 import { api } from "../../api";
 import {
+  type ChangePasswordRequestData,
   type LoginRequestData,
   type LoginResponseData,
   type RegistrationRequestData,
   type RegistrationResponseData,
+  type ResetPasswordRequestData,
   type ResponseSuccessInfo,
 } from "@/shared/types";
 
@@ -37,8 +39,35 @@ const authApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Auth"],
     }),
+
+    resetPassword: builder.mutation<
+      ResponseSuccessInfo,
+      ResetPasswordRequestData
+    >({
+      query: (body) => ({
+        url: "/auth/password/reset",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    changePassword: builder.mutation<
+      ResponseSuccessInfo,
+      ChangePasswordRequestData
+    >({
+      query: (body) => ({
+        url: "/auth/password/change",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegistrationMutation, useLogoutMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegistrationMutation,
+  useLogoutMutation,
+  useResetPasswordMutation,
+  useChangePasswordMutation,
+} = authApi;

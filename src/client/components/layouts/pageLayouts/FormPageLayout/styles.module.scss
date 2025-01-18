@@ -1,0 +1,45 @@
+@use "@/client/styles/colors" as *;
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  &.hasComeBackButton {
+    margin-right: 70px;
+  }
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 30px;
+  background-color: $color-white100;
+  border-radius: 32px;
+}
+
+.title {
+  width: 100%;
+}
+
+.comeBackButton {
+  width: 50px;
+  height: 50px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-white100;
+  border-radius: 50%;
+  transform: rotate(180deg);
+}

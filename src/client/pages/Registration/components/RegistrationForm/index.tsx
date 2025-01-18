@@ -64,19 +64,19 @@ export const RegistrationForm: FC = () => {
       <FormikForm.Input
         name="name"
         type="text"
-        placeholder="Введите имя"
+        placeholder="Имя"
         disabled={isLoading}
       />
       <FormikForm.Input
         name="email"
         type="email"
-        placeholder="Введите адрес почты"
+        placeholder="Почта"
         disabled={isLoading}
       />
       <FormikForm.Input
         name="password"
         type="password"
-        placeholder="Создайте пароль"
+        placeholder="Пароль"
         disabled={isLoading}
       />
       <FormikForm.Input

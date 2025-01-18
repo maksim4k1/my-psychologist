@@ -1,11 +1,11 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { useRouter } from "next/navigation";
 import * as Yup from "yup";
-import { FormikForm, PrimaryButton } from "@/client/components";
-import { pages } from "@/shared/data";
-import { type FC } from "react";
+import { FormErrorLabel, FormikForm, PrimaryButton } from "@/client/components";
+import { useResetPasswordMutation } from "@/client/redux";
+import { mapApiErrorMessage } from "@/client/utils";
+import { type FC, useState } from "react";
 
 interface ResetPasswordFields {
   email: string;
@@ -22,12 +22,20 @@ const validationSchema = Yup.object().shape({
 });
 
 export const ResetPasswordForm: FC = () => {
-  const router = useRouter();
+  const [resetPassword, { isError, isLoading, isSuccess, error }] =
+    useResetPasswordMutation();
+  const [email, setEmail] = useState(initialValues.email);
 
   const onSubmit = (values: ResetPasswordFields) => {
-    console.log(values);
-    router.push(pages.changePassword.path);
+    resetPassword(values);
+    setEmail(values.email);
   };
+
+  if (isSuccess) {
+    return (
+      <div>Ссылка для восстановления пароля отправлена на почту {email}</div>
+    );
+  }
 
   return (
     <FormikForm
@@ -38,13 +46,18 @@ export const ResetPasswordForm: FC = () => {
       <FormikForm.Input
         name="email"
         type="email"
-        placeholder="Введите адрес электронной почты"
+        placeholder="Почта"
+        disabled={isLoading}
         required
       />
+      {isError && !!error && (
+        <FormErrorLabel>{mapApiErrorMessage(error)}</FormErrorLabel>
+      )}
       <PrimaryButton
         className={styles.button}
         isMedium={true}
         type="submit"
+        disabled={isLoading}
       >
         Сбросить пароль
       </PrimaryButton>
