@@ -1,6 +1,7 @@
 import {
   type GetArticleApiResponseData,
   type GetArticleResponseData,
+  type ReadArticleApiRequestData,
 } from "@/shared/types";
 
 export const mapGetArticleResponse = (
@@ -18,5 +19,13 @@ export const mapGetArticleResponse = (
         content: text,
       };
     }),
+  };
+};
+
+export const mapReadArticleRequest = (
+  id: string,
+): ReadArticleApiRequestData => {
+  return {
+    education_material_id: id,
   };
 };

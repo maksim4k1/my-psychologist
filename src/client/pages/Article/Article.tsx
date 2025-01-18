@@ -9,38 +9,50 @@ import {
   DefaultError,
   LoadingLoop,
 } from "@/client/components";
-import { useGetArticleByIdQuery, useGetArticlesQuery } from "@/client/redux";
-import { type FC } from "react";
+import {
+  useGetArticleByIdQuery,
+  useGetArticlesQuery,
+  useReadArticleMutation,
+} from "@/client/redux";
+import { type FC, useEffect } from "react";
 
 export const ArticlePage: FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  const getArticleQuery = useGetArticleByIdQuery(id);
-  const getArticlesQuery = useGetArticlesQuery();
+  const { data: article, ...getArticleState } = useGetArticleByIdQuery(id);
+  const { data: articles, ...getArticlesState } = useGetArticlesQuery();
+  const [readArticle] = useReadArticleMutation();
 
-  if (getArticleQuery.isLoading || getArticlesQuery.isLoading)
+  useEffect(() => {
+    if (article?.content.length) {
+      const id = article.content[0].id;
+      readArticle(id);
+    }
+  }, [readArticle, article]);
+
+  if (getArticleState.isLoading || getArticlesState.isLoading)
     return <LoadingLoop />;
-  if (getArticleQuery.isError)
-    return <DefaultError error={getArticleQuery.error} />;
-  if (getArticlesQuery.isError)
-    return <DefaultError error={getArticlesQuery.error} />;
+  if (getArticleState.isError)
+    return <DefaultError error={getArticleState.error} />;
+  if (getArticlesState.isError)
+    return <DefaultError error={getArticlesState.error} />;
 
-  const filteredArticles = getArticlesQuery.data
-    ? getArticlesQuery.data.filter((el) => el.id !== id)
+  const filteredArticles = articles
+    ? articles.filter((el) => el.id !== id)
     : [];
 
   return (
     <Container>
-      {getArticleQuery.data && (
+      {article && (
         <div className={styles.main}>
           <div
             className={styles.image}
             style={{ backgroundImage: `url("${PatternImage.src}")` }}
           >
-            <h1 className={styles.title}>{getArticleQuery.data?.title}</h1>
+            <h1 className={styles.title}>{article?.title}</h1>
           </div>
           <div className={styles.content}>
-            {getArticleQuery.data?.content.map((el) => (
+            {article?.content.map((el) => (
               <div
                 className={styles.contentItem}
                 key={el.id}

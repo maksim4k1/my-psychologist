@@ -14,3 +14,7 @@ export type GetArticleApiResponseData = {
     text: string;
   }[];
 };
+
+export type ReadArticleApiRequestData = {
+  education_material_id: string;
+};

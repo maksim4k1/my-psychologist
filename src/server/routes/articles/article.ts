@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
-import { mapGetArticleResponse } from "@/server/mappers";
+import { mapGetArticleResponse, mapReadArticleRequest } from "@/server/mappers";
 import { createRequest } from "@/server/utils";
 import { httpStatuses } from "@/shared/data";
 import {
   type GetArticleApiResponseData,
   type GetArticleResponseData,
+  type ReadArticleApiRequestData,
+  ResponseSuccessInfo,
 } from "@/shared/types";
 
 const getArticle = createRequest<{ id: string }>(
@@ -21,6 +23,24 @@ const getArticle = createRequest<{ id: string }>(
   },
 );
 
+const readArticle = createRequest<{ id: string }>(
+  async (request, serverFetch, { id }) => {
+    console.log(id);
+    const response = await serverFetch.post<any, ReadArticleApiRequestData>(
+      `/education/complete_education_material`,
+      mapReadArticleRequest(id),
+    );
+
+    console.log(id, response);
+
+    return NextResponse.json(
+      new ResponseSuccessInfo("Article successful readed"),
+      httpStatuses.ok,
+    );
+  },
+);
+
 export const ArticleRoutes = {
   GET: getArticle,
+  POST: readArticle,
 };
