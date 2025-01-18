@@ -51,13 +51,13 @@ export const LoginForm: FC = () => {
       <FormikForm.Input
         name="email"
         type="email"
-        placeholder="Введите адрес почты"
+        placeholder="Почта"
         disabled={isLoading}
       />
       <FormikForm.Input
         name="password"
         type="password"
-        placeholder="Введите пароль"
+        placeholder="Пароль"
         disabled={isLoading}
       />
       {/* <Link

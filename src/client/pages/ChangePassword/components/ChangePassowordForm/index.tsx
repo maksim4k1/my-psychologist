@@ -36,7 +36,7 @@ export const ChangePassowordForm: FC = () => {
       <FormikForm.Input
         name="newPassword"
         type="password"
-        placeholder="Введите новый пароль"
+        placeholder="Новый пароль"
       />
       <FormikForm.Input
         name="confirmPassword"

@@ -1,10 +1,8 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 import { FormikForm, PrimaryButton } from "@/client/components";
-import { pages } from "@/shared/data";
 import { type FC } from "react";
 
 interface ResetPasswordFields {
@@ -22,11 +20,8 @@ const validationSchema = Yup.object().shape({
 });
 
 export const ResetPasswordForm: FC = () => {
-  const router = useRouter();
-
   const onSubmit = (values: ResetPasswordFields) => {
     console.log(values);
-    router.push(pages.changePassword.path);
   };
 
   return (
@@ -38,7 +33,7 @@ export const ResetPasswordForm: FC = () => {
       <FormikForm.Input
         name="email"
         type="email"
-        placeholder="Введите адрес электронной почты"
+        placeholder="Почта"
         required
       />
       <PrimaryButton

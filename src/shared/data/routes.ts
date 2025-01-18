@@ -26,7 +26,9 @@ export const pages: Pages = {
     ACCESS.hr,
   ]),
   giveExercise: new Page("/exercises/give", [ACCESS.psychologist, ACCESS.hr]),
-  changePassword: new Page("/password/change", [ACCESS.unauthorized]),
+  changePassword: new Page<{ token: string }>("/password/change/:token", [
+    ACCESS.unauthorized,
+  ]),
   resetPassword: new Page("/password/reset", [ACCESS.unauthorized]),
   profile: new Page("/profile", [
     ACCESS.client,
