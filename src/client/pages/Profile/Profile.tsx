@@ -1,61 +1,18 @@
-"use client";
-
+import { DailyTasks } from "./components";
 import styles from "./styles.module.scss";
-import Link from "next/link";
-import { Tasks } from "@/client/assets/svg";
 import { Container, PageTitle } from "@/client/components";
-import { pages } from "@/shared/data";
+import { ImageBackground } from "@/client/components/backgrounds";
+import { getCurrentDay } from "@/shared/utils";
 import { type FC } from "react";
-
-const cards = [
-  {
-    id: "testing",
-    title: "Тестирование",
-    description: "Познай себя",
-    link: pages.exercises.path,
-  },
-  {
-    id: "tasks",
-    title: "Задания",
-    description: "Нужно выполнить",
-    link: "#",
-  },
-  {
-    id: "tracker",
-    title: "Трекер настроения",
-    description: "Отметь, как ты чувствуешь себя прямо сейчас",
-    link: "#",
-  },
-  {
-    id: "diary",
-    title: "Дневник",
-    description: "Расскажи, как прошёл день или выплесни эмоции",
-    link: "#",
-  },
-];
 
 export const ProfilePage: FC = () => {
   return (
     <Container>
-      <PageTitle className={styles.title}>Моя программа</PageTitle>
+      <ImageBackground />
       <div className={styles.main}>
-        <div className={styles.cards}>
-          {cards.map((card) => {
-            return (
-              <Link
-                href={card.link}
-                className={styles.card}
-                key={card.id}
-              >
-                <h4 className={styles.cardTitle}>{card.title}</h4>
-                <p className={styles.cardDescription}>{card.description}</p>
-              </Link>
-            );
-          })}
-        </div>
-        <div className={styles.icon}>
-          <Tasks />
-        </div>
+        <PageTitle className={styles.title}>Сегодня</PageTitle>
+        <div className={styles.date}>{getCurrentDay()}</div>
+        <DailyTasks />
       </div>
     </Container>
   );

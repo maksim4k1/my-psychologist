@@ -14,7 +14,7 @@ export const mapGetTestsResponse = (
       id: test_id,
       title,
       description,
-      image: `${SEVER_API_URL}/test/images_test/${link_to_picture}`,
+      image: `${SEVER_API_URL}${link_to_picture}`,
     };
   });
 };
