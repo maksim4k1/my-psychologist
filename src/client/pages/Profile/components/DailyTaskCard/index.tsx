@@ -23,14 +23,10 @@ export const DailyTaskCard: FC<DailyTasks> = ({
     <Link
       href={taskLink ?? "#"}
       className={`${styles.card} ${completed ? styles.completed : ""} ${isActive ? styles.active : ""} ${isExist ? "" : styles.notExist}`}
+      title={isExist ? undefined : "Данное упражнение пока недоступно"}
     >
       <h4 className={styles.cardTitle}>{title}</h4>
-      <p
-        className={styles.cardDescription}
-        title={isExist ? undefined : "Данное упражнение пока недоступно"}
-      >
-        {description}
-      </p>
+      <p className={styles.cardDescription}>{description}</p>
     </Link>
   );
 };
