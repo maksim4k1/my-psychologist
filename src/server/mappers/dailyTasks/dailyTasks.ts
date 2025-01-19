@@ -2,6 +2,7 @@ import {
   type GetDailyTasksApiResponse,
   type GetDailyTasksResponse,
 } from "@/shared/types";
+import { getDailyTaskType } from "@/shared/utils";
 
 export const mapGetDailyTasksResponse = (
   data: GetDailyTasksApiResponse,
@@ -11,7 +12,7 @@ export const mapGetDailyTasksResponse = (
       id,
       title,
       description: short_description,
-      taskType: type,
+      taskType: getDailyTaskType(type),
       taskId: destination_id,
       completed: is_complete,
     }),

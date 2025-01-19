@@ -1,7 +1,7 @@
 @use "@/client/styles/colors" as *;
 @use "@/client/styles/fontStyles" as *;
 
-.dailyTaskContainer {
+.main {
   max-width: 420px;
   width: 100%;
   padding: 20px;
@@ -16,42 +16,4 @@
 .date {
   margin: 10px 0 30px;
   @include bodyLBold;
-}
-
-.cards {
-  display: flex;
-  flex-flow: column;
-  gap: 16px;
-}
-
-.card {
-  width: 100%;
-  padding: 16px;
-  display: flex;
-  flex-flow: column;
-  gap: 4px;
-  background-color: $color-white70;
-  border-radius: 12px;
-
-  &.completed {
-    color: $color-blue60;
-    background-color: $color-blue30;
-  }
-
-  &.active {
-    color: $color-white100;
-    background-color: $color-blue80;
-  }
-}
-
-.cardTitle {
-  @include bodySBold;
-}
-
-.cardDescription {
-  @include bodyS;
-}
-
-.icon {
-  margin-right: 40px;
 }

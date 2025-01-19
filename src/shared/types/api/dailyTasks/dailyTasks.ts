@@ -12,6 +12,21 @@ export type GetDailyTasksResponse = {
   title: string;
   description: string;
   completed: boolean;
-  taskType: number;
+  taskType: DailyTaskType;
   taskId: string;
 }[];
+
+export type DailyTaskType =
+  | "theory"
+  | "moodTracker"
+  | "test"
+  | "kptDiary"
+  | "exercise";
+
+export interface IDailyTaskTypes {
+  theory: "theory";
+  moodTracker: "moodTracker";
+  test: "test";
+  kptDiary: "kptDiary";
+  exercise: "exercise";
+}

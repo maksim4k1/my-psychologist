@@ -5,3 +5,4 @@ export * from "./routes";
 export * from "./cookies";
 export * from "./httpStatuses";
 export * from "./defaultInitialState";
+export * from "./dailyTaskTypes";
