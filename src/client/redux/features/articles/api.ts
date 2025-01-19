@@ -20,6 +20,7 @@ const articlesApi = api.injectEndpoints({
         url: `/articles/${articleId}`,
         method: "POST",
       }),
+      invalidatesTags: ["Articles"],
     }),
   }),
 });
